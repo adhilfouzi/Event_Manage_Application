@@ -1,0 +1,78 @@
+import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:project_event/Core/Color/color.dart';
+
+class IntroductionPage extends StatelessWidget {
+  const IntroductionPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: buttoncolor,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment:
+              CrossAxisAlignment.stretch, // Make children stretch horizontally
+          children: [
+            const SizedBox(
+              height: 40,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Skip',
+                  style: TextStyle(
+                    fontSize: 16, // Add a font size
+                    color: Colors.white, // Customize text color
+                  ),
+                ),
+                SizedBox(width: 20),
+              ],
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Expanded(
+              // Ensure the animation takes all available vertical space
+              child: Lottie.asset(
+                'animation/Animation - 1.json',
+                fit: BoxFit
+                    .contain, // Adjust the fit to maintain the aspect ratio
+              ),
+            ),
+            const Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment:
+                      CrossAxisAlignment.center, // Center align the text
+                  children: [
+                    Text(
+                      'Effortless Event Planning',
+                      style: TextStyle(
+                        height: 0,
+                        fontSize: 20, // Increase font size
+                        fontWeight: FontWeight.bold,
+                        // Apply bold style
+                      ),
+                    ),
+                    SizedBox(height: 20), // Add spacing between the text
+                    Text(
+                      'Our app simplifies event coordination, helping you manage invitations, RSVPs, vendors, and more in one place, making event planning a breeze.',
+                      style: TextStyle(
+                        fontSize: 14, // Customize the font size
+                        color: Colors.black38, // Use a grayish text color
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
