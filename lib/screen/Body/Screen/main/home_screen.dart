@@ -120,10 +120,13 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    child: Image.file(
-                                      File(data.imagex),
-                                      height: 255,
-                                      fit: BoxFit.fill,
+                                    child: SizedBox(
+                                      height: 260,
+                                      width: double.infinity,
+                                      child: Image.file(
+                                        File(data.imagex),
+                                        fit: BoxFit.fill,
+                                      ),
                                     )),
                               ),
                               Container(
@@ -137,7 +140,7 @@ class HomeScreen extends StatelessWidget {
                                       Colors
                                           .transparent, // Start with transparency
                                       Colors.black.withOpacity(
-                                          0.8), // Adjust opacity as needed
+                                          0.9), // Adjust opacity as needed
                                     ],
                                   ),
                                   borderRadius: BorderRadius.circular(20.0),
@@ -249,7 +252,7 @@ class HomeScreen extends StatelessWidget {
               const ListTileDrawer(
                   map: Reset(),
                   imagedata: 'assets/UI/icons/backup.png',
-                  textdata: 'Backup'),
+                  textdata: 'Reset Data'),
             ],
           ),
         ),

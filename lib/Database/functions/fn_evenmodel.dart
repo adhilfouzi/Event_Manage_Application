@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:sqflite/sqflite.dart';
 
-ValueNotifier<List<Eventmodel>> eventList = ValueNotifier<List<Eventmodel>>([]);
+ValueNotifier<List<Eventmodel>> eventList = ValueNotifier([]);
 late Database eventDB;
 
 // Function to initialize the database.
@@ -14,10 +14,10 @@ Future<void> initialize_event_db() async {
   eventDB = await openDatabase(
     'event_db',
     version: 1,
-    onCreate: (Database db, version) async {
+    onCreate: (eventDB, version) async {
       // Create the 'student' table when the database is created.
-      await db.execute(
-          'CREATE TABLE event (id TEXT PRIMARY KEY , eventname TEXT, budget TEXT, location TEXT, about TEXT, startingDay TEXT,endingDay TEXT, startingTime TEXT, endingTime TEXT, clientname TEXT, phoneNumber TEXT,emailId TEXT, address TEXT, imagex TEXT)');
+      await eventDB.execute(
+          'CREATE TABLE event (id INTEGER PRIMARY KEY, eventname TEXT, budget TEXT, location TEXT, about TEXT, startingDay TEXT,endingDay TEXT, startingTime TEXT, endingTime TEXT, clientname TEXT, phoneNumber TEXT,emailId TEXT, address TEXT, imagex TEXT)');
     },
   );
   print("student_db created successfully.");
@@ -26,6 +26,7 @@ Future<void> initialize_event_db() async {
 // Function to retrieve student data from the database.
 Future<void> refreshEventdata() async {
   final result = await eventDB.rawQuery("SELECT * FROM event");
+  log('All event data : $result');
   print('All event data : ${result}');
   eventList.value.clear();
   for (var map in result) {
@@ -39,16 +40,14 @@ Future<void> refreshEventdata() async {
 Future<void> addEvent(Eventmodel value) async {
   try {
     await eventDB.rawInsert(
-      'INSERT INTO event(eventname, budget, location, about, startingDay, endingDay, startingTime, endingTime, clientname, phoneNumber, emailId, address, imagex) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO event(eventname, budget, location, about, startingDay,  startingTime,  clientname, phoneNumber, emailId, address, imagex) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
       [
         value.eventname,
         value.budget,
         value.location,
         value.about,
         value.startingDay,
-        value.endingDay,
         value.startingTime,
-        value.endingTime,
         value.clientname,
         value.phoneNumber,
         value.emailId,
@@ -71,30 +70,15 @@ Future<void> deleteEventdata(id) async {
 }
 
 // Function to edit/update a student's information in the database.
-Future<void> editeventdata(
-    id,
-    eventname,
-    budget,
-    location,
-    about,
-    startingDay,
-    endingDay,
-    startingTime,
-    endingTime,
-    clientname,
-    phoneNumber,
-    emailId,
-    address,
-    imagex) async {
+Future<void> editeventdata(id, eventname, budget, location, about, startingDay,
+    startingTime, clientname, phoneNumber, emailId, address, imagex) async {
   final dataflow = {
     'eventname': eventname,
     'budget': budget,
     'location': location,
     'about': about,
     'startingDay': startingDay,
-    'endingDay': endingDay,
     'startingTime': startingTime,
-    'endingTime': endingTime,
     'clientname': clientname,
     'phoneNumber': phoneNumber,
     'emailId': emailId,

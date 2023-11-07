@@ -77,7 +77,8 @@ class RpGuests extends StatelessWidget {
                       trailing: Text(
                         '+1',
                         style: racingSansOne(
-                            color: Colors.black54,
+                            color: const Color.fromARGB(137, 225, 79, 79),
+                            fontFamily: AutofillHints.addressCity,
                             fontWeight: FontWeight.normal),
                       ),
                     ),
@@ -93,4 +94,3 @@ class RpGuests extends StatelessWidget {
 }
 
 void doNothing(BuildContext context) {}
-void doNothing2(BuildContext context) {}

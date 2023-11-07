@@ -117,28 +117,12 @@ class _AddEventState extends State<AddEvent> {
               controller: _aboutController,
             ),
             Date(
-              textdate: 'Starting Day',
+              textdate: 'Event Day',
               controller: _stdateController,
             ),
-            Date(
-              textdate: 'Ending Day',
-              controller: _eddateController,
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                    child: TextFieldBlue(
-                  textcontent: 'Starting Time',
-                  controller: _sttimeController,
-                )),
-                const SizedBox(width: 10),
-                Expanded(
-                    child: TextFieldBlue(
-                  textcontent: 'Ending Time',
-                  controller: _edtimeController,
-                )),
-              ],
+            TextFieldBlue(
+              textcontent: 'Event Time',
+              controller: _sttimeController,
             ),
             const SizedBox(height: 25),
             Text(
@@ -173,9 +157,7 @@ class _AddEventState extends State<AddEvent> {
   final _aboutController = TextEditingController();
   final _clientnameController = TextEditingController();
   final _stdateController = TextEditingController();
-  final _eddateController = TextEditingController();
   final _sttimeController = TextEditingController();
-  final _edtimeController = TextEditingController();
   final _addressController = TextEditingController();
   final _emailController = TextEditingController();
   final _pnoController = TextEditingController();
@@ -186,9 +168,7 @@ class _AddEventState extends State<AddEvent> {
     final about = _aboutController.text;
     final clientname = _clientnameController.text.toUpperCase();
     final stdate = _stdateController.text;
-    final eddate = _eddateController.text;
     final sttime = _sttimeController.text;
-    final edtime = _edtimeController.text;
     final address = _addressController.text;
     final email = _emailController.text.trim().toLowerCase();
     final pno = _pnoController.text.trim();
@@ -209,10 +189,8 @@ class _AddEventState extends State<AddEvent> {
             location.isNotEmpty &&
             budget.isNotEmpty &&
             sttime.isNotEmpty ||
-        eddate.isNotEmpty ||
         about.isNotEmpty ||
         email.isNotEmpty ||
-        edtime.isNotEmpty ||
         clientname.isNotEmpty ||
         address.isNotEmpty ||
         pno.isNotEmpty ||
@@ -230,7 +208,7 @@ class _AddEventState extends State<AddEvent> {
 
       await addEvent(event);
 
-      //Navigator.of(context).pop();
+      Navigator.of(context).pop();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Successfully added"),

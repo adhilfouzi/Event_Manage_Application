@@ -15,7 +15,7 @@ import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 class ViewEvent extends StatelessWidget {
   final Eventmodel eventModel;
 
-  ViewEvent({
+  const ViewEvent({
     Key? key,
     required this.eventModel,
   }) : super(key: key);
@@ -85,7 +85,7 @@ class ViewEvent extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(

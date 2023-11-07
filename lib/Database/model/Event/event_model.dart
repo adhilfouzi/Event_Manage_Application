@@ -1,13 +1,11 @@
 class Eventmodel {
-  String? id;
+  int? id;
   final String eventname;
   final String? budget;
   final String location;
   final String? about;
   final String startingDay;
-  final String? endingDay;
   final String startingTime;
-  final String? endingTime;
   final String? clientname;
   final String? phoneNumber;
   final String? emailId;
@@ -20,29 +18,22 @@ class Eventmodel {
     required this.startingDay,
     required this.imagex,
     required this.startingTime,
+    this.id,
     this.clientname,
     this.phoneNumber,
     this.budget,
     this.emailId,
-    this.endingDay,
-    this.endingTime,
     this.address,
     this.about,
-    this.id,
-  }) {
-    id = DateTime.now().millisecondsSinceEpoch.toString();
-  }
-
+  });
   static Eventmodel fromMap(Map<String, Object?> map) {
-    final id = map['id'] as String?;
+    final id = map['id'] as int;
     final eventname = map['eventname'] as String;
     final budget = map['budget'] as String?;
     final location = map['location'] as String;
     final about = map['about'] as String?;
     final startingDay = map['startingDay'] as String;
-    final endingDay = map['endingDay'] as String?;
     final clientname = map['clientname'] as String?;
-    final endingTime = map['endingTime'] as String?;
     final startingTime = map['startingTime'] as String;
     final phoneNumber = map['phoneNumber'] as String?;
     final emailId = map['emailId'] as String?;
@@ -58,8 +49,6 @@ class Eventmodel {
       budget: budget,
       clientname: clientname,
       emailId: emailId,
-      endingDay: endingDay,
-      endingTime: endingTime,
       location: location,
       startingDay: startingDay,
       imagex: imagex,

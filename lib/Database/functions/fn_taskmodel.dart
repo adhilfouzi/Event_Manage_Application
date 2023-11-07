@@ -17,13 +17,13 @@ Future<void> initialize_task_db() async {
     onCreate: (Database db, version) async {
       // Create the 'student' table when the database is created.
       await db.execute(
-          'CREATE TABLE task (id TEXT PRIMARY KEY, taskname TEXT, category TEXT, note TEXT, status BOOLEAN, date TEXT, eventid TEXT, subtask TEXT)');
+          'CREATE TABLE task (id INTEGER PRIMARY KEY, taskname TEXT, category TEXT, note TEXT, status BOOLEAN, date TEXT, eventid TEXT, subtask TEXT)');
     },
   );
   print("task_db created successfully.");
 }
 
-// Function to retrieve student data from the database.
+// Function to retrieve task data from the database.
 Future<void> refreshEventtaskdata() async {
   final result = await taskDB.rawQuery("SELECT * FROM task");
   print('All task data : ${result}');
@@ -89,25 +89,3 @@ Future<void> clearTaskDatabase() async {
     print('Error while clearing the database: $e');
   }
 }
-
-// Future addTask(TaskModel value) async {
-//   final eventtaskList = await Hive.openBox<TaskModel>('eventtask_db');
-//   await eventtaskList.add(value);
-
-//   print(eventtaskList.values);
-//   taskList.value.add(value);
-//   taskList.notifyListeners();
-// }
-
-// Future<void> refreshEventtaskdata() async {
-//   final eventDB = await Hive.openBox<TaskModel>('eventtask_db');
-//   taskList.value.clear();
-//   taskList.value.addAll(eventDB.values);
-//   taskList.notifyListeners();
-// }
-
-// clearDatabase2() async {
-//   final eventDB = await Hive.openBox<TaskModel>('eventtask_db');
-//   await eventDB.clear();
-//   refreshEventtaskdata();
-// }

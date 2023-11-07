@@ -11,7 +11,7 @@ import 'package:project_event/screen/Body/widget/sub/subtask.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 
 class AddTask extends StatefulWidget {
-  final String eventID;
+  final int eventID;
 
   const AddTask({super.key, required this.eventID});
 
@@ -25,7 +25,7 @@ class _AddTaskState extends State<AddTask> {
 
   @override
   Widget build(BuildContext context) {
-    log(widget.eventID);
+    log(widget.eventID.toString());
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
@@ -68,9 +68,9 @@ class _AddTaskState extends State<AddTask> {
             Date(
               controller: _dateController,
             ),
-            SubTask(
-                //  goto: AddSubTask(subtasks: _subtasks),
-                ),
+            // SubTask(
+            //     //  goto: AddSubTask(subtasks: _subtasks),
+            //     ),
           ]),
         ),
       ),
