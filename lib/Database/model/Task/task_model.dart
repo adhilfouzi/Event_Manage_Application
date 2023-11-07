@@ -3,7 +3,7 @@ class TaskModel {
   final String taskname;
   final String category;
   final String? note;
-  final bool status;
+  bool status;
   final String date;
   final int? eventid;
   final List<Subtaskmodel>? subtask;

@@ -20,14 +20,14 @@ Future<void> initialize_event_db() async {
           'CREATE TABLE event (id INTEGER PRIMARY KEY, eventname TEXT, budget TEXT, location TEXT, about TEXT, startingDay TEXT,endingDay TEXT, startingTime TEXT, endingTime TEXT, clientname TEXT, phoneNumber TEXT,emailId TEXT, address TEXT, imagex TEXT)');
     },
   );
-  print("student_db created successfully.");
+  //print("student_db created successfully.");
 }
 
 // Function to retrieve student data from the database.
 Future<void> refreshEventdata() async {
   final result = await eventDB.rawQuery("SELECT * FROM event");
   log('All event data : $result');
-  print('All event data : ${result}');
+  // print('All event data : ${result}');
   eventList.value.clear();
   for (var map in result) {
     final student = Eventmodel.fromMap(map);
@@ -98,54 +98,3 @@ Future<void> clearEventDatabase() async {
     print('Error while clearing the database: $e');
   }
 }
-
-// Future<void> addEvent(Eventmodel value) async {
-//   final eventDB = await Hive.openBox<Eventmodel>('event_db');
-//   print(eventDB);
-//   final id = await eventDB.add(value);
-//   value.id = id.toString();
-//   eventList.value.add(value);
-//   log(value.id.toString());
-//   eventList.notifyListeners();
-// }
-
-// Future<void> refreshEventdata() async {
-//   final eventDB = await Hive.openBox<Eventmodel>('event_db');
-//   eventList.value.clear();
-//   eventList.value.addAll(eventDB.values);
-
-//   eventList.notifyListeners();
-// }
-
-// Future<void> deleteEventdata(int id) async {
-//   final eventDB = await Hive.openBox<Eventmodel>('event_db');
-//   await eventDB.deleteAt(id);
-//   refreshEventdata();
-// }
-
-// Future<void> editeventdata(id, eventname, budget, location, startingDay,
-//     clientname, phoneNumber, imagex, startingTime) async {
-//   final eventDB = await Hive.openBox<Eventmodel>('event_db');
-//   final Eventmodel eventdata = Eventmodel(
-//       eventname: eventname,
-//       budget: budget,
-//       location: location,
-//       startingDay: startingDay,
-//       clientname: clientname,
-//       phoneNumber: phoneNumber,
-//       imagex: imagex,
-//       startingTime: startingTime);
-
-//   await eventDB.put(id, eventdata);
-//   refreshEventdata();
-// }
-
-// Future<void> clearDatabase() async {
-//   try {
-//     final eventBox = await Hive.openBox<Eventmodel>('event_db');
-//     await eventBox.clear();
-//     refreshEventdata();
-//   } catch (e) {
-//     print('Error while clearing the database: $e');
-//   }
-// }

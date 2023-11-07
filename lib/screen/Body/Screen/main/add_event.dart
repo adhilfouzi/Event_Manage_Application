@@ -185,15 +185,13 @@ class _AddEventState extends State<AddEvent> {
       );
     }
 
-    if (eventname.isNotEmpty &&
-            location.isNotEmpty &&
-            budget.isNotEmpty &&
-            sttime.isNotEmpty ||
+    if (eventname.isNotEmpty && location.isNotEmpty && sttime.isNotEmpty ||
         about.isNotEmpty ||
         email.isNotEmpty ||
         clientname.isNotEmpty ||
         address.isNotEmpty ||
         pno.isNotEmpty ||
+        budget.isNotEmpty ||
         stdate.isNotEmpty) {
       final event = Eventmodel(
         eventname: eventname,

@@ -36,7 +36,7 @@ class AddGuest extends StatelessWidget {
             textcontent2: 'Invitation sent',
           ),
           Contact(acontroller: _acontroller, econtroller: _econtroller),
-          Compamions(goto: AddCompanions())
+          // Compamions(goto: AddCompanions())
         ]),
       ),
     );

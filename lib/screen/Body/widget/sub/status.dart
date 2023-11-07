@@ -6,12 +6,14 @@ class StatusBar extends StatefulWidget {
   final String textcontent1;
   final Function(bool) onStatusChange;
   final String textcontent2;
+  final bool? defaultdata;
 
   const StatusBar({
     super.key,
     required this.textcontent1,
     required this.textcontent2,
     required this.onStatusChange,
+    this.defaultdata,
   });
 
   @override
@@ -19,7 +21,19 @@ class StatusBar extends StatefulWidget {
 }
 
 class _StatusBarState extends State<StatusBar> {
-  bool statusdata = false;
+  late bool statusdata;
+  @override
+  void initState() {
+    super.initState();
+    statusdata = widget.defaultdata ?? false;
+    updateButtonStyles();
+  }
+
+  void updateButtonStyles() {
+    one = statusdata == false ? firstcr() : secandcr();
+    two = statusdata == true ? firstcr() : secandcr();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(

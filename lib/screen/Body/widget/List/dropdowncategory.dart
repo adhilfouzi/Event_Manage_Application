@@ -3,10 +3,12 @@ import 'package:project_event/screen/Body/widget/List/list.dart';
 
 class CategoryDown extends StatefulWidget {
   final ValueChanged<String> onCategorySelected;
+  final String? defaultdata;
 
   const CategoryDown({
     super.key,
     required this.onCategorySelected,
+    this.defaultdata,
   });
 
   @override
@@ -19,7 +21,12 @@ class _CategoryDownState extends State<CategoryDown> {
   @override
   void initState() {
     super.initState();
-    selectedCategory = 'Accommodation';
+
+    selectedCategory = widget.defaultdata ?? 'Accommodation';
+
+    if (selectedCategory!.isEmpty) {
+      selectedCategory = 'Accommodation';
+    }
   }
 
   @override

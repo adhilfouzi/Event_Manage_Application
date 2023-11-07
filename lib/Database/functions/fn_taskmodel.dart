@@ -24,14 +24,28 @@ Future<void> initialize_task_db() async {
 }
 
 // Function to retrieve task data from the database.
-Future<void> refreshEventtaskdata() async {
-  final result = await taskDB.rawQuery("SELECT * FROM task");
-  print('All task data : ${result}');
+Future<void> refreshEventtaskdata(int id) async {
+  final result = await taskDB.rawQuery(
+      "SELECT * FROM task WHERE eventid = ? ORDER BY status DESC",
+      [id.toString()]);
+  print('All task data: $result');
   taskList.value.clear();
   for (var map in result) {
     final student = TaskModel.fromMap(map);
     taskList.value.add(student);
   }
+
+  // Sort the taskList to place rows with status=false at the beginning
+  taskList.value.sort((a, b) {
+    if (a.status == false && b.status == true) {
+      return -1; // a comes before b
+    } else if (a.status == true && b.status == false) {
+      return 1; // b comes before a
+    } else {
+      return 0; // no change in order
+    }
+  });
+
   taskList.notifyListeners();
 }
 
@@ -51,7 +65,7 @@ Future<void> addTask(TaskModel value) async {
       ],
     );
     log(value.id.toString());
-    refreshEventtaskdata();
+    refreshEventtaskdata(value.eventid!);
   } catch (e) {
     //------> Handle any errors that occur during data insertion.
     print('Error inserting data: $e');
@@ -59,9 +73,9 @@ Future<void> addTask(TaskModel value) async {
 }
 
 // Function to delete a student from the database by their ID.
-Future<void> deleteStudent(id, String eventid) async {
+Future<void> deletetask(id, int eventid) async {
   await taskDB.delete('task', where: 'id=?', whereArgs: [id]);
-  refreshEventtaskdata();
+  refreshEventtaskdata(eventid);
 }
 
 // Function to edit/update a student's information in the database.
@@ -77,7 +91,7 @@ Future<void> editTask(
     'subtask': subtask
   };
   await taskDB.update('task', dataflow, where: 'id=?', whereArgs: [id]);
-  refreshEventtaskdata();
+  refreshEventtaskdata(eventid);
 }
 
 // Function to delete a task's information in the database.

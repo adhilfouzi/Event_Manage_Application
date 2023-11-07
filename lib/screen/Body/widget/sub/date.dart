@@ -5,11 +5,13 @@ import 'package:project_event/Core/Color/font.dart';
 class Date extends StatefulWidget {
   final TextEditingController? controller;
   final String? textdate;
+  final String? defaultdata;
 
   const Date({
     super.key,
     this.controller,
     this.textdate,
+    this.defaultdata,
   });
 
   @override
@@ -22,10 +24,14 @@ class _MyWidgetState extends State<Date> {
   @override
   void initState() {
     super.initState();
-    // Initialize the selected date with the current date.
-    selectedDate = DateTime.now();
-    if (widget.controller != null) {
-      widget.controller!.text = _formatDate(selectedDate!);
+    // Initialize the selected date with the current date or defaultdata if provided.
+    if (widget.defaultdata != null) {
+      selectedDate = DateTime.parse(widget.defaultdata!);
+      if (widget.controller != null) {
+        widget.controller!.text = _formatDate(selectedDate!);
+      }
+    } else {
+      selectedDate = DateTime.now();
     }
   }
 

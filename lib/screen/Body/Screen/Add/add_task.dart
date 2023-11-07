@@ -91,8 +91,8 @@ class _AddTaskState extends State<AddTask> {
       final category = _categoryController.text;
       final note = _noteController.text;
       final date = _dateController.text;
-      final subtask = _subtasks;
       final eventId = widget.eventID;
+      final subtask = _subtasks;
       // final eventidre = _eventidController.text;
 
       final taskdata = TaskModel(
