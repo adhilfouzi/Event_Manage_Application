@@ -3,9 +3,9 @@ class TaskModel {
   final String taskname;
   final String category;
   final String? note;
-  bool status;
+  int status;
   final String date;
-  final int? eventid;
+  final int eventid;
   final List<Subtaskmodel>? subtask;
 
   TaskModel({
@@ -13,7 +13,7 @@ class TaskModel {
     required this.category,
     required this.status,
     required this.date,
-    this.eventid,
+    required this.eventid,
     this.note,
     this.subtask,
     this.id,
@@ -24,16 +24,19 @@ class TaskModel {
     final taskname = map['taskname'] as String;
     final category = map['category'] as String;
     final note = map['note'] as String?;
-    final status =
-        map['status'] is int ? map['status'] == 1 : map['status'] as bool;
+    //final status = map['status'] as int;
+    final status = map['status'] is int
+        ? map['status'] as int
+        : (map['status'] is String
+            ? int.tryParse(map['status'] as String) ?? 0
+            : 0);
     final date = map['date'] as String;
+    //final eventid = map['eventid'] as int;
     final eventid = map['eventid'] is int
         ? map['eventid'] as int
-        : (map['eventid'] == null
-            ? null
-            : int.tryParse(map['eventid'].toString()));
-
-    // final eventid = map['eventid'] as int?;
+        : (map['eventid'] is String
+            ? int.tryParse(map['eventid'] as String) ?? 0
+            : 0);
     final subtask = map['clientname'] as List<Subtaskmodel>?;
     return TaskModel(
         id: id,
@@ -51,11 +54,11 @@ class Subtaskmodel {
   String? id;
   final String subtaskname;
   final String? subtasknote;
-  final bool subtaskstatus;
+  final int? subtaskstatus;
 
   Subtaskmodel({
     required this.subtaskname,
-    required this.subtaskstatus,
+    this.subtaskstatus,
     this.id,
     this.subtasknote,
   });
@@ -65,7 +68,7 @@ class Subtaskmodel {
       id: map['id'] as String,
       subtaskname: map['subtaskname'] as String,
       subtasknote: map['subtasknote'] as String?,
-      subtaskstatus: map['subtaskstatus'] as bool,
+      subtaskstatus: map['subtaskstatus'] as int?,
     );
   }
 }

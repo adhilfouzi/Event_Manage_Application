@@ -1,7 +1,5 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -17,7 +15,7 @@ Future<void> initialize_event_db() async {
     onCreate: (eventDB, version) async {
       // Create the 'student' table when the database is created.
       await eventDB.execute(
-          'CREATE TABLE event (id INTEGER PRIMARY KEY, eventname TEXT, budget TEXT, location TEXT, about TEXT, startingDay TEXT,endingDay TEXT, startingTime TEXT, endingTime TEXT, clientname TEXT, phoneNumber TEXT,emailId TEXT, address TEXT, imagex TEXT)');
+          'CREATE TABLE event (id INTEGER PRIMARY KEY, eventname TEXT, budget TEXT, location TEXT, about TEXT, startingDay TEXT, startingTime TEXT, clientname TEXT, phoneNumber TEXT,emailId TEXT, address TEXT, imagex TEXT)');
     },
   );
   //print("student_db created successfully.");
@@ -26,7 +24,6 @@ Future<void> initialize_event_db() async {
 // Function to retrieve student data from the database.
 Future<void> refreshEventdata() async {
   final result = await eventDB.rawQuery("SELECT * FROM event");
-  log('All event data : $result');
   // print('All event data : ${result}');
   eventList.value.clear();
   for (var map in result) {
@@ -55,7 +52,6 @@ Future<void> addEvent(Eventmodel value) async {
         value.imagex
       ],
     );
-    log(value.id.toString());
     refreshEventdata();
   } catch (e) {
     // Handle any errors that occur during data insertion.

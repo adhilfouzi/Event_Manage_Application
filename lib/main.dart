@@ -2,6 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
+import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 
@@ -9,6 +10,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialize_event_db();
   await initialize_task_db();
+  await initialize_guest_database();
   runApp(
     const MyApp(),
   );

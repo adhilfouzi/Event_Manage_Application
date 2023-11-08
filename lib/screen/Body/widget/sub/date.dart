@@ -24,15 +24,23 @@ class _MyWidgetState extends State<Date> {
   @override
   void initState() {
     super.initState();
-    // Initialize the selected date with the current date or defaultdata if provided.
+
     if (widget.defaultdata != null) {
       selectedDate = DateTime.parse(widget.defaultdata!);
+    } else {
+      selectedDate = DateTime.now();
       if (widget.controller != null) {
         widget.controller!.text = _formatDate(selectedDate!);
       }
-    } else {
-      selectedDate = DateTime.now();
     }
+    // if (widget.defaultdata != null) {
+    //   selectedDate = DateTime.parse(widget.defaultdata!);
+    //   if (widget.controller != null) {
+    //     widget.controller!.text = _formatDate(selectedDate!);
+    //   }
+    // } else {
+    //   selectedDate = DateTime.now();
+    // }
   }
 
   Future<void> _selectDate(BuildContext context) async {

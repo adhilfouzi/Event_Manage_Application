@@ -53,7 +53,7 @@ class TaskList extends StatelessWidget {
                       children: [
                         SlidableAction(
                           onPressed: (BuildContext context) {
-                            var fine = data.status = false;
+                            int fine = data.status = 0;
                             editTask(
                                 data.id,
                                 data.taskname,
@@ -78,7 +78,7 @@ class TaskList extends StatelessWidget {
                       children: [
                         SlidableAction(
                           onPressed: (BuildContext context) {
-                            bool fine = data.status = true;
+                            int fine = data.status = 1;
                             editTask(
                                 data.id,
                                 data.taskname,
@@ -113,11 +113,10 @@ class TaskList extends StatelessWidget {
                             style: raleway(color: Colors.black),
                           ),
                           subtitle: Text(
-                            data.status == false ? 'Pending' : 'Completed',
+                            data.status == 0 ? 'Pending' : 'Completed',
                             style: raleway(
-                              color: data.status == false
-                                  ? Colors.red
-                                  : Colors.green,
+                              color:
+                                  data.status == 0 ? Colors.red : Colors.green,
                               fontSize: 15,
                             ),
                           ),

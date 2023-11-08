@@ -3,7 +3,7 @@ class GuestModel {
   final String gname;
   final String sex;
   final String? note;
-  bool status;
+  int status;
   final String? number;
   final int eventid;
 
@@ -26,8 +26,8 @@ class GuestModel {
     final gname = map['gname'] as String;
     final sex = map['sex'] as String;
     final note = map['note'] as String?;
-    final status =
-        map['status'] is int ? map['status'] == 1 : map['status'] as bool;
+    final status = map['status'] as int;
+    //map['status'] == 1 : map['status'] as int;
     final eventid = map['eventid'] as int;
     final number = map['number'] as String?;
     final email = map['email'] as String?;

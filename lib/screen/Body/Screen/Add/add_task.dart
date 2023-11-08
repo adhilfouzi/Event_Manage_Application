@@ -7,7 +7,6 @@ import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/List/dropdowncategory.dart';
 import 'package:project_event/screen/Body/widget/sub/status.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
-import 'package:project_event/screen/Body/widget/sub/subtask.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 
 class AddTask extends StatefulWidget {
@@ -20,7 +19,6 @@ class AddTask extends StatefulWidget {
 }
 
 class _AddTaskState extends State<AddTask> {
-  Map<String, List<TaskModel>> eventTasks = {};
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -62,7 +60,7 @@ class _AddTaskState extends State<AddTask> {
               textcontent1: 'Pending',
               textcontent2: 'Completed',
               onStatusChange: (bool status) {
-                _statusController = status;
+                _statusController = status == true ? 1 : 0;
               },
             ),
             Date(
@@ -81,9 +79,8 @@ class _AddTaskState extends State<AddTask> {
   final _categoryController = TextEditingController();
   final _noteController = TextEditingController();
   final List<Subtaskmodel> _subtasks = [];
-  bool _statusController = false;
+  int _statusController = 0;
   final _dateController = TextEditingController();
-  // final _eventidController = TextEditingController();
 
   Future<void> addTaskclick(mtx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
@@ -93,7 +90,6 @@ class _AddTaskState extends State<AddTask> {
       final date = _dateController.text;
       final eventId = widget.eventID;
       final subtask = _subtasks;
-      // final eventidre = _eventidController.text;
 
       final taskdata = TaskModel(
           taskname: taskname,
@@ -105,18 +101,14 @@ class _AddTaskState extends State<AddTask> {
           eventid: eventId);
 
       await addTask(taskdata).then((value) => log("success "));
-      // final result = await addTask(taskdata);
 
-      // log(taskList.toString());
       setState(() {
-        _statusController = false;
+        _statusController = 0;
         _tasknameController.clear();
         _categoryController.clear();
         _dateController.clear();
         _noteController.clear();
       });
-      // refreshEventtaskdata();
-      // refreshEventdata();
 
       ScaffoldMessenger.of(mtx).showSnackBar(
         const SnackBar(

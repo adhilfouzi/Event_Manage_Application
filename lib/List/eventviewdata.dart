@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/budget.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/guests.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/report.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/settlement.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/vendors.dart';
@@ -21,7 +20,7 @@ final List<Map<String, dynamic>> cardData = [
     'color': const Color.fromRGBO(234, 28, 140, 1),
     'image': const AssetImage('assets/UI/icons/Guests.png'),
     'text': 'Guests',
-    'link': const Guests(),
+    'link': 'Guests()',
     'report': () => const RpGuests(),
   },
   {

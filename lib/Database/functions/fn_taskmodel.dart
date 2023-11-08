@@ -37,9 +37,9 @@ Future<void> refreshEventtaskdata(int id) async {
 
   // Sort the taskList to place rows with status=false at the beginning
   taskList.value.sort((a, b) {
-    if (a.status == false && b.status == true) {
+    if (a.status == 0 && b.status == 1) {
       return -1; // a comes before b
-    } else if (a.status == true && b.status == false) {
+    } else if (a.status == 1 && b.status == 0) {
       return 1; // b comes before a
     } else {
       return 0; // no change in order
@@ -65,7 +65,7 @@ Future<void> addTask(TaskModel value) async {
       ],
     );
     log(value.id.toString());
-    refreshEventtaskdata(value.eventid!);
+    refreshEventtaskdata(value.eventid);
   } catch (e) {
     //------> Handle any errors that occur during data insertion.
     print('Error inserting data: $e');

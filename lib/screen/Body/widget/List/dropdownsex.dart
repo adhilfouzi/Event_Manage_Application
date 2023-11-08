@@ -4,8 +4,8 @@ import 'package:project_event/screen/Body/widget/List/list.dart';
 
 class SexDown extends StatefulWidget {
   final ValueChanged<String?>? onChanged;
-
-  const SexDown({super.key, this.onChanged});
+  final String? defaultdata;
+  const SexDown({super.key, this.onChanged, this.defaultdata});
 
   @override
   State<SexDown> createState() => _SexDownState();
@@ -17,7 +17,10 @@ class _SexDownState extends State<SexDown> {
   @override
   void initState() {
     super.initState();
-    selectedSex = 'Male';
+    selectedSex = widget.defaultdata ?? 'Male';
+    if (selectedSex!.isEmpty) {
+      selectedSex = 'Male';
+    }
   }
 
   @override
