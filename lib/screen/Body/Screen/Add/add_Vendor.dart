@@ -34,7 +34,7 @@ class AddVendor extends StatelessWidget {
               textcontent: 'Estimatrd Amount', controller: _budgetController),
           PaymentsBar(),
           Contact(acontroller: _acontroller, econtroller: _econtroller),
-          Payments(goto: AddPayments()),
+          //Payments(goto: AddPayments()),
         ]),
       ),
     );

@@ -7,15 +7,14 @@ import 'package:project_event/screen/Body/widget/sub/contact.dart';
 import 'package:project_event/screen/Body/widget/sub/status.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 
-class AddGuest extends StatefulWidget {
+class AddGuest extends StatelessWidget {
   final int eventID;
-  const AddGuest({super.key, required this.eventID});
 
-  @override
-  State<AddGuest> createState() => _AddGuestState();
-}
+  AddGuest({
+    super.key,
+    required this.eventID,
+  });
 
-class _AddGuestState extends State<AddGuest> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -43,7 +42,7 @@ class _AddGuestState extends State<AddGuest> {
               keyType: TextInputType.name,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Task name is required';
+                  return 'Name is required';
                 }
                 return null; // Return null if the input is valid
               },
@@ -90,7 +89,7 @@ class _AddGuestState extends State<AddGuest> {
       final sex = _sexController.text;
       final note = _noteController.text;
       final email = _econtroller.text;
-      final eventId = widget.eventID;
+      final eventId = eventID;
       final number = _pcontroller.text;
       final adress = _acontroller.text;
 
@@ -115,20 +114,11 @@ class _AddGuestState extends State<AddGuest> {
           duration: Duration(seconds: 2),
         ),
       );
-      setState(() {
-        _statusController = 0;
-        _sexController.clear();
-        _nameController.clear();
-        _noteController.clear();
-        _econtroller.clear();
-        _acontroller.clear();
-        _pcontroller.clear();
-      });
-      Navigator.of(mtx).pop();
+      Navigator.pop(mtx);
     } else {
       ScaffoldMessenger.of(mtx).showSnackBar(
         const SnackBar(
-          content: Text("Fill the Task Name"),
+          content: Text("Fill the  Name"),
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.all(10),
           backgroundColor: Colors.red,

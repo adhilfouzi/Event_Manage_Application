@@ -37,7 +37,7 @@ class TaskModel {
         : (map['eventid'] is String
             ? int.tryParse(map['eventid'] as String) ?? 0
             : 0);
-    final subtask = map['clientname'] as List<Subtaskmodel>?;
+    final subtask = map['subtask'] as List<Subtaskmodel>?;
     return TaskModel(
         id: id,
         eventid: eventid,

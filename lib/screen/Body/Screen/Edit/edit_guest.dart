@@ -29,7 +29,6 @@ class _EditGuestState extends State<EditGuest> {
               icon: Icons.delete,
               onPressed: () {
                 deleteGuest(widget.guestdata.id, widget.guestdata.eventid);
-                Navigator.of(context).pop();
               }),
           AppAction(
               icon: Icons.done,
@@ -114,6 +113,16 @@ class _EditGuestState extends State<EditGuest> {
           number, email, adress);
 
       refreshguestdata(guest.eventid);
+      ScaffoldMessenger.of(ctx).showSnackBar(
+        const SnackBar(
+          content: Text("Successfully Edited"),
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.all(10),
+          backgroundColor: Colors.greenAccent,
+          duration: Duration(seconds: 2),
+        ),
+      );
+      Navigator.pop(ctx);
     } else {
       ScaffoldMessenger.of(ctx).showSnackBar(
         const SnackBar(

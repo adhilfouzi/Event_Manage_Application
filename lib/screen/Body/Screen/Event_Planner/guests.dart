@@ -150,5 +150,3 @@ class Guests extends StatelessWidget {
     );
   }
 }
-
-void doNothing(BuildContext context) {}

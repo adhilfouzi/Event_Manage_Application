@@ -31,7 +31,7 @@ class EditBudget extends StatelessWidget {
           TextFieldBlue(
               textcontent: 'Estimatrd Amount', controller: _budgetController),
           PaymentsBar(),
-          Payments(goto: AddPayments())
+          // Payments(goto: AddPayments())
         ]),
       ),
     );
