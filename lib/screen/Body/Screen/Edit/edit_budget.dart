@@ -1,45 +1,132 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
+import 'package:project_event/Database/functions/fn_budgetmodel.dart';
+import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
+import 'package:project_event/screen/Body/Screen/Search/budget_search.dart';
 import 'package:project_event/screen/Body/widget/List/dropdowncategory.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/paymentbar.dart';
-import 'package:project_event/screen/Body/widget/sub/payments.dart';
 
-class EditBudget extends StatelessWidget {
-  EditBudget({super.key});
+class EditBudget extends StatefulWidget {
+  final BudgetModel budgetdata;
+  const EditBudget({super.key, required this.budgetdata});
 
+  @override
+  State<EditBudget> createState() => _EditBudgetState();
+}
+
+class _EditBudgetState extends State<EditBudget> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
-          AppAction(icon: Icons.done, onPressed: () {}),
+          AppAction(
+              icon: Icons.delete,
+              onPressed: () {
+                dodeletebudget(context, widget.budgetdata);
+              }),
+          AppAction(
+              icon: Icons.done,
+              onPressed: () {
+                editGuestclick(context, widget.budgetdata);
+              }),
         ],
         titleText: 'Edit Budget',
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10.0),
-        child: Column(children: [
-          TextFieldBlue(textcontent: 'Name', controller: _nameController),
-          CategoryDown(
-            onCategorySelected: (String value) {
-              _categoryController.text = value;
-            },
-          ),
-          TextFieldBlue(textcontent: 'Note', controller: _noteController),
-          TextFieldBlue(
-              textcontent: 'Estimatrd Amount', controller: _budgetController),
-          PaymentsBar(),
-          // Payments(goto: AddPayments())
-        ]),
+        child: Form(
+          key: _formKey,
+          child: Column(children: [
+            TextFieldBlue(
+              textcontent: 'Name',
+              controller: _nameController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return ' name is required';
+                }
+                return null; // Return null if the input is valid
+              },
+            ),
+            CategoryDown(
+              defaultdata: _categoryController.text,
+              onCategorySelected: (String value) {
+                _categoryController.text = value;
+              },
+            ),
+            TextFieldBlue(textcontent: 'Note', controller: _noteController),
+            TextFieldBlue(
+              keyType: TextInputType.number,
+              textcontent: 'Estimatrd Amount',
+              controller: _budgetController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return ' Estimatrd Amount is required';
+                }
+                return null;
+              },
+            ),
+            const PaymentsBar(),
+            // Payments(goto: AddPayments())
+          ]),
+        ),
       ),
     );
   }
 
   final _budgetController = TextEditingController();
-
   final _nameController = TextEditingController();
   final _categoryController = TextEditingController();
   final _noteController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _budgetController.text = widget.budgetdata.esamount;
+    _nameController.text = widget.budgetdata.name;
+    _categoryController.text = widget.budgetdata.category;
+    _noteController.text = widget.budgetdata.note!;
+  }
+
+  Future<void> editGuestclick(BuildContext ctx, BudgetModel budget) async {
+    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+      final name = _nameController.text.toUpperCase().trimLeft().trimRight();
+      final budgeta = _budgetController.text.trimLeft().trimRight();
+      final note = _noteController.text.trimLeft().trimRight();
+      final eventId = budget.eventid;
+
+      final category = _categoryController.text;
+      await editBudget(
+        budget.id,
+        name,
+        category,
+        note,
+        budgeta,
+        eventId,
+      );
+      refreshBudgetData(budget.eventid);
+      ScaffoldMessenger.of(ctx).showSnackBar(
+        const SnackBar(
+          content: Text("Successfully Edited"),
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.all(10),
+          backgroundColor: Colors.greenAccent,
+          duration: Duration(seconds: 2),
+        ),
+      );
+      Navigator.pop(ctx);
+    } else {
+      ScaffoldMessenger.of(ctx).showSnackBar(
+        const SnackBar(
+          content: Text("Fill the Name & Estimatrd Amount"),
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.all(10),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  }
 }

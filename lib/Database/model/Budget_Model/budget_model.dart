@@ -3,14 +3,14 @@ class BudgetModel {
   final String name;
   final String category;
   final String? note;
-  final String? esamount;
+  final String esamount;
   final int eventid;
   BudgetModel(
       {this.id,
       required this.name,
       required this.category,
       this.note,
-      this.esamount,
+      required this.esamount,
       required this.eventid});
 
   static BudgetModel fromMap(Map<String, Object?> map) {
@@ -18,7 +18,7 @@ class BudgetModel {
     final name = map['name'] as String;
     final category = map['category'] as String;
     final note = map['note'] as String?;
-    final esamount = map['esamount'] as String?;
+    final esamount = map['esamount'] as String;
     final eventid = map['eventid'] is int
         ? map['eventid'] as int
         : (map['eventid'] is String

@@ -50,7 +50,7 @@ class _EditGuestState extends State<EditGuest> {
               keyType: TextInputType.name,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Task name is required';
+                  return ' name is required';
                 }
                 return null; // Return null if the input is valid
               },

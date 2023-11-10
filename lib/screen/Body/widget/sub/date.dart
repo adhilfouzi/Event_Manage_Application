@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 
@@ -21,26 +22,31 @@ class Date extends StatefulWidget {
 class _MyWidgetState extends State<Date> {
   DateTime? selectedDate;
 
-  @override
   void initState() {
     super.initState();
 
     if (widget.defaultdata != null) {
-      selectedDate = DateTime.parse(widget.defaultdata!);
+      selectedDate = _parseDate(widget.defaultdata!);
     } else {
       selectedDate = DateTime.now();
-      if (widget.controller != null) {
-        widget.controller!.text = _formatDate(selectedDate!);
-      }
     }
-    // if (widget.defaultdata != null) {
-    //   selectedDate = DateTime.parse(widget.defaultdata!);
-    //   if (widget.controller != null) {
-    //     widget.controller!.text = _formatDate(selectedDate!);
-    //   }
-    // } else {
-    //   selectedDate = DateTime.now();
-    // }
+
+    if (widget.controller != null) {
+      widget.controller!.text = _formatDate(selectedDate!);
+    }
+  }
+
+  DateTime _parseDate(String date) {
+    try {
+      return DateFormat('dd-MM-yyyy').parse(date);
+    } catch (e) {
+      print("Error parsing date: $e");
+      return DateTime.now();
+    }
+  }
+
+  String _formatDate(DateTime date) {
+    return DateFormat('dd-MM-yyyy').format(date);
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -58,10 +64,6 @@ class _MyWidgetState extends State<Date> {
         widget.controller!.text = _formatDate(selectedDate!);
       }
     });
-  }
-
-  String _formatDate(DateTime date) {
-    return "${date.day.toString().padLeft(2, '0')}-${date.month.toString().padLeft(2, '0')}-${date.year}";
   }
 
   @override

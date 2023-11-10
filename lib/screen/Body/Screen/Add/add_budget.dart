@@ -56,6 +56,12 @@ class _AddBudgetState extends State<AddBudget> {
             ),
             TextFieldBlue(textcontent: 'Note', controller: _noteController),
             TextFieldBlue(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Estimatrd Amount is required';
+                  }
+                  return null; // Return null if the input is valid
+                },
                 textcontent: 'Estimatrd Amount',
                 controller: _budgetController,
                 keyType: TextInputType.number),
@@ -78,10 +84,10 @@ class _AddBudgetState extends State<AddBudget> {
   List<PaymentModel> store = [];
   Future<void> addGuestclick(mtx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      final name = _nameController.text.toUpperCase();
-      final category = _categoryController.text.toLowerCase();
-      final note = _noteController.text;
-      final budget = _budgetController.text;
+      final name = _nameController.text.toUpperCase().trimLeft().trimRight();
+      final category = _categoryController.text;
+      final note = _noteController.text.trimLeft().trimRight();
+      final budget = _budgetController.text.trimLeft().trimRight();
       final budgetdata = BudgetModel(
           name: name,
           category: category,
@@ -104,7 +110,7 @@ class _AddBudgetState extends State<AddBudget> {
     } else {
       ScaffoldMessenger.of(mtx).showSnackBar(
         const SnackBar(
-          content: Text("Fill the  Name"),
+          content: Text("Fill the Name & Estimatrd Amount"),
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.all(10),
           backgroundColor: Colors.red,

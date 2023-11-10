@@ -17,7 +17,7 @@ Future<void> initialize_task_db() async {
     onCreate: (Database db, version) async {
       // Create the 'student' table when the database is created.
       await db.execute(
-          'CREATE TABLE task (id INTEGER PRIMARY KEY, taskname TEXT, category TEXT, note TEXT, status BOOLEAN, date TEXT, eventid TEXT, subtask TEXT)');
+          'CREATE TABLE task (id INTEGER PRIMARY KEY, taskname TEXT, category TEXT, note TEXT, status BOOLEAN, date TEXT, eventid TEXT)');
     },
   );
   print("task_db created successfully.");
@@ -53,7 +53,7 @@ Future<void> refreshEventtaskdata(int id) async {
 Future<void> addTask(TaskModel value) async {
   try {
     await taskDB.rawInsert(
-      'INSERT INTO task(taskname, category, note, status, date, eventid, subtask,id) VALUES(?,?,?,?,?,?,?,?)',
+      'INSERT INTO task(taskname, category, note, status, date, eventid, id) VALUES(?,?,?,?,?,?,?)',
       [
         value.taskname,
         value.category,
@@ -80,7 +80,7 @@ Future<void> deletetask(id, int eventid) async {
 
 // Function to edit/update a student's information in the database.
 Future<void> editTask(
-    id, taskname, category, note, status, date, eventid, subtask) async {
+    id, taskname, category, note, status, date, eventid) async {
   final dataflow = {
     'taskname': taskname,
     'category': category,
@@ -88,7 +88,6 @@ Future<void> editTask(
     'status': status,
     'date': date,
     'eventid': eventid,
-    'subtask': subtask
   };
   await taskDB.update('task', dataflow, where: 'id=?', whereArgs: [id]);
   refreshEventtaskdata(eventid);

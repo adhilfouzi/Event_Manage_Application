@@ -78,7 +78,6 @@ class _AddTaskState extends State<AddTask> {
   final _tasknameController = TextEditingController();
   final _categoryController = TextEditingController();
   final _noteController = TextEditingController();
-  final List<Subtaskmodel> _subtasks = [];
   int _statusController = 0;
   final _dateController = TextEditingController();
 
@@ -89,7 +88,6 @@ class _AddTaskState extends State<AddTask> {
       final note = _noteController.text;
       final date = _dateController.text;
       final eventId = widget.eventID;
-      final subtask = _subtasks;
 
       final taskdata = TaskModel(
           taskname: taskname,
@@ -97,7 +95,6 @@ class _AddTaskState extends State<AddTask> {
           status: _statusController,
           note: note,
           date: date,
-          subtask: subtask,
           eventid: eventId);
 
       await addTask(taskdata).then((value) => log("success "));
@@ -119,7 +116,7 @@ class _AddTaskState extends State<AddTask> {
           duration: Duration(seconds: 2),
         ),
       );
-      Navigator.of(mtx).pop();
+      Navigator.pop(mtx);
     } else {
       ScaffoldMessenger.of(mtx).showSnackBar(
         const SnackBar(

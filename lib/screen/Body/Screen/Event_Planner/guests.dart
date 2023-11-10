@@ -5,6 +5,7 @@ import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/screen/Body/Screen/Add/add_guest.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_guest.dart';
+import 'package:project_event/screen/Body/Screen/Search/guest_search.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 
@@ -18,7 +19,13 @@ class Guests extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(actions: [
-        AppAction(icon: Icons.search, onPressed: () {}),
+        AppAction(
+            icon: Icons.search,
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctr) => const GuestSearch(),
+              ));
+            }),
         AppAction(icon: Icons.more_vert, onPressed: () {})
       ], titleText: 'Guests'),
       body: Padding(
@@ -85,47 +92,43 @@ class Guests extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: InkWell(
-                      onTap: () {},
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      elevation: 4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: buttoncolor, width: 1),
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
-                        elevation: 4,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: buttoncolor, width: 1),
-                            borderRadius: BorderRadius.circular(20.0),
+                        child: ListTile(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    EditGuest(guestdata: data)));
+                          },
+                          leading: Image.asset('assets/UI/icons/person.png'),
+                          title: Text(
+                            data.gname,
+                            style: raleway(color: Colors.black),
                           ),
-                          child: ListTile(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      EditGuest(guestdata: data)));
-                            },
-                            leading: Image.asset('assets/UI/icons/person.png'),
-                            title: Text(
-                              data.gname,
-                              style: raleway(color: Colors.black),
+                          subtitle: Text(
+                            data.status == 0
+                                ? 'Pending invitation'
+                                : 'Invitation sent',
+                            style: raleway(
+                              color:
+                                  data.status == 0 ? Colors.red : Colors.green,
+                              fontSize: 12,
                             ),
-                            subtitle: Text(
-                              data.status == 0
-                                  ? 'Pending invitation'
-                                  : 'Invitation sent',
-                              style: raleway(
-                                color: data.status == 0
-                                    ? Colors.red
-                                    : Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                            // trailing: Text(
-                            //   '+1',
-                            //   style: racingSansOne(
-                            //       color: Colors.black54,
-                            //       fontWeight: FontWeight.normal),
-                            // ),
                           ),
+                          // trailing: Text(
+                          //   '+1',
+                          //   style: racingSansOne(
+                          //       color: Colors.black54,
+                          //       fontWeight: FontWeight.normal),
+                          // ),
                         ),
                       ),
                     ),

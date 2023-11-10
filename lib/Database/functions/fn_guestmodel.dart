@@ -94,7 +94,7 @@ Future<void> editGuest(
 }
 
 // Function to delete data from event's database.
-Future<void> clearEventDatabase() async {
+Future<void> clearGuestDatabase() async {
   try {
     await guestDB.delete('guest');
     // refreshguestdata();

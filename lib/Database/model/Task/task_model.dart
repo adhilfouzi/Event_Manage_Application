@@ -6,7 +6,6 @@ class TaskModel {
   int status;
   final String date;
   final int eventid;
-  final List<Subtaskmodel>? subtask;
 
   TaskModel({
     required this.taskname,
@@ -15,7 +14,6 @@ class TaskModel {
     required this.date,
     required this.eventid,
     this.note,
-    this.subtask,
     this.id,
   });
 
@@ -37,12 +35,10 @@ class TaskModel {
         : (map['eventid'] is String
             ? int.tryParse(map['eventid'] as String) ?? 0
             : 0);
-    final subtask = map['subtask'] as List<Subtaskmodel>?;
     return TaskModel(
         id: id,
         eventid: eventid,
         note: note,
-        subtask: subtask,
         taskname: taskname,
         category: category,
         status: status,

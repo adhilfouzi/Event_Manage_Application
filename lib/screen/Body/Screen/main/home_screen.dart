@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
+import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/appinfo.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
@@ -265,4 +267,6 @@ class HomeScreen extends StatelessWidget {
 void clearDb() {
   clearEventDatabase();
   clearTaskDatabase();
+  clearBudgetDatabase();
+  clearGuestDatabase();
 }

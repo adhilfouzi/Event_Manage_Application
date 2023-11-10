@@ -24,24 +24,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'event',
-        theme: ThemeData(
-          primaryColor: appbarcolor,
-          scaffoldBackgroundColor: backgroundcolor,
-          textTheme: const TextTheme(
-            bodyMedium: TextStyle(
-              fontFamily: 'ReadexPro',
-            ),
+      debugShowCheckedModeBanner: false,
+      title: 'event',
+      theme: ThemeData(
+        primaryColor: appbarcolor,
+        scaffoldBackgroundColor: backgroundcolor,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(
+            fontFamily: 'ReadexPro',
           ),
         ),
-        home: AnimatedSplashScreen(
-          splash: 'assets/UI/Event Logo/event logo top.png',
-          splashIconSize: 500,
-          nextScreen: HomeScreen(),
-          backgroundColor: appbarcolor,
-          duration: 3000,
-          splashTransition: SplashTransition.sizeTransition,
-        ));
+      ),
+      home: AnimatedSplashScreen(
+        splash: 'assets/UI/Event Logo/event logo top.png',
+        splashIconSize: 500,
+        nextScreen: HomeScreen(),
+        backgroundColor: appbarcolor,
+        duration: 3000,
+        splashTransition: SplashTransition.sizeTransition,
+      ),
+      routes: {
+        '/Home': (context) => HomeScreen(),
+        // '/Task':(context) => TaskList(eventid: eventid)
+      },
+    );
   }
 }

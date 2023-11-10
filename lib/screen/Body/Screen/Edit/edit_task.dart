@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/model/Task/task_model.dart';
+import 'package:project_event/screen/Body/Screen/Search/tasklist_search.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/List/dropdowncategory.dart';
 import 'package:project_event/screen/Body/widget/sub/status.dart';
@@ -27,8 +28,7 @@ class _EditTaskState extends State<EditTask> {
         AppAction(
             icon: Icons.delete,
             onPressed: () {
-              deletetask(widget.taskdata.id, widget.taskdata.eventid);
-              Navigator.of(context).pop();
+              dodeletetask(context, widget.taskdata);
             }),
         AppAction(
             icon: Icons.done,
@@ -68,6 +68,7 @@ class _EditTaskState extends State<EditTask> {
               },
             ),
             Date(
+              defaultdata: _dateController.text,
               controller: _dateController,
             ),
             // SubTask(
@@ -83,7 +84,6 @@ class _EditTaskState extends State<EditTask> {
   final _tasknameController = TextEditingController();
   final _categoryController = TextEditingController();
   final _noteController = TextEditingController();
-  final List<Subtaskmodel> _subtasks = [];
   late int _statusController;
   final _dateController = TextEditingController();
 
@@ -104,10 +104,9 @@ class _EditTaskState extends State<EditTask> {
       final note = _noteController.text;
       final date = _dateController.text;
       final eventId = task.eventid;
-      final subtask = _subtasks;
 
-      await editTask(task.id, taskname, category, note, _statusController, date,
-          eventId, subtask);
+      await editTask(
+          task.id, taskname, category, note, _statusController, date, eventId);
       refreshEventtaskdata(eventId);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

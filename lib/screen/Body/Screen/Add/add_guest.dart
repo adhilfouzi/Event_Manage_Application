@@ -7,14 +7,19 @@ import 'package:project_event/screen/Body/widget/sub/contact.dart';
 import 'package:project_event/screen/Body/widget/sub/status.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 
-class AddGuest extends StatelessWidget {
+class AddGuest extends StatefulWidget {
   final int eventID;
 
-  AddGuest({
+  const AddGuest({
     super.key,
     required this.eventID,
   });
 
+  @override
+  State<AddGuest> createState() => _AddGuestState();
+}
+
+class _AddGuestState extends State<AddGuest> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -83,13 +88,13 @@ class AddGuest extends StatelessWidget {
 
   final _pcontroller = TextEditingController();
 
-  Future<void> addGuestclick(mtx) async {
+  Future<void> addGuestclick(context) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final name = _nameController.text.toUpperCase();
       final sex = _sexController.text;
       final note = _noteController.text;
       final email = _econtroller.text;
-      final eventId = eventID;
+      final eventId = widget.eventID;
       final number = _pcontroller.text;
       final adress = _acontroller.text;
 
@@ -105,7 +110,7 @@ class AddGuest extends StatelessWidget {
       );
 
       await addguest(guestdata);
-      ScaffoldMessenger.of(mtx).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Successfully added"),
           behavior: SnackBarBehavior.floating,
@@ -114,9 +119,19 @@ class AddGuest extends StatelessWidget {
           duration: Duration(seconds: 2),
         ),
       );
-      Navigator.pop(mtx);
+      setState(() {
+        _statusController = 0;
+        _nameController.clear();
+        _noteController.clear();
+        _econtroller.clear();
+        _pcontroller.clear();
+        _sexController.clear();
+        _acontroller.clear();
+      });
+
+      Navigator.of(context).pop();
     } else {
-      ScaffoldMessenger.of(mtx).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Fill the  Name"),
           behavior: SnackBarBehavior.floating,

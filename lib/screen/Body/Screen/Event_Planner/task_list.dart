@@ -5,6 +5,7 @@ import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/screen/Body/Screen/Add/add_task.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_task.dart';
+import 'package:project_event/screen/Body/Screen/Search/tasklist_search.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
@@ -24,7 +25,13 @@ class TaskList extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(actions: [
-        AppAction(icon: Icons.search, onPressed: () {}),
+        AppAction(
+            icon: Icons.search,
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctr) => const TaskSearch(),
+              ));
+            }),
         AppAction(icon: Icons.more_vert, onPressed: () {})
       ], titleText: 'Task List'),
       body: Padding(
@@ -54,15 +61,8 @@ class TaskList extends StatelessWidget {
                         SlidableAction(
                           onPressed: (BuildContext context) {
                             int fine = data.status = 0;
-                            editTask(
-                                data.id,
-                                data.taskname,
-                                data.category,
-                                data.note,
-                                fine,
-                                data.date,
-                                data.eventid,
-                                data.subtask);
+                            editTask(data.id, data.taskname, data.category,
+                                data.note, fine, data.date, data.eventid);
                           },
                           backgroundColor: Colors.redAccent,
                           foregroundColor: Colors.white,
@@ -80,14 +80,14 @@ class TaskList extends StatelessWidget {
                           onPressed: (BuildContext context) {
                             int fine = data.status = 1;
                             editTask(
-                                data.id,
-                                data.taskname,
-                                data.category,
-                                data.note,
-                                fine,
-                                data.date,
-                                data.eventid,
-                                data.subtask);
+                              data.id,
+                              data.taskname,
+                              data.category,
+                              data.note,
+                              fine,
+                              data.date,
+                              data.eventid,
+                            );
                           },
                           backgroundColor: Colors.blueAccent,
                           foregroundColor: Colors.white,
