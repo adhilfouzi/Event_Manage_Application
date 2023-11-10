@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_event/Core/Color/font.dart';
 
 class TextFieldicon extends StatelessWidget {
   final TextEditingController controller;
@@ -27,10 +28,8 @@ class TextFieldicon extends StatelessWidget {
               horizontal: 10, vertical: 10), // Adjust vertical padding.
           prefixIcon: Icon(icondata, size: 24), // Increase the icon size.
           hintText: textcontent,
-          hintStyle: const TextStyle(
-            color: Colors.black,
-            fontFamily: 'Raleway',
-          ),
+          hintStyle: raleway(
+              color: Colors.black, fontWeight: FontWeight.normal, fontSize: 15),
           border: InputBorder.none,
         ),
       ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/budget.dart';
@@ -9,6 +10,8 @@ import 'package:project_event/screen/Body/Screen/Event_Planner/report.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/settlement.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/task_list.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/vendors.dart';
+import 'package:project_event/screen/Body/Screen/main/Event/edit_event.dart';
+import 'package:project_event/screen/Body/Screen/main/Event/view_event_details.dart';
 
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 
@@ -26,7 +29,72 @@ class ViewEvent extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: CustomAppBar(
         textcolor: Colors.white,
-        actions: [AppAction(icon: Icons.more_vert, onPressed: () {})],
+        actions: [
+          AppAction(
+              icon: Icons.more_vert,
+              onPressed: () {
+                showMenu(
+                  color: backgroundcolor,
+                  context: context,
+                  position: const RelativeRect.fromLTRB(1, 0, 0, 5),
+                  items: <PopupMenuEntry>[
+                    const PopupMenuItem(
+                      value: 'view',
+                      child: Row(
+                        children: [
+                          Icon(Icons.visibility),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('View Event Details')
+                        ],
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: 'Edit',
+                      child: Row(
+                        children: [
+                          Icon(Icons.edit),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('Edit')
+                        ],
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: 'Delete',
+                      child: Row(
+                        children: [
+                          Icon(Icons.delete),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('Delete')
+                        ],
+                      ),
+                    )
+                  ],
+                ).then((value) {
+                  switch (value) {
+                    case 'view':
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            ViewEventDetails(eventModel: eventModel),
+                      ));
+                      break;
+                    case 'Edit':
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => EditEvent(event: eventModel),
+                      ));
+                      break;
+                    case 'Delete':
+                      dodeleteevent(context, eventModel);
+                      break;
+                  }
+                });
+              })
+        ],
         titleText: 'Event Planner & Organizer',
         backgroundColor: Colors.transparent,
       ),
@@ -65,11 +133,11 @@ class ViewEvent extends StatelessWidget {
                       style: racingSansOne(fontSize: 20),
                     ),
                     Text(
-                      '19 : 20 : 14 : 52',
+                      eventModel.startingDay,
                       style: racingSansOne(fontSize: 20),
                     ),
                     Text(
-                      'Days : Hrs : Mins : Secs',
+                      eventModel.startingTime,
                       style: racingSansOne(fontSize: 12),
                     ),
                   ],

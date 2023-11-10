@@ -8,8 +8,12 @@ class Contact extends StatelessWidget {
   final TextEditingController? econtroller;
   final TextEditingController? acontroller;
 
-  const Contact(
-      {super.key, this.pcontroller, this.econtroller, this.acontroller});
+  const Contact({
+    super.key,
+    this.pcontroller,
+    this.econtroller,
+    this.acontroller,
+  });
 
   @override
   Widget build(BuildContext context) {

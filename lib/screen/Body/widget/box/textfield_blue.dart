@@ -10,6 +10,7 @@ class TextFieldBlue extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyType;
   final bool? obscureText;
+  final bool? enabled;
 
   const TextFieldBlue({
     super.key,
@@ -20,6 +21,7 @@ class TextFieldBlue extends StatelessWidget {
     this.validator,
     this.keyType,
     this.obscureText,
+    this.enabled,
   });
 
   @override
@@ -34,6 +36,7 @@ class TextFieldBlue extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
           child: TextFormField(
+            enabled: enabled == null ? true : false,
             obscureText: obscureText == null ? false : true,
             keyboardType: keyType,
             validator: validator,

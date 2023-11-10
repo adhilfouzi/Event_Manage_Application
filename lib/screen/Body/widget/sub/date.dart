@@ -21,7 +21,7 @@ class Date extends StatefulWidget {
 
 class _MyWidgetState extends State<Date> {
   DateTime? selectedDate;
-
+  @override
   void initState() {
     super.initState();
 
@@ -82,7 +82,8 @@ class _MyWidgetState extends State<Date> {
               border: Border.all(color: buttoncolor, width: 1),
               borderRadius: BorderRadius.circular(40.0),
             ),
-            child: TextField(
+            child: TextFormField(
+              readOnly: true,
               controller: widget.controller,
               decoration: InputDecoration(
                 iconColor: buttoncolor,

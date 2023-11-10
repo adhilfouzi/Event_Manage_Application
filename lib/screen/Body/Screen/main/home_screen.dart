@@ -7,12 +7,13 @@ import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/appinfo.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/reset.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/terms.dart';
-import 'package:project_event/screen/Body/Screen/main/add_event.dart';
-import 'package:project_event/screen/Body/Screen/main/viewevent.dart';
+import 'package:project_event/screen/Body/Screen/main/Event/add_event.dart';
+import 'package:project_event/screen/Body/Screen/main/Event/viewevent.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 import 'package:project_event/screen/Body/widget/List/listtiledrawer.dart';
 import 'package:project_event/screen/Body/widget/box/small_button.dart';
@@ -64,8 +65,9 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.min,
+              // mainAxisSize: MainAxisSize.min,
               children: [
+                const SizedBox(width: 5),
                 TextButton(
                   onPressed: () {},
                   style: ButtonStyle(
@@ -81,9 +83,8 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(width: 5),
                 const SmallButton(textdata: 'Pending'),
                 const SizedBox(width: 5),
-                const SmallButton(textdata: 'OnProcess'),
-                const SizedBox(width: 5),
                 const SmallButton(textdata: 'Cancelled'),
+                const SizedBox(width: 5),
               ],
             ),
           ),
@@ -133,7 +134,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                               Container(
                                 height: 265,
-                                width: double.infinity,
+                                width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     begin: Alignment.topCenter,
@@ -169,7 +170,7 @@ class HomeScreen extends StatelessWidget {
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             Text(
-                                              '${data.startingDay} at ${data.startingTime}',
+                                              '${data.startingDay}  at  ${data.startingTime}',
                                               style:
                                                   racingSansOne(fontSize: 13),
                                             ),
@@ -185,6 +186,23 @@ class HomeScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
+                              Positioned(
+                                right: 20,
+                                top: 15,
+                                child: IconButton(
+                                    onPressed: () {
+                                      isFavorite(data);
+                                    },
+                                    icon: Icon(
+                                      data.favorite == 1
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: data.favorite == 1
+                                          ? Colors.red
+                                          : Colors.white,
+                                      size: 30,
+                                    )),
+                              )
                             ],
                           ),
                         ),
@@ -261,6 +279,24 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: const FloatingPointx(goto: AddEvent()),
     );
+  }
+
+  isFavorite(Eventmodel data) {
+    int fine = data.favorite == 0 ? 1 : 0;
+    editeventdata(
+        data.id,
+        data.eventname,
+        data.budget,
+        fine,
+        data.location,
+        data.about,
+        data.startingDay,
+        data.startingTime,
+        data.clientname,
+        data.phoneNumber,
+        data.emailId,
+        data.address,
+        data.imagex);
   }
 }
 

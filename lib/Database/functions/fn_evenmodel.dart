@@ -15,7 +15,7 @@ Future<void> initialize_event_db() async {
     onCreate: (eventDB, version) async {
       // Create the 'student' table when the database is created.
       await eventDB.execute(
-          'CREATE TABLE event (id INTEGER PRIMARY KEY, eventname TEXT, budget TEXT, location TEXT, about TEXT, startingDay TEXT, startingTime TEXT, clientname TEXT, phoneNumber TEXT,emailId TEXT, address TEXT, imagex TEXT)');
+          'CREATE TABLE event (id INTEGER PRIMARY KEY, eventname TEXT, budget TEXT, location TEXT, about TEXT, startingDay TEXT, startingTime TEXT, clientname TEXT, phoneNumber TEXT,emailId TEXT, address TEXT, imagex TEXT, favorite INTEGER)');
     },
   );
   //print("student_db created successfully.");
@@ -24,7 +24,7 @@ Future<void> initialize_event_db() async {
 // Function to retrieve student data from the database.
 Future<void> refreshEventdata() async {
   final result = await eventDB.rawQuery("SELECT * FROM event");
-  // print('All event data : ${result}');
+  print('All event data : ${result}');
   eventList.value.clear();
   for (var map in result) {
     final student = Eventmodel.fromMap(map);
@@ -37,8 +37,9 @@ Future<void> refreshEventdata() async {
 Future<void> addEvent(Eventmodel value) async {
   try {
     await eventDB.rawInsert(
-      'INSERT INTO event(eventname, budget, location, about, startingDay,  startingTime,  clientname, phoneNumber, emailId, address, imagex) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
+      'INSERT INTO event (favorite, eventname, budget, location, about, startingDay, startingTime, clientname, phoneNumber, emailId, address, imagex) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)',
       [
+        value.favorite,
         value.eventname,
         value.budget,
         value.location,
@@ -49,9 +50,10 @@ Future<void> addEvent(Eventmodel value) async {
         value.phoneNumber,
         value.emailId,
         value.address,
-        value.imagex
+        value.imagex,
       ],
     );
+
     refreshEventdata();
   } catch (e) {
     // Handle any errors that occur during data insertion.
@@ -66,9 +68,22 @@ Future<void> deleteEventdata(id) async {
 }
 
 // Function to edit/update a student's information in the database.
-Future<void> editeventdata(id, eventname, budget, location, about, startingDay,
-    startingTime, clientname, phoneNumber, emailId, address, imagex) async {
+Future<void> editeventdata(
+    id,
+    eventname,
+    budget,
+    favorite,
+    location,
+    about,
+    startingDay,
+    startingTime,
+    clientname,
+    phoneNumber,
+    emailId,
+    address,
+    imagex) async {
   final dataflow = {
+    'favorite': favorite,
     'eventname': eventname,
     'budget': budget,
     'location': location,
