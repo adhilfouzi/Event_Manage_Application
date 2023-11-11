@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
 import 'package:project_event/screen/Body/widget/List/dropdowncategory.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
-import 'package:project_event/screen/Body/widget/sub/contact.dart';
+import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 import 'package:project_event/screen/Body/widget/sub/paymentbar.dart';
-import 'package:project_event/screen/Body/widget/sub/payments.dart';
 
 class AddVendor extends StatelessWidget {
   AddVendor({super.key});
@@ -33,7 +31,7 @@ class AddVendor extends StatelessWidget {
           TextFieldBlue(
               textcontent: 'Estimatrd Amount', controller: _budgetController),
           PaymentsBar(),
-          Contact(acontroller: _acontroller, econtroller: _econtroller),
+          ContactState(acontroller: _acontroller, econtroller: _econtroller),
           //Payments(goto: AddPayments()),
         ]),
       ),

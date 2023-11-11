@@ -4,7 +4,6 @@ import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/Database/model/Guest_Model/guest_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_guest.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/guests.dart';
 
 class GuestSearch extends StatefulWidget {
   const GuestSearch({super.key});

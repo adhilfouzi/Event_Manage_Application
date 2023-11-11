@@ -8,7 +8,7 @@ import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
-import 'package:project_event/screen/Body/widget/sub/contact.dart';
+import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
 import 'package:project_event/screen/Body/widget/sub/time.dart';
 
@@ -145,7 +145,7 @@ class _AddEventState extends State<AddEvent> {
                 textcontent: 'Client Name',
                 controller: _clientnameController,
               ),
-              Contact(
+              ContactState(
                 acontroller: _addressController,
                 econtroller: _emailController,
                 pcontroller: _pnoController,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/screen/Body/widget/List/dropdowncategory.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
-import 'package:project_event/screen/Body/widget/sub/contact.dart';
+import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 import 'package:project_event/screen/Body/widget/sub/paymentbar.dart';
 
 class EditVendor extends StatelessWidget {
@@ -17,7 +17,7 @@ class EditVendor extends StatelessWidget {
           AppAction(icon: Icons.delete, onPressed: () {}),
           AppAction(icon: Icons.done, onPressed: () {}),
         ],
-        titleText: 'Add Task',
+        titleText: 'Add Vendor',
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10.0),
@@ -32,7 +32,7 @@ class EditVendor extends StatelessWidget {
           TextFieldBlue(
               textcontent: 'Estimatrd Amount', controller: _budgetController),
           PaymentsBar(),
-          Contact(acontroller: _acontroller, econtroller: _econtroller),
+          ContactState(acontroller: _acontroller, econtroller: _econtroller),
           // Payments(goto: AddPayments(payment1: ,)),
         ]),
       ),

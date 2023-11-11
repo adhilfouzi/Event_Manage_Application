@@ -3,12 +3,12 @@ import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 
-class Contact extends StatelessWidget {
+class ContactState extends StatelessWidget {
   final TextEditingController? pcontroller;
   final TextEditingController? econtroller;
   final TextEditingController? acontroller;
 
-  const Contact({
+  const ContactState({
     super.key,
     this.pcontroller,
     this.econtroller,

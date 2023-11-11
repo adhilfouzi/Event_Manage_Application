@@ -45,6 +45,7 @@ dependencies:
   sqflite: ^2.3.0
   flutter_slidable: ^3.0.1
   intl: ^0.18.1
+  fluttercontactpicker: ^4.7.0
 
 dev_dependencies:
   flutter_test:
