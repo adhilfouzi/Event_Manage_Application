@@ -172,21 +172,21 @@ void delectYes(
   ctx,
   TaskModel student,
 ) {
-  deletetask(student.id, student.eventid);
-  Navigator.of(ctx).pushAndRemoveUntil(
-    MaterialPageRoute(
-        builder: (BuildContext context) => TaskList(
-              eventid: student.eventid,
-            )),
-    (route) => false,
-  );
-  ScaffoldMessenger.of(ctx).showSnackBar(
-    const SnackBar(
-      content: Text("Successfully Deleted"),
-      behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.all(10),
-      backgroundColor: Colors.redAccent,
-      duration: Duration(seconds: 2),
-    ),
-  );
+  try {
+    deletetask(student.id, student.eventid);
+    Navigator.of(ctx).pop();
+    Navigator.of(ctx).pop();
+
+    ScaffoldMessenger.of(ctx).showSnackBar(
+      const SnackBar(
+        content: Text("Successfully Deleted"),
+        behavior: SnackBarBehavior.floating,
+        margin: EdgeInsets.all(10),
+        backgroundColor: Colors.grey,
+        duration: Duration(seconds: 2),
+      ),
+    );
+  } catch (e) {
+    print('Error inserting data: $e');
+  }
 }

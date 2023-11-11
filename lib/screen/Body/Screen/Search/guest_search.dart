@@ -177,11 +177,6 @@ void delectYes(ctx, GuestModel student) {
       duration: Duration(seconds: 2),
     ),
   );
-  Navigator.of(ctx).pushAndRemoveUntil(
-    MaterialPageRoute(
-        builder: (BuildContext context) => Guests(
-              eventid: student.eventid,
-            )),
-    (route) => false,
-  );
+  Navigator.of(ctx).pop();
+  Navigator.of(ctx).pop();
 }

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
 import 'package:project_event/screen/Body/widget/List/dropdowncategory.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/contact.dart';
 import 'package:project_event/screen/Body/widget/sub/paymentbar.dart';
-import 'package:project_event/screen/Body/widget/sub/payments.dart';
 
 class EditVendor extends StatelessWidget {
   EditVendor({super.key});

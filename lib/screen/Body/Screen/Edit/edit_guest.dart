@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/Database/model/Guest_Model/guest_model.dart';
+import 'package:project_event/screen/Body/Screen/Search/guest_search.dart';
 import 'package:project_event/screen/Body/widget/List/dropdownsex.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
@@ -28,7 +29,7 @@ class _EditGuestState extends State<EditGuest> {
           AppAction(
               icon: Icons.delete,
               onPressed: () {
-                deleteGuest(widget.guestdata.id, widget.guestdata.eventid);
+                dodeleteguest(context, widget.guestdata);
               }),
           AppAction(
               icon: Icons.done,

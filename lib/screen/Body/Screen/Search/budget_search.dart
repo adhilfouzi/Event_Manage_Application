@@ -170,11 +170,6 @@ void delectYes(ctx, BudgetModel student) {
       duration: Duration(seconds: 2),
     ),
   );
-  Navigator.of(ctx).pushAndRemoveUntil(
-    MaterialPageRoute(
-        builder: (BuildContext context) => Budget(
-              eventid: student.eventid,
-            )),
-    (route) => false,
-  );
+  Navigator.of(ctx).pop();
+  Navigator.of(ctx).pop();
 }
