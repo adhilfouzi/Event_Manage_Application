@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
-import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
-import 'package:project_event/screen/Body/widget/List/dropdowncategory.dart';
+import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/paymentbar.dart';
-import 'package:project_event/screen/Body/widget/sub/payments.dart';
 
 class AddBudget extends StatefulWidget {
   final int eventid;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
+import 'package:project_event/screen/Body/widget/List/paydropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
@@ -38,6 +39,9 @@ class AddPayments extends StatelessWidget {
                 return null; // Return null if the input is valid
               },
             ),
+            PayDown(onChanged: (String? status) {
+              _payController.text = status ?? 'Budget';
+            }),
             TextFieldBlue(
               textcontent: 'Amount',
               controller: _budgetController,
@@ -63,6 +67,7 @@ class AddPayments extends StatelessWidget {
   final TextEditingController _budgetController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _payController = TextEditingController();
 
   Future<void> addPaymentclick(mtx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
@@ -70,6 +75,7 @@ class AddPayments extends StatelessWidget {
       final amount = _budgetController.text;
       final note = _noteController.text;
       final date = _dateController.text;
+      var paymentmodel = _payController.text;
 
       PaymentModel(name: pname, pyamount: amount, date: date, note: note);
 

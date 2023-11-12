@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/screen/Body/Screen/Add/add_Vendor.dart';
+import 'package:project_event/screen/Body/Screen/Add/add_vendor.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 
 class Vendors extends StatelessWidget {
-  const Vendors({super.key});
+  final int eventid;
+  const Vendors({super.key, required this.eventid});
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +89,10 @@ class Vendors extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: FloatingPointx(goto: AddVendor()),
+      floatingActionButton: FloatingPointx(
+          goto: AddVendor(
+        eventid: eventid,
+      )),
     );
   }
 }

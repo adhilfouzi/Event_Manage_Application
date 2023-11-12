@@ -66,3 +66,11 @@ final List<Map<String, String>> sex = [
     'text': 'Child',
   },
 ];
+final List<Map<String, String>> pay = [
+  {
+    'text': 'Budget',
+  },
+  {
+    'text': 'Vendors',
+  },
+];
