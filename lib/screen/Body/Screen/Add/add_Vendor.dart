@@ -4,6 +4,7 @@ import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 import 'package:project_event/screen/Body/widget/sub/paymentbar.dart';
+import 'package:project_event/screen/Body/widget/sub/payments.dart';
 
 class AddVendor extends StatelessWidget {
   AddVendor({super.key});
@@ -30,9 +31,9 @@ class AddVendor extends StatelessWidget {
           TextFieldBlue(textcontent: 'Note', controller: _noteController),
           TextFieldBlue(
               textcontent: 'Estimatrd Amount', controller: _budgetController),
-          PaymentsBar(),
           ContactState(acontroller: _acontroller, econtroller: _econtroller),
-          //Payments(goto: AddPayments()),
+          PaymentsBar(),
+          Payments(),
         ]),
       ),
     );

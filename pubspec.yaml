@@ -46,6 +46,7 @@ dependencies:
   flutter_slidable: ^3.0.1
   intl: ^0.18.1
   fluttercontactpicker: ^4.7.0
+  intro_screen_onboarding_flutter: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -103,13 +104,12 @@ flutter:
     - assets/UI/icons/Ceremony.png
     - assets/UI/icons/Attire.png
     - assets/UI/icons/nodata.png
-    - animation/Animation - 1.json
-    - animation/Animation - 2.json
-    - animation/Animation - 3.json
+    - assets/UI/image/template/1-01.png
+    - assets/UI/image/template/1-02.png
+    - assets/UI/image/template/1-03.png
     - assets/UI/Event Logo/event logo.png
     - assets/UI/image/entry.jpg
-    - assets/UI/image/template/pass.png
-    - assets/UI/image/template/login.png
+  
 
     
   #   - images/a_dot_ham.jpeg

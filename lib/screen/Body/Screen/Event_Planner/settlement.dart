@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 
 class Settlement extends StatelessWidget {
   const Settlement({super.key});
@@ -47,7 +49,7 @@ class Settlement extends StatelessWidget {
                       ],
                     ),
                   ),
-                  VerticalDivider(
+                  const VerticalDivider(
                     endIndent: 15,
                     indent: 15,
                     width: 1,
@@ -72,7 +74,7 @@ class Settlement extends StatelessWidget {
                       ],
                     ),
                   ),
-                  VerticalDivider(
+                  const VerticalDivider(
                     endIndent: 15,
                     indent: 15,
                     width: 1,
@@ -103,7 +105,6 @@ class Settlement extends StatelessWidget {
           ),
         ),
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView.builder(
@@ -148,7 +149,7 @@ class Settlement extends StatelessWidget {
           },
         ),
       ),
-      //floatingActionButton: FloatingPointx(goto: AddGuest()),
+      floatingActionButton: FloatingPointx(goto: AddPayments()),
     );
   }
 }

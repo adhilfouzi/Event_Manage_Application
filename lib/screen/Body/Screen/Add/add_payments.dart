@@ -5,8 +5,9 @@ import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
 
 class AddPayments extends StatelessWidget {
-  late final PaymentModel payment1;
-  AddPayments({super.key, required this.payment1});
+  AddPayments({
+    super.key,
+  });
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,6 @@ class AddPayments extends StatelessWidget {
               icon: Icons.done,
               onPressed: () {
                 addPaymentclick(context);
-                Navigator.pop(context);
               }),
         ],
         titleText: 'Add Payments',
@@ -59,10 +59,10 @@ class AddPayments extends StatelessWidget {
     );
   }
 
-  final _pnameController = TextEditingController();
-  final _budgetController = TextEditingController();
-  final _noteController = TextEditingController();
-  final _dateController = TextEditingController();
+  final TextEditingController _pnameController = TextEditingController();
+  final TextEditingController _budgetController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
 
   Future<void> addPaymentclick(mtx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
@@ -71,8 +71,7 @@ class AddPayments extends StatelessWidget {
       final note = _noteController.text;
       final date = _dateController.text;
 
-      payment1 =
-          PaymentModel(name: pname, pyamount: amount, date: date, note: note);
+      PaymentModel(name: pname, pyamount: amount, date: date, note: note);
 
       ScaffoldMessenger.of(mtx).showSnackBar(
         const SnackBar(

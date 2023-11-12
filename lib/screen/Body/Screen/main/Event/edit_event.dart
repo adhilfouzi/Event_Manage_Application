@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
+import 'package:project_event/screen/Body/Screen/main/Event/view_event_details.dart';
 import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
@@ -24,6 +26,7 @@ class EditEvent extends StatefulWidget {
 
 class _EditEventState extends State<EditEvent> {
   final _formKey = GlobalKey<FormState>();
+  PhoneContact? _phoneContact;
 
   late String imagepath;
   File? imageevent;
@@ -32,6 +35,16 @@ class _EditEventState extends State<EditEvent> {
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
+          AppAction(
+              icon: Icons.contacts,
+              onPressed: () {
+                getcontact();
+              }),
+          AppAction(
+              icon: Icons.delete,
+              onPressed: () {
+                dodeleteevent(context, widget.event);
+              }),
           AppAction(
               icon: Icons.done,
               onPressed: () {
@@ -285,5 +298,38 @@ class _EditEventState extends State<EditEvent> {
         );
       },
     );
+  }
+
+  Future<void> getcontact() async {
+    try {
+      bool permission = await FlutterContactPicker.requestPermission();
+      if (permission) {
+        if (await FlutterContactPicker.hasPermission()) {
+          _phoneContact = await FlutterContactPicker.pickPhoneContact();
+
+          if (_phoneContact != null) {
+            if (_phoneContact!.fullName!.isNotEmpty) {
+              setState(() {
+                _clientnameController.text = _phoneContact!.fullName.toString();
+              });
+            }
+            if (_phoneContact!.phoneNumber!.number!.isNotEmpty) {
+              setState(() {
+                _pnoController.text =
+                    _phoneContact!.phoneNumber!.number.toString();
+              });
+            }
+          }
+        }
+      }
+    } catch (e) {
+      if (e is UserCancelledPickingException) {
+        print('User cancelled picking contact');
+        // Handle the cancellation (e.g., show a message to the user)
+      } else {
+        // Handle other exceptions
+        print('Error picking contact: $e');
+      }
+    }
   }
 }

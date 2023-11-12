@@ -3,8 +3,10 @@ import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 
 class Payments extends StatelessWidget {
-  final Widget goto;
-  const Payments({super.key, required this.goto});
+  // final Widget goto;
+  const Payments({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +19,14 @@ class Payments extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Payments', style: raleway()),
-              IconButton(
-                icon: const Icon(Icons.add_circle_outline_sharp,
-                    color: buttoncolor),
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => goto));
-                },
-              )
+              // IconButton(
+              //   icon: const Icon(Icons.add_circle_outline_sharp,
+              //       color: buttoncolor),
+              //   onPressed: () {
+              //     Navigator.of(context)
+              //         .push(MaterialPageRoute(builder: (context) => goto));
+              //   },
+              // )
             ],
           ),
           Container(

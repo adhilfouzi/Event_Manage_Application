@@ -6,6 +6,7 @@ import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
+import 'package:project_event/screen/intro/intro.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       home: AnimatedSplashScreen(
         splash: 'assets/UI/Event Logo/event logo top.png',
         splashIconSize: 500,
-        nextScreen: HomeScreen(),
+        nextScreen: const OnBoardingPage(),
         backgroundColor: appbarcolor,
         duration: 3000,
         splashTransition: SplashTransition.sizeTransition,

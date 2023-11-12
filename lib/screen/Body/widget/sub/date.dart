@@ -46,7 +46,7 @@ class _MyWidgetState extends State<Date> {
   }
 
   String _formatDate(DateTime date) {
-    return DateFormat('dd-MM-yyyy').format(date);
+    return DateFormat('dd-MMMM-yyyy', 'en_US').format(date);
   }
 
   Future<void> _selectDate(BuildContext context) async {
