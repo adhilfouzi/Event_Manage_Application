@@ -82,7 +82,7 @@ class Vendors extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  data.esamount,
+                                  '₹ ${data.esamount}',
                                   style: racingSansOne(
                                     color: Colors.black,
                                     fontSize: 15,
@@ -94,14 +94,14 @@ class Vendors extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Pending:15,000',
+                                  'Pending: ₹15,000',
                                   style: racingSansOne(
                                     color: Colors.black54,
                                     fontSize: 12,
                                   ),
                                 ),
                                 Text(
-                                  'Paid: 000',
+                                  'Paid: ₹000',
                                   style: racingSansOne(
                                     color: Colors.black54,
                                     fontSize: 12,

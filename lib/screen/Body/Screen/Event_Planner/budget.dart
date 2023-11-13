@@ -79,7 +79,7 @@ class Budget extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  data.esamount,
+                                  '₹ ${data.esamount}',
                                   style: racingSansOne(
                                     color: Colors.black,
                                     fontSize: 15,
@@ -91,14 +91,14 @@ class Budget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Pending:20,000',
+                                  'Pending: ₹20,000',
                                   style: racingSansOne(
                                     color: Colors.black54,
                                     fontSize: 12,
                                   ),
                                 ),
                                 Text(
-                                  'Paid: 5000',
+                                  'Paid: ₹5000',
                                   style: racingSansOne(
                                     color: Colors.black54,
                                     fontSize: 12,

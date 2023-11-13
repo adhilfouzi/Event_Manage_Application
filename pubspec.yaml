@@ -44,6 +44,7 @@ dependencies:
   intl: ^0.18.1
   fluttercontactpicker: ^4.7.0
   intro_screen_onboarding_flutter: ^1.0.0
+  url_launcher: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -106,6 +107,9 @@ flutter:
     - assets/UI/image/template/1-03.png
     - assets/UI/Event Logo/event logo.png
     - assets/UI/image/entry.jpg
+    - assets/UI/icons/favorite.png
+    - assets/UI/icons/calendar.png
+
   
 
     

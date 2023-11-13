@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Vendors/vendors_model.dart';
+import 'package:project_event/screen/Body/Screen/Search/vendor_search.dart';
 import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
@@ -27,6 +28,11 @@ class _EditVendorState extends State<EditVendor> {
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
+          AppAction(
+              icon: Icons.delete,
+              onPressed: () {
+                dodeletevendor(context, widget.vendordataway);
+              }),
           AppAction(
               icon: Icons.contacts,
               onPressed: () {

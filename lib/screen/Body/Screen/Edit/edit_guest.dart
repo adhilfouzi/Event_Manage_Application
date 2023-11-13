@@ -41,7 +41,6 @@ class _EditGuestState extends State<EditGuest> {
               icon: Icons.done,
               onPressed: () {
                 editGuestclick(context, widget.guestdata);
-                Navigator.of(context).pop();
               }),
         ],
         titleText: 'Edit Guest',
@@ -106,7 +105,7 @@ class _EditGuestState extends State<EditGuest> {
     _pcontroller.text = widget.guestdata.number!;
   }
 
-  Future<void> editGuestclick(BuildContext ctx, GuestModel guest) async {
+  Future<void> editGuestclick(BuildContext context, GuestModel guest) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final name = _nameController.text.toUpperCase();
       final sex = _sexController.text;
@@ -120,18 +119,10 @@ class _EditGuestState extends State<EditGuest> {
           number, email, adress);
 
       refreshguestdata(guest.eventid);
-      ScaffoldMessenger.of(ctx).showSnackBar(
-        const SnackBar(
-          content: Text("Successfully Edited"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
-          backgroundColor: Colors.greenAccent,
-          duration: Duration(seconds: 2),
-        ),
-      );
-      Navigator.pop(ctx);
+
+      Navigator.pop(context);
     } else {
-      ScaffoldMessenger.of(ctx).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Fill the Guest Name"),
           behavior: SnackBarBehavior.floating,

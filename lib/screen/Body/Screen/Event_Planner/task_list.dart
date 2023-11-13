@@ -112,13 +112,26 @@ class TaskList extends StatelessWidget {
                             data.taskname,
                             style: raleway(color: Colors.black),
                           ),
-                          subtitle: Text(
-                            data.status == 0 ? 'Pending' : 'Completed',
-                            style: raleway(
-                              color:
-                                  data.status == 0 ? Colors.red : Colors.green,
-                              fontSize: 15,
-                            ),
+                          subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                data.status == 0 ? 'Pending' : 'Completed',
+                                style: raleway(
+                                  color: data.status == 0
+                                      ? Colors.red
+                                      : Colors.green,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              Text(
+                                data.date,
+                                style: racingSansOne(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
                           ),
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -126,13 +139,6 @@ class TaskList extends StatelessWidget {
                                       taskdata: data,
                                     )));
                           },
-                          trailing: Text(
-                            data.date,
-                            style: racingSansOne(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
                         ),
                       ),
                     ),

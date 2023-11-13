@@ -251,14 +251,21 @@ class HomeScreen extends StatelessWidget {
                   textdata: 'Settings++++'),
               const SizedBox(height: 15),
               const ListTileDrawer(
+                  map: Reset(),
+                  imagedata: 'assets/UI/icons/favorite.png',
+                  textdata: 'Favorite'),
+              const SizedBox(height: 15),
+              const ListTileDrawer(
+                  map: Reset(),
+                  imagedata: 'assets/UI/icons/calendar.png',
+                  textdata: 'Calendar'),
+              const SizedBox(height: 15),
+              const ListTileDrawer(
                   map: AppInfo(),
                   imagedata: 'assets/UI/icons/about us.png',
                   textdata: 'App info'),
               const SizedBox(height: 15),
-              const ListTileDrawer(
-                  map: Privacy(),
-                  imagedata: 'assets/UI/icons/feedback.png',
-                  textdata: 'Feedback++++'),
+              const ListTileDrawerEmail(),
               const SizedBox(height: 15),
               const ListTileDrawer(
                   map: Privacy(),

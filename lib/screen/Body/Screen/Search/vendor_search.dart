@@ -19,7 +19,6 @@ class _VendorSearchState extends State<VendorSearch> {
   void initState() {
     super.initState();
     finduser = vendortlist.value;
-    // Initialize with the current student list
   }
 
   void _runFilter(String enteredKeyword) {
