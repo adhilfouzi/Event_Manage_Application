@@ -1,5 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:project_event/Database/model/Vendors/vendors.dart';
+import 'package:project_event/Database/model/Vendors/vendors_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 ValueNotifier<List<VendorsModel>> vendortlist =
@@ -13,7 +15,7 @@ Future<void> initializeVendorDatabase() async {
     version: 1,
     onCreate: (Database db, version) async {
       await db.execute(
-          'CREATE TABLE vendor (id INTEGER PRIMARY KEY, name TEXT, category TEXT, note TEXT, number TEXT, esamount TEXT, eventid INTEGER, email TEXT, address TEXT, clientname TEXT)');
+          'CREATE TABLE vendortb (id INTEGER PRIMARY KEY, name TEXT, category TEXT, note TEXT,esamount TEXT, clientname TEXT, number TEXT,   email TEXT, address TEXT, eventid INTEGER, FOREIGN KEY (eventid) REFERENCES event(id))');
     },
   );
   print("vendorDB created successfully.");
@@ -21,23 +23,30 @@ Future<void> initializeVendorDatabase() async {
 
 // Function to retrieve vendor data from the database.
 Future<void> refreshVendorData(int id) async {
-  final result = await vendorDB
-      .rawQuery("SELECT * FROM vendor WHERE eventid = ?", [id.toString()]);
-  print('All vendor data: $result');
-  vendortlist.value.clear();
-  for (var map in result) {
-    final student = VendorsModel.fromMap(map);
-    vendortlist.value.add(student);
+  try {
+    final ststr = await vendorDB.rawQuery("SELECT * FROM vendortb");
+    log('All vendor data: $ststr');
+    log("Refreshing vendor data for event id: $id");
+    final result = await vendorDB
+        .rawQuery("SELECT * FROM vendortb WHERE eventid = ?", [id.toString()]);
+    log('All vendor sorted data: $result');
+    vendortlist.value.clear();
+    for (var map in result) {
+      final student = VendorsModel.fromMap(map);
+      vendortlist.value.add(student);
+    }
+    vendortlist.notifyListeners();
+  } catch (e) {
+    log('Error Refresh data: $e');
   }
-
-  vendortlist.notifyListeners();
 }
 
 // Function to add a new student to the database.
 Future<void> addVendor(VendorsModel value) async {
   try {
+    log("Adding vendor: $value");
     await vendorDB.rawInsert(
-      'INSERT INTO vendor( name , category, note, number, esamount, eventid, email, address, clientname) VALUES(?,?,?,?,?,?,?,?,?)',
+      'INSERT INTO vendortb (name, category, note, esamount, number, email, address, clientname, eventid) VALUES(?,?,?,?,?,?,?,?,?)',
       [
         value.name,
         value.category,
@@ -46,21 +55,22 @@ Future<void> addVendor(VendorsModel value) async {
         value.number,
         value.email,
         value.address,
-        value.eventid,
         value.clientname,
+        value.eventid,
       ],
     );
+
     refreshVendorData(value.eventid);
+    log('id:${value.eventid}');
   } catch (e) {
-    //------> Handle any errors that occur during data insertion.
-    print('Error inserting data: $e');
+    log('Error inserting data: $e');
   }
 }
 
 // Function to delete a vendor from the database by their ID.
 Future<void> deleteVendor(id, int eventid) async {
-  await vendorDB.delete('vendor', where: 'id=?', whereArgs: [id]);
-  refreshVendorData(eventid);
+  await vendorDB.delete('vendortb', where: 'id=?', whereArgs: [id]);
+  await refreshVendorData(eventid);
 }
 
 // Function to edit/update a student's information in the database.
@@ -78,14 +88,15 @@ Future<void> editVendor(id, name, category, note, number, esamount, eventid,
     'clientname': clientname,
   };
 
-  await vendorDB.update('vendor', dataflow, where: 'id=?', whereArgs: [id]);
-  refreshVendorData(eventid);
+  await vendorDB.update('vendortb', dataflow, where: 'id=?', whereArgs: [id]);
+  await refreshVendorData(eventid);
 }
 
 // Function to delete data from event's database.
 Future<void> clearVendorDatabase() async {
   try {
-    await vendorDB.delete('vendor');
+    await vendorDB.delete('vendortb');
+    print(' cleared the vendortb database');
   } catch (e) {
     print('Error while clearing the database: $e');
   }

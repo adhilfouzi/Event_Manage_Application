@@ -15,7 +15,7 @@ Future<void> initialize_guest_database() async {
     onCreate: (Database db, version) async {
       // Create the 'student' table when the database is created.
       await db.execute(
-          'CREATE TABLE guest (id INTEGER PRIMARY KEY, gname TEXT, sex TEXT, status INTEGER, note TEXT, number TEXT, eventid INTEGER, email TEXT, address TEXT)');
+          'CREATE TABLE guest (id INTEGER PRIMARY KEY, gname TEXT, sex TEXT, status INTEGER, note TEXT, number TEXT,  email TEXT, address TEXT, eventid INTEGER, FOREIGN KEY (eventid) REFERENCES event(id))');
     },
   );
   print("guestDB created successfully.");
@@ -97,7 +97,7 @@ Future<void> editGuest(
 Future<void> clearGuestDatabase() async {
   try {
     await guestDB.delete('guest');
-    // refreshguestdata();
+    print(' cleared the guest database');
   } catch (e) {
     print('Error while clearing the database: $e');
   }

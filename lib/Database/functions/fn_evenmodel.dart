@@ -104,6 +104,7 @@ Future<void> editeventdata(
 Future<void> clearEventDatabase() async {
   try {
     await eventDB.delete('event');
+    print(' cleared the event database');
     refreshEventdata();
   } catch (e) {
     print('Error while clearing the database: $e');

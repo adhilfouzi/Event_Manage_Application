@@ -267,10 +267,10 @@ class _EditEventState extends State<EditEvent> {
     }
   }
 
-  void addoneditphoto(Contact) {
+  void addoneditphoto(ctx) {
     showDialog(
-      context: Contact,
-      builder: (Contact) {
+      context: ctx,
+      builder: (ctx) {
         return AlertDialog(
           content: const Text('Choose Image From.......'),
           actions: [

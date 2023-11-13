@@ -17,7 +17,7 @@ Future<void> initialize_task_db() async {
     onCreate: (Database db, version) async {
       // Create the 'student' table when the database is created.
       await db.execute(
-          'CREATE TABLE task (id INTEGER PRIMARY KEY, taskname TEXT, category TEXT, note TEXT, status BOOLEAN, date TEXT, eventid TEXT)');
+          'CREATE TABLE task (id INTEGER PRIMARY KEY, taskname TEXT, category TEXT, note TEXT, status BOOLEAN, date TEXT, eventid TEXT, FOREIGN KEY (eventid) REFERENCES event(id))');
     },
   );
   print("task_db created successfully.");
@@ -97,7 +97,7 @@ Future<void> editTask(
 Future<void> clearTaskDatabase() async {
   try {
     await taskDB.delete('task');
-    // refreshEventtaskdata(taskDB.value.eventid);
+    print(' cleared the task database');
   } catch (e) {
     print('Error while clearing the database: $e');
   }

@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
-import 'package:project_event/Database/model/Vendors/vendors.dart';
+import 'package:project_event/Database/model/Vendors/vendors_model.dart';
 import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
@@ -10,7 +12,7 @@ import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 class AddVendor extends StatefulWidget {
   final int eventid;
 
-  AddVendor({super.key, required this.eventid});
+  const AddVendor({super.key, required this.eventid});
 
   @override
   State<AddVendor> createState() => _AddVendorState();
@@ -23,6 +25,8 @@ class _AddVendorState extends State<AddVendor> {
 
   @override
   Widget build(BuildContext context) {
+    log('event id : ${widget.eventid}');
+
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
@@ -66,6 +70,7 @@ class _AddVendorState extends State<AddVendor> {
                   }
                   return null;
                 },
+                keyType: TextInputType.number,
                 textcontent: 'Estimatrd Amount',
                 controller: _budgetController),
             TextFieldBlue(
@@ -91,35 +96,32 @@ class _AddVendorState extends State<AddVendor> {
     );
   }
 
-  final _nameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _categoryController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
+  final TextEditingController _acontroller = TextEditingController();
+  final TextEditingController _econtroller = TextEditingController();
 
-  final _categoryController = TextEditingController();
-
-  final _noteController = TextEditingController();
-
-  final _acontroller = TextEditingController();
-
-  final _econtroller = TextEditingController();
-
-  final _budgetController = TextEditingController();
+  final TextEditingController _budgetController = TextEditingController();
   final TextEditingController _clientnameController = TextEditingController();
-  final _phoneController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
-  Future<void> addVendorclick(mtx) async {
+  Future<void> addVendorclick(BuildContext ctx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final vendordata = VendorsModel(
-          clientname: _clientnameController.text.toUpperCase(),
-          name: _nameController.text.toUpperCase().trimLeft().trimRight(),
-          category: _categoryController.text,
-          esamount: _budgetController.text.trimLeft().trimRight(),
-          eventid: widget.eventid,
-          note: _noteController.text.trimLeft().trimRight(),
-          number: _phoneController.text.trimLeft().trimRight(),
-          address: _acontroller.text.trimLeft().trimRight(),
-          email: _econtroller.text.trimLeft().trimRight());
-      await addVendor(vendordata);
-      refreshVendorData(widget.eventid);
-      ScaffoldMessenger.of(mtx).showSnackBar(
+        name: _nameController.text.toUpperCase().trimLeft().trimRight(),
+        category: _categoryController.text,
+        note: _noteController.text.trimLeft().trimRight(),
+        esamount: _budgetController.text.trimLeft().trimRight(),
+        eventid: widget.eventid,
+        number: _phoneController.text.trimLeft().trimRight(),
+        address: _acontroller.text.trimLeft().trimRight(),
+        clientname: _clientnameController.text.toUpperCase(),
+      );
+
+      await addVendor(vendordata).then((value) => log("success "));
+      await refreshVendorData(widget.eventid);
+      ScaffoldMessenger.of(ctx).showSnackBar(
         const SnackBar(
           content: Text("Successfully added"),
           behavior: SnackBarBehavior.floating,
@@ -128,14 +130,14 @@ class _AddVendorState extends State<AddVendor> {
           duration: Duration(seconds: 2),
         ),
       );
-      Navigator.pop(mtx);
+      Navigator.pop(ctx);
     } else {
-      ScaffoldMessenger.of(mtx).showSnackBar(
+      ScaffoldMessenger.of(ctx).showSnackBar(
         const SnackBar(
-          content: Text("Fill the Name & Estimatrd Amount"),
+          content: Text("Fill the Name & Estimated Amount"),
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.all(10),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.redAccent,
           duration: Duration(seconds: 2),
         ),
       );
@@ -167,9 +169,7 @@ class _AddVendorState extends State<AddVendor> {
     } catch (e) {
       if (e is UserCancelledPickingException) {
         print('User cancelled picking contact');
-        // Handle the cancellation (e.g., show a message to the user)
       } else {
-        // Handle other exceptions
         print('Error picking contact: $e');
       }
     }

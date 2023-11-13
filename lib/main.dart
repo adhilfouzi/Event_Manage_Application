@@ -5,6 +5,7 @@ import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
+import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:project_event/screen/intro/intro.dart';
 
@@ -14,6 +15,7 @@ Future<void> main() async {
   await initialize_task_db();
   await initialize_guest_database();
   await initializeBudgetDatabase();
+  await initializeVendorDatabase();
   runApp(
     const MyApp(),
   );

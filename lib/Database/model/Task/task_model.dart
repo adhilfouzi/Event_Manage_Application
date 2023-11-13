@@ -22,14 +22,12 @@ class TaskModel {
     final taskname = map['taskname'] as String;
     final category = map['category'] as String;
     final note = map['note'] as String?;
-    //final status = map['status'] as int;
     final status = map['status'] is int
         ? map['status'] as int
         : (map['status'] is String
             ? int.tryParse(map['status'] as String) ?? 0
             : 0);
     final date = map['date'] as String;
-    //final eventid = map['eventid'] as int;
     final eventid = map['eventid'] is int
         ? map['eventid'] as int
         : (map['eventid'] is String

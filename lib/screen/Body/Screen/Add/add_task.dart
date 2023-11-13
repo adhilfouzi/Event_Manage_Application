@@ -75,27 +75,21 @@ class _AddTaskState extends State<AddTask> {
     );
   }
 
-  final _tasknameController = TextEditingController();
-  final _categoryController = TextEditingController();
-  final _noteController = TextEditingController();
+  final TextEditingController _tasknameController = TextEditingController();
+  final TextEditingController _categoryController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
   int _statusController = 0;
-  final _dateController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
 
   Future<void> addTaskclick(mtx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      final taskname = _tasknameController.text.toUpperCase();
-      final category = _categoryController.text;
-      final note = _noteController.text;
-      final date = _dateController.text;
-      final eventId = widget.eventID;
-
       final taskdata = TaskModel(
-          taskname: taskname,
-          category: category,
+          taskname: _tasknameController.text.toUpperCase(),
+          category: _categoryController.text,
           status: _statusController,
-          note: note,
-          date: date,
-          eventid: eventId);
+          note: _noteController.text,
+          date: _dateController.text,
+          eventid: widget.eventID);
 
       await addTask(taskdata).then((value) => log("success "));
 

@@ -78,6 +78,7 @@ Future<void> editBudget(id, name, category, note, esamount, eventid) async {
 Future<void> clearBudgetDatabase() async {
   try {
     await budgetDB.delete('budget');
+    print(' cleared the budget database');
   } catch (e) {
     print('Error while clearing the database: $e');
   }

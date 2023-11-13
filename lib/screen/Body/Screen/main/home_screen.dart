@@ -7,6 +7,7 @@ import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
+import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/appinfo.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
@@ -305,4 +306,5 @@ void clearDb() {
   clearTaskDatabase();
   clearBudgetDatabase();
   clearGuestDatabase();
+  clearVendorDatabase();
 }
