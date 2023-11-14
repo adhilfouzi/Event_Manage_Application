@@ -37,85 +37,52 @@ class Report extends StatelessWidget {
                     child: Column(
                       children: [
                         ListTile(
-                          leading: Image(image: cardInfo['image'], width: 110),
+                          leading: Image(
+                            image: cardInfo['image'],
+                            height: 100,
+                          ),
                           title: Text(
                             cardInfo['text'],
                             style: raleway(color: Colors.black),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 25),
-                          child: Row(
+                          subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Expanded(
-                                child: InkWell(
-                                  onTap: () {
-                                    if (cardInfo['report'] != null) {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              cardInfo['report'](),
-                                        ),
-                                      );
-                                    }
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Pending',
-                                        style: raleway(
-                                          color: Colors.red,
-                                          fontSize: 15,
-                                        ),
+                              InkWell(
+                                onTap: () {
+                                  if (cardInfo['report'] != null) {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            cardInfo['report'](),
                                       ),
-                                      Text(
-                                        '5',
-                                        style: raleway(
-                                          color: Colors.red,
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    ],
+                                    );
+                                  }
+                                },
+                                child: Text(
+                                  'Completed : 5 ',
+                                  style: readexPro(
+                                    color: Colors.green,
+                                    fontSize: 15,
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Expanded(
-                                child: InkWell(
-                                  onTap: () {
-                                    if (cardInfo['report'] != null) {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              cardInfo['report'](),
-                                        ),
-                                      );
-                                    }
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Completed',
-                                        style: raleway(
-                                          color: Colors.green,
-                                          fontSize: 15,
-                                        ),
+                              InkWell(
+                                onTap: () {
+                                  if (cardInfo['report'] != null) {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            cardInfo['reportP'](),
                                       ),
-                                      Text(
-                                        '5',
-                                        style: raleway(
-                                          color: Colors.green,
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    ],
+                                    );
+                                  }
+                                },
+                                child: Text(
+                                  'Pending : 5 ',
+                                  style: readexPro(
+                                    color: Colors.red,
+                                    fontSize: 15,
                                   ),
                                 ),
                               ),

@@ -5,6 +5,11 @@ import 'package:project_event/Database/model/Guest_Model/guest_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 ValueNotifier<List<GuestModel>> guestlist = ValueNotifier<List<GuestModel>>([]);
+ValueNotifier<List<GuestModel>> guestDonelist =
+    ValueNotifier<List<GuestModel>>([]);
+ValueNotifier<List<GuestModel>> guestPendinglist =
+    ValueNotifier<List<GuestModel>>([]);
+
 late Database guestDB;
 
 // Function to initialize the database.
@@ -21,7 +26,7 @@ Future<void> initialize_guest_database() async {
   print("guestDB created successfully.");
 }
 
-// Function to retrieve task data from the database.
+// Function to retrieve guest data from the database.
 Future<void> refreshguestdata(int id) async {
   final result = await guestDB.rawQuery(
       "SELECT * FROM guest WHERE eventid = ? ORDER BY status DESC",
@@ -32,19 +37,44 @@ Future<void> refreshguestdata(int id) async {
     final student = GuestModel.fromMap(map);
     guestlist.value.add(student);
   }
-
-  // Sort the taskList to place rows with status=false at the beginning
   guestlist.value.sort((a, b) {
     if (a.status == 0 && b.status == 1) {
-      return -1; // a comes before b
+      return -1;
     } else if (a.status == 1 && b.status == 0) {
-      return 1; // b comes before a
+      return 1;
     } else {
-      return 0; // no change in order
+      return 0;
     }
   });
 
   guestlist.notifyListeners();
+
+  ///-----------------------------------------
+  ///-----------------------------------------
+  ///-------------------------------------
+  final rpDoneGuest = await guestDB.rawQuery(
+      "SELECT * FROM guest WHERE eventid = ? AND status = 1", [id.toString()]);
+
+  print('rpDoneguest : $rpDoneGuest');
+  guestDonelist.value.clear();
+  for (var map in rpDoneGuest) {
+    final student = GuestModel.fromMap(map);
+    guestDonelist.value.add(student);
+  }
+  guestDonelist.notifyListeners();
+
+  ///-----------------------------------------
+  ///-----------------------------------------
+  ///-------------------------------------
+  final rpPendingGuest = await guestDB.rawQuery(
+      "SELECT * FROM guest WHERE eventid = ? AND status = 0", [id.toString()]);
+  print('rpDoneguest : $rpPendingGuest');
+  guestPendinglist.value.clear();
+  for (var map in rpPendingGuest) {
+    final student = GuestModel.fromMap(map);
+    guestPendinglist.value.add(student);
+  }
+  guestPendinglist.notifyListeners();
 }
 
 // Function to add a new student to the database.

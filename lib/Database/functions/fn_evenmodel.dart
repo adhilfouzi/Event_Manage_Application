@@ -6,6 +6,7 @@ import 'package:sqflite/sqflite.dart';
 
 ValueNotifier<List<Eventmodel>> favoriteEventlist = ValueNotifier([]);
 ValueNotifier<List<Eventmodel>> eventList = ValueNotifier([]);
+
 late Database eventDB;
 
 // Function to initialize the database.

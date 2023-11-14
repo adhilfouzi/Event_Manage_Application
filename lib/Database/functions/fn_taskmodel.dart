@@ -7,6 +7,9 @@ import 'package:project_event/Database/model/Task/task_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 ValueNotifier<List<TaskModel>> taskList = ValueNotifier<List<TaskModel>>([]);
+ValueNotifier<List<TaskModel>> doneRpTaskList = ValueNotifier([]);
+ValueNotifier<List<TaskModel>> pendingRpTaskList = ValueNotifier([]);
+
 late Database taskDB;
 
 // Function to initialize the database.
@@ -34,19 +37,43 @@ Future<void> refreshEventtaskdata(int id) async {
     final student = TaskModel.fromMap(map);
     taskList.value.add(student);
   }
-
-  // Sort the taskList to place rows with status=false at the beginning
   taskList.value.sort((a, b) {
     if (a.status == 0 && b.status == 1) {
-      return -1; // a comes before b
+      return -1;
     } else if (a.status == 1 && b.status == 0) {
-      return 1; // b comes before a
+      return 1;
     } else {
-      return 0; // no change in order
+      return 0;
     }
   });
-
   taskList.notifyListeners();
+
+  ///-----------------------------------------
+  ///-----------------------------------------
+  ///-------------------------------------
+  final rpDoneTask = await taskDB.rawQuery(
+      "SELECT * FROM task WHERE eventid = ? AND status = 1", [id.toString()]);
+
+  print('rpDonetask : $rpDoneTask');
+  doneRpTaskList.value.clear();
+  for (var map in rpDoneTask) {
+    final student = TaskModel.fromMap(map);
+    doneRpTaskList.value.add(student);
+  }
+  doneRpTaskList.notifyListeners();
+
+  ///-----------------------------------------
+  ///-----------------------------------------
+  ///-------------------------------------
+  final rpPendingtask = await taskDB.rawQuery(
+      "SELECT * FROM task WHERE eventid = ? AND status = 0", [id.toString()]);
+  print('rpDonetask : $rpPendingtask');
+  pendingRpTaskList.value.clear();
+  for (var map in rpPendingtask) {
+    final student = TaskModel.fromMap(map);
+    pendingRpTaskList.value.add(student);
+  }
+  pendingRpTaskList.notifyListeners();
 }
 
 // Function to add a new student to the database.

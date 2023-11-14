@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:project_event/screen/Body/Screen/Report/Guest_Rp/guests_done_rp.dart';
+import 'package:project_event/screen/Body/Screen/Report/Guest_Rp/guests_pending_rp.dart';
+import 'package:project_event/screen/Body/Screen/Report/Task/done_taskRp.dart';
+import 'package:project_event/screen/Body/Screen/Report/Task/pending_taskRp.dart';
 
 import 'package:project_event/screen/Body/Screen/Report/report_buget.dart';
-import 'package:project_event/screen/Body/Screen/Report/report_guests.dart';
-import 'package:project_event/screen/Body/Screen/Report/report_task.dart';
+
 import 'package:project_event/screen/Body/Screen/Report/report_vendors.dart';
 
 final List<Map<String, dynamic>> cardData = [
@@ -11,14 +14,16 @@ final List<Map<String, dynamic>> cardData = [
     'image': const AssetImage('assets/UI/icons/Task List.png'),
     'text': 'Task List',
     'link': 'TaskList()',
-    'report': () => const RpTaskList(),
+    'report': () => const DoneRpTaskList(),
+    'reportP': () => const PendingRpTaskList()
   },
   {
     'color': const Color.fromRGBO(234, 28, 140, 1),
     'image': const AssetImage('assets/UI/icons/Guests.png'),
     'text': 'Guests',
     'link': 'Guests()',
-    'report': () => const RpGuests(),
+    'report': () => const DoneRpGuests(),
+    'reportP': () => const PendingRpGuests()
   },
   {
     'color': const Color.fromRGBO(211, 234, 43, 1),
@@ -26,6 +31,7 @@ final List<Map<String, dynamic>> cardData = [
     'text': 'Budget',
     'link': 'Budget()',
     'report': () => const RpBudget(),
+    'reportP': () => const PendingRpTaskList()
   },
   {
     'color': const Color.fromRGBO(250, 166, 68, 1),
@@ -33,6 +39,7 @@ final List<Map<String, dynamic>> cardData = [
     'text': 'Vendors',
     'link': 'const Vendors()',
     'report': () => const RpVendors(),
+    'reportP': () => const PendingRpTaskList()
   },
   {
     'color': const Color.fromRGBO(129, 236, 114, 1),
