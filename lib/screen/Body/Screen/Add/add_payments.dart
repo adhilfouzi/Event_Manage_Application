@@ -75,7 +75,7 @@ class AddPayments extends StatelessWidget {
       final amount = _budgetController.text;
       final note = _noteController.text;
       final date = _dateController.text;
-      var paymentmodel = _payController.text;
+      //var paymentmodel = _payController.text;
 
       PaymentModel(name: pname, pyamount: amount, date: date, note: note);
 
