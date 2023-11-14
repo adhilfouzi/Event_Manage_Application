@@ -76,9 +76,9 @@ class TextFieldBlue extends StatelessWidget {
                   : null,
               hintText: textcontent,
               hintStyle: const TextStyle(
-                color: Color.fromRGBO(0, 0, 0, 0.5),
-                fontFamily: 'Raleway',
-              ),
+                  color: Color.fromRGBO(0, 0, 0, 0.5),
+                  fontFamily: 'Raleway',
+                  fontSize: 13.5),
             ),
           ),
         ),

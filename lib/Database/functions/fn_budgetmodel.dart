@@ -23,8 +23,9 @@ Future<void> initializeBudgetDatabase() async {
 
 // Function to retrieve task data from the database.
 Future<void> refreshBudgetData(int id) async {
-  final result = await budgetDB
-      .rawQuery("SELECT * FROM budget WHERE eventid = ?", [id.toString()]);
+  final result = await budgetDB.rawQuery(
+      "SELECT * FROM budget WHERE eventid = ? ORDER BY id DESC",
+      [id.toString()]);
   print('All budget data: $result');
   budgetlist.value.clear();
   for (var map in result) {

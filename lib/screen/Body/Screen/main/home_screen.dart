@@ -10,6 +10,8 @@ import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/appinfo.dart';
+import 'package:project_event/screen/Body/Screen/Drawer/calender.dart';
+import 'package:project_event/screen/Body/Screen/Drawer/favorite.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/reset.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/terms.dart';
@@ -218,7 +220,7 @@ class HomeScreen extends StatelessWidget {
       ),
       drawer: Drawer(
         child: Container(
-          color: const Color.fromRGBO(152, 228, 255, 1.0),
+          color: const Color.fromRGBO(255, 200, 200, 0.7),
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
@@ -251,12 +253,12 @@ class HomeScreen extends StatelessWidget {
                   textdata: 'Settings++++'),
               const SizedBox(height: 15),
               const ListTileDrawer(
-                  map: Reset(),
+                  map: Favorite(),
                   imagedata: 'assets/UI/icons/favorite.png',
                   textdata: 'Favorite'),
               const SizedBox(height: 15),
               const ListTileDrawer(
-                  map: Reset(),
+                  map: Calender(),
                   imagedata: 'assets/UI/icons/calendar.png',
                   textdata: 'Calendar'),
               const SizedBox(height: 15),
@@ -288,24 +290,6 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: const FloatingPointx(goto: AddEvent()),
     );
   }
-
-  isFavorite(Eventmodel data) {
-    int fine = data.favorite == 0 ? 1 : 0;
-    editeventdata(
-        data.id,
-        data.eventname,
-        data.budget,
-        fine,
-        data.location,
-        data.about,
-        data.startingDay,
-        data.startingTime,
-        data.clientname,
-        data.phoneNumber,
-        data.emailId,
-        data.address,
-        data.imagex);
-  }
 }
 
 void clearDb() {
@@ -314,4 +298,22 @@ void clearDb() {
   clearBudgetDatabase();
   clearGuestDatabase();
   clearVendorDatabase();
+}
+
+isFavorite(Eventmodel data) {
+  int fine = data.favorite == 0 ? 1 : 0;
+  editeventdata(
+      data.id,
+      data.eventname,
+      data.budget,
+      fine,
+      data.location,
+      data.about,
+      data.startingDay,
+      data.startingTime,
+      data.clientname,
+      data.phoneNumber,
+      data.emailId,
+      data.address,
+      data.imagex);
 }

@@ -19,7 +19,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       imageUrl: 'assets/UI/image/template/1-03.png',
     ),
     Introduction(
-      title: 'Time-Saving Solution',
+      title: 'Time-Saving\n Solution',
       subTitle: ' ',
       imageUrl: 'assets/UI/image/template/1-01.png',
     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dart';
 
 class AppAction extends StatelessWidget {
   final IconData icon;
@@ -50,7 +51,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: readexPro(fontSize: 22, color: textcolor ?? Colors.black),
       ),
       actions: actions,
-      bottom: bottom,
+      bottom: bottom ?? const BottomBorderWidget(),
     );
   }
 

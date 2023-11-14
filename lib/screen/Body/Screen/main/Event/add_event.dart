@@ -24,7 +24,7 @@ class _AddEventState extends State<AddEvent> {
   final _formKey = GlobalKey<FormState>();
   PhoneContact? _phoneContact;
 
-  late final String imagepath;
+  late String imagepath;
   File? imageevent;
   @override
   Widget build(BuildContext context) {

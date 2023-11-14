@@ -14,6 +14,7 @@ import 'package:project_event/screen/Body/Screen/main/Event/edit_event.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/view_event_details.dart';
 
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dart';
 
 class ViewEvent extends StatelessWidget {
   final Eventmodel eventModel;
@@ -97,17 +98,25 @@ class ViewEvent extends StatelessWidget {
         ],
         titleText: 'Event Planner & Organizer',
         backgroundColor: Colors.transparent,
+        bottom: const BottomBorderNull(),
       ),
       body: Column(
         children: [
           Stack(
             children: [
-              SizedBox(
-                height: 250,
-                width: double.infinity,
-                child: Image.file(
-                  File(eventModel.imagex),
-                  fit: BoxFit.fill,
+              Card(
+                margin: EdgeInsets.zero,
+                color: const Color.fromARGB(255, 26, 27, 28),
+                elevation: 6,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero),
+                child: SizedBox(
+                  height: 250,
+                  width: double.infinity,
+                  child: Image.file(
+                    File(eventModel.imagex),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
               Container(

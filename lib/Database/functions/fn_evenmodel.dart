@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:sqflite/sqflite.dart';
 
+ValueNotifier<List<Eventmodel>> favoriteEventlist = ValueNotifier([]);
 ValueNotifier<List<Eventmodel>> eventList = ValueNotifier([]);
 late Database eventDB;
 
@@ -23,7 +24,7 @@ Future<void> initialize_event_db() async {
 
 // Function to retrieve student data from the database.
 Future<void> refreshEventdata() async {
-  final result = await eventDB.rawQuery("SELECT * FROM event");
+  final result = await eventDB.rawQuery("SELECT * FROM event ORDER BY id DESC");
   print('All event data : ${result}');
   eventList.value.clear();
   for (var map in result) {
@@ -31,6 +32,23 @@ Future<void> refreshEventdata() async {
     eventList.value.add(student);
   }
   eventList.notifyListeners();
+
+  ///-----------------------------------------
+  ///-----------------------------------------
+  ///-----------------------------------------
+  final favResult = await eventDB
+      .rawQuery("SELECT * FROM event WHERE favorite = 1 ORDER BY id DESC");
+  print('Favorite event data : ${favResult}');
+  favoriteEventlist.value.clear();
+  for (var map in favResult) {
+    final student = Eventmodel.fromMap(map);
+    favoriteEventlist.value.add(student);
+  }
+  favoriteEventlist.notifyListeners();
+
+  ///-----------------------------------------
+  ///-----------------------------------------
+  ///-----------------------------------------
 }
 
 // Function to add a new event to the database.

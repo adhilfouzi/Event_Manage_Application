@@ -26,7 +26,7 @@ Future<void> initialize_task_db() async {
 // Function to retrieve task data from the database.
 Future<void> refreshEventtaskdata(int id) async {
   final result = await taskDB.rawQuery(
-      "SELECT * FROM task WHERE eventid = ? ORDER BY status DESC",
+      "SELECT * FROM task WHERE eventid = ? ORDER BY status DESC ",
       [id.toString()]);
   print('All task data: $result');
   taskList.value.clear();

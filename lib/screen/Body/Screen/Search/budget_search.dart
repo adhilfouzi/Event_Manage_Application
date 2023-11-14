@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
@@ -45,84 +44,67 @@ class _BudgetSearchState extends State<BudgetSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(255, 200, 200, 1),
+          automaticallyImplyLeading: false,
+          title: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: TextField(
+              autofocus: true,
+              onChanged: (value) => _runFilter(value),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Search',
+                suffixIcon: Icon(Icons.search),
+              ),
+            ),
+          )),
       body: SafeArea(
         child: ValueListenableBuilder<List<BudgetModel>>(
             valueListenable: budgetlist,
             builder: (context, value, child) {
               return Padding(
                 padding: const EdgeInsets.all(12),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: TextField(
-                        onChanged: (value) => _runFilter(value),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                            borderSide: const BorderSide(
-                              color: buttoncolor,
-                              width: 1,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: buttoncolor,
-                              width: 1,
-                            ),
-                          ),
-                          hintText: 'Search',
-                          suffixIcon: Icon(Icons.search),
+                child: finduser.isEmpty
+                    ? const Center(
+                        child: Text(
+                          'No Data Available',
+                          style: TextStyle(fontSize: 18),
                         ),
-                      ),
-                    ),
-                    Expanded(
-                      child: finduser.isEmpty
-                          ? const Center(
-                              child: Text(
-                                'No Data Available',
-                                style: TextStyle(fontSize: 18),
+                      )
+                    : ListView.builder(
+                        itemCount: finduser.length,
+                        itemBuilder: (context, index) {
+                          final finduserItem = finduser[index];
+                          return Card(
+                            color: Colors.blue[100],
+                            elevation: 4,
+                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            child: ListTile(
+                              title: Text(
+                                finduserItem.name,
+                                style: raleway(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                ),
                               ),
-                            )
-                          : ListView.builder(
-                              itemCount: finduser.length,
-                              itemBuilder: (context, index) {
-                                final finduserItem = finduser[index];
-                                return Card(
-                                  color: Colors.blue[100],
-                                  elevation: 4,
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  child: ListTile(
-                                    title: Text(
-                                      finduserItem.name,
-                                      style: raleway(
-                                        color: Colors.black,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      finduserItem.category,
-                                    ),
-                                    trailing: IconButton(
-                                        icon: const Icon(Icons.delete),
-                                        onPressed: () {
-                                          dodeletebudget(context, finduserItem);
-                                        }),
-                                    onTap: () {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (ctr) => EditBudget(
-                                            budgetdata: finduserItem),
-                                      ));
-                                    },
-                                  ),
-                                );
-                              }),
-                    ),
-                  ],
-                ),
+                              subtitle: Text(
+                                finduserItem.category,
+                              ),
+                              trailing: IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () {
+                                    dodeletebudget(context, finduserItem);
+                                  }),
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctr) =>
+                                      EditBudget(budgetdata: finduserItem),
+                                ));
+                              },
+                            ),
+                          );
+                        }),
               );
             }),
       ),

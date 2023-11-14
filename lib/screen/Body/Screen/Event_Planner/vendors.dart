@@ -119,7 +119,7 @@ class Vendors extends StatelessWidget {
             } else {
               return const Center(
                 child: Text(
-                  'No Task available',
+                  'No Vendors available',
                   style: TextStyle(fontSize: 18),
                 ),
               );

@@ -30,8 +30,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'event',
       theme: ThemeData(
-        primaryColor: appbarcolor,
-        scaffoldBackgroundColor: backgroundcolor,
+        appBarTheme: const AppBarTheme(),
+        primaryColor: Colors.black,
+        scaffoldBackgroundColor: const Color.fromRGBO(255, 200, 200, 1),
         textTheme: const TextTheme(
           bodyMedium: TextStyle(
             fontFamily: 'ReadexPro',

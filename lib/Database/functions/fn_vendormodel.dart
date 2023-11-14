@@ -24,12 +24,12 @@ Future<void> initializeVendorDatabase() async {
 // Function to retrieve vendor data from the database.
 Future<void> refreshVendorData(int id) async {
   try {
-    final ststr = await vendorDB.rawQuery("SELECT * FROM vendortb");
-    log('All vendor data: $ststr');
-    log("Refreshing vendor data for event id: $id");
+    // final ststr = await vendorDB.rawQuery("SELECT * FROM vendortb");
+    // log('All vendor data: $ststr');
+    // log("Refreshing vendor data for event id: $id");
     final result = await vendorDB
         .rawQuery("SELECT * FROM vendortb WHERE eventid = ?", [id.toString()]);
-    log('All vendor sorted data: $result');
+    // log('All vendor sorted data: $result');
     vendortlist.value.clear();
     for (var map in result) {
       final student = VendorsModel.fromMap(map);
