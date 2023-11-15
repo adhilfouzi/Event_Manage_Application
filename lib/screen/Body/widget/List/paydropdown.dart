@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
 
 class PayDown extends StatefulWidget {
-  final ValueChanged<String?>? onChanged;
+  final ValueChanged<String> onChanged;
   final String? defaultdata;
-  const PayDown({super.key, this.onChanged, this.defaultdata});
+  const PayDown({super.key, required this.onChanged, this.defaultdata});
 
   @override
   State<PayDown> createState() => _PayDownState();
@@ -20,6 +21,7 @@ class _PayDownState extends State<PayDown> {
     selectedPay = widget.defaultdata ?? 'Budget';
     if (selectedPay!.isEmpty) {
       selectedPay = 'Budget';
+      raylist = ValueNotifier(selectedPay!);
     }
   }
 
@@ -42,8 +44,9 @@ class _PayDownState extends State<PayDown> {
                     onChanged: (value) {
                       setState(() {
                         selectedPay = value;
+                        raylist.value = selectedPay!;
                       });
-                      widget.onChanged!(value);
+                      widget.onChanged(value!);
                     },
                   ),
                   Text(

@@ -6,7 +6,9 @@ import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 
 class Settlement extends StatelessWidget {
-  const Settlement({super.key});
+  final int eventID;
+
+  const Settlement({super.key, required this.eventID});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,7 +151,10 @@ class Settlement extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: FloatingPointx(goto: AddPayments()),
+      floatingActionButton: FloatingPointx(
+          goto: AddPayments(
+        eventID: eventID,
+      )),
     );
   }
 }

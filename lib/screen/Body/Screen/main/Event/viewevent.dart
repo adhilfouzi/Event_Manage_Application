@@ -328,7 +328,8 @@ class ViewEvent extends StatelessWidget {
                           child: InkWell(
                             onTap: () => Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (ctr) => const Settlement(),
+                                builder: (ctr) =>
+                                    Settlement(eventID: eventModel.id!),
                               ),
                             ),
                             child: Card(

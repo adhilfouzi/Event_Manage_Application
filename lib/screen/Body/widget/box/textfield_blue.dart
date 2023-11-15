@@ -11,18 +11,19 @@ class TextFieldBlue extends StatelessWidget {
   final TextInputType? keyType;
   final bool? obscureText;
   final bool? enabled;
+  final void Function(String)? onChanged;
 
-  const TextFieldBlue({
-    super.key,
-    required this.textcontent,
-    this.preicondata,
-    this.posticondata,
-    this.controller,
-    this.validator,
-    this.keyType,
-    this.obscureText,
-    this.enabled,
-  });
+  const TextFieldBlue(
+      {super.key,
+      required this.textcontent,
+      this.preicondata,
+      this.posticondata,
+      this.controller,
+      this.validator,
+      this.keyType,
+      this.obscureText,
+      this.enabled,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,7 @@ class TextFieldBlue extends StatelessWidget {
             keyboardType: keyType,
             validator: validator,
             controller: controller,
+            onChanged: onChanged,
             decoration: InputDecoration(
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40.0),
