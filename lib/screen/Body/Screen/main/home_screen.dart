@@ -6,6 +6,7 @@ import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
+import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
@@ -34,7 +35,7 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                clearDb();
+                // clearDb();
               },
               icon: const Icon(Icons.logout))
         ],
@@ -298,6 +299,7 @@ void clearDb() {
   clearBudgetDatabase();
   clearGuestDatabase();
   clearVendorDatabase();
+  clearPaymentDatabase();
 }
 
 isFavorite(Eventmodel data) {

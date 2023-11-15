@@ -79,7 +79,7 @@ class _AddBudgetState extends State<AddBudget> {
   final _nameController = TextEditingController();
   final _categoryController = TextEditingController();
   final _noteController = TextEditingController();
-  List<PaymentModel> store = [];
+  //List<PaymentModel> store = [];
   Future<void> addGuestclick(mtx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final name = _nameController.text.toUpperCase().trimLeft().trimRight();

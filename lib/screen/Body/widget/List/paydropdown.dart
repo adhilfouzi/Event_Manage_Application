@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
-import 'package:project_event/screen/Body/widget/List/list.dart';
+import 'package:project_event/Database/functions/fn_paymodel.dart';
 
 class PayDown extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final String? defaultdata;
-  const PayDown({super.key, required this.onChanged, this.defaultdata});
+  const PayDown({Key? key, required this.onChanged, this.defaultdata})
+      : super(key: key);
 
   @override
   State<PayDown> createState() => _PayDownState();
@@ -19,10 +19,7 @@ class _PayDownState extends State<PayDown> {
   void initState() {
     super.initState();
     selectedPay = widget.defaultdata ?? 'Budget';
-    if (selectedPay!.isEmpty) {
-      selectedPay = 'Budget';
-      raylist = ValueNotifier(selectedPay!);
-    }
+    paymentTypeNotifier = ValueNotifier(PaymentType.budget);
   }
 
   @override
@@ -32,25 +29,23 @@ class _PayDownState extends State<PayDown> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Text('Budget', style: raleway()),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: pay.map((payOption) {
+            children: PaymentType.values.map((paymentType) {
               return Row(
                 children: [
-                  Radio<String>(
-                    value: payOption['text']!,
-                    groupValue: selectedPay,
+                  Radio<PaymentType>(
+                    value: paymentType,
+                    groupValue: paymentTypeNotifier.value,
                     onChanged: (value) {
                       setState(() {
-                        selectedPay = value;
-                        raylist.value = selectedPay!;
+                        paymentTypeNotifier.value = value!;
                       });
-                      widget.onChanged(value!);
+                      widget.onChanged(value.toString().split('.').last);
                     },
                   ),
                   Text(
-                    payOption['text']!,
+                    paymentType.toString().split('.').last,
                     style: raleway(color: Colors.black),
                   ),
                 ],

@@ -7,7 +7,7 @@ import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/budget.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/guests.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/report.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/settlement.dart';
+import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/settlement.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/task_list.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/vendors.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/edit_event.dart';

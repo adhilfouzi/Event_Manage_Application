@@ -6,7 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Database/model/Payment/pay_model.dart';
 import 'package:sqflite/sqflite.dart';
 
-ValueNotifier<String> raylist = ValueNotifier<String>('Budget');
+enum PaymentType { budget, vendor }
+
+ValueNotifier<PaymentType> paymentTypeNotifier =
+    ValueNotifier<PaymentType>(PaymentType.budget);
+
 ValueNotifier<List<PaymentModel>> budgetPaymentDetails =
     ValueNotifier<List<PaymentModel>>([]);
 ValueNotifier<List<PaymentModel>> vendorPaymentDetails =
@@ -157,7 +161,7 @@ Future<void> editPayment(id, name, paytype, paytypename, pyamount, note, date,
 }
 
 // Function to delete a task's information in the database.
-Future<void> clearTaskDatabase() async {
+Future<void> clearPaymentDatabase() async {
   try {
     await paymentDB.delete('payment');
     print(' cleared the task database');
