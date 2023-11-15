@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
+import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
-import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
+import 'package:project_event/Database/model/Payment/pay_model.dart';
 import 'package:project_event/screen/Body/widget/List/paydropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
@@ -161,14 +162,16 @@ class _AddPaymentsState extends State<AddPayments> {
       final String paytypename = searchController.text;
 
       PaymentModel(
-          name: pname,
-          pyamount: amount,
-          date: date,
-          paytype: paytype,
-          paytypename: paytypename,
-          time: time,
-          payid: payid,
-          note: note);
+        name: pname,
+        pyamount: amount,
+        date: date,
+        paytype: paytype,
+        paytypename: paytypename,
+        time: time,
+        payid: payid,
+        note: note,
+        eventid: widget.eventID,
+      );
 
       ScaffoldMessenger.of(mtx).showSnackBar(
         const SnackBar(
