@@ -38,7 +38,7 @@ class _MyWidgetState extends State<Date> {
 
   DateTime _parseDate(String date) {
     try {
-      return DateFormat('dd-MM-yyyy').parse(date);
+      return DateFormat('dd-MMMM-yyyy', 'en_US').parse(date);
     } catch (e) {
       print("Error parsing date: $e");
       return DateTime.now();

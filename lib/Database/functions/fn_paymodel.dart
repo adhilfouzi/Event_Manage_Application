@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/model/Payment/pay_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -11,15 +12,11 @@ enum PaymentType { budget, vendor }
 ValueNotifier<PaymentType> paymentTypeNotifier =
     ValueNotifier<PaymentType>(PaymentType.budget);
 
-ValueNotifier<List<PaymentModel>> budgetPaymentDetails =
-    ValueNotifier<List<PaymentModel>>([]);
-ValueNotifier<List<PaymentModel>> vendorPaymentDetails =
-    ValueNotifier<List<PaymentModel>>([]);
-
 ValueNotifier<List<PaymentModel>> budgetPaymentList =
     ValueNotifier<List<PaymentModel>>([]);
 ValueNotifier<List<PaymentModel>> vendorPaymentlist =
     ValueNotifier<List<PaymentModel>>([]);
+
 late Database paymentDB;
 
 // Function to initialize the database.
@@ -65,40 +62,6 @@ Future<void> refreshPaymentData(int eventid) async {
     vendorPaymentlist.notifyListeners();
   } catch (e) {
     log('Error Refresh data: $e');
-  }
-}
-
-// Function to retrieve payment for view selected data from the database.
-Future<void> refreshPaymentTypeData(int payid, int eventid) async {
-  try {
-    final result = await paymentDB.rawQuery(
-        "SELECT * FROM payment WHERE eventid = ? AND paytype = 0 AND payid = ?",
-        [payid.toString(), eventid.toString()]);
-    print('All budgetPayment data: $result');
-    budgetPaymentDetails.value.clear();
-    for (var map in result) {
-      final student = PaymentModel.fromMap(map);
-      budgetPaymentDetails.value.add(student);
-    }
-
-    budgetPaymentDetails.notifyListeners();
-
-    ///-----------------------------------------
-    ///-----------------------------------------
-
-    final resultven = await paymentDB.rawQuery(
-        "SELECT * FROM payment WHERE eventid = ? AND paytype = 1 AND payid = ?",
-        [payid.toString()]);
-    print('All vendorPaymentlist data: $resultven');
-    vendorPaymentDetails.value.clear();
-    for (var map in resultven) {
-      final studentven = PaymentModel.fromMap(map);
-      vendorPaymentDetails.value.add(studentven);
-    }
-
-    vendorPaymentDetails.notifyListeners();
-  } catch (e) {
-    log('Error Refresh Details view data: $e');
   }
 }
 

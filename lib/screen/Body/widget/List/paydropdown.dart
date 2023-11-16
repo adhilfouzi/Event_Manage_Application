@@ -4,7 +4,7 @@ import 'package:project_event/Database/functions/fn_paymodel.dart';
 
 class PayDown extends StatefulWidget {
   final ValueChanged<String> onChanged;
-  final String? defaultdata;
+  final int? defaultdata;
   const PayDown({Key? key, required this.onChanged, this.defaultdata})
       : super(key: key);
 
@@ -18,8 +18,10 @@ class _PayDownState extends State<PayDown> {
   @override
   void initState() {
     super.initState();
-    selectedPay = widget.defaultdata ?? 'Budget';
-    paymentTypeNotifier = ValueNotifier(PaymentType.budget);
+    if (widget.defaultdata != null) {
+      paymentTypeNotifier.value =
+          widget.defaultdata == 0 ? PaymentType.budget : PaymentType.vendor;
+    }
   }
 
   @override

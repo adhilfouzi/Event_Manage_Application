@@ -13,8 +13,6 @@ class Settlement extends StatelessWidget {
   const Settlement({super.key, required this.eventID});
   @override
   Widget build(BuildContext context) {
-    // raylist = ValueNotifier('Budget');
-
     refreshPaymentData(eventID);
     return DefaultTabController(
       length: 2,
@@ -116,21 +114,19 @@ class Settlement extends StatelessWidget {
                 ),
                 const TabBar(
                   tabs: [
-                    Tab(text: 'Message'),
-                    Tab(text: 'Status'),
+                    Tab(text: 'Budget'),
+                    Tab(text: 'Vendor'),
                   ],
-                  // unselectedLabelColor: Color.fromRGBO(
-                  //     255, 255, 255, 0.7), // Text color for unselected tabs
-                  // labelColor: Colors.yellow, // Text color for selected tab
-                  // indicatorColor: Colors.yellow, // Indicator line color
+                  unselectedLabelColor: Colors.black,
+                  dividerColor: Colors.transparent,
                 ),
               ],
             ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: const TabBarView(
+        body: const Padding(
+          padding: EdgeInsets.all(10.0),
+          child: TabBarView(
             children: [BudgetSettlement(), VendorSettlement()],
           ),
         ),

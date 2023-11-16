@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
+import 'package:project_event/screen/Body/Screen/Edit/edit_payments.dart';
 
 class VendorSettlement extends StatelessWidget {
   const VendorSettlement({super.key});
@@ -31,6 +32,11 @@ class VendorSettlement extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: ListTile(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    EditPayments(paydata: data)));
+                          },
                           leading: Image.asset(
                             'assets/UI/icons/person.png',
                           ),

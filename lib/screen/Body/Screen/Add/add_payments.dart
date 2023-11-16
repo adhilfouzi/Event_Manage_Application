@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
+import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Payment/pay_model.dart';
@@ -31,15 +32,17 @@ class _AddPaymentsState extends State<AddPayments> {
   @override
   void initState() {
     super.initState();
+    refreshBudgetData(widget.eventID);
+    refreshVendorData(widget.eventID);
     paymentTypeNotifier = ValueNotifier(PaymentType.budget);
   }
 
   @override
   Widget build(BuildContext context) {
-    _paytypeController.text =
-        paymentTypeNotifier.value.toString().split('.').last;
-    refreshBudgetData(widget.eventID);
-    refreshVendorData(widget.eventID);
+    // _paytypeController.text =
+    //     paymentTypeNotifier.value.toString().split('.').last;
+
+    refreshPaymentpayid(widget.eventID);
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
@@ -117,6 +120,7 @@ class _AddPaymentsState extends State<AddPayments> {
 
                         setState(() {
                           payid = searchResults[index].id;
+                          log(payid.toString());
                         });
                       },
                       child: Container(
@@ -155,7 +159,7 @@ class _AddPaymentsState extends State<AddPayments> {
   }
 
   final TextEditingController _pnameController = TextEditingController();
-  final TextEditingController _paytypeController = TextEditingController();
+  // final TextEditingController _paytypeController = TextEditingController();
   final TextEditingController searchController = TextEditingController();
   final TextEditingController _budgetController = TextEditingController();
 
@@ -167,69 +171,97 @@ class _AddPaymentsState extends State<AddPayments> {
 
   Future<void> addPaymentclick(mtx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      if (payid == 999999999999999) {
-        ScaffoldMessenger.of(mtx).showSnackBar(
-          const SnackBar(
-            content: Text("Make Proper Item Name"),
-            behavior: SnackBarBehavior.floating,
-            margin: EdgeInsets.all(10),
-            backgroundColor: Colors.red,
-            duration: Duration(seconds: 2),
-          ),
-        );
-        return;
-      }
-    }
-    final String pname = _pnameController.text;
-    final String amount = _budgetController.text;
-    final String note = _noteController.text;
-    final String date = _dateController.text;
-    final int paytype = paymentTypeNotifier.value == PaymentType.budget ? 0 : 1;
-    final String time = _timeController.text;
-    final String paytypename = searchController.text;
+      if (paymentTypeNotifier.value == PaymentType.budget) {
+        // Check if the payid is in budgetpayid
+        if (!budgetpayid.value.contains(payid)) {
+          ScaffoldMessenger.of(mtx).showSnackBar(
+            const SnackBar(
+              content: Text("Make Proper Item Name"),
+              behavior: SnackBarBehavior.floating,
+              margin: EdgeInsets.all(10),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 2),
+            ),
+          );
+          return;
+        }
 
-    final datas = PaymentModel(
-      name: pname,
-      pyamount: amount,
-      date: date,
-      paytype: paytype,
-      paytypename: paytypename,
-      time: time,
-      payid: payid,
-      note: note,
-      eventid: widget.eventID,
-    );
-    log(" payid: ${paytype.toString()}");
-    await addPayment(datas);
-    setState(() {
-      Navigator.pop(context);
-      _pnameController.clear();
-      _budgetController.clear();
-      _noteController.clear();
-      _dateController.clear();
-      _timeController.clear();
-      searchController.clear();
-    });
-    ScaffoldMessenger.of(mtx).showSnackBar(
-      const SnackBar(
-        content: Text("Successfully added"),
-        behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(10),
-        backgroundColor: Colors.greenAccent,
-        duration: Duration(seconds: 2),
-      ),
-    );
-    //   } else {
-    //     ScaffoldMessenger.of(mtx).showSnackBar(
-    //       const SnackBar(
-    //         content: Text("Fill the  Missing"),
-    //         behavior: SnackBarBehavior.floating,
-    //         margin: EdgeInsets.all(10),
-    //         backgroundColor: Colors.red,
-    //         duration: Duration(seconds: 2),
-    //       ),
-    //     );
-    //   }
-    // }
+        // Check if the paytypename is in budgetlist
+        if (!budgetlist.value
+            .any((budget) => budget.name == searchController.text)) {
+          ScaffoldMessenger.of(mtx).showSnackBar(
+            const SnackBar(
+              content: Text("Make Proper Item Name"),
+              behavior: SnackBarBehavior.floating,
+              margin: EdgeInsets.all(10),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 2),
+            ),
+          );
+          return;
+        }
+      } else if (paymentTypeNotifier.value == PaymentType.vendor) {
+        // Check if the payid is in vendorpayid
+        if (!vendorpayid.value.contains(payid)) {
+          ScaffoldMessenger.of(mtx).showSnackBar(
+            const SnackBar(
+              content: Text("Make Proper Item Name"),
+              behavior: SnackBarBehavior.floating,
+              margin: EdgeInsets.all(10),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 2),
+            ),
+          );
+          return;
+        }
+
+        // Check if the paytypename is in vendortlist
+        if (!vendortlist.value
+            .any((vendor) => vendor.name == searchController.text)) {
+          ScaffoldMessenger.of(mtx).showSnackBar(
+            const SnackBar(
+              content: Text("Make Proper Item Name"),
+              behavior: SnackBarBehavior.floating,
+              margin: EdgeInsets.all(10),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 2),
+            ),
+          );
+          return;
+        }
+      }
+
+      final datas = PaymentModel(
+        name: _pnameController.text,
+        pyamount: _budgetController.text,
+        date: _dateController.text,
+        paytype: paymentTypeNotifier.value == PaymentType.budget ? 0 : 1,
+        paytypename: searchController.text,
+        time: _timeController.text,
+        payid: payid,
+        note: _noteController.text,
+        eventid: widget.eventID,
+      );
+      log(" payid: ${(paymentTypeNotifier.value == PaymentType.budget ? 0 : 1).toString()}");
+      await addPayment(datas);
+      setState(() {
+        Navigator.pop(context);
+        _pnameController.clear();
+        _budgetController.clear();
+        _noteController.clear();
+        _dateController.clear();
+        _timeController.clear();
+        searchController.clear();
+      });
+      ScaffoldMessenger.of(mtx).showSnackBar(
+        const SnackBar(
+          content: Text("Successfully added"),
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.all(10),
+          backgroundColor: Colors.greenAccent,
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
   }
 }
