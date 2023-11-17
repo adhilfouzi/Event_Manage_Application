@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
+import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_payments.dart';
+import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 
 class VendorSettlement extends StatelessWidget {
-  const VendorSettlement({super.key});
+  final int eventID;
+
+  const VendorSettlement({super.key, required this.eventID});
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +77,10 @@ class VendorSettlement extends StatelessWidget {
             }
           },
         ),
+        floatingActionButton: FloatingPointx(
+            goto: AddPayments(
+          eventID: eventID,
+        )),
       ),
     );
   }

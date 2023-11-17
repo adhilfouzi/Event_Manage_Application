@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_paymentdetail.dart';
@@ -61,7 +59,6 @@ class _AddPaymentsState extends State<AddPayments> {
           child: ValueListenableBuilder(
             valueListenable: paymentTypeNotifier,
             builder: (context, value, child) {
-              log(paymentTypeNotifier.value.toString());
               return Column(children: [
                 TextFieldBlue(
                   textcontent: 'Receiver Name',
@@ -120,7 +117,6 @@ class _AddPaymentsState extends State<AddPayments> {
 
                         setState(() {
                           payid = searchResults[index].id;
-                          log(payid.toString());
                         });
                       },
                       child: Container(
@@ -230,7 +226,6 @@ class _AddPaymentsState extends State<AddPayments> {
           return;
         }
       }
-
       final datas = PaymentModel(
         name: _pnameController.text,
         pyamount: _budgetController.text,
@@ -242,7 +237,6 @@ class _AddPaymentsState extends State<AddPayments> {
         note: _noteController.text,
         eventid: widget.eventID,
       );
-      log(" payid: ${(paymentTypeNotifier.value == PaymentType.budget ? 0 : 1).toString()}");
       await addPayment(datas);
       setState(() {
         Navigator.pop(context);

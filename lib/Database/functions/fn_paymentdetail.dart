@@ -21,17 +21,20 @@ ValueNotifier<List<int>> budgetpayid = ValueNotifier<List<int>>([]);
 // Function to retrieve payment for view selected data from the database.
 Future<void> refreshPaymentTypeData(int payid, int eventid) async {
   try {
-    final result = await paymentDB.rawQuery(
-        "SELECT * FROM payment WHERE eventid = ? AND paytype = 0 AND payid = ?",
-        [payid.toString(), eventid.toString()]);
-    print('All budgetPayment data: $result');
-    budgetPaymentDetails.value.clear();
-    for (var map in result) {
-      final student = PaymentModel.fromMap(map);
-      budgetPaymentDetails.value.add(student);
+    try {
+      final resulter = await paymentDB.rawQuery(
+          "SELECT * FROM payment WHERE eventid = ? AND paytype = 0 AND payid = ?",
+          [payid.toString(), eventid.toString()]);
+      print('All budgetPaymentdetiled data: $resulter');
+      budgetPaymentDetails.value.clear();
+      for (var map in resulter) {
+        final student = PaymentModel.fromMap(map);
+        budgetPaymentDetails.value.add(student);
+      }
+      budgetPaymentDetails.notifyListeners();
+    } catch (e, stackTrace) {
+      log('Error in refreshPaymentTypeData: $e\n$stackTrace');
     }
-
-    budgetPaymentDetails.notifyListeners();
 
     ///-----------------------------------------
     ///-----------------------------------------

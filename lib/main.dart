@@ -4,6 +4,7 @@ import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
+import 'package:project_event/Database/functions/fn_incomemodel.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
@@ -18,6 +19,7 @@ Future<void> main() async {
   await initializeBudgetDatabase();
   await initializeVendorDatabase();
   await initializePaymentDatabase();
+  await initializeIncomeDatabase();
   runApp(
     const MyApp(),
   );

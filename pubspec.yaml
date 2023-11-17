@@ -46,6 +46,7 @@ dependencies:
   intro_screen_onboarding_flutter: ^1.0.0
   url_launcher: ^6.2.1
   table_calendar: ^3.0.9
+  flutter_speed_dial: ^7.0.0
 
 dev_dependencies:
   flutter_test:

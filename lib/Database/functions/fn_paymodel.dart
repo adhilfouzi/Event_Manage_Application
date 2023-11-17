@@ -116,11 +116,10 @@ Future<void> editPayment(id, name, paytype, paytypename, pyamount, note, date,
     };
     await paymentDB.update('payment', dataflow, where: 'id=?', whereArgs: [id]);
     refreshPaymentData(eventid);
+    refreshPaymentTypeData(payid, eventid);
   } catch (e) {
     log('Error while editing the database: $e');
   }
-
-  refreshPaymentTypeData(payid, eventid);
 }
 
 // Function to delete a task's information in the database.

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
-import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/budget_settelment.dart';
+import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/income_settelment.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/vendor_settlement.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 
 class Settlement extends StatelessWidget {
   final int eventID;
@@ -15,7 +14,7 @@ class Settlement extends StatelessWidget {
   Widget build(BuildContext context) {
     refreshPaymentData(eventID);
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 150,
@@ -116,24 +115,33 @@ class Settlement extends StatelessWidget {
                   tabs: [
                     Tab(text: 'Budget'),
                     Tab(text: 'Vendor'),
+                    Tab(text: 'Income'),
                   ],
-                  unselectedLabelColor: Colors.black,
+                  unselectedLabelColor: Colors.black45,
+                  labelColor: Colors.black,
                   dividerColor: Colors.transparent,
+                  indicatorColor: Colors.black,
                 ),
               ],
             ),
           ),
         ),
-        body: const Padding(
-          padding: EdgeInsets.all(10.0),
+        body: Padding(
+          padding: const EdgeInsets.all(10.0),
           child: TabBarView(
-            children: [BudgetSettlement(), VendorSettlement()],
+            children: [
+              BudgetSettlement(
+                eventID: eventID,
+              ),
+              VendorSettlement(
+                eventID: eventID,
+              ),
+              IncomeSettlement(
+                eventID: eventID,
+              ),
+            ],
           ),
         ),
-        floatingActionButton: FloatingPointx(
-            goto: AddPayments(
-          eventID: eventID,
-        )),
       ),
     );
   }

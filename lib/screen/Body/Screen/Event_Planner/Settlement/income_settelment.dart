@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/Database/functions/fn_paymodel.dart';
-import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
-import 'package:project_event/screen/Body/Screen/Edit/edit_payments.dart';
+import 'package:project_event/Database/functions/fn_incomemodel.dart';
+import 'package:project_event/screen/Body/Screen/Add/addincome.dart';
+import 'package:project_event/screen/Body/Screen/Edit/edit_income.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 
-class BudgetSettlement extends StatelessWidget {
+class IncomeSettlement extends StatelessWidget {
   final int eventID;
-  const BudgetSettlement({super.key, required this.eventID});
+
+  const IncomeSettlement({super.key, required this.eventID});
 
   @override
   Widget build(BuildContext context) {
+    refreshincomedata(eventID);
     return SafeArea(
       child: Scaffold(
         body: ValueListenableBuilder(
-          valueListenable: budgetPaymentList,
+          valueListenable: incomePaymentList,
           builder: (context, value, child) {
             if (value.isNotEmpty) {
               return ListView.builder(
@@ -35,8 +37,7 @@ class BudgetSettlement extends StatelessWidget {
                       child: ListTile(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  EditPayments(paydata: data)));
+                              builder: (context) => EditIncome(paydata: data)));
                         },
                         leading: Image.asset(
                           'assets/UI/icons/person.png',
@@ -45,13 +46,13 @@ class BudgetSettlement extends StatelessWidget {
                           data.name,
                           style: raleway(color: Colors.black),
                         ),
-                        subtitle: Text(
-                          'payid : ${data.payid}, paytype : ${data.paytype},eventid : ${data.eventid}',
-                          style: readexPro(
-                            color: Colors.black45,
-                            fontSize: 10,
-                          ),
-                        ),
+                        // subtitle: Text(
+                        //   'payid : ${data.payid}, paytype : ${data.},eventid : ${data.eventid}',
+                        //   style: readexPro(
+                        //     color: Colors.black45,
+                        //     fontSize: 10,
+                        //   ),
+                        // ),
                         trailing: Text(
                           "₹${data.pyamount}",
                           style: racingSansOne(
@@ -66,7 +67,7 @@ class BudgetSettlement extends StatelessWidget {
             } else {
               return const Center(
                 child: Text(
-                  'No Budget Payment available',
+                  'No Income Payment available',
                   style: TextStyle(fontSize: 18),
                 ),
               );
@@ -74,7 +75,7 @@ class BudgetSettlement extends StatelessWidget {
           },
         ),
         floatingActionButton: FloatingPointx(
-            goto: AddPayments(
+            goto: AddIncome(
           eventID: eventID,
         )),
       ),

@@ -47,6 +47,11 @@ class _EditPaymentsState extends State<EditPayments> {
       appBar: CustomAppBar(
         actions: [
           AppAction(
+              icon: Icons.delete,
+              onPressed: () {
+                dodeletepayment(context, widget.paydata);
+              }),
+          AppAction(
               icon: Icons.done,
               onPressed: () {
                 editPaymentclick(context);
@@ -246,5 +251,56 @@ class _EditPaymentsState extends State<EditPayments> {
           widget.paydata.eventid);
       Navigator.pop(mtx);
     }
+  }
+}
+
+void dodeletepayment(rtx, PaymentModel student) {
+  try {
+    showDialog(
+      context: rtx,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Delete'),
+          content: Text('Do You Want delete Payment by ${student.name} ?'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  delectpayYes(context, student);
+                },
+                child: const Text('Yes')),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(rtx);
+                },
+                child: const Text('No'))
+          ],
+        );
+      },
+    );
+  } catch (e) {
+    print('Error deleting data: $e');
+  }
+}
+
+void delectpayYes(
+  ctx,
+  PaymentModel student,
+) {
+  try {
+    deletePayment(student.id, student.eventid, student.payid);
+    Navigator.of(ctx).pop();
+    Navigator.of(ctx).pop();
+
+    ScaffoldMessenger.of(ctx).showSnackBar(
+      const SnackBar(
+        content: Text("Successfully Deleted"),
+        behavior: SnackBarBehavior.floating,
+        margin: EdgeInsets.all(10),
+        backgroundColor: Colors.grey,
+        duration: Duration(seconds: 2),
+      ),
+    );
+  } catch (e) {
+    print('Error inserting data: $e');
   }
 }

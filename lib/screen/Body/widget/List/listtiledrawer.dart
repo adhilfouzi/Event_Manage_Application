@@ -27,32 +27,32 @@ class ListTileDrawer extends StatelessWidget {
   }
 }
 
-class ListTileDrawerUrl extends StatelessWidget {
-  final Function()? link;
-  final String imagedata;
-  final String textdata;
-  const ListTileDrawerUrl(
-      {super.key,
-      required this.imagedata,
-      required this.textdata,
-      required this.link});
+// class ListTileDrawerUrl extends StatelessWidget {
+//   final Function()? link;
+//   final String imagedata;
+//   final String textdata;
+//   const ListTileDrawerUrl(
+//       {super.key,
+//       required this.imagedata,
+//       required this.textdata,
+//       required this.link});
 
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Image.asset(imagedata),
-      title: Text(
-        textdata,
-        style: readexPro(),
-      ),
-      onTap: () async {
-        if (link != null) {
-          await link!();
-        }
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListTile(
+//       leading: Image.asset(imagedata),
+//       title: Text(
+//         textdata,
+//         style: readexPro(),
+//       ),
+//       onTap: () async {
+//         if (link != null) {
+//           await link!();
+//         }
+//       },
+//     );
+//   }
+// }
 
 class ListTileDrawerEmail extends StatelessWidget {
   const ListTileDrawerEmail({
