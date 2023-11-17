@@ -7,6 +7,7 @@ import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/screen/Body/Screen/Add/add_vendor.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_vendor.dart';
 import 'package:project_event/screen/Body/Screen/Search/vendor_search.dart';
+import 'package:project_event/screen/Body/Screen/View/view_vendor.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
@@ -58,11 +59,14 @@ class Vendors extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: ListTile(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  EditVendor(vendordataway: data)));
-                        },
+                        onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ViewVendor(vendor: data))),
+                        onLongPress: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    EditVendor(vendordataway: data))),
                         leading: Image(image: categoryItem['image']),
                         title: Text(
                           data.name,

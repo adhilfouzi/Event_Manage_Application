@@ -11,9 +11,10 @@ class ViewBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 5, top: 0),
       alignment: Alignment.centerLeft,
       child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           // crossAxisAlignment: ,
           children: [

@@ -11,23 +11,13 @@ import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dar
 import 'package:project_event/screen/Body/widget/box/viewbox.dart';
 import 'package:project_event/screen/Body/widget/sub/paymentbar.dart';
 
-class BudgetView extends StatefulWidget {
+class BudgetView extends StatelessWidget {
   final BudgetModel budget;
   const BudgetView({super.key, required this.budget});
 
   @override
-  State<BudgetView> createState() => _BudgetViewState();
-}
-
-class _BudgetViewState extends State<BudgetView> {
-  @override
-  void initState() {
-    super.initState();
-    refreshPaymentTypeData(widget.budget.id!, widget.budget.eventid);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    refreshPaymentTypeData(budget.id!, budget.eventid);
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
@@ -36,7 +26,7 @@ class _BudgetViewState extends State<BudgetView> {
               icon: Icons.edit,
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => EditBudget(budgetdata: widget.budget),
+                  builder: (context) => EditBudget(budgetdata: budget),
                 ));
               }),
         ],
@@ -49,15 +39,13 @@ class _BudgetViewState extends State<BudgetView> {
           padding: const EdgeInsets.all(15),
           child: Column(children: [
             const SizedBox(height: 20),
-            ViewBox(textcontent: 'Name ', controller: widget.budget.name),
-            ViewBox(
-                textcontent: 'Category', controller: widget.budget.category),
-            ViewBox(textcontent: 'Note', controller: widget.budget.note!),
+            ViewBox(textcontent: 'Name ', controller: budget.name),
+            ViewBox(textcontent: 'Category', controller: budget.category),
+            ViewBox(textcontent: 'Note', controller: budget.note!),
             const SizedBox(height: 15),
             const SizedBox(height: 15),
             ViewBox(
-                textcontent: 'Estimatrd Amount',
-                controller: widget.budget.esamount),
+                textcontent: 'Estimatrd Amount', controller: budget.esamount),
             const SizedBox(height: 5),
             PaymentsBar(),
             const SizedBox(height: 15),
@@ -73,7 +61,7 @@ class _BudgetViewState extends State<BudgetView> {
                 const SizedBox(height: 5),
                 Container(
                   constraints:
-                      const BoxConstraints(maxHeight: 150, minHeight: 0),
+                      const BoxConstraints(maxHeight: 140, minHeight: 0),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     border: Border.all(color: buttoncolor, width: 1),
@@ -83,43 +71,30 @@ class _BudgetViewState extends State<BudgetView> {
                     valueListenable: budgetPaymentDetails,
                     builder: (context, value, child) {
                       log('length ${value.length.toString()}');
-                      log(widget.budget.id.toString());
+                      log(budget.id.toString());
                       if (value.isNotEmpty) {
                         return ListView.builder(
                           itemCount: value.length,
                           itemBuilder: (BuildContext context, int index) {
                             final data = value[index];
-                            return Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                            return ListTile(
+                              onTap: () {
+                                // Navigator.of(context).push(MaterialPageRoute(
+                                //     builder: (context) =>
+                                //         EditPayments(paydata: data)));
+                              },
+                              leading: Image.asset(
+                                'assets/UI/icons/person.png',
                               ),
-                              elevation: 4,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: buttoncolor, width: 1),
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: ListTile(
-                                  onTap: () {
-                                    // Navigator.of(context).push(MaterialPageRoute(
-                                    //     builder: (context) =>
-                                    //         EditPayments(paydata: data)));
-                                  },
-                                  leading: Image.asset(
-                                    'assets/UI/icons/person.png',
-                                  ),
-                                  title: Text(
-                                    data.name,
-                                    style: raleway(color: Colors.black),
-                                  ),
-                                  trailing: Text(
-                                    "₹${data.pyamount}",
-                                    style: racingSansOne(
-                                        color: Colors.black54,
-                                        fontWeight: FontWeight.normal),
-                                  ),
-                                ),
+                              title: Text(
+                                data.name,
+                                style: raleway(color: Colors.black),
+                              ),
+                              trailing: Text(
+                                "₹${data.pyamount}",
+                                style: racingSansOne(
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.normal),
                               ),
                             );
                           },

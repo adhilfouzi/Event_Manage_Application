@@ -24,7 +24,7 @@ class _AddEventState extends State<AddEvent> {
   final _formKey = GlobalKey<FormState>();
   PhoneContact? _phoneContact;
 
-  late String imagepath;
+  String? imagepath;
   File? imageevent;
   @override
   Widget build(BuildContext context) {
@@ -176,7 +176,7 @@ class _AddEventState extends State<AddEvent> {
   final TextEditingController _pnoController = TextEditingController();
   final int favorite = 0;
   Future addEventcliked(context) async {
-    if (imagepath.isEmpty) {
+    if (imagepath == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Add Profile Picture '),
@@ -199,7 +199,7 @@ class _AddEventState extends State<AddEvent> {
           clientname: _clientnameController.text.toUpperCase(),
           phoneNumber: _pnoController.text.trim(),
           startingTime: _sttimeController.text,
-          imagex: imagepath,
+          imagex: imagepath!,
           emailId: _emailController.text.trim().toLowerCase(),
           about: _aboutController.text.trimLeft().trimRight(),
           address: _addressController.text.trimLeft().trimRight(),

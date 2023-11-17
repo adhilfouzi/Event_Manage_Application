@@ -109,15 +109,15 @@ class _AddVendorState extends State<AddVendor> {
   Future<void> addVendorclick(BuildContext ctx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final vendordata = VendorsModel(
-        name: _nameController.text.toUpperCase().trimLeft().trimRight(),
-        category: _categoryController.text,
-        note: _noteController.text.trimLeft().trimRight(),
-        esamount: _budgetController.text.trimLeft().trimRight(),
-        eventid: widget.eventid,
-        number: _phoneController.text.trimLeft().trimRight(),
-        address: _acontroller.text.trimLeft().trimRight(),
-        clientname: _clientnameController.text.toUpperCase(),
-      );
+          name: _nameController.text.toUpperCase().trimLeft().trimRight(),
+          category: _categoryController.text,
+          note: _noteController.text.trimLeft().trimRight(),
+          esamount: _budgetController.text.trimLeft().trimRight(),
+          eventid: widget.eventid,
+          number: _phoneController.text.trimLeft().trimRight(),
+          address: _acontroller.text.trimLeft().trimRight(),
+          clientname: _clientnameController.text.toUpperCase(),
+          email: _econtroller.text);
 
       await addVendor(vendordata).then((value) => log("success "));
       await refreshVendorData(widget.eventid);

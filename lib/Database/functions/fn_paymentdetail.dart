@@ -24,7 +24,7 @@ Future<void> refreshPaymentTypeData(int payid, int eventid) async {
     try {
       final resulter = await paymentDB.rawQuery(
           "SELECT * FROM payment WHERE eventid = ? AND paytype = 0 AND payid = ?",
-          [payid.toString(), eventid.toString()]);
+          [eventid.toString(), payid.toString()]);
       print('All budgetPaymentdetiled data: $resulter');
       budgetPaymentDetails.value.clear();
       for (var map in resulter) {
@@ -37,11 +37,10 @@ Future<void> refreshPaymentTypeData(int payid, int eventid) async {
     }
 
     ///-----------------------------------------
-    ///-----------------------------------------
 
     final resultven = await paymentDB.rawQuery(
         "SELECT * FROM payment WHERE eventid = ? AND paytype = 1 AND payid = ?",
-        [payid.toString()]);
+        [eventid.toString(), payid.toString()]);
     print('All vendorPaymentlist data: $resultven');
     vendorPaymentDetails.value.clear();
     for (var map in resultven) {
