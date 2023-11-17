@@ -85,3 +85,40 @@ Future<void> refreshPaymentpayid(int eventid) async {
     log('Error Refresh Details id data: $e');
   }
 }
+
+ValueNotifier<Balence> balance =
+    ValueNotifier<Balence>(Balence(paid: 0, total: 0, pending: 0));
+
+Future<void> refreshbalancedata(
+    int payid, int eventid, int bol, String amound) async {
+  try {
+    final resulter = await paymentDB.rawQuery(
+        "SELECT * FROM payment WHERE eventid = ? AND paytype = ? AND payid = ?",
+        [eventid.toString(), bol, payid.toString()]);
+    print('All budgetPaymentdetiled data: $resulter');
+    int paid = 0;
+    for (var map in resulter) {
+      final student = PaymentModel.fromMap(map);
+      int amound = int.parse(student.pyamount);
+      paid += amound;
+    }
+
+    // int total = int.parse(amound);
+    // int pending = total - paid;
+    Balence b = Balence(
+        paid: paid,
+        total: int.parse(amound),
+        pending: int.parse(amound) - paid);
+    balance.value = b;
+    balance.notifyListeners();
+  } catch (e, stackTrace) {
+    log('Error in refreshPaymentTypeData: $e\n$stackTrace');
+  }
+}
+
+class Balence {
+  int paid;
+  int total;
+  int pending;
+  Balence({required this.paid, required this.total, required this.pending});
+}

@@ -3,7 +3,15 @@ import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 
 class PaymentsBar extends StatelessWidget {
-  const PaymentsBar({super.key});
+  final String eAmount;
+  final String pending;
+  final String paid;
+
+  const PaymentsBar(
+      {super.key,
+      required this.eAmount,
+      required this.pending,
+      required this.paid});
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +28,17 @@ class PaymentsBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Balance: 0',
+              'Amount: ₹$eAmount',
               style: readexPro(fontSize: 18, fontWeight: FontWeight.normal),
             ),
             const Divider(color: buttoncolor, thickness: 1),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Pending:0',
+                Text('Pending: ₹$pending',
                     style:
                         readexPro(fontSize: 18, fontWeight: FontWeight.normal)),
-                Text('Paid: 0000',
+                Text('Paid: ₹$paid',
                     style:
                         readexPro(fontSize: 18, fontWeight: FontWeight.normal))
               ],

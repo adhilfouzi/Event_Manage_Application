@@ -5,7 +5,6 @@ import 'package:project_event/screen/Body/Screen/Search/budget_search.dart';
 import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
-import 'package:project_event/screen/Body/widget/sub/paymentbar.dart';
 
 class EditBudget extends StatefulWidget {
   final BudgetModel budgetdata;
@@ -68,7 +67,7 @@ class _EditBudgetState extends State<EditBudget> {
                 return null;
               },
             ),
-            const PaymentsBar(),
+
             // Payments(goto: AddPayments())
           ]),
         ),

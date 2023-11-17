@@ -4,7 +4,6 @@ import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
 import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
-import 'package:project_event/screen/Body/widget/sub/paymentbar.dart';
 
 class AddBudget extends StatefulWidget {
   final int eventid;
@@ -63,7 +62,6 @@ class _AddBudgetState extends State<AddBudget> {
                 textcontent: 'Estimatrd Amount',
                 controller: _budgetController,
                 keyType: TextInputType.number),
-            PaymentsBar(),
             // Payments(
             //     goto: AddPayments(
             //   payment1: paymentdata,
