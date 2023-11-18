@@ -79,9 +79,13 @@ class Vendors extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Pending',
+                                  data.paid! > data.pending!
+                                      ? 'Paid'
+                                      : 'Pending',
                                   style: raleway(
-                                    color: Colors.red,
+                                    color: data.paid! > data.pending!
+                                        ? Colors.green
+                                        : Colors.red,
                                     fontSize: 12,
                                   ),
                                 ),
@@ -98,14 +102,14 @@ class Vendors extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Pending: ₹15,000',
+                                  'Pending: ₹${data.pending}',
                                   style: racingSansOne(
                                     color: Colors.black54,
                                     fontSize: 12,
                                   ),
                                 ),
                                 Text(
-                                  'Paid: ₹000',
+                                  'Paid: ₹${data.paid}',
                                   style: racingSansOne(
                                     color: Colors.black54,
                                     fontSize: 12,

@@ -5,13 +5,19 @@ class BudgetModel {
   final String? note;
   final String esamount;
   final int eventid;
-  BudgetModel(
-      {this.id,
-      required this.name,
-      required this.category,
-      this.note,
-      required this.esamount,
-      required this.eventid});
+
+  int? paid;
+  int? pending;
+  BudgetModel({
+    this.id,
+    required this.name,
+    required this.category,
+    this.note,
+    required this.esamount,
+    required this.eventid,
+    this.paid,
+    this.pending,
+  });
 
   static BudgetModel fromMap(Map<String, Object?> map) {
     final id = map['id'] as int?;
@@ -24,7 +30,8 @@ class BudgetModel {
         : (map['eventid'] is String
             ? int.tryParse(map['eventid'] as String) ?? 0
             : 0);
-
+    final paid = map['paid'] as int?;
+    final pending = map['pending'] as int?;
     return BudgetModel(
       id: id,
       name: name,
@@ -32,6 +39,8 @@ class BudgetModel {
       note: note,
       esamount: esamount,
       eventid: eventid,
+      paid: paid,
+      pending: pending,
     );
   }
 }

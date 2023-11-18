@@ -1,6 +1,8 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 import 'package:flutter/material.dart';
+import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
+import 'package:project_event/Database/model/Payment/pay_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 ValueNotifier<List<BudgetModel>> budgetlist =
@@ -15,20 +17,40 @@ Future<void> initializeBudgetDatabase() async {
     onCreate: (Database db, version) async {
       // Create the 'student' table when the database is created.
       await db.execute(
-          'CREATE TABLE budget (id INTEGER PRIMARY KEY, name TEXT, category TEXT, note TEXT, esamount TEXT, eventid TEXT, FOREIGN KEY (eventid) REFERENCES event(id))');
+          'CREATE TABLE budget (id INTEGER PRIMARY KEY, name TEXT, category TEXT, note TEXT, esamount TEXT, paid INTEGER, pending INTEGER, eventid TEXT, FOREIGN KEY (eventid) REFERENCES event(id))');
     },
   );
   print("budgetDB created successfully.");
 }
 
 // Function to retrieve task data from the database.
-Future<void> refreshBudgetData(int id) async {
-  final result = await budgetDB.rawQuery(
+Future<void> refreshBudgetData(int eventid) async {
+  final budget = await budgetDB.rawQuery(
       "SELECT * FROM budget WHERE eventid = ? ORDER BY id DESC",
-      [id.toString()]);
-  print('All budget data: $result');
+      [eventid.toString()]);
+  print('All budget data: $budget');
   budgetlist.value.clear();
-  for (var map in result) {
+//////////////////////////////////////////////////////////////
+  final payment = await paymentDB.rawQuery(
+      "SELECT * FROM payment WHERE eventid = ? AND paytype = 0 ORDER BY id DESC",
+      [eventid.toString()]);
+  print('All payment data: $payment');
+////////////////////////////////////////////////////////.
+  for (var teacher in budget) {
+    int paid = 0;
+    final student = BudgetModel.fromMap(teacher);
+    for (var parent in payment) {
+      final father = PaymentModel.fromMap(parent);
+      if (student.id == father.payid) {
+        paid += int.parse(father.pyamount);
+      }
+    }
+
+    editBudget(student.id, student.name, student.category, student.note,
+        student.esamount, paid, int.parse(student.esamount) - paid, eventid);
+  }
+
+  for (var map in budget) {
     final student = BudgetModel.fromMap(map);
     budgetlist.value.add(student);
   }
@@ -40,19 +62,26 @@ Future<void> refreshBudgetData(int id) async {
 Future<void> addBudget(BudgetModel value) async {
   try {
     await budgetDB.rawInsert(
-      'INSERT INTO budget(name, category, note, esamount, eventid) VALUES(?,?,?,?,?)',
+      'INSERT INTO budget(name, category, note, esamount, eventid, paid, pending) VALUES(?,?,?,?,?,?,?)',
       [
         value.name,
         value.category,
         value.note,
         value.esamount,
         value.eventid,
+        value.paid,
+        value.pending
       ],
     );
-    refreshBudgetData(value.eventid);
+    // refreshBudgetData(value.eventid);
   } catch (e) {
-    //------> Handle any errors that occur during data insertion.
-    print('Error inserting data: $e');
+    if (e is DatabaseException) {
+      // Handle SQLite-specific errors
+      print('SQLite Error: $e');
+    } else {
+      // Handle other exceptions
+      print('Error inserting data: $e');
+    }
   }
 }
 
@@ -63,16 +92,19 @@ Future<void> deleteBudget(id, int eventid) async {
 }
 
 // Function to edit/update a student's information in the database.
-Future<void> editBudget(id, name, category, note, esamount, eventid) async {
+Future<void> editBudget(
+    id, name, category, note, esamount, paid, pending, eventid) async {
   final dataflow = {
     'name': name,
     'category': category,
     'esamount': esamount,
     'note': note,
     'eventid': eventid,
+    'paid': paid,
+    'pending': pending,
   };
   await budgetDB.update('budget', dataflow, where: 'id=?', whereArgs: [id]);
-  refreshBudgetData(eventid);
+  // refreshBudgetData(eventid);
 }
 
 // Function to delete data from event's database.

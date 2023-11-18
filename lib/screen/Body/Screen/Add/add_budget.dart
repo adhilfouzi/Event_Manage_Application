@@ -89,7 +89,9 @@ class _AddBudgetState extends State<AddBudget> {
           category: category,
           eventid: widget.eventid,
           esamount: budget,
-          note: note);
+          note: note,
+          paid: 0,
+          pending: int.parse(budget));
 
       await addBudget(budgetdata);
       refreshBudgetData(widget.eventid);

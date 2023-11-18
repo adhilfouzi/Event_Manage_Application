@@ -91,20 +91,16 @@ class _EditBudgetState extends State<EditBudget> {
 
   Future<void> editGuestclick(BuildContext ctx, BudgetModel budget) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      final name = _nameController.text.toUpperCase().trimLeft().trimRight();
-      final budgeta = _budgetController.text.trimLeft().trimRight();
-      final note = _noteController.text.trimLeft().trimRight();
-      final eventId = budget.eventid;
-
-      final category = _categoryController.text;
       await editBudget(
-        budget.id,
-        name,
-        category,
-        note,
-        budgeta,
-        eventId,
-      );
+          budget.id,
+          _nameController.text.toUpperCase().trimLeft().trimRight(),
+          _categoryController.text,
+          _noteController.text.trimLeft().trimRight(),
+          _budgetController.text.trimLeft().trimRight(),
+          budget.paid,
+          budget.pending,
+          budget.eventid);
+
       refreshBudgetData(budget.eventid);
       ScaffoldMessenger.of(ctx).showSnackBar(
         const SnackBar(

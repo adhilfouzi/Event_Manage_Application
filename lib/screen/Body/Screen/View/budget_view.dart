@@ -62,13 +62,10 @@ class BudgetView extends StatelessWidget {
                   ViewBox(textcontent: 'Category', controller: budget.category),
                   ViewBox(textcontent: 'Note', controller: budget.note!),
                   const SizedBox(height: 15),
-                  ValueListenableBuilder(
-                    valueListenable: balance,
-                    builder: (context, value, child) => PaymentsBar(
-                        eAmount: value.total.toString(),
-                        pending: value.pending.toString(),
-                        paid: value.paid.toString()),
-                  ),
+                  PaymentsBar(
+                      eAmount: budget.esamount.toString(),
+                      pending: budget.pending.toString(),
+                      paid: budget.paid.toString()),
                   const SizedBox(height: 15),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +79,7 @@ class BudgetView extends StatelessWidget {
                       const SizedBox(height: 5),
                       Container(
                         constraints:
-                            const BoxConstraints(maxHeight: 100, minHeight: 0),
+                            const BoxConstraints(maxHeight: 150, minHeight: 0),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           border: Border.all(color: buttoncolor, width: 1),

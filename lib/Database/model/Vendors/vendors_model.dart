@@ -11,6 +11,9 @@ class VendorsModel {
   final String? email;
   final String? address;
 
+  int? paid;
+  int? pending;
+
   VendorsModel({
     required this.name,
     required this.category,
@@ -22,6 +25,8 @@ class VendorsModel {
     this.email,
     this.address,
     this.id,
+    this.paid,
+    this.pending,
   });
 
   static VendorsModel fromMap(Map<String, Object?> map) {
@@ -35,6 +40,9 @@ class VendorsModel {
     final number = map['number'] as String?;
     final email = map['email'] as String?;
     final address = map['address'] as String?;
+    final paid = map['paid'] as int?;
+    final pending = map['pending'] as int?;
+
     return VendorsModel(
       id: id,
       name: name,
@@ -46,6 +54,8 @@ class VendorsModel {
       number: number,
       email: email,
       address: address,
+      paid: paid,
+      pending: pending,
     );
   }
 }

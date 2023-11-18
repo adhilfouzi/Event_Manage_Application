@@ -108,29 +108,47 @@ class _AddVendorState extends State<AddVendor> {
 
   Future<void> addVendorclick(BuildContext ctx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      final vendordata = VendorsModel(
+      try {
+        final vendordata = VendorsModel(
           name: _nameController.text.toUpperCase().trimLeft().trimRight(),
           category: _categoryController.text,
-          note: _noteController.text.trimLeft().trimRight(),
           esamount: _budgetController.text.trimLeft().trimRight(),
           eventid: widget.eventid,
-          number: _phoneController.text.trimLeft().trimRight(),
-          address: _acontroller.text.trimLeft().trimRight(),
           clientname: _clientnameController.text.toUpperCase(),
-          email: _econtroller.text);
+          note: _noteController.text.trimLeft().trimRight(),
+          address: _acontroller.text.trimLeft().trimRight(),
+          email: _econtroller.text,
+          number: _phoneController.text.trimLeft().trimRight(),
+          paid: 0,
+          pending: int.parse(_budgetController.text.trimLeft().trimRight()),
+        );
+// name:
+//           category:,
+//           note:
+//           esamount:
+//           eventid:
+//           number:
+//           address:
+//           clientname:
+//           email:
+//           paid: 0,
+//           pending:
 
-      await addVendor(vendordata).then((value) => log("success "));
-      await refreshVendorData(widget.eventid);
-      ScaffoldMessenger.of(ctx).showSnackBar(
-        const SnackBar(
-          content: Text("Successfully added"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
-          backgroundColor: Colors.greenAccent,
-          duration: Duration(seconds: 2),
-        ),
-      );
-      Navigator.pop(ctx);
+        await addVendor(vendordata).then((value) => log("success "));
+        await refreshVendorData(widget.eventid);
+        ScaffoldMessenger.of(ctx).showSnackBar(
+          const SnackBar(
+            content: Text("Successfully added"),
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.all(10),
+            backgroundColor: Colors.greenAccent,
+            duration: Duration(seconds: 2),
+          ),
+        );
+        Navigator.pop(ctx);
+      } catch (e) {
+        log('Error adding vendor: $e');
+      }
     } else {
       ScaffoldMessenger.of(ctx).showSnackBar(
         const SnackBar(

@@ -88,7 +88,7 @@ class ViewVendor extends StatelessWidget {
                           const SizedBox(height: 5),
                           Container(
                             constraints: const BoxConstraints(
-                                maxHeight: 140, minHeight: 0),
+                                maxHeight: 150, minHeight: 0),
                             width: double.infinity,
                             decoration: BoxDecoration(
                               border: Border.all(color: buttoncolor, width: 1),

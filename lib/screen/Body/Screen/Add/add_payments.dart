@@ -25,6 +25,7 @@ class AddPayments extends StatefulWidget {
 class _AddPaymentsState extends State<AddPayments> {
   final _formKey = GlobalKey<FormState>();
   List searchResults = [];
+
   int payid = 999999999999999;
 
   @override
@@ -98,9 +99,7 @@ class _AddPaymentsState extends State<AddPayments> {
                                 .toLowerCase()
                                 .contains(p0.toLowerCase()))
                             .toList();
-                    setState(() {
-                      // payid = searchResults[index].name;
-                    });
+                    setState(() {});
                   },
                 ),
                 const SizedBox(
@@ -238,6 +237,10 @@ class _AddPaymentsState extends State<AddPayments> {
         eventid: widget.eventID,
       );
       await addPayment(datas);
+      await refreshBudgetData(widget.eventID);
+      refreshVendorData(widget.eventID);
+      // if (paymentTypeNotifier.value == PaymentType.budget) {
+      // } else if (paymentTypeNotifier.value == PaymentType.vendor) {}
       setState(() {
         Navigator.pop(context);
         _pnameController.clear();

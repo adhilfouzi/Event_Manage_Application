@@ -130,17 +130,19 @@ class _EditVendorState extends State<EditVendor> {
   Future<void> addVendorclick(mtx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       await editVendor(
-        widget.vendordataway.id,
-        _nameController.text.toUpperCase().trimLeft().trimRight(),
-        _categoryController.text,
-        _noteController.text.trimLeft().trimRight(),
-        _phoneController.text.trimLeft().trimRight(),
-        _budgetController.text.trimLeft().trimRight(),
-        widget.vendordataway.eventid,
-        _econtroller.text.trimLeft().trimRight(),
-        _acontroller.text.trimLeft().trimRight(),
-        _clientnameController.text.toUpperCase(),
-      );
+          widget.vendordataway.id,
+          _nameController.text.toUpperCase().trimLeft().trimRight(),
+          _categoryController.text,
+          _noteController.text.trimLeft().trimRight(),
+          _phoneController.text.trimLeft().trimRight(),
+          _budgetController.text.trimLeft().trimRight(),
+          widget.vendordataway.eventid,
+          _econtroller.text.trimLeft().trimRight(),
+          _acontroller.text.trimLeft().trimRight(),
+          _clientnameController.text.toUpperCase(),
+          widget.vendordataway.paid,
+          widget.vendordataway.pending);
+
       refreshVendorData(widget.vendordataway.eventid);
 
       Navigator.pop(mtx);
