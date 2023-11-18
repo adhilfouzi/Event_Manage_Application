@@ -121,18 +121,8 @@ class _AddVendorState extends State<AddVendor> {
           number: _phoneController.text.trimLeft().trimRight(),
           paid: 0,
           pending: int.parse(_budgetController.text.trimLeft().trimRight()),
+          status: 0,
         );
-// name:
-//           category:,
-//           note:
-//           esamount:
-//           eventid:
-//           number:
-//           address:
-//           clientname:
-//           email:
-//           paid: 0,
-//           pending:
 
         await addVendor(vendordata).then((value) => log("success "));
         await refreshVendorData(widget.eventid);

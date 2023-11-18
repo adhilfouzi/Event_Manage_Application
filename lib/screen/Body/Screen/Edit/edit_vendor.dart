@@ -141,7 +141,8 @@ class _EditVendorState extends State<EditVendor> {
           _acontroller.text.trimLeft().trimRight(),
           _clientnameController.text.toUpperCase(),
           widget.vendordataway.paid,
-          widget.vendordataway.pending);
+          widget.vendordataway.pending,
+          widget.vendordataway.status);
 
       refreshVendorData(widget.vendordataway.eventid);
 

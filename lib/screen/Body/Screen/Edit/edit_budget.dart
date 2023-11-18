@@ -99,7 +99,8 @@ class _EditBudgetState extends State<EditBudget> {
           _budgetController.text.trimLeft().trimRight(),
           budget.paid,
           budget.pending,
-          budget.eventid);
+          budget.eventid,
+          budget.status);
 
       refreshBudgetData(budget.eventid);
       ScaffoldMessenger.of(ctx).showSnackBar(

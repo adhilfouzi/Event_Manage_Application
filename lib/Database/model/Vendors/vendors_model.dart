@@ -13,11 +13,13 @@ class VendorsModel {
 
   int? paid;
   int? pending;
+  int status;
 
   VendorsModel({
     required this.name,
     required this.category,
     required this.esamount,
+    required this.status,
     required this.eventid,
     required this.clientname,
     this.note,
@@ -42,6 +44,11 @@ class VendorsModel {
     final address = map['address'] as String?;
     final paid = map['paid'] as int?;
     final pending = map['pending'] as int?;
+    final status = map['status'] is int
+        ? map['status'] as int
+        : (map['status'] is String
+            ? int.tryParse(map['status'] as String) ?? 0
+            : 0);
 
     return VendorsModel(
       id: id,
@@ -56,6 +63,7 @@ class VendorsModel {
       address: address,
       paid: paid,
       pending: pending,
+      status: status,
     );
   }
 }

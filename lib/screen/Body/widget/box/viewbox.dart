@@ -44,3 +44,47 @@ class ViewBox extends StatelessWidget {
     );
   }
 }
+
+class ViewBoxAccommodation extends StatelessWidget {
+  final String textcontent;
+  final String controller;
+
+  const ViewBoxAccommodation(
+      {super.key, required this.textcontent, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 5, top: 0),
+      alignment: Alignment.centerLeft,
+      child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // crossAxisAlignment: ,
+          children: [
+            Expanded(
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Text('$textcontent : ',
+                    style: raleway(
+                      color: Colors.black,
+                      fontSize: 16,
+                    )),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  controller.isNotEmpty == true ? controller : 'Accommodation',
+                  style: readexPro(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            )
+          ]),
+    );
+  }
+}

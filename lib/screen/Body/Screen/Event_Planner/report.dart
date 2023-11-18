@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:project_event/Database/functions/fn_budgetmodel.dart';
+import 'package:project_event/Database/functions/fn_guestmodel.dart';
+import 'package:project_event/Database/functions/fn_taskmodel.dart';
+import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/List/eventviewdata.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 
 class Report extends StatelessWidget {
-  const Report({super.key});
+  final int eventid;
+
+  const Report({super.key, required this.eventid});
   @override
   Widget build(BuildContext context) {
+    refreshBudgetData(eventid);
+    refreshVendorData(eventid);
+    refreshEventtaskdata(eventid);
+    refreshguestdata(eventid);
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
@@ -69,7 +79,7 @@ class Report extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: () {
-                                  if (cardInfo['report'] != null) {
+                                  if (cardInfo['reportP'] != null) {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) =>

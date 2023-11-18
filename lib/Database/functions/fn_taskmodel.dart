@@ -20,7 +20,7 @@ Future<void> initialize_task_db() async {
     onCreate: (Database db, version) async {
       // Create the 'student' table when the database is created.
       await db.execute(
-          'CREATE TABLE task (id INTEGER PRIMARY KEY, taskname TEXT, category TEXT, note TEXT, status BOOLEAN, date TEXT, eventid TEXT, FOREIGN KEY (eventid) REFERENCES event(id))');
+          'CREATE TABLE task (id INTEGER PRIMARY KEY, taskname TEXT, category TEXT, note TEXT, status INTEGER, date TEXT, eventid TEXT, FOREIGN KEY (eventid) REFERENCES event(id))');
     },
   );
   print("task_db created successfully.");
@@ -29,7 +29,7 @@ Future<void> initialize_task_db() async {
 // Function to retrieve task data from the database.
 Future<void> refreshEventtaskdata(int id) async {
   final result = await taskDB.rawQuery(
-      "SELECT * FROM task WHERE eventid = ? ORDER BY status DESC ",
+      "SELECT * FROM task WHERE eventid = ? ORDER BY status ASC",
       [id.toString()]);
   print('All task data: $result');
   taskList.value.clear();
@@ -37,15 +37,7 @@ Future<void> refreshEventtaskdata(int id) async {
     final student = TaskModel.fromMap(map);
     taskList.value.add(student);
   }
-  taskList.value.sort((a, b) {
-    if (a.status == 0 && b.status == 1) {
-      return -1;
-    } else if (a.status == 1 && b.status == 0) {
-      return 1;
-    } else {
-      return 0;
-    }
-  });
+
   taskList.notifyListeners();
 
   ///-----------------------------------------

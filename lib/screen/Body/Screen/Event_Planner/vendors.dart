@@ -79,13 +79,11 @@ class Vendors extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  data.paid! > data.pending!
-                                      ? 'Paid'
-                                      : 'Pending',
+                                  data.status == 0 ? 'Pending' : 'Completed',
                                   style: raleway(
-                                    color: data.paid! > data.pending!
-                                        ? Colors.green
-                                        : Colors.red,
+                                    color: data.status == 0
+                                        ? Colors.red
+                                        : Colors.green,
                                     fontSize: 12,
                                   ),
                                 ),

@@ -91,7 +91,8 @@ class _AddBudgetState extends State<AddBudget> {
           esamount: budget,
           note: note,
           paid: 0,
-          pending: int.parse(budget));
+          pending: int.parse(budget),
+          status: 0);
 
       await addBudget(budgetdata);
       refreshBudgetData(widget.eventid);

@@ -249,6 +249,8 @@ class _EditPaymentsState extends State<EditPayments> {
           _timeController.text,
           payid,
           widget.paydata.eventid);
+      await refreshBudgetData(widget.paydata.eventid);
+      await refreshVendorData(widget.paydata.eventid);
       Navigator.pop(mtx);
     }
   }

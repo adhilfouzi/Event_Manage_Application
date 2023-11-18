@@ -1,37 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/Database/functions/fn_budgetmodel.dart';
-import 'package:project_event/screen/Body/Screen/Add/add_budget.dart';
-import 'package:project_event/screen/Body/Screen/Edit/edit_budget.dart';
-import 'package:project_event/screen/Body/Screen/Search/budget_search.dart';
-import 'package:project_event/screen/Body/Screen/View/budget_view.dart';
+import 'package:project_event/Database/functions/fn_vendormodel.dart';
+import 'package:project_event/screen/Body/Screen/Edit/edit_vendor.dart';
+import 'package:project_event/screen/Body/Screen/View/view_vendor.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 
-class Budget extends StatelessWidget {
-  final int eventid;
-  const Budget({super.key, required this.eventid});
+class DoneRpVendorList extends StatelessWidget {
+  const DoneRpVendorList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    refreshBudgetData(eventid);
     return Scaffold(
       appBar: CustomAppBar(actions: [
         AppAction(
             icon: Icons.search,
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (ctr) => const BudgetSearch(),
-              ));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //   builder: (ctr) => const VendorSearch(),
+              // ));
             }),
         AppAction(icon: Icons.more_vert, onPressed: () {})
-      ], titleText: 'Budget'),
+      ], titleText: 'Vendors'),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ValueListenableBuilder(
-          valueListenable: budgetlist,
+          valueListenable: vendorDonelist,
           builder: (context, value, child) {
             if (value.isNotEmpty) {
               return ListView.builder(
@@ -56,15 +51,14 @@ class Budget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: ListTile(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => BudgetView(budget: data)));
-                        },
-                        onLongPress: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  EditBudget(budgetdata: data)));
-                        },
+                        onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ViewVendor(vendor: data))),
+                        onLongPress: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    EditVendor(vendordataway: data))),
                         leading: Image(image: categoryItem['image']),
                         title: Text(
                           data.name,
@@ -123,7 +117,7 @@ class Budget extends StatelessWidget {
             } else {
               return const Center(
                 child: Text(
-                  'No Budget available',
+                  'No Vendors available',
                   style: TextStyle(fontSize: 18),
                 ),
               );
@@ -131,10 +125,6 @@ class Budget extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: FloatingPointx(
-          goto: AddBudget(
-        eventid: eventid,
-      )),
     );
   }
 }

@@ -59,7 +59,8 @@ class BudgetView extends StatelessWidget {
               child: Column(
                 children: [
                   ViewBox(textcontent: 'Name ', controller: budget.name),
-                  ViewBox(textcontent: 'Category', controller: budget.category),
+                  ViewBoxAccommodation(
+                      textcontent: 'Category', controller: budget.category),
                   ViewBox(textcontent: 'Note', controller: budget.note!),
                   const SizedBox(height: 15),
                   PaymentsBar(

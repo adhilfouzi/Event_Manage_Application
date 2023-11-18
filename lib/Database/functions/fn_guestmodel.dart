@@ -29,7 +29,7 @@ Future<void> initialize_guest_database() async {
 // Function to retrieve guest data from the database.
 Future<void> refreshguestdata(int id) async {
   final result = await guestDB.rawQuery(
-      "SELECT * FROM guest WHERE eventid = ? ORDER BY status DESC",
+      "SELECT * FROM guest WHERE eventid = ? ORDER BY status ASC",
       [id.toString()]);
   print('All guest data: $result');
   guestlist.value.clear();
@@ -37,15 +37,6 @@ Future<void> refreshguestdata(int id) async {
     final student = GuestModel.fromMap(map);
     guestlist.value.add(student);
   }
-  guestlist.value.sort((a, b) {
-    if (a.status == 0 && b.status == 1) {
-      return -1;
-    } else if (a.status == 1 && b.status == 0) {
-      return 1;
-    } else {
-      return 0;
-    }
-  });
 
   guestlist.notifyListeners();
 

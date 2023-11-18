@@ -8,10 +8,13 @@ class BudgetModel {
 
   int? paid;
   int? pending;
+  int status;
+
   BudgetModel({
     this.id,
     required this.name,
     required this.category,
+    required this.status,
     this.note,
     required this.esamount,
     required this.eventid,
@@ -32,6 +35,12 @@ class BudgetModel {
             : 0);
     final paid = map['paid'] as int?;
     final pending = map['pending'] as int?;
+    final status = map['status'] is int
+        ? map['status'] as int
+        : (map['status'] is String
+            ? int.tryParse(map['status'] as String) ?? 0
+            : 0);
+
     return BudgetModel(
       id: id,
       name: name,
@@ -41,6 +50,7 @@ class BudgetModel {
       eventid: eventid,
       paid: paid,
       pending: pending,
+      status: status,
     );
   }
 }
