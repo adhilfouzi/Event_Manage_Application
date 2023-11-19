@@ -21,7 +21,6 @@ class Report extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
-          AppAction(icon: Icons.search, onPressed: () {}),
           AppAction(icon: Icons.more_vert, onPressed: () {}),
         ],
         titleText: 'Report',
