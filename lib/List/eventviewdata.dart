@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project_event/Database/functions/fn_budgetmodel.dart';
+import 'package:project_event/Database/functions/fn_guestmodel.dart';
+import 'package:project_event/Database/functions/fn_taskmodel.dart';
+import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/screen/Body/Screen/Report/Budget/done_budget.dart';
 import 'package:project_event/screen/Body/Screen/Report/Budget/pending_buget.dart';
 import 'package:project_event/screen/Body/Screen/Report/Guest_Rp/guests_done_rp.dart';
@@ -16,7 +20,9 @@ final List<Map<String, dynamic>> cardData = [
     'text': 'Task List',
     'link': 'TaskList()',
     'report': () => const DoneRpTaskList(),
-    'reportP': () => const PendingRpTaskList()
+    'reportP': () => const PendingRpTaskList(),
+    'done': doneRpTaskList,
+    'pending': pendingRpTaskList
   },
   {
     'color': const Color.fromRGBO(234, 28, 140, 1),
@@ -24,7 +30,9 @@ final List<Map<String, dynamic>> cardData = [
     'text': 'Guests',
     'link': 'Guests()',
     'report': () => const DoneRpGuests(),
-    'reportP': () => const PendingRpGuests()
+    'reportP': () => const PendingRpGuests(),
+    'done': guestDonelist,
+    'pending': guestPendinglist
   },
   {
     'color': const Color.fromRGBO(211, 234, 43, 1),
@@ -32,7 +40,9 @@ final List<Map<String, dynamic>> cardData = [
     'text': 'Budget',
     'link': 'Budget()',
     'report': () => const DoneRpBudget(),
-    'reportP': () => const PendingRpBudget()
+    'reportP': () => const PendingRpBudget(),
+    'done': budgetDonelist,
+    'pending': budgetPendinglist
   },
   {
     'color': const Color.fromRGBO(250, 166, 68, 1),
@@ -40,7 +50,9 @@ final List<Map<String, dynamic>> cardData = [
     'text': 'Vendors',
     'link': 'const Vendors()',
     'report': () => const DoneRpVendorList(),
-    'reportP': () => const PendingRpVendorList()
+    'reportP': () => const PendingRpVendorList(),
+    'done': vendorDonelist,
+    'pending': vendorPendinglist
   },
   {
     'color': const Color.fromRGBO(129, 236, 114, 1),

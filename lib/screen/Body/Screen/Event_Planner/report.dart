@@ -69,12 +69,16 @@ class Report extends StatelessWidget {
                                     );
                                   }
                                 },
-                                child: Text(
-                                  'Completed : 5 ',
-                                  style: readexPro(
-                                    color: Colors.green,
-                                    fontSize: 15,
+                                child: ValueListenableBuilder(
+                                  builder: (context, value, child) => Text(
+                                    'Completed : ${value.length} ',
+                                    style: readexPro(
+                                      color: Colors.green,
+                                      fontSize: 15,
+                                    ),
                                   ),
+                                  valueListenable:
+                                      cardInfo['done'] as ValueNotifier,
                                 ),
                               ),
                               InkWell(
@@ -88,12 +92,16 @@ class Report extends StatelessWidget {
                                     );
                                   }
                                 },
-                                child: Text(
-                                  'Pending : 5 ',
-                                  style: readexPro(
-                                    color: Colors.red,
-                                    fontSize: 15,
+                                child: ValueListenableBuilder(
+                                  builder: (context, value, child) => Text(
+                                    'Pending : ${value?.length} ',
+                                    style: readexPro(
+                                      color: Colors.red,
+                                      fontSize: 15,
+                                    ),
                                   ),
+                                  valueListenable:
+                                      cardInfo['pending'] as ValueNotifier,
                                 ),
                               ),
                             ],

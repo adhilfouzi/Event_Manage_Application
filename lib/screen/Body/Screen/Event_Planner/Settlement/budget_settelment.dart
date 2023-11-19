@@ -46,7 +46,7 @@ class BudgetSettlement extends StatelessWidget {
                           style: raleway(color: Colors.black),
                         ),
                         subtitle: Text(
-                          'payid : ${data.payid}, paytype : ${data.paytype},eventid : ${data.eventid}',
+                          'Paid on ${data.date}, ${data.time}',
                           style: readexPro(
                             color: Colors.black45,
                             fontSize: 10,

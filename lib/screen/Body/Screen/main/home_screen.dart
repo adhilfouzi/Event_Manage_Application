@@ -167,7 +167,7 @@ class HomeScreen extends StatelessWidget {
                                       children: [
                                         Text(
                                           data.eventname,
-                                          style: racingSansOne(fontSize: 18),
+                                          style: racingSansOne(fontSize: 15),
                                         ),
                                         Row(
                                           mainAxisAlignment:
@@ -176,12 +176,13 @@ class HomeScreen extends StatelessWidget {
                                             Text(
                                               '${data.startingDay}  at  ${data.startingTime}',
                                               style:
-                                                  racingSansOne(fontSize: 13),
+                                                  racingSansOne(fontSize: 12),
                                             ),
                                             const SizedBox(width: 30),
                                             Text(
                                               data.location,
-                                              style: racingSansOne(),
+                                              style:
+                                                  racingSansOne(fontSize: 12),
                                             ),
                                           ],
                                         ),
