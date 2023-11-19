@@ -148,6 +148,7 @@ void dodeletevendor(rtx, VendorsModel student) {
 void delectYes(ctx, VendorsModel student) {
   try {
     deleteVendor(student.id, student.eventid);
+
     Navigator.of(ctx).pop();
     Navigator.of(ctx).pop();
 

@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/model/Task/task_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -66,6 +67,7 @@ Future<void> refreshEventtaskdata(int id) async {
     pendingRpTaskList.value.add(student);
   }
   pendingRpTaskList.notifyListeners();
+  await refreshmainbalancedata(id);
 }
 
 // Function to add a new student to the database.

@@ -156,6 +156,7 @@ void delectYes(
 ) {
   try {
     deletetask(student.id, student.eventid);
+
     Navigator.of(ctx).pop();
     Navigator.of(ctx).pop();
 

@@ -127,7 +127,7 @@ class ViewEvent extends StatelessWidget {
                     begin: Alignment.center,
                     end: Alignment.center,
                     colors: [Colors.transparent, Colors.black.withOpacity(0.3)],
-                    stops: [0.3, 1.0],
+                    stops: const [0.3, 1.0],
                   ),
                 ),
               ),

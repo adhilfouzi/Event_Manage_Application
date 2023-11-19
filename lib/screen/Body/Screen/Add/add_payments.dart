@@ -239,6 +239,8 @@ class _AddPaymentsState extends State<AddPayments> {
       await addPayment(datas);
       await refreshBudgetData(widget.eventID);
       await refreshVendorData(widget.eventID);
+      await refreshmainbalancedata(widget.eventID);
+
       // if (paymentTypeNotifier.value == PaymentType.budget) {
       // } else if (paymentTypeNotifier.value == PaymentType.vendor) {}
       setState(() {

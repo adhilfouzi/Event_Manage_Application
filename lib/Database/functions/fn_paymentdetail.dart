@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
+import 'package:project_event/Database/functions/fn_incomemodel.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
@@ -121,4 +122,48 @@ class Balence {
   int total;
   int pending;
   Balence({required this.paid, required this.total, required this.pending});
+}
+
+ValueNotifier<Balence> mainbalance =
+    ValueNotifier<Balence>(Balence(paid: 0, total: 0, pending: 0));
+
+Future<void> refreshmainbalancedata(int eventid) async {
+  try {
+    log('refresh start');
+    log('eventid :${eventid}');
+
+    final resultpayment = await paymentDB.rawQuery(
+        "SELECT * FROM payment WHERE eventid = ?", [eventid.toString()]);
+    print('All resultpayment data: $resultpayment');
+    int payment = 0;
+    for (var map in resultpayment) {
+      final student = PaymentModel.fromMap(map);
+      int amound = int.parse(student.pyamount);
+      payment += amound;
+    }
+    log('payment :${payment}');
+///////////////////////////////////////////////////////////
+    final resultincome = await incomeDB.rawQuery(
+        "SELECT * FROM income WHERE eventid = ?", [eventid.toString()]);
+    print('All resultincome data: $resultincome');
+
+    int income = 0;
+    for (var dora in resultincome) {
+      final student = IncomeModel.fromMap(dora);
+      int amound = int.parse(student.pyamount);
+      income += amound;
+    }
+    log('payment :${payment}');
+    log('income :${income}');
+
+    Balence b =
+        Balence(paid: payment, total: income - payment, pending: income);
+    print(b);
+    mainbalance.value = b;
+    mainbalance.notifyListeners();
+    // refreshBudgetData(eventid);
+    // refreshVendorData(eventid);
+  } catch (e, stackTrace) {
+    log('Error in refreshPaymentTypeData: $e\n$stackTrace');
+  }
 }

@@ -60,6 +60,7 @@ Future<void> refreshPaymentData(int eventid) async {
       vendorPaymentlist.value.add(studentvn);
     }
     vendorPaymentlist.notifyListeners();
+    await refreshmainbalancedata(eventid);
   } catch (e) {
     log('Error Refresh data: $e');
   }

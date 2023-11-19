@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 import 'package:flutter/material.dart';
+import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
 import 'package:project_event/Database/model/Payment/pay_model.dart';
@@ -61,6 +62,7 @@ Future<void> refreshBudgetData(int eventid) async {
         eventid,
         paid >= int.parse(student.esamount) ? 1 : 0);
   }
+  await refreshmainbalancedata(eventid);
 
   for (var map in budget) {
     final student = BudgetModel.fromMap(map);

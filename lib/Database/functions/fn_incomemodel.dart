@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/model/Payment/pay_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -51,7 +52,8 @@ Future<void> addincome(IncomeModel value) async {
       ],
     );
     log(value.id.toString());
-    refreshincomedata(value.eventid);
+    await refreshmainbalancedata(value.eventid);
+    await refreshincomedata(value.eventid);
   } catch (e) {
     //------> Handle any errors that occur during data insertion.
     print('Error inserting data: $e');
@@ -60,7 +62,8 @@ Future<void> addincome(IncomeModel value) async {
 
 Future<void> deleteincome(id, int eventid) async {
   await incomeDB.delete('income', where: 'id=?', whereArgs: [id]);
-  refreshincomedata(eventid);
+  await refreshincomedata(eventid);
+  await refreshmainbalancedata(eventid);
 }
 
 Future<void> editincome(id, name, pyamount, note, date, time, eventid) async {
@@ -74,7 +77,7 @@ Future<void> editincome(id, name, pyamount, note, date, time, eventid) async {
       'eventid': eventid,
     };
     await incomeDB.update('income', dataflow, where: 'id=?', whereArgs: [id]);
-    refreshincomedata(eventid);
+    await refreshincomedata(eventid);
   } catch (e) {
     log('Error while editing the database: $e');
   }

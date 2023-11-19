@@ -155,6 +155,7 @@ void dodeleteguest(rtx, GuestModel student) {
 
 void delectYes(ctx, GuestModel student) {
   deleteGuest(student.id, student.eventid);
+
   ScaffoldMessenger.of(ctx).showSnackBar(
     const SnackBar(
       content: Text("Successfully Deleted"),

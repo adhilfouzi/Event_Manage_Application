@@ -237,7 +237,6 @@ class _EditPaymentsState extends State<EditPayments> {
           return;
         }
       }
-      log(" payid: ${(paymentTypeNotifier.value == PaymentType.budget ? 0 : 1).toString()}");
       await editPayment(
           widget.paydata.id,
           _pnameController.text,
@@ -251,6 +250,7 @@ class _EditPaymentsState extends State<EditPayments> {
           widget.paydata.eventid);
       await refreshBudgetData(widget.paydata.eventid);
       await refreshVendorData(widget.paydata.eventid);
+      await refreshmainbalancedata(widget.paydata.eventid);
       Navigator.pop(mtx);
     }
   }

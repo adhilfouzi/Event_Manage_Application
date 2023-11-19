@@ -142,6 +142,7 @@ void dodeletebudget(rtx, BudgetModel student) {
 
 void delectYes(ctx, BudgetModel student) {
   deleteBudget(student.id, student.eventid);
+
   ScaffoldMessenger.of(ctx).showSnackBar(
     const SnackBar(
       content: Text("Successfully Deleted"),

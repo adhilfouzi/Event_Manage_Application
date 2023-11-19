@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/model/Payment/pay_model.dart';
 import 'package:project_event/Database/model/Vendors/vendors_model.dart';
@@ -100,6 +101,7 @@ Future<void> refreshVendorData(int eventid) async {
     vendorPendinglist.value.add(student);
   }
   vendorPendinglist.notifyListeners();
+  await refreshmainbalancedata(eventid);
 }
 
 // Function to add a new student to the database.

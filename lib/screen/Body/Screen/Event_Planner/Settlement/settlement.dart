@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/budget_settelment.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/income_settelment.dart';
@@ -13,6 +14,7 @@ class Settlement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     refreshPaymentData(eventID);
+    refreshmainbalancedata(eventID);
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -35,80 +37,88 @@ class Settlement extends StatelessWidget {
                 Container(
                   height: 80,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Card(
-                    elevation: 4,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Expenses',
-                                style: readexPro(fontWeight: FontWeight.normal),
+                  child: ValueListenableBuilder(
+                    valueListenable: mainbalance,
+                    builder: (context, value, child) {
+                      return Card(
+                        elevation: 4,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Expenses',
+                                    style: readexPro(
+                                        fontWeight: FontWeight.normal),
+                                  ),
+                                  Text(
+                                    '₹${value.paid.toString()}',
+                                    style: readexPro(
+                                        color: Colors.red,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
                               ),
-                              Text(
-                                '₹72,000',
-                                style: readexPro(
-                                    color: Colors.red,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                        const VerticalDivider(
-                          endIndent: 15,
-                          indent: 15,
-                          width: 1,
-                          thickness: 2,
-                          color: Colors.black,
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Credit',
-                                style: readexPro(fontWeight: FontWeight.normal),
+                            ),
+                            const VerticalDivider(
+                              endIndent: 15,
+                              indent: 15,
+                              width: 1,
+                              thickness: 2,
+                              color: Colors.black,
+                            ),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Credit',
+                                    style: readexPro(
+                                        fontWeight: FontWeight.normal),
+                                  ),
+                                  Text(
+                                    '₹${value.pending.toString()}',
+                                    style: readexPro(
+                                        color: Colors.green,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
                               ),
-                              Text(
-                                '₹100,000',
-                                style: readexPro(
-                                    color: Colors.green,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                        const VerticalDivider(
-                          endIndent: 15,
-                          indent: 15,
-                          width: 1,
-                          thickness: 2,
-                          color: Colors.black,
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Balance',
-                                style: readexPro(fontWeight: FontWeight.normal),
+                            ),
+                            const VerticalDivider(
+                              endIndent: 15,
+                              indent: 15,
+                              width: 1,
+                              thickness: 2,
+                              color: Colors.black,
+                            ),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Balance',
+                                    style: readexPro(
+                                        fontWeight: FontWeight.normal),
+                                  ),
+                                  Text(
+                                    '₹${value.total.toString()}',
+                                    style: readexPro(
+                                        color: Colors.green,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                '+₹32,000',
-                                style: readexPro(
-                                    color: Colors.green,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 ),
                 const TabBar(
