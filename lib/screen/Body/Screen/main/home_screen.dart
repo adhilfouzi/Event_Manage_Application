@@ -13,6 +13,7 @@ import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/appinfo.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/calender.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/favorite.dart';
+import 'package:project_event/screen/Body/Screen/Drawer/feedback.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/reset.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/terms.dart';
