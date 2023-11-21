@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
@@ -17,11 +16,8 @@ import 'package:project_event/screen/Body/Screen/Drawer/feedback.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/reset.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/terms.dart';
-import 'package:project_event/screen/Body/Screen/main/Event/add_event.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/viewevent.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 import 'package:project_event/screen/Body/widget/List/listtiledrawer.dart';
-import 'package:project_event/screen/Body/widget/box/small_button.dart';
 import 'package:project_event/screen/Body/widget/box/textfield.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -66,33 +62,6 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              // mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(width: 5),
-                TextButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(buttoncolor),
-                  ),
-                  child: const Text(
-                    'All',
-                    style: TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                ),
-                const SizedBox(width: 5),
-                const SmallButton(textdata: 'Done'),
-                const SizedBox(width: 5),
-                const SmallButton(textdata: 'Pending'),
-                const SizedBox(width: 5),
-                const SmallButton(textdata: 'Cancelled'),
-                const SizedBox(width: 5),
-              ],
-            ),
-          ),
           Expanded(
             child: ValueListenableBuilder(
               valueListenable: eventList,
@@ -228,7 +197,6 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               const SizedBox(height: 20),
-
               // Header section
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 20),
@@ -290,7 +258,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: const FloatingPointx(goto: AddEvent()),
+      //floatingActionButton: const FloatingPointx(goto: AddEvent()),
     );
   }
 }

@@ -24,6 +24,7 @@ class AppAction extends StatelessWidget {
 //-----------------------------------------------
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final bool? automaticallyImplyLeadingtitle;
   final List<Widget> actions;
   final String titleText;
   final Color? backgroundColor;
@@ -36,13 +37,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.textcolor,
     this.bottom,
+    this.automaticallyImplyLeadingtitle,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      // automaticallyImplyLeading: false,
+      automaticallyImplyLeading: automaticallyImplyLeadingtitle ?? true,
       centerTitle: true,
       foregroundColor: textcolor ?? Colors.black,
       backgroundColor: Colors.transparent, // backgroundColor ?? appbarcolor,

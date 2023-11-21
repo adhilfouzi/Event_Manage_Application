@@ -3,6 +3,7 @@ import 'package:intro_screen_onboarding_flutter/introduction.dart';
 import 'package:intro_screen_onboarding_flutter/introscreenonboarding.dart';
 
 import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
+import 'package:project_event/screen/intro/entry.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       onTapSkipButton: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => Entry(),
           )),
       skipTextStyle: const TextStyle(
         color: Colors.blueGrey,

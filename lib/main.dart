@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       title: 'event',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(),
-        primaryColor: Colors.black,
+        primaryColor: Colors.grey[300],
         scaffoldBackgroundColor: const Color.fromRGBO(255, 200, 200, 1),
         textTheme: const TextTheme(
           bodyMedium: TextStyle(

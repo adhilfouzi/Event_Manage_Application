@@ -7,6 +7,7 @@ import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
+import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
@@ -207,7 +208,8 @@ class _AddEventState extends State<AddEvent> {
 
         await addEvent(event);
 
-        Navigator.of(context).pop();
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => HomeScreen()));
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Successfully added"),

@@ -13,7 +13,7 @@ class Favorite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(actions: [], titleText: 'Favorite Events'),
+      appBar: const CustomAppBar(actions: [], titleText: 'Favorite Events'),
       body: ValueListenableBuilder(
         valueListenable: favoriteEventlist,
         builder: (context, value, child) {

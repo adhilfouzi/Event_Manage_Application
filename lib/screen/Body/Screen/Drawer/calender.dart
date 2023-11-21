@@ -3,10 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
-import 'package:project_event/screen/Body/Screen/main/Event/add_event.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/view_event_details.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
+import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calender extends StatefulWidget {
@@ -43,7 +42,12 @@ class _CalenderState extends State<Calender> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(actions: [], titleText: ''),
+      appBar: const CustomAppBar(
+        actions: [],
+        titleText: '',
+        automaticallyImplyLeadingtitle: false,
+        bottom: BottomBorderNull(),
+      ),
       body: Column(
         children: [
           Container(
@@ -141,7 +145,6 @@ class _CalenderState extends State<Calender> {
           ),
         ],
       ),
-      floatingActionButton: const FloatingPointx(goto: AddEvent()),
     );
   }
 }

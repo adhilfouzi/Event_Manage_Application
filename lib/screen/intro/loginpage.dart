@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
+import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/intro/forgetpassword.dart';
 import 'package:project_event/screen/intro/signup_page.dart';
@@ -68,11 +69,11 @@ class LoginScreen extends StatelessWidget {
                           child: ElevatedButton(
                             style: firstbutton(),
                             onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => HomeScreen(),
-                                ),
-                              );
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) => const MainBottom(),
+                                  ),
+                                  (route) => false);
                             },
                             child: const Text('Login',
                                 style: TextStyle(
