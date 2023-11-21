@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
+import 'package:sizer/sizer.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -18,43 +19,42 @@ class _SignupScreenState extends State<SignupScreen> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(1.50.h),
             child: Column(
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 50),
-                const Text(
+                SizedBox(height: 5.h),
+                Text(
                   'Let’s Begin the game',
                   style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 3.5.h,
                       fontWeight: FontWeight.bold,
                       color: buttoncolor),
                 ),
-                const SizedBox(height: 50),
+                SizedBox(height: 5.h),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const TextFieldBlue(
                         textcontent: 'Full Name', keyType: TextInputType.name),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 1.5.h),
                     const TextFieldBlue(
                         textcontent: 'Email',
                         keyType: TextInputType.emailAddress),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 1.5.h),
                     const TextFieldBlue(
                         textcontent: 'Phone Number',
                         keyType: TextInputType.number),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 1.5.h),
                     const TextFieldBlue(
                       obscureText: true,
                       textcontent: 'Password',
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 1.5.h),
                     const TextFieldBlue(
                       obscureText: true,
                       textcontent: 'Confirm Password',
                     ),
-                    //const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -66,9 +66,10 @@ class _SignupScreenState extends State<SignupScreen> {
                             });
                           },
                         ),
-                        const Text(
+                        Text(
                           'I agree with Terms and Privacy ',
-                          style: TextStyle(color: buttoncolor),
+                          style:
+                              TextStyle(color: buttoncolor, fontSize: 1.52.h),
                         ),
                       ],
                     ),
@@ -88,9 +89,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                 return;
                               }
                             },
-                            child: const Text('Signup',
+                            child: Text('Signup',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 18)),
+                                    color: Colors.white, fontSize: 2.5.h)),
                           ),
                         ),
                       ],
@@ -98,8 +99,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Already have an account -',
-                            style: TextStyle(color: buttoncolor)),
+                        Text(
+                          'Already have an account -',
+                          style:
+                              TextStyle(color: buttoncolor, fontSize: 1.52.h),
+                        ),
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).push(
@@ -108,8 +112,11 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                             );
                           },
-                          child: const Text('Login',
-                              style: TextStyle(color: buttoncolor)),
+                          child: Text(
+                            'Login',
+                            style:
+                                TextStyle(color: buttoncolor, fontSize: 1.52.h),
+                          ),
                         ),
                       ],
                     ),

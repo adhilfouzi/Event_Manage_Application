@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:sizer/sizer.dart';
 
 class TextFieldBlue extends StatelessWidget {
   final String textcontent;
@@ -31,11 +32,11 @@ class TextFieldBlue extends StatelessWidget {
       children: [
         Container(
           alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(left: 15),
-          child: Text(textcontent, style: raleway()),
+          padding: EdgeInsets.only(left: 2.h),
+          child: Text(textcontent, style: raleway(fontSize: 2.2.h)),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+          padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 1.h),
           child: TextFormField(
             enabled: enabled == null ? true : false,
             obscureText: obscureText == null ? false : true,
@@ -46,41 +47,41 @@ class TextFieldBlue extends StatelessWidget {
             decoration: InputDecoration(
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40.0),
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   color: Colors.red,
-                  width: 3,
+                  width: 0.3.h,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40.0),
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   color: buttoncolor,
-                  width: 1.0,
+                  width: 0.2.h,
                 ),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40.0),
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   color: buttoncolor,
-                  width: 1,
+                  width: 0.2.h,
                 ),
               ),
               iconColor: buttoncolor,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 10,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 1.h,
+                vertical: 1.h,
               ),
               prefixIcon: preicondata != null
-                  ? Icon(preicondata, size: 24, color: buttoncolor[700])
+                  ? Icon(preicondata, size: 4.h, color: buttoncolor[700])
                   : null,
               suffixIcon: posticondata != null
-                  ? Icon(posticondata, size: 24, color: buttoncolor[700])
+                  ? Icon(posticondata, size: 4.h, color: buttoncolor[700])
                   : null,
               hintText: textcontent,
-              hintStyle: const TextStyle(
+              hintStyle: TextStyle(
                   color: Color.fromRGBO(0, 0, 0, 0.5),
                   fontFamily: 'Raleway',
-                  fontSize: 13.5),
+                  fontSize: 1.8.h),
             ),
           ),
         ),

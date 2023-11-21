@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
+import 'package:sizer/sizer.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({Key? key}) : super(key: key);
@@ -12,31 +13,35 @@ class ForgetPassword extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 2.h),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
-                const Text(
+                SizedBox(height: 5.h),
+                Text(
                   'Make it perfect !',
                   style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
                       color: buttoncolor),
                 ),
-                const SizedBox(height: 30),
-                Image.asset('assets/UI/image/template/pass.png', height: 200),
-                const SizedBox(height: 100),
+                SizedBox(height: 7.h),
+                Image.asset(
+                  'assets/UI/image/template/pass.png',
+                  height: 25.h,
+                  width: 90.w,
+                ),
+                SizedBox(height: 10.h),
                 const TextFieldBlue(
                   obscureText: true,
                   textcontent: 'Password',
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: 1.5.h),
                 const TextFieldBlue(
                   obscureText: true,
                   textcontent: 'Confirm Password',
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 1.5.h),
                 Row(
                   children: [
                     Expanded(
@@ -45,9 +50,9 @@ class ForgetPassword extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: const Text('Signup',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 18)),
+                        child: Text('Signup',
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 15.sp)),
                       ),
                     ),
                   ],

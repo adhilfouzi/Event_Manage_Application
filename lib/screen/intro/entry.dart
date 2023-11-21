@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:project_event/screen/intro/signup_page.dart';
+import 'package:sizer/sizer.dart';
 
 class Entry extends StatelessWidget {
   const Entry({super.key});
@@ -24,12 +25,12 @@ class Entry extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.topCenter,
-                child: const Padding(
-                  padding: EdgeInsets.fromLTRB(16, 110, 16, 16),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 110, 16, 16),
                   child: Text(
                     'Event Time',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 25.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -48,11 +49,11 @@ class Entry extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Text(
+                    Text(
                       'Life is only once, Enjoy your life!',
-                      style: TextStyle(color: Colors.white, fontSize: 15),
+                      style: TextStyle(color: Colors.white, fontSize: 1.7.h),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 2.h),
                     Row(
                       children: [
                         Expanded(
@@ -65,21 +66,21 @@ class Entry extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: const Text('Signup',
+                            child: Text('Signup',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 18)),
+                                    color: Colors.white, fontSize: 14.sp)),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 2.h),
                     const Text(
                       'OR',
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 2.h),
                     Row(
                       children: [
                         Expanded(
@@ -92,9 +93,9 @@ class Entry extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: const Text('Login',
+                            child: Text('Login',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 18)),
+                                    color: Colors.white, fontSize: 14.sp)),
                           ),
                         ),
                       ],
@@ -111,10 +112,10 @@ class Entry extends StatelessWidget {
 }
 
 ButtonStyle withr = ButtonStyle(
-  padding: const MaterialStatePropertyAll(
-      EdgeInsets.symmetric(vertical: 12, horizontal: 20)),
-  side: MaterialStateProperty.all(
-      const BorderSide(color: Colors.white, width: 1.5)),
+  padding: MaterialStatePropertyAll(
+      EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 1.5.h)),
+  side:
+      MaterialStateProperty.all(BorderSide(color: Colors.white, width: 0.3.h)),
   backgroundColor: MaterialStateProperty.all(Colors.transparent),
   shape: MaterialStateProperty.all(RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(30.0),

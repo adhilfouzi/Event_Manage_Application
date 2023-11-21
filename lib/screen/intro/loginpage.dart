@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
-import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/intro/forgetpassword.dart';
 import 'package:project_event/screen/intro/signup_page.dart';
+import 'package:sizer/sizer.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -17,43 +17,47 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const SizedBox(height: 60),
-              Container(
-                height: 30,
-                child: const Text(
+              SizedBox(height: 5.h),
+              SizedBox(
+                height: 10.h,
+                child: Text(
                   'Welcome Back !',
                   style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 3.5.h,
                       fontWeight: FontWeight.bold,
                       color: buttoncolor),
                 ),
               ),
-              const SizedBox(height: 20),
-              Image.asset('assets/UI/image/template/login.png', height: 200),
-              const SizedBox(height: 50),
+              //SizedBox(height: 5.h),
+              Image.asset(
+                'assets/UI/image/template/login.png',
+                height: 20.h,
+                width: 90.w,
+              ),
+              SizedBox(height: 5.h),
               Container(
-                height: 500,
+                height: 50.h,
                 padding: const EdgeInsets.all(20.0),
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const TextFieldBlue(
-                        textcontent: 'Email',
+                        textcontent: 'Email ',
                         keyType: TextInputType.emailAddress),
                     const SizedBox(height: 5),
                     const TextFieldBlue(
                         obscureText: true,
                         textcontent: 'Password',
                         keyType: TextInputType.emailAddress),
-                    const SizedBox(height: 10),
+                    // const SizedBox(height: 10),
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => ForgetPassword(),
+                              builder: (context) => const ForgetPassword(),
                             ),
                           );
                         },
@@ -75,17 +79,17 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                   (route) => false);
                             },
-                            child: const Text('Login',
+                            child: Text('Login',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 18)),
+                                    color: Colors.white, fontSize: 15.sp)),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 1.5.h),
                     const Text('If you are new here',
                         style: TextStyle(color: buttoncolor)),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 1.5.h),
                     Row(
                       children: [
                         Expanded(
@@ -98,9 +102,9 @@ class LoginScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: const Text('Signup',
+                            child: Text('Signup',
                                 style: TextStyle(
-                                    color: buttoncolor, fontSize: 18)),
+                                    color: buttoncolor, fontSize: 15.sp)),
                           ),
                         ),
                       ],
@@ -118,7 +122,7 @@ class LoginScreen extends StatelessWidget {
 
 ButtonStyle firstbutton() {
   return ButtonStyle(
-    padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 12)),
+    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 1.5.h)),
     side: MaterialStateProperty.all(BorderSide.none),
     backgroundColor: MaterialStateProperty.all(buttoncolor),
   );
@@ -126,7 +130,7 @@ ButtonStyle firstbutton() {
 
 ButtonStyle secbutton() {
   return ButtonStyle(
-    padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 12)),
+    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 1.5.h)),
     shape: MaterialStateProperty.all(RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30.0),
     )),

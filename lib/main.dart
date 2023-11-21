@@ -8,8 +8,8 @@ import 'package:project_event/Database/functions/fn_incomemodel.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
-import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:project_event/screen/intro/intro.dart';
+import 'package:sizer/sizer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,31 +30,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'event',
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(),
-        primaryColor: Colors.grey[300],
-        scaffoldBackgroundColor: const Color.fromRGBO(255, 200, 200, 1),
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(
-            fontFamily: 'ReadexPro',
+    return Sizer(
+      builder: (context, orientation, deviceType) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'event',
+        theme: ThemeData(
+          appBarTheme: const AppBarTheme(),
+          primaryColor: Colors.grey[300],
+          scaffoldBackgroundColor: const Color.fromRGBO(255, 200, 200, 1),
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(
+              fontFamily: 'ReadexPro',
+            ),
           ),
         ),
+        home: AnimatedSplashScreen(
+          splash: 'assets/UI/Event Logo/event logo top.png',
+          splashIconSize: 50.h,
+          nextScreen: const OnBoardingPage(),
+          backgroundColor: appbarcolor,
+          duration: 3000,
+          splashTransition: SplashTransition.sizeTransition,
+        ),
       ),
-      home: AnimatedSplashScreen(
-        splash: 'assets/UI/Event Logo/event logo top.png',
-        splashIconSize: 500,
-        nextScreen: const OnBoardingPage(),
-        backgroundColor: appbarcolor,
-        duration: 3000,
-        splashTransition: SplashTransition.sizeTransition,
-      ),
-      routes: {
-        '/Home': (context) => HomeScreen(),
-        // '/Task':(context) => TaskList(eventid: eventid)
-      },
     );
   }
 }

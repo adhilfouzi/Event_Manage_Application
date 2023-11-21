@@ -5,8 +5,8 @@ import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/edit_event.dart';
-import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
 import 'package:project_event/screen/Body/widget/box/viewbox.dart';
 
 class ViewEventDetails extends StatelessWidget {
@@ -179,7 +179,9 @@ void delecteventYes(
     student.id,
   );
   Navigator.of(ctx).pushAndRemoveUntil(
-    MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
+    MaterialPageRoute(
+      builder: (context) => const MainBottom(),
+    ),
     (route) => false,
   );
   ScaffoldMessenger.of(ctx).showSnackBar(
@@ -187,7 +189,7 @@ void delecteventYes(
       content: Text("Successfully Deleted"),
       behavior: SnackBarBehavior.floating,
       margin: EdgeInsets.all(10),
-      backgroundColor: Colors.redAccent,
+      backgroundColor: Colors.grey,
       duration: Duration(seconds: 2),
     ),
   );

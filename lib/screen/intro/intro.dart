@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intro_screen_onboarding_flutter/introduction.dart';
 import 'package:intro_screen_onboarding_flutter/introscreenonboarding.dart';
 
-import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:project_event/screen/intro/entry.dart';
+import 'package:sizer/sizer.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
@@ -18,16 +18,19 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       title: 'Effortless Event\n Planning',
       subTitle: '',
       imageUrl: 'assets/UI/image/template/1-03.png',
+      titleTextStyle: TextStyle(fontSize: 20.sp),
     ),
     Introduction(
       title: 'Time-Saving\n Solution',
       subTitle: ' ',
       imageUrl: 'assets/UI/image/template/1-01.png',
+      titleTextStyle: TextStyle(fontSize: 20.sp),
     ),
     Introduction(
       title: 'Make Work Smart',
       subTitle: ' ',
       imageUrl: 'assets/UI/image/template/1-02.png',
+      titleTextStyle: TextStyle(fontSize: 20.sp),
     ),
   ];
   @override
@@ -39,11 +42,11 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       onTapSkipButton: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Entry(),
+            builder: (context) => const Entry(),
           )),
-      skipTextStyle: const TextStyle(
+      skipTextStyle: TextStyle(
         color: Colors.blueGrey,
-        fontSize: 18,
+        fontSize: 18.sp,
       ),
     );
   }

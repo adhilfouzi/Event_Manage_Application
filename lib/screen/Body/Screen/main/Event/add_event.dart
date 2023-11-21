@@ -7,8 +7,8 @@ import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
-import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
@@ -29,136 +29,147 @@ class _AddEventState extends State<AddEvent> {
   File? imageevent;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.contacts,
-              onPressed: () {
-                getcontact();
-              }),
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                addEventcliked(context);
-              }),
-        ],
-        titleText: ' ',
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(5),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Text(
-                'Event Details',
-                style: raleway(fontSize: 22),
-              ),
-              const Divider(
-                color: buttoncolor,
-                height: 20,
-                thickness: 2,
-                endIndent: 40,
-                indent: 40,
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 15, 10, 5),
-                child: InkWell(
-                  onTap: () {
-                    addphoto(context);
-                  },
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 175,
-                    child: Card(
-                      color: Colors.transparent,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(19),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: imageevent == null
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/UI/icons/addimage.png',
-                                    width: 75,
-                                    height: 70,
-                                  ),
-                                  Text(
-                                    'Add image of event',
-                                    style: raleway(color: Colors.black),
-                                  )
-                                ],
-                              )
-                            : Image.file(
-                                imageevent!,
-                                height: 160,
-                                fit: BoxFit.fill,
-                              ),
-                      ),
-                    ),
-                  ),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const MainBottom(),
+          ),
+          (route) => false,
+        );
+        return false;
+      },
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.contacts,
+                onPressed: () {
+                  getcontact();
+                }),
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  addEventcliked(context);
+                }),
+          ],
+          titleText: ' ',
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(5),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Text(
+                  'Event Details',
+                  style: raleway(fontSize: 22),
                 ),
-              ),
-              TextFieldBlue(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a Name';
-                    }
-                    return null;
-                  },
-                  keyType: TextInputType.name,
-                  textcontent: 'Event Name',
-                  controller: _eventnameController),
-              TextFieldBlue(
-                keyType: TextInputType.number,
-                textcontent: 'Budget',
-                controller: _budgetController,
-              ),
-              TextFieldBlue(
-                keyType: TextInputType.streetAddress,
-                textcontent: 'Venue',
-                posticondata: Icons.location_on,
-                controller: _locationController,
-              ),
-              TextFieldBlue(
-                textcontent: 'About',
-                controller: _aboutController,
-              ),
-              Date(
-                textdate: 'Event Day',
-                controller: _stdateController,
-              ),
-              Time(
-                textdate: 'Event Time',
-                controller: _sttimeController,
-              ),
-              const SizedBox(height: 25),
-              Text(
-                'Client Details',
-                style: raleway(fontSize: 22),
-              ),
-              const Divider(
+                const Divider(
                   color: buttoncolor,
                   height: 20,
                   thickness: 2,
                   endIndent: 40,
-                  indent: 40),
-              TextFieldBlue(
-                keyType: TextInputType.name,
-                textcontent: 'Client Name',
-                controller: _clientnameController,
-              ),
-              ContactState(
-                acontroller: _addressController,
-                econtroller: _emailController,
-                pcontroller: _pnoController,
-              )
-            ],
+                  indent: 40,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 15, 10, 5),
+                  child: InkWell(
+                    onTap: () {
+                      addphoto(context);
+                    },
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 175,
+                      child: Card(
+                        color: Colors.transparent,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(19),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: imageevent == null
+                              ? Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/UI/icons/addimage.png',
+                                      width: 75,
+                                      height: 70,
+                                    ),
+                                    Text(
+                                      'Add image of event',
+                                      style: raleway(color: Colors.black),
+                                    )
+                                  ],
+                                )
+                              : Image.file(
+                                  imageevent!,
+                                  height: 160,
+                                  fit: BoxFit.fill,
+                                ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                TextFieldBlue(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter a Name';
+                      }
+                      return null;
+                    },
+                    keyType: TextInputType.name,
+                    textcontent: 'Event Name',
+                    controller: _eventnameController),
+                TextFieldBlue(
+                  keyType: TextInputType.number,
+                  textcontent: 'Budget',
+                  controller: _budgetController,
+                ),
+                TextFieldBlue(
+                  keyType: TextInputType.streetAddress,
+                  textcontent: 'Venue',
+                  posticondata: Icons.location_on,
+                  controller: _locationController,
+                ),
+                TextFieldBlue(
+                  textcontent: 'About',
+                  controller: _aboutController,
+                ),
+                Date(
+                  textdate: 'Event Day',
+                  controller: _stdateController,
+                ),
+                Time(
+                  textdate: 'Event Time',
+                  controller: _sttimeController,
+                ),
+                const SizedBox(height: 25),
+                Text(
+                  'Client Details',
+                  style: raleway(fontSize: 22),
+                ),
+                const Divider(
+                    color: buttoncolor,
+                    height: 20,
+                    thickness: 2,
+                    endIndent: 40,
+                    indent: 40),
+                TextFieldBlue(
+                  keyType: TextInputType.name,
+                  textcontent: 'Client Name',
+                  controller: _clientnameController,
+                ),
+                ContactState(
+                  acontroller: _addressController,
+                  econtroller: _emailController,
+                  pcontroller: _pnoController,
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -208,8 +219,12 @@ class _AddEventState extends State<AddEvent> {
 
         await addEvent(event);
 
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const MainBottom(),
+          ),
+          (route) => false,
+        );
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Successfully added"),

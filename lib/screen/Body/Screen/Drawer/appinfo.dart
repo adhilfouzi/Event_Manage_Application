@@ -9,12 +9,13 @@ class AppInfo extends StatelessWidget {
       appBar: AppBar(backgroundColor: Colors.transparent),
       body:
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text(
+        const Text(
           'Event Manager',
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
         Image.asset('assets/UI/Event Logo/event logo top.png'),
-        Padding(padding: EdgeInsets.all(20), child: Text('Version 1.00.0')),
+        const Padding(
+            padding: EdgeInsets.all(20), child: Text('Version 1.00.0')),
       ]),
     );
   }
