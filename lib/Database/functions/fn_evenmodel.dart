@@ -6,6 +6,12 @@ import 'package:sqflite/sqflite.dart';
 
 ValueNotifier<List<Eventmodel>> favoriteEventlist = ValueNotifier([]);
 ValueNotifier<List<Eventmodel>> eventList = ValueNotifier([]);
+ValueNotifier<SearchModel> search = ValueNotifier<SearchModel>(SearchModel());
+
+class SearchModel {
+  int pass = 0;
+  bool? autofocus = false;
+}
 
 late Database eventDB;
 

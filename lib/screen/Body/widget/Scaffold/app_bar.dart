@@ -4,10 +4,12 @@ import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dar
 import 'package:sizer/sizer.dart';
 
 class AppAction extends StatelessWidget {
+  final double? sizer;
   final IconData icon;
   final VoidCallback onPressed;
 
-  const AppAction({super.key, required this.icon, required this.onPressed});
+  const AppAction(
+      {super.key, required this.icon, required this.onPressed, this.sizer});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class AppAction extends StatelessWidget {
       onTap: onPressed,
       child: Padding(
         padding: EdgeInsets.all(0.8.h),
-        child: Icon(icon, weight: 2.h),
+        child: Icon(icon, weight: 2.h, size: sizer),
       ),
     );
   }

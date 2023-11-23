@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
@@ -30,6 +31,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Set preferred orientations
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
         debugShowCheckedModeBanner: false,

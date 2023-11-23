@@ -6,12 +6,14 @@ class TextFieldicon extends StatelessWidget {
   final TextEditingController controller;
   final IconData icondata;
   final String textcontent;
+  final void Function(String)? onChanged;
 
   const TextFieldicon({
     super.key,
     required this.controller,
     required this.icondata,
     required this.textcontent,
+    this.onChanged,
   });
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class TextFieldicon extends StatelessWidget {
         borderRadius: BorderRadius.circular(40),
       ),
       child: TextField(
+        onChanged: onChanged,
         controller: controller,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(

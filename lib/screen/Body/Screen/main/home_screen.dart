@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
@@ -9,15 +10,9 @@ import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/appinfo.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/calender.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/favorite.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/feedback.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/reset.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/terms.dart';
+
 import 'package:project_event/screen/Body/Screen/main/Event/viewevent.dart';
-import 'package:project_event/screen/Body/widget/List/listtiledrawer.dart';
+import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield.dart';
 import 'package:sizer/sizer.dart';
 
@@ -30,13 +25,47 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController searchController = TextEditingController();
+  final FocusNode searchFocusNode = FocusNode(); // Create a FocusNode
 
   DateTime timeback = DateTime.now();
+  @override
+  void initState() {
+    super.initState();
+    search.value.pass = 0;
+    finduser = eventList.value;
+  }
+
+  List<Eventmodel> finduser = [];
+
+  void _runFilter(String enteredKeyword) {
+    List<Eventmodel> result = [];
+    if (enteredKeyword.isEmpty) {
+      result = eventList.value;
+    } else {
+      result = eventList.value
+          .where((student) =>
+              student.eventname
+                  .toLowerCase()
+                  .contains(enteredKeyword.toLowerCase()) ||
+              student.clientname!
+                  .toLowerCase()
+                  .contains(enteredKeyword.toLowerCase()) ||
+              student.startingDay
+                  .toLowerCase()
+                  .contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      finduser = result;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     refreshEventdata();
-    return WillPopScope(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: WillPopScope(
         onWillPop: () async {
           final difference = DateTime.now().difference(timeback);
           timeback = DateTime.now();
@@ -48,7 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Scaffold(
           appBar: AppBar(
-            actions: const [],
             backgroundColor: Colors.transparent, //appbarcolor,
             toolbarHeight: 12.h,
             title: SizedBox(
@@ -57,28 +85,55 @@ class _HomeScreenState extends State<HomeScreen> {
                 'assets/UI/Event Logo/event logo name.png',
               ),
             ),
-            centerTitle: true,
-            bottom: PreferredSize(
-              preferredSize: Size(double.infinity, 6.h),
-              child: Column(
-                children: [
-                  TextFieldicon(
-                    controller: searchController,
-                    icondata: Icons.search,
-                    textcontent: 'Search event',
-                  ),
-                  SizedBox(height: 5.sp)
-                ],
+            actions: [
+              AppAction(
+                icon: search.value.pass == 0
+                    ? Ionicons.search_outline
+                    : Ionicons.close_outline,
+                sizer: 4.h,
+                onPressed: () {
+                  print("Before - search.value.pass: ${search.value.pass}");
+                  setState(() {
+                    if (search.value.pass == 0) {
+                      search.value.pass = 8;
+                    } else {
+                      search.value.pass = 0;
+                      searchController.clear();
+                      FocusScope.of(context).unfocus();
+                    }
+                  });
+                  print("After - search.value.pass: ${search.value.pass}");
+                },
               ),
-            ),
+              AppAction(
+                  icon: Ionicons.notifications_outline,
+                  sizer: 4.h,
+                  onPressed: () {}),
+            ],
+            centerTitle: false,
           ),
           body: Column(
             children: [
+              ValueListenableBuilder(
+                valueListenable: search,
+                builder: (context, value, child) {
+                  return Container(
+                    constraints:
+                        BoxConstraints(maxHeight: value.pass.h, minHeight: 0),
+                    child: TextFieldicon(
+                      onChanged: (value) => _runFilter(value),
+                      controller: searchController,
+                      icondata: Icons.search,
+                      textcontent: 'Search event',
+                    ),
+                  );
+                },
+              ),
               Expanded(
                 child: ValueListenableBuilder(
                   valueListenable: eventList,
                   builder: (context, value, child) {
-                    if (value.isEmpty) {
+                    if (finduser.isEmpty) {
                       return Center(
                         child: Text(
                           'No Event available',
@@ -87,9 +142,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     } else {
                       return ListView.builder(
-                        itemCount: value.length,
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
+                        itemCount: finduser.length,
                         itemBuilder: (context, index) {
-                          final data = value[index];
+                          final data = finduser[index];
                           return Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 1.h, vertical: 0.5.h),
@@ -183,18 +240,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                     right: 20,
                                     top: 15,
                                     child: IconButton(
-                                        onPressed: () {
-                                          isFavorite(data);
-                                        },
-                                        icon: Icon(
-                                          data.favorite == 1
-                                              ? Icons.favorite
-                                              : Icons.favorite_border,
-                                          color: data.favorite == 1
-                                              ? Colors.red
-                                              : Colors.white,
-                                          size: 30,
-                                        )),
+                                      onPressed: () {
+                                        isFavorite(data);
+                                      },
+                                      icon: Icon(
+                                        data.favorite == 1
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
+                                        color: data.favorite == 1
+                                            ? Colors.red
+                                            : Colors.white,
+                                        size: 30,
+                                      ),
+                                    ),
                                   )
                                 ],
                               ),
@@ -208,76 +266,9 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             ],
           ),
-          drawer: Drawer(
-            child: Container(
-              color: const Color.fromRGBO(255, 200, 200, 0.7),
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  SizedBox(height: 5.h),
-                  // Header section
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    alignment: Alignment.center,
-                    child: const Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/UI/image/shafeeq.png'),
-                          radius: 40,
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          "Abhishek Mishra",
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Divider(color: Colors.black, thickness: 0.5),
-                  const SizedBox(height: 15),
-                  const ListTileDrawer(
-                      map: Privacy(),
-                      imagedata: 'assets/UI/icons/icons8-settings-500.png',
-                      textdata: 'Settings++++'),
-                  const SizedBox(height: 15),
-                  const ListTileDrawer(
-                      map: Favorite(),
-                      imagedata: 'assets/UI/icons/favorite.png',
-                      textdata: 'Favorite'),
-                  const SizedBox(height: 15),
-                  const ListTileDrawer(
-                      map: Calender(),
-                      imagedata: 'assets/UI/icons/calendar.png',
-                      textdata: 'Calendar'),
-                  const SizedBox(height: 15),
-                  const ListTileDrawer(
-                      map: AppInfo(),
-                      imagedata: 'assets/UI/icons/about us.png',
-                      textdata: 'App info'),
-                  const SizedBox(height: 15),
-                  const ListTileDrawerEmail(),
-                  const SizedBox(height: 15),
-                  const ListTileDrawer(
-                      map: Privacy(),
-                      imagedata: 'assets/UI/icons/privacy.png',
-                      textdata: 'Privacy'),
-                  const SizedBox(height: 15),
-                  const ListTileDrawer(
-                      map: Terms(),
-                      imagedata: 'assets/UI/icons/terms of service.png',
-                      textdata: 'Terms of Service'),
-                  const SizedBox(height: 15),
-                  const ListTileDrawer(
-                      map: Reset(),
-                      imagedata: 'assets/UI/icons/backup.png',
-                      textdata: 'Reset Data'),
-                ],
-              ),
-            ),
-          ),
-          //floatingActionButton: const FloatingPointx(goto: AddEvent()),
-        ));
+        ),
+      ),
+    );
   }
 }
 

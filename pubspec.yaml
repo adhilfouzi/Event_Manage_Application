@@ -49,6 +49,7 @@ dependencies:
   flutter_speed_dial: ^7.0.0
   google_nav_bar: ^5.0.6
   sizer: ^2.0.15
+  ionicons: ^0.2.2
 
 dev_dependencies:
   flutter_test:
@@ -115,6 +116,7 @@ flutter:
     - assets/UI/image/entry.jpg
     - assets/UI/icons/favorite.png
     - assets/UI/icons/calendar.png
+    - assets/UI/icons/profile.png
 
   
 
