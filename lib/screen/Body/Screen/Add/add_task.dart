@@ -8,6 +8,7 @@ import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
 import 'package:project_event/screen/Body/widget/sub/status.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
+import 'package:sizer/sizer.dart';
 
 class AddTask extends StatefulWidget {
   final int eventID;
@@ -38,14 +39,14 @@ class _AddTaskState extends State<AddTask> {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(2.h),
           child: Column(children: [
             TextFieldBlue(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Task name is required';
                   }
-                  return null; // Return null if the input is valid
+                  return null;
                 },
                 keyType: TextInputType.name,
                 textcontent: 'Task Name',
@@ -66,9 +67,6 @@ class _AddTaskState extends State<AddTask> {
             Date(
               controller: _dateController,
             ),
-            // SubTask(
-            //     //  goto: AddSubTask(subtasks: _subtasks),
-            //     ),
           ]),
         ),
       ),
@@ -102,23 +100,23 @@ class _AddTaskState extends State<AddTask> {
       });
 
       ScaffoldMessenger.of(mtx).showSnackBar(
-        const SnackBar(
-          content: Text("Successfully added"),
+        SnackBar(
+          content: const Text("Successfully added"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(2.h),
           backgroundColor: Colors.greenAccent,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
       Navigator.pop(mtx);
     } else {
       ScaffoldMessenger.of(mtx).showSnackBar(
-        const SnackBar(
-          content: Text("Fill the Task Name"),
+        SnackBar(
+          content: const Text("Fill the Task Name"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(2.h),
           backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }

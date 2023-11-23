@@ -3,6 +3,7 @@ import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Vendors/vendors_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_vendor.dart';
+import 'package:sizer/sizer.dart';
 
 class VendorSearch extends StatefulWidget {
   const VendorSearch({super.key});
@@ -47,7 +48,7 @@ class _VendorSearchState extends State<VendorSearch> {
           backgroundColor: const Color.fromRGBO(255, 200, 200, 1),
           automaticallyImplyLeading: false,
           title: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: EdgeInsets.symmetric(vertical: 2.h),
             child: TextField(
               autofocus: true,
               onChanged: (value) => _runFilter(value),
@@ -63,12 +64,12 @@ class _VendorSearchState extends State<VendorSearch> {
             valueListenable: vendortlist,
             builder: (context, value, child) {
               return Padding(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(1.h),
                 child: finduser.isEmpty
-                    ? const Center(
+                    ? Center(
                         child: Text(
                           'No Data Available',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 15.sp),
                         ),
                       )
                     : ListView.builder(
@@ -84,7 +85,7 @@ class _VendorSearchState extends State<VendorSearch> {
                                 finduserItem.name,
                                 style: raleway(
                                   color: Colors.black,
-                                  fontSize: 15,
+                                  fontSize: 12.sp,
                                 ),
                               ),
                               subtitle: Text(
@@ -101,8 +102,10 @@ class _VendorSearchState extends State<VendorSearch> {
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (ctr) =>
-                                        EditVendor(vendordataway: finduserItem),
+                                    builder: (ctr) => EditVendor(
+                                      vendordataway: finduserItem,
+                                      val: 1,
+                                    ),
                                   ),
                                 );
                               },
@@ -153,12 +156,12 @@ void delectYes(ctx, VendorsModel student) {
     Navigator.of(ctx).pop();
 
     ScaffoldMessenger.of(ctx).showSnackBar(
-      const SnackBar(
-        content: Text("Successfully Deleted"),
+      SnackBar(
+        content: const Text("Successfully Deleted"),
         behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(10),
+        margin: EdgeInsets.all(1.h),
         backgroundColor: Colors.grey,
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
   } catch (e) {

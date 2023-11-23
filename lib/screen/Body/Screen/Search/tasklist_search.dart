@@ -3,6 +3,7 @@ import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/model/Task/task_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_task.dart';
+import 'package:sizer/sizer.dart';
 
 class TaskSearch extends StatefulWidget {
   const TaskSearch({super.key});
@@ -48,7 +49,7 @@ class _TaskSearchState extends State<TaskSearch> {
           backgroundColor: const Color.fromRGBO(255, 200, 200, 1),
           automaticallyImplyLeading: false,
           title: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: EdgeInsets.symmetric(vertical: 2.h),
             child: TextField(
               autofocus: true,
               onChanged: (value) => _runFilter(value),
@@ -64,12 +65,12 @@ class _TaskSearchState extends State<TaskSearch> {
             valueListenable: taskList,
             builder: (context, value, child) {
               return Padding(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(1.h),
                 child: finduser.isEmpty
-                    ? const Center(
+                    ? Center(
                         child: Text(
                           'No Data Available',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 15.sp),
                         ),
                       )
                     : ListView.builder(
@@ -79,13 +80,13 @@ class _TaskSearchState extends State<TaskSearch> {
                           return Card(
                             color: Colors.blue[100],
                             elevation: 4,
-                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            margin: EdgeInsets.symmetric(vertical: 1.h),
                             child: ListTile(
                               title: Text(
                                 finduserItem.taskname,
                                 style: raleway(
                                   color: Colors.black,
-                                  fontSize: 15,
+                                  fontSize: 13.sp,
                                 ),
                               ),
                               subtitle: Text(
@@ -161,12 +162,12 @@ void delectYes(
     Navigator.of(ctx).pop();
 
     ScaffoldMessenger.of(ctx).showSnackBar(
-      const SnackBar(
-        content: Text("Successfully Deleted"),
+      SnackBar(
+        content: const Text("Successfully Deleted"),
         behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(10),
+        margin: EdgeInsets.all(2.h),
         backgroundColor: Colors.grey,
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
   } catch (e) {

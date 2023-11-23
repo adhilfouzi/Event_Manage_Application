@@ -5,6 +5,7 @@ import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_guest.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:sizer/sizer.dart';
 
 class PendingRpGuests extends StatelessWidget {
   const PendingRpGuests({super.key});
@@ -17,7 +18,7 @@ class PendingRpGuests extends StatelessWidget {
         AppAction(icon: Icons.more_vert, onPressed: () {})
       ], titleText: 'Guests List'),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.h),
         child: ValueListenableBuilder(
           valueListenable: guestPendinglist,
           builder: (context, value, child) {
@@ -102,7 +103,7 @@ class PendingRpGuests extends StatelessWidget {
                             style: raleway(
                               color:
                                   data.status == 0 ? Colors.red : Colors.green,
-                              fontSize: 15,
+                              fontSize: 11.sp,
                             ),
                           ),
                           onTap: () {
@@ -118,10 +119,10 @@ class PendingRpGuests extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(
+              return Center(
                 child: Text(
                   'No Task available',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 15.sp),
                 ),
               );
             }

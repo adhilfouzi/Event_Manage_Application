@@ -7,6 +7,7 @@ import 'package:project_event/screen/Body/Screen/main/Event/view_event_details.d
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
+import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calender extends StatefulWidget {
@@ -64,7 +65,7 @@ class _CalenderState extends State<Calender> {
         body: Column(
           children: [
             Container(
-              margin: const EdgeInsets.all(10),
+              margin: EdgeInsets.all(1.5.h),
               child: TableCalendar(
                 firstDay: DateTime(2000, 10, 1),
                 lastDay: DateTime.utc(2100, 12, 31),
@@ -98,8 +99,8 @@ class _CalenderState extends State<Calender> {
                 weekendDays: const [DateTime.sunday],
               ),
             ),
-            const SizedBox(
-              height: 8,
+            SizedBox(
+              height: 2.h,
             ),
             Expanded(
               child: ValueListenableBuilder<List<Eventmodel>>(
@@ -115,8 +116,8 @@ class _CalenderState extends State<Calender> {
                     itemBuilder: (context, index) {
                       final data = value[index];
                       return Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 14, vertical: 4),
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 2.h, vertical: 1.h),
                         decoration: BoxDecoration(
                           border: Border.all(),
                           borderRadius: BorderRadius.circular(12),
@@ -130,11 +131,11 @@ class _CalenderState extends State<Calender> {
                           },
                           title: Text(
                             data.eventname,
-                            style: readexPro(fontSize: 12),
+                            style: readexPro(fontSize: 10.sp),
                           ),
                           subtitle: Text(
                             data.location,
-                            style: readexPro(fontSize: 12),
+                            style: readexPro(fontSize: 10.sp),
                           ),
                           trailing: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -142,11 +143,11 @@ class _CalenderState extends State<Calender> {
                               children: [
                                 Text(
                                   data.startingTime,
-                                  style: readexPro(fontSize: 12),
+                                  style: readexPro(fontSize: 10.sp),
                                 ),
                                 Text(
                                   data.clientname!,
-                                  style: readexPro(fontSize: 12),
+                                  style: readexPro(fontSize: 10.sp),
                                 ),
                               ]),
                         ),

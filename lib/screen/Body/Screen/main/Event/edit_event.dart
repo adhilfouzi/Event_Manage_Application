@@ -14,6 +14,7 @@ import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
 import 'package:project_event/screen/Body/widget/sub/time.dart';
+import 'package:sizer/sizer.dart';
 
 class EditEvent extends StatefulWidget {
   final Eventmodel event;
@@ -54,7 +55,7 @@ class _EditEventState extends State<EditEvent> {
         titleText: 'Add Event',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(5),
+        padding: EdgeInsets.all(1.h),
         child: Form(
           key: _formKey,
           child: Column(
@@ -63,22 +64,22 @@ class _EditEventState extends State<EditEvent> {
                 'Event Details',
                 style: raleway(fontSize: 22),
               ),
-              const Divider(
+              Divider(
                 color: buttoncolor,
-                height: 20,
+                height: 2.h,
                 thickness: 2,
                 endIndent: 40,
                 indent: 40,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(10, 15, 10, 5),
+                padding: EdgeInsets.fromLTRB(1.h, 3.h, 1.h, 1.h),
                 child: InkWell(
                   onTap: () {
                     addoneditphoto(context);
                   },
                   child: SizedBox(
                     width: double.infinity,
-                    height: 175,
+                    height: 20.h,
                     child: Card(
                       color: Colors.transparent,
                       elevation: 0,
@@ -93,8 +94,7 @@ class _EditEventState extends State<EditEvent> {
                                 children: [
                                   Image.asset(
                                     'assets/UI/icons/addimage.png',
-                                    width: 75,
-                                    height: 70,
+                                    height: 10.h,
                                   ),
                                   Text(
                                     'Add image of event',
@@ -104,7 +104,6 @@ class _EditEventState extends State<EditEvent> {
                               )
                             : Image.file(
                                 imageevent!,
-                                height: 160,
                                 fit: BoxFit.fill,
                               ),
                       ),
@@ -146,14 +145,14 @@ class _EditEventState extends State<EditEvent> {
                 textdate: 'Event Time',
                 controller: _sttimeController,
               ),
-              const SizedBox(height: 25),
+              SizedBox(height: 2.h),
               Text(
                 'Client Details',
-                style: raleway(fontSize: 22),
+                style: raleway(fontSize: 18.sp),
               ),
-              const Divider(
+              Divider(
                   color: buttoncolor,
-                  height: 20,
+                  height: 2.h,
                   thickness: 2,
                   endIndent: 40,
                   indent: 40),
@@ -208,10 +207,10 @@ class _EditEventState extends State<EditEvent> {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       if (imagepath.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Add Profile Picture '),
-            duration: Duration(seconds: 2),
-            margin: EdgeInsets.all(10),
+          SnackBar(
+            content: const Text('Add Profile Picture '),
+            duration: const Duration(seconds: 2),
+            margin: EdgeInsets.all(2.h),
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.redAccent,
           ),

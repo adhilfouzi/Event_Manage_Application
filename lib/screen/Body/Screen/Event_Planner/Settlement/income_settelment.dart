@@ -5,6 +5,7 @@ import 'package:project_event/Database/functions/fn_incomemodel.dart';
 import 'package:project_event/screen/Body/Screen/Add/addincome.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_income.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
+import 'package:sizer/sizer.dart';
 
 class IncomeSettlement extends StatelessWidget {
   final int eventID;
@@ -65,10 +66,10 @@ class IncomeSettlement extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(
+              return Center(
                 child: Text(
                   'No Income Payment available',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 15.sp),
                 ),
               );
             }

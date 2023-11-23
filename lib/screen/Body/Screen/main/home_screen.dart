@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           final data = value[index];
                           return Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 1.h, vertical: 1.5.h),
+                                horizontal: 1.h, vertical: 0.5.h),
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         borderRadius:
                                             BorderRadius.circular(20.0),
                                         child: SizedBox(
-                                          height: 26.h,
+                                          height: 20.h,
                                           width: double.infinity,
                                           child: Image.file(
                                             File(data.imagex),
@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         )),
                                   ),
                                   Container(
-                                    height: 27.2.h,
+                                    height: 21.2.h,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(

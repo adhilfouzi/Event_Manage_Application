@@ -6,6 +6,7 @@ import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_task.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:sizer/sizer.dart';
 
 class DoneRpTaskList extends StatelessWidget {
   const DoneRpTaskList({super.key});
@@ -18,7 +19,7 @@ class DoneRpTaskList extends StatelessWidget {
         AppAction(icon: Icons.more_vert, onPressed: () {})
       ], titleText: 'Task List'),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.h),
         child: ValueListenableBuilder(
           valueListenable: doneRpTaskList,
           builder: (context, value, child) {
@@ -104,7 +105,7 @@ class DoneRpTaskList extends StatelessWidget {
                                   color: data.status == 0
                                       ? Colors.red
                                       : Colors.green,
-                                  fontSize: 15,
+                                  fontSize: 11.sp,
                                 ),
                               ),
                               Text(
@@ -129,10 +130,10 @@ class DoneRpTaskList extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(
+              return Center(
                 child: Text(
                   'No Task available',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 15.sp),
                 ),
               );
             }

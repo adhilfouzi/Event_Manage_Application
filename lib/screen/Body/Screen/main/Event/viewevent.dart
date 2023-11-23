@@ -15,6 +15,7 @@ import 'package:project_event/screen/Body/Screen/main/Event/view_event_details.d
 
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dart';
+import 'package:sizer/sizer.dart';
 
 class ViewEvent extends StatelessWidget {
   final Eventmodel eventModel;
@@ -37,41 +38,41 @@ class ViewEvent extends StatelessWidget {
                 showMenu(
                   color: backgroundcolor,
                   context: context,
-                  position: const RelativeRect.fromLTRB(1, 0, 0, 5),
+                  position: RelativeRect.fromLTRB(0.1.h, 0, 0, 0.5.h),
                   items: <PopupMenuEntry>[
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 'view',
                       child: Row(
                         children: [
-                          Icon(Icons.visibility),
+                          const Icon(Icons.visibility),
                           SizedBox(
-                            width: 10,
+                            width: 2.h,
                           ),
-                          Text('View Event Details')
+                          const Text('View Event Details')
                         ],
                       ),
                     ),
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 'Edit',
                       child: Row(
                         children: [
-                          Icon(Icons.edit),
+                          const Icon(Icons.edit),
                           SizedBox(
-                            width: 10,
+                            width: 2.h,
                           ),
-                          Text('Edit')
+                          const Text('Edit')
                         ],
                       ),
                     ),
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 'Delete',
                       child: Row(
                         children: [
-                          Icon(Icons.delete),
+                          const Icon(Icons.delete),
                           SizedBox(
-                            width: 10,
+                            width: 2.h,
                           ),
-                          Text('Delete')
+                          const Text('Delete')
                         ],
                       ),
                     )
@@ -111,7 +112,7 @@ class ViewEvent extends StatelessWidget {
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero),
                 child: SizedBox(
-                  height: 250,
+                  height: 30.h,
                   width: double.infinity,
                   child: Image.file(
                     File(eventModel.imagex),
@@ -120,7 +121,7 @@ class ViewEvent extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 250,
+                height: 30.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -139,15 +140,15 @@ class ViewEvent extends StatelessWidget {
                   children: [
                     Text(
                       eventModel.eventname,
-                      style: racingSansOne(fontSize: 20),
+                      style: racingSansOne(fontSize: 18.sp),
                     ),
                     Text(
                       eventModel.startingDay,
-                      style: racingSansOne(fontSize: 20),
+                      style: racingSansOne(fontSize: 15.sp),
                     ),
                     Text(
                       eventModel.startingTime,
-                      style: racingSansOne(fontSize: 12),
+                      style: racingSansOne(fontSize: 10.sp),
                     ),
                   ],
                 ),
@@ -159,11 +160,11 @@ class ViewEvent extends StatelessWidget {
           //----------------------------------------------------------//
           Expanded(
             child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                padding: EdgeInsets.fromLTRB(1.h, 0, 1.h, 1.h),
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: 3.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -178,21 +179,21 @@ class ViewEvent extends StatelessWidget {
                               ),
                             ),
                             child: Card(
-                              margin: const EdgeInsets.all(10),
+                              margin: EdgeInsets.all(1.4.h),
                               elevation: 4,
                               color: const Color.fromRGBO(227, 100, 136, 1),
                               child: Column(
                                 children: [
-                                  const SizedBox(height: 20),
-                                  const Image(
-                                      image: AssetImage(
+                                  SizedBox(height: 2.4.h),
+                                  Image(
+                                      image: const AssetImage(
                                           'assets/UI/icons/Task List.png'),
-                                      width: 90),
+                                      width: 11.h),
                                   Text(
                                     'Task List',
                                     style: raleway(color: Colors.white),
                                   ),
-                                  const SizedBox(height: 20)
+                                  SizedBox(height: 2.4.h)
                                 ],
                               ),
                             ),
@@ -207,21 +208,21 @@ class ViewEvent extends StatelessWidget {
                               ),
                             ),
                             child: Card(
-                              margin: const EdgeInsets.all(10),
+                              margin: EdgeInsets.all(1.4.h),
                               elevation: 4,
                               color: const Color.fromRGBO(234, 28, 140, 1),
                               child: Column(
                                 children: [
-                                  const SizedBox(height: 20),
-                                  const Image(
-                                      image: AssetImage(
+                                  SizedBox(height: 2.4.h),
+                                  Image(
+                                      image: const AssetImage(
                                           'assets/UI/icons/Guests.png'),
-                                      width: 90),
+                                      width: 11.h),
                                   Text(
                                     'Guests',
                                     style: raleway(color: Colors.white),
                                   ),
-                                  const SizedBox(height: 20)
+                                  SizedBox(height: 2.4.h)
                                 ],
                               ),
                             ),
@@ -242,21 +243,21 @@ class ViewEvent extends StatelessWidget {
                               ),
                             ),
                             child: Card(
-                              margin: const EdgeInsets.all(10),
+                              margin: EdgeInsets.all(1.4.h),
                               elevation: 4,
                               color: const Color.fromRGBO(211, 234, 43, 1),
                               child: Column(
                                 children: [
-                                  const SizedBox(height: 20),
-                                  const Image(
-                                      image: AssetImage(
+                                  SizedBox(height: 2.4.h),
+                                  Image(
+                                      image: const AssetImage(
                                           'assets/UI/icons/budget.png'),
-                                      width: 90),
+                                      width: 11.h),
                                   Text(
                                     'Budget',
                                     style: raleway(color: Colors.white),
                                   ),
-                                  const SizedBox(height: 20)
+                                  SizedBox(height: 2.4.h)
                                 ],
                               ),
                             ),
@@ -271,21 +272,21 @@ class ViewEvent extends StatelessWidget {
                               ),
                             ),
                             child: Card(
-                              margin: const EdgeInsets.all(10),
+                              margin: EdgeInsets.all(1.4.h),
                               elevation: 4,
                               color: const Color.fromRGBO(250, 166, 68, 11),
                               child: Column(
                                 children: [
-                                  const SizedBox(height: 20),
-                                  const Image(
-                                      image: AssetImage(
+                                  SizedBox(height: 2.4.h),
+                                  Image(
+                                      image: const AssetImage(
                                           'assets/UI/icons/vendors.png'),
-                                      width: 90),
+                                      width: 11.h),
                                   Text(
                                     'Vendors',
                                     style: raleway(color: Colors.white),
                                   ),
-                                  const SizedBox(height: 20)
+                                  SizedBox(height: 2.4.h)
                                 ],
                               ),
                             ),
@@ -306,21 +307,21 @@ class ViewEvent extends StatelessWidget {
                               ),
                             ),
                             child: Card(
-                              margin: const EdgeInsets.all(10),
+                              margin: EdgeInsets.all(1.4.h),
                               elevation: 4,
                               color: const Color.fromRGBO(129, 236, 114, 1),
                               child: Column(
                                 children: [
-                                  const SizedBox(height: 20),
-                                  const Image(
-                                      image: AssetImage(
+                                  SizedBox(height: 2.4.h),
+                                  Image(
+                                      image: const AssetImage(
                                           'assets/UI/icons/report.png'),
-                                      width: 90),
+                                      width: 11.h),
                                   Text(
                                     'Report',
                                     style: raleway(color: Colors.white),
                                   ),
-                                  const SizedBox(height: 20)
+                                  SizedBox(height: 2.4.h)
                                 ],
                               ),
                             ),
@@ -335,21 +336,21 @@ class ViewEvent extends StatelessWidget {
                               ),
                             ),
                             child: Card(
-                              margin: const EdgeInsets.all(10),
+                              margin: EdgeInsets.all(1.4.h),
                               elevation: 4,
                               color: const Color.fromRGBO(67, 229, 181, 1),
                               child: Column(
                                 children: [
-                                  const SizedBox(height: 20),
-                                  const Image(
-                                      image: AssetImage(
+                                  SizedBox(height: 2.4.h),
+                                  Image(
+                                      image: const AssetImage(
                                           'assets/UI/icons/settlement.png'),
-                                      width: 90),
+                                      width: 11.h),
                                   Text(
                                     'Settlementt',
                                     style: raleway(color: Colors.white),
                                   ),
-                                  const SizedBox(height: 20)
+                                  SizedBox(height: 2.4.h)
                                 ],
                               ),
                             ),

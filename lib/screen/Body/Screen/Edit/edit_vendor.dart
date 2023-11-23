@@ -9,10 +9,12 @@ import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
+import 'package:sizer/sizer.dart';
 
 class EditVendor extends StatefulWidget {
+  final int val;
   final VendorsModel vendordataway;
-  const EditVendor({super.key, required this.vendordataway});
+  const EditVendor({super.key, required this.vendordataway, required this.val});
 
   @override
   State<EditVendor> createState() => _EditVendorState();
@@ -41,13 +43,13 @@ class _EditVendorState extends State<EditVendor> {
           AppAction(
               icon: Icons.done,
               onPressed: () {
-                addVendorclick(context);
+                editVendorclick(context);
               }),
         ],
         titleText: 'Edit Vendors',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(2.h),
         child: Form(
           key: _formKey,
           child: Column(children: [
@@ -127,7 +129,7 @@ class _EditVendorState extends State<EditVendor> {
     _phoneController.text = widget.vendordataway.number ?? '';
   }
 
-  Future<void> addVendorclick(mtx) async {
+  Future<void> editVendorclick(mtx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       await editVendor(
           widget.vendordataway.id,
@@ -144,17 +146,21 @@ class _EditVendorState extends State<EditVendor> {
           widget.vendordataway.pending,
           widget.vendordataway.status);
 
-      refreshVendorData(widget.vendordataway.eventid);
-
-      Navigator.pop(mtx);
+      await refreshVendorData(widget.vendordataway.eventid);
+      if (widget.val == 1) {
+        Navigator.of(mtx).pop();
+        Navigator.of(mtx).pop();
+      } else if (widget.val == 0) {
+        Navigator.of(mtx).pop();
+      }
     } else {
       ScaffoldMessenger.of(mtx).showSnackBar(
-        const SnackBar(
-          content: Text("Fill the Name & Estimatrd Amount"),
+        SnackBar(
+          content: const Text("Fill the Name & Estimatrd Amount"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(1.h),
           backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }

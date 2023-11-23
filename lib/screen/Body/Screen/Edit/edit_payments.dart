@@ -11,6 +11,7 @@ import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
 import 'package:project_event/screen/Body/widget/sub/time.dart';
+import 'package:sizer/sizer.dart';
 
 class EditPayments extends StatefulWidget {
   final PaymentModel paydata;
@@ -60,7 +61,7 @@ class _EditPaymentsState extends State<EditPayments> {
         titleText: 'Edit Payments',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(1.h),
         child: Form(
           key: _formKey,
           child: ValueListenableBuilder(
@@ -96,7 +97,6 @@ class _EditPaymentsState extends State<EditPayments> {
                   controller: searchController,
                   onChanged: (p0) {
                     searchResults.clear();
-
                     paymentTypeNotifier.value == PaymentType.budget
                         ? searchResults = budgetlist.value
                             .where((budgetModel) => budgetModel.name
@@ -108,17 +108,14 @@ class _EditPaymentsState extends State<EditPayments> {
                                 .toLowerCase()
                                 .contains(p0.toLowerCase()))
                             .toList();
-                    setState(() {
-                      // payid = searchResults[index].name;
-                    });
+                    setState(() {});
                   },
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 1.h,
                 ),
                 Container(
-                  constraints:
-                      const BoxConstraints(maxHeight: 300, minHeight: 0),
+                  constraints: BoxConstraints(maxHeight: 15.h, minHeight: 0),
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemBuilder: (context, index) => GestureDetector(
@@ -127,12 +124,11 @@ class _EditPaymentsState extends State<EditPayments> {
 
                         setState(() {
                           payid = searchResults[index].id;
-                          log(payid.toString());
                         });
                       },
                       child: Container(
-                        margin: const EdgeInsets.all(5),
-                        padding: const EdgeInsets.all(10),
+                        margin: EdgeInsets.symmetric(horizontal: 1.h),
+                        padding: EdgeInsets.all(1.h),
                         child: Text(searchResults[index].name),
                       ),
                     ),
@@ -182,12 +178,12 @@ class _EditPaymentsState extends State<EditPayments> {
         // Check if the payid is in budgetpayid
         if (!budgetpayid.value.contains(payid)) {
           ScaffoldMessenger.of(mtx).showSnackBar(
-            const SnackBar(
-              content: Text("Make Proper Item Name"),
+            SnackBar(
+              content: const Text("Make Proper Item Name"),
               behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(1.h),
               backgroundColor: Colors.red,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
             ),
           );
           return;
@@ -197,12 +193,12 @@ class _EditPaymentsState extends State<EditPayments> {
         if (!budgetlist.value
             .any((budget) => budget.name == searchController.text)) {
           ScaffoldMessenger.of(mtx).showSnackBar(
-            const SnackBar(
-              content: Text("Make Proper Item Name"),
+            SnackBar(
+              content: const Text("Make Proper Item Name"),
               behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(1.h),
               backgroundColor: Colors.red,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
             ),
           );
           return;
@@ -211,12 +207,12 @@ class _EditPaymentsState extends State<EditPayments> {
         // Check if the payid is in vendorpayid
         if (!vendorpayid.value.contains(payid)) {
           ScaffoldMessenger.of(mtx).showSnackBar(
-            const SnackBar(
-              content: Text("Make Proper Item Name"),
+            SnackBar(
+              content: const Text("Make Proper Item Name"),
               behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(1.h),
               backgroundColor: Colors.red,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
             ),
           );
           return;
@@ -226,12 +222,12 @@ class _EditPaymentsState extends State<EditPayments> {
         if (!vendortlist.value
             .any((vendor) => vendor.name == searchController.text)) {
           ScaffoldMessenger.of(mtx).showSnackBar(
-            const SnackBar(
-              content: Text("Make Proper Item Name"),
+            SnackBar(
+              content: const Text("Make Proper Item Name"),
               behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(1.h),
               backgroundColor: Colors.red,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
             ),
           );
           return;
@@ -294,12 +290,12 @@ void delectpayYes(
     Navigator.of(ctx).pop();
 
     ScaffoldMessenger.of(ctx).showSnackBar(
-      const SnackBar(
-        content: Text("Successfully Deleted"),
+      SnackBar(
+        content: const Text("Successfully Deleted"),
         behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(10),
+        margin: EdgeInsets.all(1.h),
         backgroundColor: Colors.grey,
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
   } catch (e) {

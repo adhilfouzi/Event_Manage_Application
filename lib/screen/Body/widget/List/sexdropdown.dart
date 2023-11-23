@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
+import 'package:sizer/sizer.dart';
 
 class SexDown extends StatefulWidget {
   final ValueChanged<String?>? onChanged;
@@ -26,7 +27,7 @@ class _SexDownState extends State<SexDown> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
+      padding: EdgeInsets.fromLTRB(1.h, 0.2.h, 1.h, 0.2.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

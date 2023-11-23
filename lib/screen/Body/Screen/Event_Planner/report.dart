@@ -7,6 +7,7 @@ import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/List/eventviewdata.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:sizer/sizer.dart';
 
 class Report extends StatelessWidget {
   final int eventid;
@@ -26,7 +27,7 @@ class Report extends StatelessWidget {
         titleText: 'Report',
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.h),
         child: ListView.builder(
           itemCount: 4,
           itemBuilder: (context, index) {
@@ -48,7 +49,7 @@ class Report extends StatelessWidget {
                         ListTile(
                           leading: Image(
                             image: cardInfo['image'],
-                            height: 100,
+                            height: 10.h,
                           ),
                           title: Text(
                             cardInfo['text'],
@@ -73,7 +74,7 @@ class Report extends StatelessWidget {
                                     'Completed : ${value.length} ',
                                     style: readexPro(
                                       color: Colors.green,
-                                      fontSize: 15,
+                                      fontSize: 11.sp,
                                     ),
                                   ),
                                   valueListenable:
@@ -96,7 +97,7 @@ class Report extends StatelessWidget {
                                     'Pending : ${value?.length} ',
                                     style: readexPro(
                                       color: Colors.red,
-                                      fontSize: 15,
+                                      fontSize: 11.sp,
                                     ),
                                   ),
                                   valueListenable:

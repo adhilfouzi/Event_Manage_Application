@@ -6,6 +6,7 @@ import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/budget
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/income_settelment.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/vendor_settlement.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:sizer/sizer.dart';
 
 class Settlement extends StatelessWidget {
   final int eventID;
@@ -19,7 +20,7 @@ class Settlement extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 150,
+          toolbarHeight: 16.h,
           backgroundColor: Colors.transparent,
           actions: [
             AppAction(icon: Icons.search, onPressed: () {}),
@@ -28,15 +29,17 @@ class Settlement extends StatelessWidget {
           title: Text(
             'Settlement',
             style: racingSansOne(
-                fontWeight: FontWeight.w500, fontSize: 22, color: Colors.black),
+                fontWeight: FontWeight.w500,
+                fontSize: 20.sp,
+                color: Colors.black),
           ),
           bottom: PreferredSize(
-            preferredSize: const Size(double.infinity, 40),
+            preferredSize: Size(double.infinity, 4.h),
             child: Column(
               children: [
                 Container(
-                  height: 80,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  height: 10.h,
+                  padding: EdgeInsets.symmetric(horizontal: 1.5.h),
                   child: ValueListenableBuilder(
                     valueListenable: mainbalance,
                     builder: (context, value, child) {
@@ -57,7 +60,7 @@ class Settlement extends StatelessWidget {
                                     '₹${value.paid.toString()}',
                                     style: readexPro(
                                         color: Colors.red,
-                                        fontSize: 15,
+                                        fontSize: 11.sp,
                                         fontWeight: FontWeight.bold),
                                   )
                                 ],
@@ -83,7 +86,7 @@ class Settlement extends StatelessWidget {
                                     '₹${value.pending.toString()}',
                                     style: readexPro(
                                         color: Colors.green,
-                                        fontSize: 15,
+                                        fontSize: 11.sp,
                                         fontWeight: FontWeight.bold),
                                   )
                                 ],
@@ -109,7 +112,7 @@ class Settlement extends StatelessWidget {
                                     '₹${value.total.toString()}',
                                     style: readexPro(
                                         color: Colors.green,
-                                        fontSize: 15,
+                                        fontSize: 11.sp,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -137,7 +140,7 @@ class Settlement extends StatelessWidget {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(1.h),
           child: TabBarView(
             children: [
               BudgetSettlement(

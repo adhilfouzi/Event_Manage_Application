@@ -5,6 +5,7 @@ import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_payments.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
+import 'package:sizer/sizer.dart';
 
 class BudgetSettlement extends StatelessWidget {
   final int eventID;
@@ -49,7 +50,7 @@ class BudgetSettlement extends StatelessWidget {
                           'Paid on ${data.date}, ${data.time}',
                           style: readexPro(
                             color: Colors.black45,
-                            fontSize: 10,
+                            fontSize: 8.sp,
                           ),
                         ),
                         trailing: Text(
@@ -64,10 +65,10 @@ class BudgetSettlement extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(
+              return Center(
                 child: Text(
                   'No Budget Payment available',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 15.sp),
                 ),
               );
             }

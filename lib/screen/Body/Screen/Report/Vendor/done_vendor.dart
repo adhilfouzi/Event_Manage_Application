@@ -6,6 +6,7 @@ import 'package:project_event/screen/Body/Screen/Edit/edit_vendor.dart';
 import 'package:project_event/screen/Body/Screen/View/view_vendor.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:sizer/sizer.dart';
 
 class DoneRpVendorList extends StatelessWidget {
   const DoneRpVendorList({super.key});
@@ -24,7 +25,7 @@ class DoneRpVendorList extends StatelessWidget {
         AppAction(icon: Icons.more_vert, onPressed: () {})
       ], titleText: 'Vendors'),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.h),
         child: ValueListenableBuilder(
           valueListenable: vendorDonelist,
           builder: (context, value, child) {
@@ -55,10 +56,12 @@ class DoneRpVendorList extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) =>
                                     ViewVendor(vendor: data))),
-                        onLongPress: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    EditVendor(vendordataway: data))),
+                        onLongPress: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => EditVendor(
+                                      vendordataway: data,
+                                      val: 0,
+                                    ))),
                         leading: Image(image: categoryItem['image']),
                         title: Text(
                           data.name,
@@ -76,14 +79,14 @@ class DoneRpVendorList extends StatelessWidget {
                                     color: data.status == 0
                                         ? Colors.red
                                         : Colors.green,
-                                    fontSize: 12,
+                                    fontSize: 11.sp,
                                   ),
                                 ),
                                 Text(
                                   '₹ ${data.esamount}',
                                   style: racingSansOne(
                                     color: Colors.black,
-                                    fontSize: 15,
+                                    fontSize: 11.sp,
                                   ),
                                 ),
                               ],
@@ -95,14 +98,14 @@ class DoneRpVendorList extends StatelessWidget {
                                   'Pending: ₹${data.pending}',
                                   style: racingSansOne(
                                     color: Colors.black54,
-                                    fontSize: 12,
+                                    fontSize: 11.sp,
                                   ),
                                 ),
                                 Text(
                                   'Paid: ₹${data.paid}',
                                   style: racingSansOne(
                                     color: Colors.black54,
-                                    fontSize: 12,
+                                    fontSize: 11.sp,
                                   ),
                                 )
                               ],
@@ -115,10 +118,10 @@ class DoneRpVendorList extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(
+              return Center(
                 child: Text(
                   'No Vendors available',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 15.sp),
                 ),
               );
             }

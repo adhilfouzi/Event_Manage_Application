@@ -50,7 +50,7 @@ class ForgetPassword extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('Signup',
+                        child: Text('SetS',
                             style: TextStyle(
                                 color: Colors.white, fontSize: 15.sp)),
                       ),

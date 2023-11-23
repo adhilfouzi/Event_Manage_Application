@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dart';
+import 'package:sizer/sizer.dart';
 
 class AppAction extends StatelessWidget {
   final IconData icon;
@@ -13,8 +14,8 @@ class AppAction extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Icon(icon, weight: 20),
+        padding: EdgeInsets.all(0.8.h),
+        child: Icon(icon, weight: 2.h),
       ),
     );
   }
@@ -50,7 +51,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent, // backgroundColor ?? appbarcolor,
       title: Text(
         titleText,
-        style: readexPro(fontSize: 22, color: textcolor ?? Colors.black),
+        style: readexPro(fontSize: 17.sp, color: textcolor ?? Colors.black),
       ),
       actions: actions,
       bottom: bottom ?? const BottomBorderWidget(),

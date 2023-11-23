@@ -3,10 +3,10 @@ import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_vendor.dart';
-import 'package:project_event/screen/Body/Screen/Search/vendor_search.dart';
 import 'package:project_event/screen/Body/Screen/View/view_vendor.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:sizer/sizer.dart';
 
 class PendingRpVendorList extends StatelessWidget {
   const PendingRpVendorList({super.key});
@@ -18,14 +18,14 @@ class PendingRpVendorList extends StatelessWidget {
         AppAction(
             icon: Icons.search,
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (ctr) => const VendorSearch(),
-              ));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //   builder: (ctr) => const VendorSearch(),
+              // ));
             }),
         AppAction(icon: Icons.more_vert, onPressed: () {})
       ], titleText: 'Vendors'),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.h),
         child: ValueListenableBuilder(
           valueListenable: vendorPendinglist,
           builder: (context, value, child) {
@@ -56,10 +56,12 @@ class PendingRpVendorList extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) =>
                                     ViewVendor(vendor: data))),
-                        onLongPress: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    EditVendor(vendordataway: data))),
+                        onLongPress: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => EditVendor(
+                                      vendordataway: data,
+                                      val: 0,
+                                    ))),
                         leading: Image(image: categoryItem['image']),
                         title: Text(
                           data.name,
@@ -77,14 +79,14 @@ class PendingRpVendorList extends StatelessWidget {
                                     color: data.status == 0
                                         ? Colors.red
                                         : Colors.green,
-                                    fontSize: 12,
+                                    fontSize: 11.sp,
                                   ),
                                 ),
                                 Text(
                                   '₹ ${data.esamount}',
                                   style: racingSansOne(
                                     color: Colors.black,
-                                    fontSize: 15,
+                                    fontSize: 11.sp,
                                   ),
                                 ),
                               ],
@@ -96,14 +98,14 @@ class PendingRpVendorList extends StatelessWidget {
                                   'Pending: ₹${data.pending}',
                                   style: racingSansOne(
                                     color: Colors.black54,
-                                    fontSize: 12,
+                                    fontSize: 10.sp,
                                   ),
                                 ),
                                 Text(
                                   'Paid: ₹${data.paid}',
                                   style: racingSansOne(
                                     color: Colors.black54,
-                                    fontSize: 12,
+                                    fontSize: 10.sp,
                                   ),
                                 )
                               ],
@@ -116,10 +118,10 @@ class PendingRpVendorList extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(
+              return Center(
                 child: Text(
                   'No Vendors available',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 15.sp),
                 ),
               );
             }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:sizer/sizer.dart';
 
 class ViewBox extends StatelessWidget {
   final String textcontent;
@@ -11,7 +12,8 @@ class ViewBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 5, top: 0),
+      padding:
+          EdgeInsets.only(left: 1.5.h, right: 1.5.h, bottom: 0.5.h, top: 0),
       alignment: Alignment.centerLeft,
       child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +26,7 @@ class ViewBox extends StatelessWidget {
                 child: Text('$textcontent : ',
                     style: raleway(
                       color: Colors.black,
-                      fontSize: 16,
+                      fontSize: 12.sp,
                     )),
               ),
             ),
@@ -34,7 +36,7 @@ class ViewBox extends StatelessWidget {
                 child: Text(
                   controller.isNotEmpty == true ? controller : '-',
                   style: readexPro(
-                    fontSize: 16,
+                    fontSize: 12.sp,
                     color: Colors.black,
                   ),
                 ),
@@ -46,21 +48,21 @@ class ViewBox extends StatelessWidget {
 }
 
 class ViewBoxAccommodation extends StatelessWidget {
-  final String textcontent;
+  final String? textcontent;
   final String controller;
 
   const ViewBoxAccommodation(
-      {super.key, required this.textcontent, required this.controller});
+      {super.key, this.textcontent, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 5, top: 0),
+      padding:
+          EdgeInsets.only(left: 1.5.h, right: 1.5.h, bottom: 0.5.h, top: 0),
       alignment: Alignment.centerLeft,
       child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          // crossAxisAlignment: ,
           children: [
             Expanded(
               child: Container(
@@ -68,7 +70,7 @@ class ViewBoxAccommodation extends StatelessWidget {
                 child: Text('$textcontent : ',
                     style: raleway(
                       color: Colors.black,
-                      fontSize: 16,
+                      fontSize: 12.sp,
                     )),
               ),
             ),
@@ -78,7 +80,7 @@ class ViewBoxAccommodation extends StatelessWidget {
                 child: Text(
                   controller.isNotEmpty == true ? controller : 'Accommodation',
                   style: readexPro(
-                    fontSize: 16,
+                    fontSize: 12.sp,
                     color: Colors.black,
                   ),
                 ),

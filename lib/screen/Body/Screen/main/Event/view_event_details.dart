@@ -8,6 +8,7 @@ import 'package:project_event/screen/Body/Screen/main/Event/edit_event.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
 import 'package:project_event/screen/Body/widget/box/viewbox.dart';
+import 'package:sizer/sizer.dart';
 
 class ViewEventDetails extends StatelessWidget {
   final Eventmodel eventModel;
@@ -32,30 +33,30 @@ class ViewEventDetails extends StatelessWidget {
                   builder: (context) => EditEvent(event: eventModel),
                 ));
               }),
-          const SizedBox(width: 15)
+          SizedBox(width: 2.h)
         ],
         titleText: ' ',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(5),
+        padding: EdgeInsets.all(1.h),
         child: Column(
           children: [
             Card(
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(10),
+                padding: EdgeInsets.all(2.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'Event Details',
-                      style: raleway(fontSize: 22, color: Colors.black),
+                      style: raleway(fontSize: 18.sp, color: Colors.black),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                      padding: EdgeInsets.fromLTRB(2.h, 1.h, 2.h, 1.h),
                       child: SizedBox(
                         width: double.infinity,
-                        height: 175,
+                        height: 20.h,
                         child: Card(
                           color: Colors.transparent,
                           elevation: 0,
@@ -66,14 +67,13 @@ class ViewEventDetails extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20.0),
                             child: Image.file(
                               File(eventModel.imagex),
-                              height: 160,
                               fit: BoxFit.fill,
                             ),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 2.h),
                     ViewBox(
                       textcontent: 'Event Name',
                       controller: eventModel.eventname,
@@ -102,19 +102,19 @@ class ViewEventDetails extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: 2.h),
             Card(
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(10),
+                padding: EdgeInsets.all(2.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'Client Details',
-                      style: raleway(fontSize: 22, color: Colors.black),
+                      style: raleway(fontSize: 18.sp, color: Colors.black),
                     ),
-                    const SizedBox(height: 15),
+                    SizedBox(height: 2.h),
                     ViewBox(
                       textcontent: 'Client Name',
                       controller: eventModel.clientname!,
@@ -185,12 +185,12 @@ void delecteventYes(
     (route) => false,
   );
   ScaffoldMessenger.of(ctx).showSnackBar(
-    const SnackBar(
-      content: Text("Successfully Deleted"),
+    SnackBar(
+      content: const Text("Successfully Deleted"),
       behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.all(2.h),
       backgroundColor: Colors.grey,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     ),
   );
 }

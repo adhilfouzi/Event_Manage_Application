@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:sizer/sizer.dart';
 
 class TextFieldicon extends StatelessWidget {
   final TextEditingController controller;
@@ -15,8 +16,8 @@ class TextFieldicon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-          vertical: 5, horizontal: 16), // Adjust the margin.
+      margin: EdgeInsets.symmetric(
+          vertical: 0.5.h, horizontal: 2.h), // Adjust the margin.
       decoration: BoxDecoration(
         color: Colors.white, // Set your desired background color.
         borderRadius: BorderRadius.circular(40),
@@ -24,12 +25,14 @@ class TextFieldicon extends StatelessWidget {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(
-              horizontal: 10, vertical: 10), // Adjust vertical padding.
-          prefixIcon: Icon(icondata, size: 24), // Increase the icon size.
+          contentPadding: EdgeInsets.symmetric(
+              horizontal: 1.h, vertical: 1.h), // Adjust vertical padding.
+          prefixIcon: Icon(icondata, size: 4.h), // Increase the icon size.
           hintText: textcontent,
           hintStyle: raleway(
-              color: Colors.black, fontWeight: FontWeight.normal, fontSize: 15),
+              color: Colors.black,
+              fontWeight: FontWeight.normal,
+              fontSize: 12.sp),
           border: InputBorder.none,
         ),
       ),

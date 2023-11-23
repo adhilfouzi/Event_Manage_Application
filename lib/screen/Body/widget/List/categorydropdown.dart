@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
+import 'package:sizer/sizer.dart';
 
 class CategoryDown extends StatefulWidget {
   final ValueChanged<String> onCategorySelected;
@@ -32,7 +33,7 @@ class _CategoryDownState extends State<CategoryDown> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
+      padding: EdgeInsets.fromLTRB(1.h, 0.2.h, 1.h, 0.2.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -47,10 +48,10 @@ class _CategoryDownState extends State<CategoryDown> {
                   children: [
                     Image(
                       image: categoryItem['image'],
-                      height: 50,
-                      width: 50,
+                      height: 8.h,
+                      width: 8.h,
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 0.8.h),
                     Text(
                       categoryItem['text'],
                     ),

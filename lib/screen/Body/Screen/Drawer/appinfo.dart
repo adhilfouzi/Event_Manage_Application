@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class AppInfo extends StatelessWidget {
   const AppInfo({super.key});
@@ -9,13 +10,13 @@ class AppInfo extends StatelessWidget {
       appBar: AppBar(backgroundColor: Colors.transparent),
       body:
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        const Text(
+        Text(
           'Event Manager',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 3.h, fontWeight: FontWeight.bold),
         ),
         Image.asset('assets/UI/Event Logo/event logo top.png'),
-        const Padding(
-            padding: EdgeInsets.all(20), child: Text('Version 1.00.0')),
+        Padding(
+            padding: EdgeInsets.all(2.h), child: const Text('Version 1.00.0')),
       ]),
     );
   }

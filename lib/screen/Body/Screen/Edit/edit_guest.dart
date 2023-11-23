@@ -8,6 +8,7 @@ import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 import 'package:project_event/screen/Body/widget/sub/status.dart';
+import 'package:sizer/sizer.dart';
 
 class EditGuest extends StatefulWidget {
   final GuestModel guestdata;
@@ -46,7 +47,7 @@ class _EditGuestState extends State<EditGuest> {
         titleText: 'Edit Guest',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.2.h),
         child: Form(
           key: _formKey,
           child: Column(children: [
@@ -123,12 +124,12 @@ class _EditGuestState extends State<EditGuest> {
       Navigator.pop(context);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Fill the Guest Name"),
+        SnackBar(
+          content: const Text("Fill the Guest Name"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(1.h),
           backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }

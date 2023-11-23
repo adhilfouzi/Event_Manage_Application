@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class FloatingPointx extends StatelessWidget {
   final Widget goto;
@@ -7,7 +8,7 @@ class FloatingPointx extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: EdgeInsets.all(3.h),
       child: FloatingActionButton(
         tooltip: 'increment',
         backgroundColor: const Color(0xFF80B3FF),

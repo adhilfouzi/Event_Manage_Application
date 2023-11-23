@@ -3,6 +3,7 @@ import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_budget.dart';
+import 'package:sizer/sizer.dart';
 
 class BudgetSearch extends StatefulWidget {
   const BudgetSearch({super.key});
@@ -64,12 +65,12 @@ class _BudgetSearchState extends State<BudgetSearch> {
             valueListenable: budgetlist,
             builder: (context, value, child) {
               return Padding(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(1.h),
                 child: finduser.isEmpty
-                    ? const Center(
+                    ? Center(
                         child: Text(
                           'No Data Available',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 15.sp),
                         ),
                       )
                     : ListView.builder(
@@ -79,17 +80,23 @@ class _BudgetSearchState extends State<BudgetSearch> {
                           return Card(
                             color: Colors.blue[100],
                             elevation: 4,
-                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            margin: EdgeInsets.symmetric(vertical: 1.h),
                             child: ListTile(
                               title: Text(
                                 finduserItem.name,
                                 style: raleway(
                                   color: Colors.black,
-                                  fontSize: 15,
+                                  fontSize: 12.sp,
                                 ),
                               ),
                               subtitle: Text(
-                                finduserItem.category,
+                                finduserItem.category.isNotEmpty == true
+                                    ? finduserItem.category
+                                    : 'Accommodation',
+                                style: raleway(
+                                  color: Colors.black,
+                                  fontSize: 10.sp,
+                                ),
                               ),
                               trailing: IconButton(
                                   icon: const Icon(Icons.delete),
@@ -144,12 +151,12 @@ void delectYes(ctx, BudgetModel student) {
   deleteBudget(student.id, student.eventid);
 
   ScaffoldMessenger.of(ctx).showSnackBar(
-    const SnackBar(
-      content: Text("Successfully Deleted"),
+    SnackBar(
+      content: const Text("Successfully Deleted"),
       behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.all(1.h),
       backgroundColor: Colors.redAccent,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     ),
   );
   Navigator.of(ctx).pop();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:sizer/sizer.dart';
 
 class PaymentsBar extends StatelessWidget {
   final String eAmount;
@@ -15,35 +16,39 @@ class PaymentsBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(15),
-      height: 130,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        border: Border.all(color: buttoncolor, width: 1),
-        borderRadius: BorderRadius.circular(20.0),
+    return Padding(
+      padding: EdgeInsets.all(1.h),
+      child: Container(
+        padding: EdgeInsets.all(1.5.h),
+        height: 15.h,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          border: Border.all(color: buttoncolor, width: 1),
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Amount: ₹$eAmount',
+                style:
+                    readexPro(fontSize: 13.sp, fontWeight: FontWeight.normal),
+              ),
+              const Divider(color: buttoncolor, thickness: 1),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Pending: ₹$pending',
+                      style: readexPro(
+                          fontSize: 13.sp, fontWeight: FontWeight.normal)),
+                  Text('Paid: ₹$paid',
+                      style: readexPro(
+                          fontSize: 13.sp, fontWeight: FontWeight.normal))
+                ],
+              )
+            ]),
       ),
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Amount: ₹$eAmount',
-              style: readexPro(fontSize: 18, fontWeight: FontWeight.normal),
-            ),
-            const Divider(color: buttoncolor, thickness: 1),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Pending: ₹$pending',
-                    style:
-                        readexPro(fontSize: 18, fontWeight: FontWeight.normal)),
-                Text('Paid: ₹$paid',
-                    style:
-                        readexPro(fontSize: 18, fontWeight: FontWeight.normal))
-              ],
-            )
-          ]),
     );
   }
 }

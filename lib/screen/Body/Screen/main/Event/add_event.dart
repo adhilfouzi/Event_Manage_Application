@@ -13,6 +13,7 @@ import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
 import 'package:project_event/screen/Body/widget/sub/time.dart';
+import 'package:sizer/sizer.dart';
 
 class AddEvent extends StatefulWidget {
   const AddEvent({super.key});
@@ -56,31 +57,31 @@ class _AddEventState extends State<AddEvent> {
           titleText: ' ',
         ),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.all(5),
+          padding: EdgeInsets.all(0.5.h),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
                 Text(
                   'Event Details',
-                  style: raleway(fontSize: 22),
+                  style: raleway(fontSize: 18.sp),
                 ),
-                const Divider(
+                Divider(
                   color: buttoncolor,
-                  height: 20,
+                  height: 2.h,
                   thickness: 2,
                   endIndent: 40,
                   indent: 40,
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 15, 10, 5),
+                  padding: EdgeInsets.fromLTRB(1.h, 3.h, 1.h, 1.h),
                   child: InkWell(
                     onTap: () {
                       addphoto(context);
                     },
                     child: SizedBox(
                       width: double.infinity,
-                      height: 175,
+                      height: 20.h,
                       child: Card(
                         color: Colors.transparent,
                         elevation: 0,
@@ -95,8 +96,7 @@ class _AddEventState extends State<AddEvent> {
                                   children: [
                                     Image.asset(
                                       'assets/UI/icons/addimage.png',
-                                      width: 75,
-                                      height: 70,
+                                      height: 10.h,
                                     ),
                                     Text(
                                       'Add image of event',
@@ -106,7 +106,6 @@ class _AddEventState extends State<AddEvent> {
                                 )
                               : Image.file(
                                   imageevent!,
-                                  height: 160,
                                   fit: BoxFit.fill,
                                 ),
                         ),
@@ -147,17 +146,18 @@ class _AddEventState extends State<AddEvent> {
                   textdate: 'Event Time',
                   controller: _sttimeController,
                 ),
-                const SizedBox(height: 25),
+                SizedBox(height: 2.h),
                 Text(
                   'Client Details',
-                  style: raleway(fontSize: 22),
+                  style: raleway(fontSize: 18.sp),
                 ),
-                const Divider(
+                Divider(
                     color: buttoncolor,
-                    height: 20,
+                    height: 2.h,
                     thickness: 2,
                     endIndent: 40,
                     indent: 40),
+                SizedBox(height: 2.h),
                 TextFieldBlue(
                   keyType: TextInputType.name,
                   textcontent: 'Client Name',
@@ -190,10 +190,10 @@ class _AddEventState extends State<AddEvent> {
   Future addEventcliked(context) async {
     if (imagepath == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Add Profile Picture '),
-          duration: Duration(seconds: 2),
-          margin: EdgeInsets.all(10),
+        SnackBar(
+          content: const Text('Add Profile Picture '),
+          duration: const Duration(seconds: 2),
+          margin: EdgeInsets.all(2.h),
           behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.redAccent,
         ),
@@ -226,23 +226,23 @@ class _AddEventState extends State<AddEvent> {
           (route) => false,
         );
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Successfully added"),
+          SnackBar(
+            content: const Text("Successfully added"),
             behavior: SnackBarBehavior.floating,
-            margin: EdgeInsets.all(10),
+            margin: EdgeInsets.all(2.h),
             backgroundColor: Colors.greenAccent,
-            duration: Duration(seconds: 2),
+            duration: const Duration(seconds: 2),
           ),
         );
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Fill the Task Name"),
+        SnackBar(
+          content: const Text("Fill the Task Name"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(2.h),
           backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }

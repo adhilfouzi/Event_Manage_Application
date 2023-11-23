@@ -9,6 +9,7 @@ import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
 import 'package:project_event/screen/Body/widget/sub/time.dart';
+import 'package:sizer/sizer.dart';
 
 class AddPayments extends StatefulWidget {
   final int eventID;
@@ -54,7 +55,7 @@ class _AddPaymentsState extends State<AddPayments> {
         titleText: 'Add Payments',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(1.h),
         child: Form(
           key: _formKey,
           child: ValueListenableBuilder(
@@ -102,12 +103,11 @@ class _AddPaymentsState extends State<AddPayments> {
                     setState(() {});
                   },
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 1.h,
                 ),
                 Container(
-                  constraints:
-                      const BoxConstraints(maxHeight: 300, minHeight: 0),
+                  constraints: BoxConstraints(maxHeight: 15.h, minHeight: 0),
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemBuilder: (context, index) => GestureDetector(
@@ -119,8 +119,8 @@ class _AddPaymentsState extends State<AddPayments> {
                         });
                       },
                       child: Container(
-                        margin: const EdgeInsets.all(5),
-                        padding: const EdgeInsets.all(10),
+                        margin: EdgeInsets.all(1.h),
+                        padding: EdgeInsets.all(0.5.h),
                         child: Text(searchResults[index].name),
                       ),
                     ),
@@ -170,12 +170,12 @@ class _AddPaymentsState extends State<AddPayments> {
         // Check if the payid is in budgetpayid
         if (!budgetpayid.value.contains(payid)) {
           ScaffoldMessenger.of(mtx).showSnackBar(
-            const SnackBar(
-              content: Text("Make Proper Item Name"),
+            SnackBar(
+              content: const Text("Make Proper Item Name"),
               behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(1.h),
               backgroundColor: Colors.red,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
             ),
           );
           return;
@@ -185,12 +185,12 @@ class _AddPaymentsState extends State<AddPayments> {
         if (!budgetlist.value
             .any((budget) => budget.name == searchController.text)) {
           ScaffoldMessenger.of(mtx).showSnackBar(
-            const SnackBar(
-              content: Text("Make Proper Item Name"),
+            SnackBar(
+              content: const Text("Make Proper Item Name"),
               behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(1.h),
               backgroundColor: Colors.red,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
             ),
           );
           return;
@@ -199,12 +199,12 @@ class _AddPaymentsState extends State<AddPayments> {
         // Check if the payid is in vendorpayid
         if (!vendorpayid.value.contains(payid)) {
           ScaffoldMessenger.of(mtx).showSnackBar(
-            const SnackBar(
-              content: Text("Make Proper Item Name"),
+            SnackBar(
+              content: const Text("Make Proper Item Name"),
               behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(1.h),
               backgroundColor: Colors.red,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
             ),
           );
           return;
@@ -214,12 +214,12 @@ class _AddPaymentsState extends State<AddPayments> {
         if (!vendortlist.value
             .any((vendor) => vendor.name == searchController.text)) {
           ScaffoldMessenger.of(mtx).showSnackBar(
-            const SnackBar(
-              content: Text("Make Proper Item Name"),
+            SnackBar(
+              content: const Text("Make Proper Item Name"),
               behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(1.h),
               backgroundColor: Colors.red,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
             ),
           );
           return;
@@ -253,12 +253,12 @@ class _AddPaymentsState extends State<AddPayments> {
         searchController.clear();
       });
       ScaffoldMessenger.of(mtx).showSnackBar(
-        const SnackBar(
-          content: Text("Successfully added"),
+        SnackBar(
+          content: const Text("Successfully added"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(1.h),
           backgroundColor: Colors.greenAccent,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }

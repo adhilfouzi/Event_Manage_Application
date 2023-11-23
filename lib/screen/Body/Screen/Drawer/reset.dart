@@ -3,6 +3,7 @@ import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
+import 'package:sizer/sizer.dart';
 
 class Reset extends StatefulWidget {
   const Reset({super.key});
@@ -19,10 +20,10 @@ class _ResetState extends State<Reset> {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.transparent),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30),
+        padding: EdgeInsets.symmetric(horizontal: 3.h),
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Text('RESET DATA ', style: readexPro(fontSize: 25)),
+          Text('RESET DATA ', style: readexPro(fontSize: 20.sp)),
           //Text('Clear all Data from this application'),
           Column(
             children: [
@@ -54,15 +55,16 @@ class _ResetState extends State<Reset> {
 
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
+                              builder: (context) => const HomeScreen(),
                             ),
                           );
                         } else {
                           return;
                         }
                       },
-                      child: const Text('Clear Data',
-                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                      child: Text('Clear Data',
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 15.sp)),
                     ),
                   ),
                 ],

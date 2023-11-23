@@ -3,6 +3,7 @@ import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/Database/model/Guest_Model/guest_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_guest.dart';
+import 'package:sizer/sizer.dart';
 
 class GuestSearch extends StatefulWidget {
   const GuestSearch({super.key});
@@ -48,7 +49,7 @@ class _GuestSearchState extends State<GuestSearch> {
           backgroundColor: const Color.fromRGBO(255, 200, 200, 1),
           automaticallyImplyLeading: false,
           title: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: EdgeInsets.symmetric(vertical: 2.h),
             child: TextField(
               autofocus: true,
               onChanged: (value) => _runFilter(value),
@@ -64,58 +65,59 @@ class _GuestSearchState extends State<GuestSearch> {
             valueListenable: guestlist,
             builder: (context, value, child) {
               return Padding(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(1.h),
                 child: Column(
                   children: [
-                    finduser.isEmpty
-                        ? const Center(
-                            child: Text(
-                              'No Data Available',
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          )
-                        : ListView.builder(
-                            itemCount: finduser.length,
-                            itemBuilder: (context, index) {
-                              final finduserItem = finduser[index];
-                              return Card(
-                                color: Colors.blue[100],
-                                elevation: 4,
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                child: ListTile(
-                                  title: Text(
-                                    finduserItem.gname,
-                                    style: raleway(
-                                      color: Colors.black,
-                                      fontSize: 15,
+                    Expanded(
+                      child: finduser.isEmpty
+                          ? Center(
+                              child: Text(
+                                'No Data Available',
+                                style: TextStyle(fontSize: 15.sp),
+                              ),
+                            )
+                          : ListView.builder(
+                              itemCount: finduser.length,
+                              itemBuilder: (context, index) {
+                                final finduserItem = finduser[index];
+                                return Card(
+                                  color: Colors.blue[100],
+                                  elevation: 4,
+                                  margin: EdgeInsets.symmetric(vertical: 2.sp),
+                                  child: ListTile(
+                                    title: Text(
+                                      finduserItem.gname,
+                                      style: raleway(
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                      ),
                                     ),
-                                  ),
-                                  subtitle: Text(
-                                    finduserItem.status == 0
-                                        ? 'Pending invitation'
-                                        : 'Invitation sent',
-                                    style: TextStyle(
-                                      color: finduserItem.status == 0
-                                          ? Colors.red
-                                          : Colors.green,
+                                    subtitle: Text(
+                                      finduserItem.status == 0
+                                          ? 'Pending invitation'
+                                          : 'Invitation sent',
+                                      style: TextStyle(
+                                        color: finduserItem.status == 0
+                                            ? Colors.red
+                                            : Colors.green,
+                                      ),
                                     ),
+                                    trailing: IconButton(
+                                        icon: const Icon(Icons.delete),
+                                        onPressed: () {
+                                          dodeleteguest(context, finduserItem);
+                                        }),
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (ctr) =>
+                                            EditGuest(guestdata: finduserItem),
+                                      ));
+                                    },
                                   ),
-                                  trailing: IconButton(
-                                      icon: const Icon(Icons.delete),
-                                      onPressed: () {
-                                        dodeleteguest(context, finduserItem);
-                                      }),
-                                  onTap: () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (ctr) =>
-                                          EditGuest(guestdata: finduserItem),
-                                    ));
-                                  },
-                                ),
-                              );
-                            }),
+                                );
+                              }),
+                    ),
                   ],
                 ),
               );
@@ -157,12 +159,12 @@ void delectYes(ctx, GuestModel student) {
   deleteGuest(student.id, student.eventid);
 
   ScaffoldMessenger.of(ctx).showSnackBar(
-    const SnackBar(
-      content: Text("Successfully Deleted"),
+    SnackBar(
+      content: const Text("Successfully Deleted"),
       behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.all(1.h),
       backgroundColor: Colors.redAccent,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     ),
   );
   Navigator.of(ctx).pop();

@@ -50,7 +50,9 @@ Future<void> refreshVendorData(int eventid) async {
         paid += int.parse(father.pyamount);
       }
     }
-    editVendor(
+    int pending = int.parse(student.esamount) - paid;
+    int status = paid >= int.parse(student.esamount) ? 1 : 0;
+    await editVendor(
       student.id,
       student.name,
       student.category,
@@ -62,8 +64,8 @@ Future<void> refreshVendorData(int eventid) async {
       student.address,
       student.clientname,
       paid,
-      int.parse(student.esamount) - paid,
-      paid >= int.parse(student.esamount) ? 1 : 0,
+      pending,
+      status,
     );
   }
 

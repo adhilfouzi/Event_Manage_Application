@@ -6,6 +6,7 @@ import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/viewevent.dart';
 import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:sizer/sizer.dart';
 
 class Favorite extends StatelessWidget {
   const Favorite({super.key});
@@ -18,10 +19,10 @@ class Favorite extends StatelessWidget {
         valueListenable: favoriteEventlist,
         builder: (context, value, child) {
           if (value.isEmpty) {
-            return const Center(
+            return Center(
               child: Text(
                 'No Event available',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18.sp),
               ),
             );
           } else {
@@ -30,7 +31,8 @@ class Favorite extends StatelessWidget {
               itemBuilder: (context, index) {
                 final data = value[index];
                 return Container(
-                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 1.h, vertical: 0.5.h),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -49,7 +51,7 @@ class Favorite extends StatelessWidget {
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
                               child: SizedBox(
-                                height: 200,
+                                height: 20.h,
                                 width: double.infinity,
                                 child: Image.file(
                                   File(data.imagex),
@@ -58,7 +60,7 @@ class Favorite extends StatelessWidget {
                               )),
                         ),
                         Container(
-                          height: 205,
+                          height: 21.2.h,
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
@@ -85,7 +87,7 @@ class Favorite extends StatelessWidget {
                                 children: [
                                   Text(
                                     data.eventname,
-                                    style: racingSansOne(fontSize: 18),
+                                    style: racingSansOne(fontSize: 13.sp),
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -93,12 +95,13 @@ class Favorite extends StatelessWidget {
                                     children: [
                                       Text(
                                         '${data.startingDay}  at  ${data.startingTime}',
-                                        style: racingSansOne(fontSize: 13),
+                                        style: racingSansOne(fontSize: 10.sp),
                                       ),
                                       const SizedBox(width: 30),
                                       Text(
+                                        overflow: TextOverflow.ellipsis,
                                         data.location,
-                                        style: racingSansOne(),
+                                        style: racingSansOne(fontSize: 10.sp),
                                       ),
                                     ],
                                   ),

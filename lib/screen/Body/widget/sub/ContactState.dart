@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
+import 'package:sizer/sizer.dart';
 
 class ContactState extends StatelessWidget {
   final TextEditingController? pcontroller;
@@ -18,11 +19,11 @@ class ContactState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(1.h),
       child: Container(
-        padding: const EdgeInsets.fromLTRB(5, 10, 5, 15),
+        padding: EdgeInsets.fromLTRB(0.5.h, 1.h, 0.5.h, 2.h),
         decoration: BoxDecoration(
-          border: Border.all(color: buttoncolor, width: 1),
+          border: Border.all(color: buttoncolor, width: 2),
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Column(children: [
@@ -30,9 +31,9 @@ class ContactState extends StatelessWidget {
             'Contact Details',
             style: raleway(),
           ),
-          const Divider(
+          Divider(
             color: buttoncolor,
-            height: 20,
+            height: 2.h,
             thickness: 2,
             endIndent: 40,
             indent: 40,

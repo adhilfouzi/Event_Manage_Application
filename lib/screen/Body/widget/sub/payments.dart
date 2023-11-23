@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:sizer/sizer.dart';
 
 class Payments extends StatelessWidget {
   final ValueListenable<Object?> valueListenable;
@@ -14,7 +15,7 @@ class Payments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
+      padding: EdgeInsets.all(1.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,59 +25,36 @@ class Payments extends StatelessWidget {
               Text('Payments', style: raleway()),
             ],
           ),
-          const SizedBox(height: 5),
+          SizedBox(height: 1.h),
           Container(
-            constraints: const BoxConstraints(maxHeight: 150, minHeight: 0),
+            constraints: BoxConstraints(maxHeight: 18.h, minHeight: 0),
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(color: buttoncolor, width: 1),
               borderRadius: BorderRadius.circular(20.0),
             ),
             child: ValueListenableBuilder(
-              valueListenable: valueListenable,
+              valueListenable: valueListenable as ValueNotifier,
               builder: (context, value, child) {
-                if (value == null) {
+                if (value.isNotEmpty) {
                   return ListView.builder(
-                    itemCount: (value as List).length,
+                    itemCount: value.length,
                     itemBuilder: (BuildContext context, int index) {
                       final data = value[index];
-                      return Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                      return ListTile(
+                        onTap: () {},
+                        leading: Image.asset(
+                          'assets/UI/icons/person.png',
                         ),
-                        elevation: 4,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: buttoncolor, width: 1),
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: ListTile(
-                            onTap: () {
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (context) =>
-                              //         EditPayments(paydata: data)));
-                            },
-                            leading: Image.asset(
-                              'assets/UI/icons/person.png',
-                            ),
-                            title: Text(
-                              data.name,
-                              style: raleway(color: Colors.black),
-                            ),
-                            // subtitle: Text(
-                            //   'Paid on ${data.date}, ${data.time}',
-                            //   style: readexPro(
-                            //     color: Colors.black45,
-                            //     fontSize: 10,
-                            //   ),
-                            // ),
-                            trailing: Text(
-                              "₹${data.pyamount}",
-                              style: racingSansOne(
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.normal),
-                            ),
-                          ),
+                        title: Text(
+                          data.name,
+                          style: raleway(color: Colors.black),
+                        ),
+                        trailing: Text(
+                          "₹${data.pyamount}",
+                          style: racingSansOne(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.normal),
                         ),
                       );
                     },
@@ -88,7 +66,7 @@ class Payments extends StatelessWidget {
                       children: [
                         Image.asset('assets/UI/icons/nodata.png',
                             height: 70, width: 70),
-                        const SizedBox(height: 10),
+                        SizedBox(height: 2.h),
                         Text(
                           'No Payments Found',
                           style: raleway(fontSize: 13, color: Colors.black),

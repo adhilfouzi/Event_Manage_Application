@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:sizer/sizer.dart';
 
 class StatusBar extends StatefulWidget {
   final String textcontent1;
@@ -40,11 +41,11 @@ class _StatusBarState extends State<StatusBar> {
       children: [
         Container(
           alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(left: 15),
+          padding: EdgeInsets.only(left: 1.2.h),
           child: Text('Status', style: raleway()),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+          padding: EdgeInsets.fromLTRB(1.h, 0.5.h, 1.h, 0.5.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -61,7 +62,7 @@ class _StatusBarState extends State<StatusBar> {
                       style: readexPro(),
                     )),
               ),
-              const SizedBox(width: 10),
+              SizedBox(width: 1.h),
               Expanded(
                 child: ElevatedButton(
                     style: two,
@@ -83,14 +84,14 @@ class _StatusBarState extends State<StatusBar> {
   }
 
   ButtonStyle one = ButtonStyle(
-    padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 12)),
+    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
     side: MaterialStateProperty.all(BorderSide.none),
     backgroundColor: MaterialStateProperty.all(buttoncolor[300]),
   );
   ButtonStyle two = ButtonStyle(
-    padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 12)),
-    side: MaterialStateProperty.all(
-        const BorderSide(color: buttoncolor, width: 2.0)),
+    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
+    side:
+        MaterialStateProperty.all(BorderSide(color: buttoncolor, width: 0.2.h)),
     shape: MaterialStateProperty.all(RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30.0),
     )),
@@ -113,7 +114,7 @@ class _StatusBarState extends State<StatusBar> {
 
 ButtonStyle firstcr() {
   return ButtonStyle(
-    padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 12)),
+    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
     side: MaterialStateProperty.all(BorderSide.none),
     backgroundColor: MaterialStateProperty.all(buttoncolor[300]),
   );
@@ -121,7 +122,7 @@ ButtonStyle firstcr() {
 
 ButtonStyle secandcr() {
   return ButtonStyle(
-    padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 12)),
+    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
     side: MaterialStateProperty.all(
         const BorderSide(color: buttoncolor, width: 2.0)),
     shape: MaterialStateProperty.all(RoundedRectangleBorder(

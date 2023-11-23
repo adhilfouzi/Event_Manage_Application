@@ -7,6 +7,7 @@ import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
 import 'package:project_event/screen/Body/widget/sub/status.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
+import 'package:sizer/sizer.dart';
 
 class EditTask extends StatefulWidget {
   final TaskModel taskdata;
@@ -38,7 +39,7 @@ class _EditTaskState extends State<EditTask> {
             })
       ], titleText: 'Edit Task'),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.5.h),
         child: Form(
           key: _formKey,
           child: Column(children: [
@@ -110,12 +111,12 @@ class _EditTaskState extends State<EditTask> {
       refreshEventtaskdata(eventId);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Fill the Task Name"),
+        SnackBar(
+          content: const Text("Fill the Task Name"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(1.5.h),
           backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }

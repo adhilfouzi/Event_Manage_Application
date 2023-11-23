@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:sizer/sizer.dart';
 
 class Time extends StatefulWidget {
   final TextEditingController? controller;
@@ -74,11 +75,11 @@ class _TimeState extends State<Time> {
       children: [
         Container(
           alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(left: 15),
+          padding: EdgeInsets.only(left: 2.h),
           child: Text(widget.textdate ?? 'Time', style: raleway()),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+          padding: EdgeInsets.fromLTRB(1.h, 0.5.h, 1.h, 0.5.h),
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(color: buttoncolor, width: 1),
@@ -91,9 +92,9 @@ class _TimeState extends State<Time> {
                 controller: widget.controller,
                 decoration: InputDecoration(
                   iconColor: buttoncolor,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 10,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 1.h,
+                    vertical: 1.h,
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(Icons.access_time,

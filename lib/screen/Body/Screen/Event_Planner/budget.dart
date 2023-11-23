@@ -9,6 +9,7 @@ import 'package:project_event/screen/Body/Screen/View/budget_view.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
+import 'package:sizer/sizer.dart';
 
 class Budget extends StatelessWidget {
   final int eventid;
@@ -29,7 +30,7 @@ class Budget extends StatelessWidget {
         AppAction(icon: Icons.more_vert, onPressed: () {})
       ], titleText: 'Budget'),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.h),
         child: ValueListenableBuilder(
           valueListenable: budgetlist,
           builder: (context, value, child) {
@@ -82,14 +83,14 @@ class Budget extends StatelessWidget {
                                     color: data.status == 0
                                         ? Colors.red
                                         : Colors.green,
-                                    fontSize: 12,
+                                    fontSize: 10.sp,
                                   ),
                                 ),
                                 Text(
                                   '₹ ${data.esamount}',
                                   style: racingSansOne(
                                     color: Colors.black,
-                                    fontSize: 15,
+                                    fontSize: 12.sp,
                                   ),
                                 ),
                               ],
@@ -101,14 +102,14 @@ class Budget extends StatelessWidget {
                                   'Pending: ₹${data.pending}',
                                   style: racingSansOne(
                                     color: Colors.black54,
-                                    fontSize: 12,
+                                    fontSize: 8.sp,
                                   ),
                                 ),
                                 Text(
                                   'Paid: ₹${data.paid}',
                                   style: racingSansOne(
                                     color: Colors.black54,
-                                    fontSize: 12,
+                                    fontSize: 8.sp,
                                   ),
                                 )
                               ],
@@ -121,10 +122,10 @@ class Budget extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(
+              return Center(
                 child: Text(
                   'No Budget available',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 15.sp),
                 ),
               );
             }

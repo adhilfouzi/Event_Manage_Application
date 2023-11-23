@@ -5,6 +5,7 @@ import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
 import 'package:project_event/screen/Body/widget/sub/time.dart';
+import 'package:sizer/sizer.dart';
 
 class AddIncome extends StatefulWidget {
   final int eventID;
@@ -35,7 +36,7 @@ class _AddIncomeState extends State<AddIncome> {
         titleText: 'Add Income',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(1.h),
         child: Form(
           key: _formKey,
           child: Column(
@@ -102,12 +103,12 @@ class _AddIncomeState extends State<AddIncome> {
         _timeController.clear();
       });
       ScaffoldMessenger.of(mtx).showSnackBar(
-        const SnackBar(
-          content: Text("Successfully added"),
+        SnackBar(
+          content: const Text("Successfully added"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(1.h),
           backgroundColor: Colors.greenAccent,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }

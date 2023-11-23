@@ -17,7 +17,7 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(height: 5.h),
+              SizedBox(height: 4.h),
               SizedBox(
                 height: 10.h,
                 child: Text(
@@ -36,7 +36,7 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 5.h),
               Container(
-                height: 50.h,
+                //height: 50.h,
                 padding: const EdgeInsets.all(20.0),
                 alignment: Alignment.bottomCenter,
                 child: Column(

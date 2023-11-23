@@ -8,6 +8,7 @@ import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 
 import 'package:project_event/screen/Body/widget/sub/status.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
+import 'package:sizer/sizer.dart';
 
 class AddGuest extends StatefulWidget {
   final int eventID;
@@ -44,7 +45,7 @@ class _AddGuestState extends State<AddGuest> {
         titleText: 'Add Guest',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.h),
         child: Form(
           key: _formKey,
           child: Column(children: [
@@ -118,12 +119,12 @@ class _AddGuestState extends State<AddGuest> {
 
       await addguest(guestdata);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Successfully added"),
+        SnackBar(
+          content: const Text("Successfully added"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(2.h),
           backgroundColor: Colors.greenAccent,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
       setState(() {
@@ -139,12 +140,12 @@ class _AddGuestState extends State<AddGuest> {
       Navigator.of(context).pop();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Fill the  Name"),
+        SnackBar(
+          content: const Text("Fill the  Name"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(2.h),
           backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }

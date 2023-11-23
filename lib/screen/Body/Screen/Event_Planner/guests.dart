@@ -8,6 +8,7 @@ import 'package:project_event/screen/Body/Screen/Edit/edit_guest.dart';
 import 'package:project_event/screen/Body/Screen/Search/guest_search.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
+import 'package:sizer/sizer.dart';
 
 class Guests extends StatelessWidget {
   final int eventid;
@@ -29,7 +30,7 @@ class Guests extends StatelessWidget {
         AppAction(icon: Icons.more_vert, onPressed: () {})
       ], titleText: 'Guests'),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.2.h),
         child: ValueListenableBuilder(
           valueListenable: guestlist,
           builder: (context, value, child) {
@@ -111,7 +112,8 @@ class Guests extends StatelessWidget {
                           leading: Image.asset('assets/UI/icons/person.png'),
                           title: Text(
                             data.gname,
-                            style: raleway(color: Colors.black),
+                            style:
+                                raleway(color: Colors.black, fontSize: 15.sp),
                           ),
                           subtitle: Text(
                             data.status == 0
@@ -120,15 +122,9 @@ class Guests extends StatelessWidget {
                             style: raleway(
                               color:
                                   data.status == 0 ? Colors.red : Colors.green,
-                              fontSize: 12,
+                              fontSize: 10.sp,
                             ),
                           ),
-                          // trailing: Text(
-                          //   '+1',
-                          //   style: racingSansOne(
-                          //       color: Colors.black54,
-                          //       fontWeight: FontWeight.normal),
-                          // ),
                         ),
                       ),
                     ),
@@ -136,10 +132,10 @@ class Guests extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(
+              return Center(
                 child: Text(
                   'No Guest available',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 15.sp),
                 ),
               );
             }

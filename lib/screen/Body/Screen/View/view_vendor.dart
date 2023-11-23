@@ -3,10 +3,14 @@ import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/model/Vendors/vendors_model.dart';
+import 'package:project_event/screen/Body/Screen/Edit/edit_vendor.dart';
+import 'package:project_event/screen/Body/Screen/Search/vendor_search.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dart';
 import 'package:project_event/screen/Body/widget/box/viewbox.dart';
 import 'package:project_event/screen/Body/widget/sub/paymentbar.dart';
+import 'package:project_event/screen/Body/widget/sub/payments.dart';
+import 'package:sizer/sizer.dart';
 
 class ViewVendor extends StatelessWidget {
   final VendorsModel vendor;
@@ -21,13 +25,20 @@ class ViewVendor extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
-          AppAction(icon: Icons.delete, onPressed: () {}),
+          AppAction(
+              icon: Icons.delete,
+              onPressed: () {
+                dodeletevendor(context, vendor);
+              }),
           AppAction(
               icon: Icons.edit,
               onPressed: () {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (context) => EditBudget(vendordata: vendor),
-                // ));
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => EditVendor(
+                    vendordataway: vendor,
+                    val: 1,
+                  ),
+                ));
               }),
         ],
         titleText: ' ',
@@ -37,12 +48,12 @@ class ViewVendor extends StatelessWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+            padding: EdgeInsets.fromLTRB(1.h, 0, 1.h, 1.h),
             child: Column(children: [
-              const SizedBox(height: 20),
+              SizedBox(height: 1.h),
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(2.3.h),
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(216, 239, 225, 1),
                   boxShadow: [
@@ -61,11 +72,11 @@ class ViewVendor extends StatelessWidget {
                     ViewBoxAccommodation(
                         textcontent: 'Category', controller: vendor.category!),
                     ViewBox(textcontent: 'Note', controller: vendor.note!),
-                    const SizedBox(height: 15),
+                    SizedBox(height: 1.h),
                     ViewBox(
                         textcontent: 'Estimatrd Amount',
                         controller: vendor.esamount),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 1.h),
                     ValueListenableBuilder(
                       valueListenable: balance,
                       builder: (context, value, child) => PaymentsBar(
@@ -73,80 +84,11 @@ class ViewVendor extends StatelessWidget {
                           pending: value.pending.toString(),
                           paid: value.paid.toString()),
                     ),
-                    const SizedBox(height: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Payments', style: raleway()),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        Container(
-                          constraints: const BoxConstraints(
-                              maxHeight: 150, minHeight: 0),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: buttoncolor, width: 1),
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: ValueListenableBuilder(
-                            valueListenable: vendorPaymentDetails,
-                            builder: (context, value, child) {
-                              if (value.isNotEmpty) {
-                                return ListView.builder(
-                                  itemCount: value.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    final data = value[index];
-                                    return ListTile(
-                                      onTap: () {
-                                        // Navigator.of(context).push(MaterialPageRoute(
-                                        //     builder: (context) =>
-                                        //         EditPayments(paydata: data)));
-                                      },
-                                      leading: Image.asset(
-                                        'assets/UI/icons/person.png',
-                                      ),
-                                      title: Text(
-                                        data.name,
-                                        style: raleway(color: Colors.black),
-                                      ),
-                                      trailing: Text(
-                                        "₹${data.pyamount}",
-                                        style: racingSansOne(
-                                            color: Colors.black54,
-                                            fontWeight: FontWeight.normal),
-                                      ),
-                                    );
-                                  },
-                                );
-                              } else {
-                                return Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Image.asset('assets/UI/icons/nodata.png',
-                                          height: 70, width: 70),
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        'No Payments Found',
-                                        style: raleway(
-                                            fontSize: 13, color: Colors.black),
-                                      )
-                                    ]);
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 15),
+                    SizedBox(height: 1.h),
+                    Payments(valueListenable: vendorPaymentDetails),
                     Container(
-                      padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
+                      margin: EdgeInsets.all(1.h),
+                      padding: EdgeInsets.fromLTRB(0.5.h, 1.h, 0.5.h, 1.h),
                       decoration: BoxDecoration(
                         border: Border.all(color: buttoncolor, width: 1),
                         borderRadius: BorderRadius.circular(20.0),
@@ -157,14 +99,14 @@ class ViewVendor extends StatelessWidget {
                             'Contact Details',
                             style: raleway(),
                           ),
-                          const Divider(
+                          Divider(
                             color: buttoncolor,
-                            height: 20,
+                            height: 1.h,
                             thickness: 2,
                             endIndent: 40,
                             indent: 40,
                           ),
-                          const SizedBox(height: 15),
+                          SizedBox(height: 1.h),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

@@ -9,6 +9,7 @@ import 'package:project_event/screen/Body/Screen/Search/tasklist_search.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
+import 'package:sizer/sizer.dart';
 
 class TaskList extends StatelessWidget {
   final int eventid;
@@ -20,8 +21,7 @@ class TaskList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int eventdata = eventid;
-    refreshEventtaskdata(eventdata);
+    refreshEventtaskdata(eventid);
 
     return Scaffold(
       appBar: CustomAppBar(actions: [
@@ -35,7 +35,7 @@ class TaskList extends StatelessWidget {
         AppAction(icon: Icons.more_vert, onPressed: () {})
       ], titleText: 'Task List'),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.h),
         child: ValueListenableBuilder(
           valueListenable: taskList,
           builder: (context, value, child) {
@@ -121,7 +121,7 @@ class TaskList extends StatelessWidget {
                                   color: data.status == 0
                                       ? Colors.red
                                       : Colors.green,
-                                  fontSize: 15,
+                                  fontSize: 10.sp,
                                 ),
                               ),
                               Text(
@@ -146,10 +146,10 @@ class TaskList extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(
+              return Center(
                 child: Text(
                   'No Task available',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 10.sp),
                 ),
               );
             }
@@ -158,7 +158,7 @@ class TaskList extends StatelessWidget {
       ),
       floatingActionButton: FloatingPointx(
           goto: AddTask(
-        eventID: eventdata,
+        eventID: eventid,
       )),
     );
   }

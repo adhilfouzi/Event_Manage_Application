@@ -9,6 +9,7 @@ import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
 import 'package:project_event/screen/Body/widget/sub/time.dart';
+import 'package:sizer/sizer.dart';
 
 class EditIncome extends StatefulWidget {
   final IncomeModel paydata;
@@ -54,7 +55,7 @@ class _EditIncomeState extends State<EditIncome> {
         titleText: 'Edit Payments',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(1.h),
         child: Form(
           key: _formKey,
           child: ValueListenableBuilder(
@@ -159,12 +160,12 @@ void delectpayYes(
     Navigator.of(ctx).pop();
 
     ScaffoldMessenger.of(ctx).showSnackBar(
-      const SnackBar(
-        content: Text("Successfully Deleted"),
+      SnackBar(
+        content: const Text("Successfully Deleted"),
         behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(10),
+        margin: EdgeInsets.all(1.h),
         backgroundColor: Colors.grey,
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
   } catch (e) {

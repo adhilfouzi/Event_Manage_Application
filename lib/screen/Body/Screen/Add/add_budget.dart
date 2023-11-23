@@ -4,6 +4,7 @@ import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
 import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
+import 'package:sizer/sizer.dart';
 
 class AddBudget extends StatefulWidget {
   final int eventid;
@@ -31,7 +32,7 @@ class _AddBudgetState extends State<AddBudget> {
         titleText: 'Add Budget',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(1.h),
         child: Form(
           key: _formKey,
           child: Column(children: [
@@ -97,23 +98,23 @@ class _AddBudgetState extends State<AddBudget> {
       await addBudget(budgetdata);
       refreshBudgetData(widget.eventid);
       ScaffoldMessenger.of(mtx).showSnackBar(
-        const SnackBar(
-          content: Text("Successfully added"),
+        SnackBar(
+          content: const Text("Successfully added"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(1.h),
           backgroundColor: Colors.greenAccent,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
       Navigator.pop(mtx);
     } else {
       ScaffoldMessenger.of(mtx).showSnackBar(
-        const SnackBar(
-          content: Text("Fill the Name & Estimatrd Amount"),
+        SnackBar(
+          content: const Text("Fill the Name & Estimatrd Amount"),
           behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(2.h),
           backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }
