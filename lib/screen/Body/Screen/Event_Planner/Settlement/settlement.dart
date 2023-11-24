@@ -5,6 +5,7 @@ import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/budget_settelment.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/income_settelment.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/vendor_settlement.dart';
+import 'package:project_event/screen/Body/Screen/Search/settlement_search.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:sizer/sizer.dart';
 
@@ -23,8 +24,27 @@ class Settlement extends StatelessWidget {
           toolbarHeight: 16.h,
           backgroundColor: Colors.transparent,
           actions: [
-            AppAction(icon: Icons.search, onPressed: () {}),
-            AppAction(icon: Icons.more_vert, onPressed: () {}),
+            AppAction(
+                icon: Icons.search,
+                onPressed: () {
+                  // var index = DefaultTabController.of(context).index;
+                  // if (index == 1) {
+                  //   Navigator.of(context).push(MaterialPageRoute(
+                  //       builder: (context) =>
+                  //           BudgetSettlement(eventID: eventID)));
+                  // } else if (index == 2) {
+                  //   Navigator.of(context).push(MaterialPageRoute(
+                  //       builder: (context) =>
+                  //           VendorSettlement(eventID: eventID)));
+                  // } else if (index == 3) {
+                  //   Navigator.of(context).push(MaterialPageRoute(
+                  //       builder: (context) => const IncomeSearch()));
+                  // }
+                }),
+            SizedBox(
+              width: 2.h,
+            )
+            //  AppAction(icon: Icons.more_vert, onPressed: () {}),
           ],
           title: Text(
             'Settlement',

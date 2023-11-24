@@ -20,10 +20,8 @@ class Report extends StatelessWidget {
     refreshEventtaskdata(eventid);
     refreshguestdata(eventid);
     return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(icon: Icons.more_vert, onPressed: () {}),
-        ],
+      appBar: const CustomAppBar(
+        actions: [],
         titleText: 'Report',
       ),
       body: Padding(

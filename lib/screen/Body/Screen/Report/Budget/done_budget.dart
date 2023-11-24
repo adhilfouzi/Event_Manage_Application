@@ -15,16 +15,7 @@ class DoneRpBudget extends StatelessWidget {
   Widget build(BuildContext context) {
     // refreshBudgetData(eventid);
     return Scaffold(
-      appBar: CustomAppBar(actions: [
-        AppAction(
-            icon: Icons.search,
-            onPressed: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (ctr) => const BudgetSearch(),
-              // ));
-            }),
-        AppAction(icon: Icons.more_vert, onPressed: () {})
-      ], titleText: 'Budget'),
+      appBar: const CustomAppBar(actions: [], titleText: 'Budget'),
       body: Padding(
         padding: EdgeInsets.all(1.h),
         child: ValueListenableBuilder(

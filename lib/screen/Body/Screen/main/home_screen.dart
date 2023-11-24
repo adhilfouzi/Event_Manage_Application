@@ -33,9 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     search.value.pass = 0;
     finduser = eventList.value;
-    if (finduser.isEmpty) {
-      search.value.pass = 8;
-    }
+    // if (finduser.isEmpty) {
+    //   search.value.pass = 8;
+    // }
   }
 
   List<Eventmodel> finduser = [];

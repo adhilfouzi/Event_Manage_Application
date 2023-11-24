@@ -43,110 +43,114 @@ class _AddPaymentsState extends State<AddPayments> {
     //     paymentTypeNotifier.value.toString().split('.').last;
 
     refreshPaymentpayid(widget.eventID);
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                addPaymentclick(context);
-              }),
-        ],
-        titleText: 'Add Payments',
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(1.h),
-        child: Form(
-          key: _formKey,
-          child: ValueListenableBuilder(
-            valueListenable: paymentTypeNotifier,
-            builder: (context, value, child) {
-              return Column(children: [
-                TextFieldBlue(
-                  textcontent: 'Receiver Name',
-                  controller: _pnameController,
-                  keyType: TextInputType.name,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Name is required';
-                    }
-                    return null;
-                  },
-                ),
-                PayDown(onChanged: (String? status) {
-                  searchResults = [];
-                  setState(() {});
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  addPaymentclick(context);
                 }),
-                TextFieldBlue(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Item Name is required';
-                    }
-                    return null;
-                  },
-                  textcontent: 'Item Name',
-                  controller: searchController,
-                  onChanged: (p0) {
-                    searchResults.clear();
-
-                    paymentTypeNotifier.value == PaymentType.budget
-                        ? searchResults = budgetlist.value
-                            .where((budgetModel) => budgetModel.name
-                                .toLowerCase()
-                                .contains(p0.toLowerCase()))
-                            .toList()
-                        : searchResults = vendortlist.value
-                            .where((element) => element.name
-                                .toLowerCase()
-                                .contains(p0.toLowerCase()))
-                            .toList();
-                    setState(() {});
-                  },
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  constraints: BoxConstraints(maxHeight: 15.h, minHeight: 0),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        searchController.text = searchResults[index].name;
-
-                        setState(() {
-                          payid = searchResults[index].id;
-                        });
-                      },
-                      child: Container(
-                        margin: EdgeInsets.all(1.h),
-                        padding: EdgeInsets.all(0.5.h),
-                        child: Text(searchResults[index].name),
-                      ),
-                    ),
-                    itemCount: searchResults.length,
+          ],
+          titleText: 'Add Payments',
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.h),
+          child: Form(
+            key: _formKey,
+            child: ValueListenableBuilder(
+              valueListenable: paymentTypeNotifier,
+              builder: (context, value, child) {
+                return Column(children: [
+                  TextFieldBlue(
+                    textcontent: 'Receiver Name',
+                    controller: _pnameController,
+                    keyType: TextInputType.name,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Name is required';
+                      }
+                      return null;
+                    },
                   ),
-                ),
-                TextFieldBlue(
-                  textcontent: 'Amount',
-                  controller: _budgetController,
-                  keyType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Amount is required';
-                    }
-                    return null;
-                  },
-                ),
-                TextFieldBlue(textcontent: 'Note', controller: _noteController),
-                Date(
-                  controller: _dateController,
-                ),
-                Time(
-                  controller: _timeController,
-                )
-              ]);
-            },
+                  PayDown(onChanged: (String? status) {
+                    searchResults = [];
+                    setState(() {});
+                  }),
+                  TextFieldBlue(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Item Name is required';
+                      }
+                      return null;
+                    },
+                    textcontent: 'Item Name',
+                    controller: searchController,
+                    onChanged: (p0) {
+                      searchResults.clear();
+
+                      paymentTypeNotifier.value == PaymentType.budget
+                          ? searchResults = budgetlist.value
+                              .where((budgetModel) => budgetModel.name
+                                  .toLowerCase()
+                                  .contains(p0.toLowerCase()))
+                              .toList()
+                          : searchResults = vendortlist.value
+                              .where((element) => element.name
+                                  .toLowerCase()
+                                  .contains(p0.toLowerCase()))
+                              .toList();
+                      setState(() {});
+                    },
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  Container(
+                    constraints: BoxConstraints(maxHeight: 15.h, minHeight: 0),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () {
+                          searchController.text = searchResults[index].name;
+
+                          setState(() {
+                            payid = searchResults[index].id;
+                          });
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(1.h),
+                          padding: EdgeInsets.all(0.5.h),
+                          child: Text(searchResults[index].name),
+                        ),
+                      ),
+                      itemCount: searchResults.length,
+                    ),
+                  ),
+                  TextFieldBlue(
+                    textcontent: 'Amount',
+                    controller: _budgetController,
+                    keyType: TextInputType.number,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Amount is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFieldBlue(
+                      textcontent: 'Note', controller: _noteController),
+                  Date(
+                    controller: _dateController,
+                  ),
+                  Time(
+                    controller: _timeController,
+                  )
+                ]);
+              },
+            ),
           ),
         ),
       ),

@@ -27,76 +27,79 @@ class _EditVendorState extends State<EditVendor> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.delete,
-              onPressed: () {
-                dodeletevendor(context, widget.vendordataway);
-              }),
-          AppAction(
-              icon: Icons.contacts,
-              onPressed: () {
-                getcontact();
-              }),
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                editVendorclick(context);
-              }),
-        ],
-        titleText: 'Edit Vendors',
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(2.h),
-        child: Form(
-          key: _formKey,
-          child: Column(children: [
-            TextFieldBlue(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.delete,
+                onPressed: () {
+                  dodeletevendor(context, widget.vendordataway);
+                }),
+            AppAction(
+                icon: Icons.contacts,
+                onPressed: () {
+                  getcontact();
+                }),
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  editVendorclick(context);
+                }),
+          ],
+          titleText: 'Edit Vendors',
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(2.h),
+          child: Form(
+            key: _formKey,
+            child: Column(children: [
+              TextFieldBlue(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a Company Name';
+                    }
+                    return null;
+                  },
+                  textcontent: 'Company Name',
+                  controller: _nameController),
+              CategoryDown(
+                defaultdata: _categoryController.text,
+                onCategorySelected: (String value) {
+                  _categoryController.text = value;
+                },
+              ),
+              TextFieldBlue(textcontent: 'Note', controller: _noteController),
+              TextFieldBlue(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a Estimatrd Amount';
+                    }
+                    return null;
+                  },
+                  keyType: TextInputType.number,
+                  textcontent: 'Estimatrd Amount',
+                  controller: _budgetController),
+              TextFieldBlue(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please enter a Company Name';
+                    return 'Please enter a Client Name';
                   }
                   return null;
                 },
-                textcontent: 'Company Name',
-                controller: _nameController),
-            CategoryDown(
-              defaultdata: _categoryController.text,
-              onCategorySelected: (String value) {
-                _categoryController.text = value;
-              },
-            ),
-            TextFieldBlue(textcontent: 'Note', controller: _noteController),
-            TextFieldBlue(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter a Estimatrd Amount';
-                  }
-                  return null;
-                },
-                keyType: TextInputType.number,
-                textcontent: 'Estimatrd Amount',
-                controller: _budgetController),
-            TextFieldBlue(
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter a Client Name';
-                }
-                return null;
-              },
-              keyType: TextInputType.name,
-              textcontent: 'Client Name',
-              controller: _clientnameController,
-            ),
-            ContactState(
-                acontroller: _acontroller,
-                econtroller: _econtroller,
-                pcontroller: _phoneController),
-            // PaymentsBar(),
-            // Payments(),
-          ]),
+                keyType: TextInputType.name,
+                textcontent: 'Client Name',
+                controller: _clientnameController,
+              ),
+              ContactState(
+                  acontroller: _acontroller,
+                  econtroller: _econtroller,
+                  pcontroller: _phoneController),
+              // PaymentsBar(),
+              // Payments(),
+            ]),
+          ),
         ),
       ),
     );

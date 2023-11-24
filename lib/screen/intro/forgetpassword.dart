@@ -9,55 +9,58 @@ class ForgetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 2.h),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: 5.h),
-                Text(
-                  'Make it perfect !',
-                  style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: buttoncolor),
-                ),
-                SizedBox(height: 7.h),
-                Image.asset(
-                  'assets/UI/image/template/pass.png',
-                  height: 25.h,
-                  width: 90.w,
-                ),
-                SizedBox(height: 10.h),
-                const TextFieldBlue(
-                  obscureText: true,
-                  textcontent: 'Password',
-                ),
-                SizedBox(height: 1.5.h),
-                const TextFieldBlue(
-                  obscureText: true,
-                  textcontent: 'Confirm Password',
-                ),
-                SizedBox(height: 1.5.h),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        style: firstbutton(),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text('SetS',
-                            style: TextStyle(
-                                color: Colors.white, fontSize: 15.sp)),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 2.h),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 5.h),
+                  Text(
+                    'Make it perfect !',
+                    style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                        color: buttoncolor),
+                  ),
+                  SizedBox(height: 7.h),
+                  Image.asset(
+                    'assets/UI/image/template/pass.png',
+                    height: 25.h,
+                    width: 90.w,
+                  ),
+                  SizedBox(height: 10.h),
+                  const TextFieldBlue(
+                    obscureText: true,
+                    textcontent: 'Password',
+                  ),
+                  SizedBox(height: 1.5.h),
+                  const TextFieldBlue(
+                    obscureText: true,
+                    textcontent: 'Confirm Password',
+                  ),
+                  SizedBox(height: 1.5.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          style: firstbutton(),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('SetS',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 15.sp)),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

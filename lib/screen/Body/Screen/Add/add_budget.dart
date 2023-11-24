@@ -20,54 +20,57 @@ class _AddBudgetState extends State<AddBudget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                addGuestclick(context);
-              }),
-        ],
-        titleText: 'Add Budget',
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(1.h),
-        child: Form(
-          key: _formKey,
-          child: Column(children: [
-            TextFieldBlue(
-              textcontent: 'Name',
-              controller: _nameController,
-              keyType: TextInputType.name,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Name is required';
-                }
-                return null; // Return null if the input is valid
-              },
-            ),
-            CategoryDown(
-              onCategorySelected: (String value) {
-                _categoryController.text = value;
-              },
-            ),
-            TextFieldBlue(textcontent: 'Note', controller: _noteController),
-            TextFieldBlue(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  addGuestclick(context);
+                }),
+          ],
+          titleText: 'Add Budget',
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.h),
+          child: Form(
+            key: _formKey,
+            child: Column(children: [
+              TextFieldBlue(
+                textcontent: 'Name',
+                controller: _nameController,
+                keyType: TextInputType.name,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Estimatrd Amount is required';
+                    return 'Name is required';
                   }
                   return null; // Return null if the input is valid
                 },
-                textcontent: 'Estimatrd Amount',
-                controller: _budgetController,
-                keyType: TextInputType.number),
-            // Payments(
-            //     goto: AddPayments(
-            //   payment1: paymentdata,
-            // ))
-          ]),
+              ),
+              CategoryDown(
+                onCategorySelected: (String value) {
+                  _categoryController.text = value;
+                },
+              ),
+              TextFieldBlue(textcontent: 'Note', controller: _noteController),
+              TextFieldBlue(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Estimatrd Amount is required';
+                    }
+                    return null; // Return null if the input is valid
+                  },
+                  textcontent: 'Estimatrd Amount',
+                  controller: _budgetController,
+                  keyType: TextInputType.number),
+              // Payments(
+              //     goto: AddPayments(
+              //   payment1: paymentdata,
+              // ))
+            ]),
+          ),
         ),
       ),
     );

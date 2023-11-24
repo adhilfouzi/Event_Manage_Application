@@ -25,62 +25,65 @@ class _EditGuestState extends State<EditGuest> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.contacts,
-              onPressed: () {
-                getcontact();
-              }),
-          AppAction(
-              icon: Icons.delete,
-              onPressed: () {
-                dodeleteguest(context, widget.guestdata);
-              }),
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                editGuestclick(context, widget.guestdata);
-              }),
-        ],
-        titleText: 'Edit Guest',
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(1.2.h),
-        child: Form(
-          key: _formKey,
-          child: Column(children: [
-            TextFieldBlue(
-              textcontent: 'Name',
-              controller: _nameController,
-              keyType: TextInputType.name,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return ' name is required';
-                }
-                return null; // Return null if the input is valid
-              },
-            ),
-            SexDown(
-                onChanged: (String? status) {
-                  _sexController.text = status ?? 'Male';
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.contacts,
+                onPressed: () {
+                  getcontact();
+                }),
+            AppAction(
+                icon: Icons.delete,
+                onPressed: () {
+                  dodeleteguest(context, widget.guestdata);
+                }),
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  editGuestclick(context, widget.guestdata);
+                }),
+          ],
+          titleText: 'Edit Guest',
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.2.h),
+          child: Form(
+            key: _formKey,
+            child: Column(children: [
+              TextFieldBlue(
+                textcontent: 'Name',
+                controller: _nameController,
+                keyType: TextInputType.name,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return ' name is required';
+                  }
+                  return null; // Return null if the input is valid
                 },
-                defaultdata: _sexController.text),
-            TextFieldBlue(textcontent: 'Note', controller: _noteController),
-            StatusBar(
-              defaultdata: _statusController == 1 ? true : false,
-              onStatusChange: (bool status) {
-                _statusController = status == true ? 1 : 0;
-              },
-              textcontent1: 'Not sent',
-              textcontent2: 'Invitation sent',
-            ),
-            ContactState(
-                acontroller: _acontroller,
-                econtroller: _econtroller,
-                pcontroller: _pcontroller),
-          ]),
+              ),
+              SexDown(
+                  onChanged: (String? status) {
+                    _sexController.text = status ?? 'Male';
+                  },
+                  defaultdata: _sexController.text),
+              TextFieldBlue(textcontent: 'Note', controller: _noteController),
+              StatusBar(
+                defaultdata: _statusController == 1 ? true : false,
+                onStatusChange: (bool status) {
+                  _statusController = status == true ? 1 : 0;
+                },
+                textcontent1: 'Not sent',
+                textcontent2: 'Invitation sent',
+              ),
+              ContactState(
+                  acontroller: _acontroller,
+                  econtroller: _econtroller,
+                  pcontroller: _pcontroller),
+            ]),
+          ),
         ),
       ),
     );

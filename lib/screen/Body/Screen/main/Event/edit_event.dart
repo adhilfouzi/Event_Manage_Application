@@ -33,140 +33,143 @@ class _EditEventState extends State<EditEvent> {
   File? imageevent;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.contacts,
-              onPressed: () {
-                getcontact();
-              }),
-          AppAction(
-              icon: Icons.delete,
-              onPressed: () {
-                dodeleteevent(context, widget.event);
-              }),
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                editEventcliked(context);
-              }),
-        ],
-        titleText: 'Add Event',
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(1.h),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Text(
-                'Event Details',
-                style: raleway(fontSize: 22),
-              ),
-              Divider(
-                color: buttoncolor,
-                height: 2.h,
-                thickness: 2,
-                endIndent: 40,
-                indent: 40,
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(1.h, 3.h, 1.h, 1.h),
-                child: InkWell(
-                  onTap: () {
-                    addoneditphoto(context);
-                  },
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 20.h,
-                    child: Card(
-                      color: Colors.transparent,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(19),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: imageevent == null
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/UI/icons/addimage.png',
-                                    height: 10.h,
-                                  ),
-                                  Text(
-                                    'Add image of event',
-                                    style: raleway(color: Colors.black),
-                                  )
-                                ],
-                              )
-                            : Image.file(
-                                imageevent!,
-                                fit: BoxFit.fill,
-                              ),
-                      ),
-                    ),
-                  ),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.contacts,
+                onPressed: () {
+                  getcontact();
+                }),
+            AppAction(
+                icon: Icons.delete,
+                onPressed: () {
+                  dodeleteevent(context, widget.event);
+                }),
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  editEventcliked(context);
+                }),
+          ],
+          titleText: 'Edit Event',
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.h),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Text(
+                  'Event Details',
+                  style: raleway(fontSize: 22),
                 ),
-              ),
-              TextFieldBlue(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a Name';
-                    }
-                    return null;
-                  },
-                  keyType: TextInputType.name,
-                  textcontent: 'Event Name',
-                  controller: _eventnameController),
-              TextFieldBlue(
-                keyType: TextInputType.number,
-                textcontent: 'Budget',
-                controller: _budgetController,
-              ),
-              TextFieldBlue(
-                keyType: TextInputType.streetAddress,
-                textcontent: 'Venue',
-                posticondata: Icons.location_on,
-                controller: _locationController,
-              ),
-              TextFieldBlue(
-                textcontent: 'About',
-                controller: _aboutController,
-              ),
-              Date(
-                textdate: 'Event Day',
-                controller: _stdateController,
-              ),
-              Time(
-                defaultdata: _sttimeController.text,
-                textdate: 'Event Time',
-                controller: _sttimeController,
-              ),
-              SizedBox(height: 2.h),
-              Text(
-                'Client Details',
-                style: raleway(fontSize: 18.sp),
-              ),
-              Divider(
+                Divider(
                   color: buttoncolor,
                   height: 2.h,
                   thickness: 2,
                   endIndent: 40,
-                  indent: 40),
-              TextFieldBlue(
-                keyType: TextInputType.name,
-                textcontent: 'Client Name',
-                controller: _clientnameController,
-              ),
-              ContactState(
-                acontroller: _addressController,
-                econtroller: _emailController,
-                pcontroller: _pnoController,
-              )
-            ],
+                  indent: 40,
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(1.h, 3.h, 1.h, 1.h),
+                  child: InkWell(
+                    onTap: () {
+                      addoneditphoto(context);
+                    },
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 20.h,
+                      child: Card(
+                        color: Colors.transparent,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(19),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: imageevent == null
+                              ? Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/UI/icons/addimage.png',
+                                      height: 10.h,
+                                    ),
+                                    Text(
+                                      'Add image of event',
+                                      style: raleway(color: Colors.black),
+                                    )
+                                  ],
+                                )
+                              : Image.file(
+                                  imageevent!,
+                                  fit: BoxFit.fill,
+                                ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                TextFieldBlue(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter a Name';
+                      }
+                      return null;
+                    },
+                    keyType: TextInputType.name,
+                    textcontent: 'Event Name',
+                    controller: _eventnameController),
+                TextFieldBlue(
+                  keyType: TextInputType.number,
+                  textcontent: 'Budget',
+                  controller: _budgetController,
+                ),
+                TextFieldBlue(
+                  keyType: TextInputType.streetAddress,
+                  textcontent: 'Venue',
+                  posticondata: Icons.location_on,
+                  controller: _locationController,
+                ),
+                TextFieldBlue(
+                  textcontent: 'About',
+                  controller: _aboutController,
+                ),
+                Date(
+                  textdate: 'Event Day',
+                  controller: _stdateController,
+                ),
+                Time(
+                  defaultdata: _sttimeController.text,
+                  textdate: 'Event Time',
+                  controller: _sttimeController,
+                ),
+                SizedBox(height: 2.h),
+                Text(
+                  'Client Details',
+                  style: raleway(fontSize: 18.sp),
+                ),
+                Divider(
+                    color: buttoncolor,
+                    height: 2.h,
+                    thickness: 2,
+                    endIndent: 40,
+                    indent: 40),
+                TextFieldBlue(
+                  keyType: TextInputType.name,
+                  textcontent: 'Client Name',
+                  controller: _clientnameController,
+                ),
+                ContactState(
+                  acontroller: _addressController,
+                  econtroller: _emailController,
+                  pcontroller: _pnoController,
+                )
+              ],
+            ),
           ),
         ),
       ),

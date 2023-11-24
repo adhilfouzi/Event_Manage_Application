@@ -23,60 +23,63 @@ class _EditTaskState extends State<EditTask> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(actions: [
-        AppAction(icon: Icons.contacts, onPressed: () {}),
-        AppAction(
-            icon: Icons.delete,
-            onPressed: () {
-              dodeletetask(context, widget.taskdata);
-            }),
-        AppAction(
-            icon: Icons.done,
-            onPressed: () {
-              edittaskclicked(context, widget.taskdata);
-              Navigator.of(context).pop();
-            })
-      ], titleText: 'Edit Task'),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(1.5.h),
-        child: Form(
-          key: _formKey,
-          child: Column(children: [
-            TextFieldBlue(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Task name is required';
-                  }
-                  return null; // Return null if the input is valid
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(actions: [
+          AppAction(icon: Icons.contacts, onPressed: () {}),
+          AppAction(
+              icon: Icons.delete,
+              onPressed: () {
+                dodeletetask(context, widget.taskdata);
+              }),
+          AppAction(
+              icon: Icons.done,
+              onPressed: () {
+                edittaskclicked(context, widget.taskdata);
+                Navigator.of(context).pop();
+              })
+        ], titleText: 'Edit Task'),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.5.h),
+          child: Form(
+            key: _formKey,
+            child: Column(children: [
+              TextFieldBlue(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Task name is required';
+                    }
+                    return null; // Return null if the input is valid
+                  },
+                  keyType: TextInputType.name,
+                  textcontent: 'Task Name',
+                  controller: _tasknameController),
+              CategoryDown(
+                defaultdata: _categoryController.text,
+                onCategorySelected: (String value) {
+                  _categoryController.text = value;
                 },
-                keyType: TextInputType.name,
-                textcontent: 'Task Name',
-                controller: _tasknameController),
-            CategoryDown(
-              defaultdata: _categoryController.text,
-              onCategorySelected: (String value) {
-                _categoryController.text = value;
-              },
-            ),
-            TextFieldBlue(textcontent: 'Note', controller: _noteController),
-            StatusBar(
-              defaultdata: _statusController == 1 ? true : false,
-              textcontent1: 'Pending',
-              textcontent2: 'Completed',
-              onStatusChange: (bool status) {
-                _statusController = status == true ? 1 : 0;
-              },
-            ),
-            Date(
-              defaultdata: _dateController.text,
-              controller: _dateController,
-            ),
-            // SubTask(
-            //   subtasks: [],
-            //   goto: AddSubTask(),
-            // )
-          ]),
+              ),
+              TextFieldBlue(textcontent: 'Note', controller: _noteController),
+              StatusBar(
+                defaultdata: _statusController == 1 ? true : false,
+                textcontent1: 'Pending',
+                textcontent2: 'Completed',
+                onStatusChange: (bool status) {
+                  _statusController = status == true ? 1 : 0;
+                },
+              ),
+              Date(
+                defaultdata: _dateController.text,
+                controller: _dateController,
+              ),
+              // SubTask(
+              //   subtasks: [],
+              //   goto: AddSubTask(),
+              // )
+            ]),
+          ),
         ),
       ),
     );

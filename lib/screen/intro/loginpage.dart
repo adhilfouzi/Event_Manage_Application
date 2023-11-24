@@ -11,108 +11,111 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(height: 4.h),
-              SizedBox(
-                height: 10.h,
-                child: Text(
-                  'Welcome Back !',
-                  style: TextStyle(
-                      fontSize: 3.5.h,
-                      fontWeight: FontWeight.bold,
-                      color: buttoncolor),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(height: 4.h),
+                SizedBox(
+                  height: 10.h,
+                  child: Text(
+                    'Welcome Back !',
+                    style: TextStyle(
+                        fontSize: 3.5.h,
+                        fontWeight: FontWeight.bold,
+                        color: buttoncolor),
+                  ),
                 ),
-              ),
-              //SizedBox(height: 5.h),
-              Image.asset(
-                'assets/UI/image/template/login.png',
-                height: 20.h,
-                width: 90.w,
-              ),
-              SizedBox(height: 5.h),
-              Container(
-                //height: 50.h,
-                padding: const EdgeInsets.all(20.0),
-                alignment: Alignment.bottomCenter,
-                child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const TextFieldBlue(
-                        textcontent: 'Email ',
-                        keyType: TextInputType.emailAddress),
-                    const SizedBox(height: 5),
-                    const TextFieldBlue(
-                        obscureText: true,
-                        textcontent: 'Password',
-                        keyType: TextInputType.emailAddress),
-                    // const SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const ForgetPassword(),
-                            ),
-                          );
-                        },
-                        child: const Text(
-                          'Forget your password ?',
-                          style: TextStyle(color: buttoncolor),
+                //SizedBox(height: 5.h),
+                Image.asset(
+                  'assets/UI/image/template/login.png',
+                  height: 20.h,
+                  width: 90.w,
+                ),
+                SizedBox(height: 5.h),
+                Container(
+                  //height: 50.h,
+                  padding: const EdgeInsets.all(20.0),
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const TextFieldBlue(
+                          textcontent: 'Email ',
+                          keyType: TextInputType.emailAddress),
+                      const SizedBox(height: 5),
+                      const TextFieldBlue(
+                          obscureText: true,
+                          textcontent: 'Password',
+                          keyType: TextInputType.emailAddress),
+                      // const SizedBox(height: 10),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const ForgetPassword(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'Forget your password ?',
+                            style: TextStyle(color: buttoncolor),
+                          ),
                         ),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            style: firstbutton(),
-                            onPressed: () {
-                              Navigator.of(context).pushAndRemoveUntil(
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              style: firstbutton(),
+                              onPressed: () {
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                      builder: (context) => const MainBottom(),
+                                    ),
+                                    (route) => false);
+                              },
+                              child: Text('Login',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15.sp)),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 1.5.h),
+                      const Text('If you are new here',
+                          style: TextStyle(color: buttoncolor)),
+                      SizedBox(height: 1.5.h),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              style: secbutton(),
+                              onPressed: () {
+                                Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => const MainBottom(),
+                                    builder: (context) => const SignupScreen(),
                                   ),
-                                  (route) => false);
-                            },
-                            child: Text('Login',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15.sp)),
+                                );
+                              },
+                              child: Text('Signup',
+                                  style: TextStyle(
+                                      color: buttoncolor, fontSize: 15.sp)),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 1.5.h),
-                    const Text('If you are new here',
-                        style: TextStyle(color: buttoncolor)),
-                    SizedBox(height: 1.5.h),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            style: secbutton(),
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const SignupScreen(),
-                                ),
-                              );
-                            },
-                            child: Text('Signup',
-                                style: TextStyle(
-                                    color: buttoncolor, fontSize: 15.sp)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

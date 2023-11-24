@@ -9,7 +9,8 @@ class Time extends StatefulWidget {
   final String? textdate;
   final String? defaultdata;
 
-  const Time({super.key, this.controller, this.textdate, this.defaultdata});
+  const Time({Key? key, this.controller, this.textdate, this.defaultdata})
+      : super(key: key);
 
   @override
   State<Time> createState() => _TimeState();
@@ -43,11 +44,18 @@ class _TimeState extends State<Time> {
   }
 
   String _formatTime(DateTime time) {
-    return DateFormat('HH:mm').format(time);
+    // Use 'hh:mm a' to display time in 12-hour format with AM/PM
+    return DateFormat('hh:mm a').format(time);
   }
 
   Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
+    // Set the dayPeriodTextColor for AM/PM color
+    TimePickerThemeData timePickerTheme = TimePickerTheme.of(context);
+    timePickerTheme =
+        timePickerTheme.copyWith(dayPeriodTextColor: buttoncolor[700]);
+
+    // Show the time picker
+    final picked = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.fromDateTime(selectedTime),
     );

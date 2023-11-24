@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/appinfo.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/calender.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/favorite.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/feedback.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/reset.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/terms.dart';
 import 'package:project_event/screen/Body/widget/List/listtiledrawer.dart';
@@ -12,7 +10,7 @@ import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfileAccount extends StatelessWidget {
-  const ProfileAccount({Key? key});
+  const ProfileAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class ProfileAccount extends StatelessWidget {
         return false;
       },
       child: Scaffold(
-        appBar: CustomAppBar(actions: [], titleText: 'Profile'),
+        appBar: const CustomAppBar(actions: [], titleText: 'Profile'),
         body: Padding(
           padding: EdgeInsets.all(1.h),
           child: Column(
@@ -39,7 +37,7 @@ class ProfileAccount extends StatelessWidget {
                 ),
                 child: Container(
                   height: 20.h,
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -61,14 +59,14 @@ class ProfileAccount extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 4.0),
+                          const SizedBox(height: 4.0),
                           Text(
                             "abhishekmishra@gmail.com",
                             style: TextStyle(fontSize: 8.sp),
                           ),
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),
@@ -77,46 +75,45 @@ class ProfileAccount extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(height: 2.h),
-                      ListTileDrawer(
-                        map: Privacy(),
-                        imagedata: 'assets/UI/icons/icons8-settings-500.png',
-                        textdata: 'Settings++++',
-                      ),
-                      SizedBox(height: 2.h),
-                      ListTileDrawer(
+                      // SizedBox(height: 1.h),
+                      // const ListTileDrawer(
+                      //   so: 1,
+                      //   map: Privacy(),
+                      //   imagedata: 'assets/UI/icons/icons8-settings-500.png',
+                      //   textdata: 'Settings++++',
+                      // ),
+                      SizedBox(height: 1.h),
+                      const ListTileDrawer(
+                        so: 1,
                         map: Favorite(),
                         imagedata: 'assets/UI/icons/favorite.png',
                         textdata: 'Favorite',
                       ),
-                      SizedBox(height: 2.h),
-                      ListTileDrawer(
-                        map: Calender(),
-                        imagedata: 'assets/UI/icons/calendar.png',
-                        textdata: 'Calendar',
-                      ),
-                      SizedBox(height: 2.h),
-                      ListTileDrawer(
+                      SizedBox(height: 1.h),
+                      const ListTileDrawer(
+                        so: 1,
                         map: AppInfo(),
                         imagedata: 'assets/UI/icons/about us.png',
                         textdata: 'App info',
                       ),
-                      SizedBox(height: 2.h),
-                      ListTileDrawerEmail(),
-                      SizedBox(height: 2.h),
-                      ListTileDrawer(
-                        map: Privacy(),
+                      SizedBox(height: 1.h),
+                      const ListTileDrawerEmail(),
+                      SizedBox(height: 1.h),
+                      const ListTileDrawer(
+                        so: 2,
                         imagedata: 'assets/UI/icons/privacy.png',
                         textdata: 'Privacy',
                       ),
-                      SizedBox(height: 2.h),
-                      ListTileDrawer(
+                      SizedBox(height: 1.h),
+                      const ListTileDrawer(
+                        so: 3,
                         map: Terms(),
                         imagedata: 'assets/UI/icons/terms of service.png',
                         textdata: 'Terms of Service',
                       ),
-                      SizedBox(height: 2.h),
-                      ListTileDrawer(
+                      SizedBox(height: 1.h),
+                      const ListTileDrawer(
+                        so: 1,
                         map: Reset(),
                         imagedata: 'assets/UI/icons/backup.png',
                         textdata: 'Reset Data',

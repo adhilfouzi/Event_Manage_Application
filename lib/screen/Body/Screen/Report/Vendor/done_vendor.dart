@@ -14,16 +14,7 @@ class DoneRpVendorList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(actions: [
-        AppAction(
-            icon: Icons.search,
-            onPressed: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (ctr) => const VendorSearch(),
-              // ));
-            }),
-        AppAction(icon: Icons.more_vert, onPressed: () {})
-      ], titleText: 'Vendors'),
+      appBar: const CustomAppBar(actions: [], titleText: 'Vendors'),
       body: Padding(
         padding: EdgeInsets.all(1.h),
         child: ValueListenableBuilder(

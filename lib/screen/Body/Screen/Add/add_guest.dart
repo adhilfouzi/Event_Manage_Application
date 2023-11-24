@@ -28,55 +28,58 @@ class _AddGuestState extends State<AddGuest> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.contacts,
-              onPressed: () {
-                getcontact();
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.contacts,
+                onPressed: () {
+                  getcontact();
+                }),
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  addGuestclick(context);
+                }),
+          ],
+          titleText: 'Add Guest',
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.h),
+          child: Form(
+            key: _formKey,
+            child: Column(children: [
+              TextFieldBlue(
+                textcontent: 'Name',
+                controller: _nameController,
+                keyType: TextInputType.name,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Name is required';
+                  }
+                  return null; // Return null if the input is valid
+                },
+              ),
+              SexDown(onChanged: (String? status) {
+                _sexController.text = status ?? 'Male';
               }),
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                addGuestclick(context);
-              }),
-        ],
-        titleText: 'Add Guest',
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(1.h),
-        child: Form(
-          key: _formKey,
-          child: Column(children: [
-            TextFieldBlue(
-              textcontent: 'Name',
-              controller: _nameController,
-              keyType: TextInputType.name,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Name is required';
-                }
-                return null; // Return null if the input is valid
-              },
-            ),
-            SexDown(onChanged: (String? status) {
-              _sexController.text = status ?? 'Male';
-            }),
-            TextFieldBlue(textcontent: 'Note', controller: _noteController),
-            StatusBar(
-              onStatusChange: (bool status) {
-                _statusController = status == true ? 1 : 0;
-              },
-              textcontent1: 'Not sent',
-              textcontent2: 'Invitation sent',
-            ),
-            ContactState(
-                acontroller: _acontroller,
-                econtroller: _econtroller,
-                pcontroller: _pcontroller),
-            // Compamions(goto: AddCompanions())
-          ]),
+              TextFieldBlue(textcontent: 'Note', controller: _noteController),
+              StatusBar(
+                onStatusChange: (bool status) {
+                  _statusController = status == true ? 1 : 0;
+                },
+                textcontent1: 'Not sent',
+                textcontent2: 'Invitation sent',
+              ),
+              ContactState(
+                  acontroller: _acontroller,
+                  econtroller: _econtroller,
+                  pcontroller: _pcontroller),
+              // Compamions(goto: AddCompanions())
+            ]),
+          ),
         ),
       ),
     );

@@ -44,119 +44,123 @@ class _EditPaymentsState extends State<EditPayments> {
   Widget build(BuildContext context) {
     refreshPaymentpayid(widget.paydata.eventid);
 
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.delete,
-              onPressed: () {
-                dodeletepayment(context, widget.paydata);
-              }),
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                editPaymentclick(context);
-              }),
-        ],
-        titleText: 'Edit Payments',
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(1.h),
-        child: Form(
-          key: _formKey,
-          child: ValueListenableBuilder(
-            valueListenable: paymentTypeNotifier,
-            builder: (context, value, child) {
-              log(paymentTypeNotifier.value.toString());
-              return Column(children: [
-                TextFieldBlue(
-                  textcontent: 'Receiver Name',
-                  controller: _pnameController,
-                  keyType: TextInputType.name,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Name is required';
-                    }
-                    return null;
-                  },
-                ),
-                PayDown(
-                    defaultdata: widget.paydata.paytype,
-                    onChanged: (String? status) {
-                      searchResults = [];
-                      setState(() {});
-                    }),
-                TextFieldBlue(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Item Name is required';
-                    }
-                    return null;
-                  },
-                  textcontent: 'Item Name',
-                  controller: searchController,
-                  onChanged: (p0) {
-                    searchResults.clear();
-                    paymentTypeNotifier.value == PaymentType.budget
-                        ? searchResults = budgetlist.value
-                            .where((budgetModel) => budgetModel.name
-                                .toLowerCase()
-                                .contains(p0.toLowerCase()))
-                            .toList()
-                        : searchResults = vendortlist.value
-                            .where((element) => element.name
-                                .toLowerCase()
-                                .contains(p0.toLowerCase()))
-                            .toList();
-                    setState(() {});
-                  },
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  constraints: BoxConstraints(maxHeight: 15.h, minHeight: 0),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        searchController.text = searchResults[index].name;
-
-                        setState(() {
-                          payid = searchResults[index].id;
-                        });
-                      },
-                      child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 1.h),
-                        padding: EdgeInsets.all(1.h),
-                        child: Text(searchResults[index].name),
-                      ),
-                    ),
-                    itemCount: searchResults.length,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.delete,
+                onPressed: () {
+                  dodeletepayment(context, widget.paydata);
+                }),
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  editPaymentclick(context);
+                }),
+          ],
+          titleText: 'Edit Payments',
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.h),
+          child: Form(
+            key: _formKey,
+            child: ValueListenableBuilder(
+              valueListenable: paymentTypeNotifier,
+              builder: (context, value, child) {
+                log(paymentTypeNotifier.value.toString());
+                return Column(children: [
+                  TextFieldBlue(
+                    textcontent: 'Receiver Name',
+                    controller: _pnameController,
+                    keyType: TextInputType.name,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Name is required';
+                      }
+                      return null;
+                    },
                   ),
-                ),
-                TextFieldBlue(
-                  textcontent: 'Amount',
-                  controller: _budgetController,
-                  keyType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Amount is required';
-                    }
-                    return null;
-                  },
-                ),
-                TextFieldBlue(textcontent: 'Note', controller: _noteController),
-                Date(
-                  defaultdata: _dateController.text,
-                  controller: _dateController,
-                ),
-                Time(
-                  defaultdata: _timeController.text,
-                  controller: _timeController,
-                )
-              ]);
-            },
+                  PayDown(
+                      defaultdata: widget.paydata.paytype,
+                      onChanged: (String? status) {
+                        searchResults = [];
+                        setState(() {});
+                      }),
+                  TextFieldBlue(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Item Name is required';
+                      }
+                      return null;
+                    },
+                    textcontent: 'Item Name',
+                    controller: searchController,
+                    onChanged: (p0) {
+                      searchResults.clear();
+                      paymentTypeNotifier.value == PaymentType.budget
+                          ? searchResults = budgetlist.value
+                              .where((budgetModel) => budgetModel.name
+                                  .toLowerCase()
+                                  .contains(p0.toLowerCase()))
+                              .toList()
+                          : searchResults = vendortlist.value
+                              .where((element) => element.name
+                                  .toLowerCase()
+                                  .contains(p0.toLowerCase()))
+                              .toList();
+                      setState(() {});
+                    },
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  Container(
+                    constraints: BoxConstraints(maxHeight: 15.h, minHeight: 0),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () {
+                          searchController.text = searchResults[index].name;
+
+                          setState(() {
+                            payid = searchResults[index].id;
+                          });
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 1.h),
+                          padding: EdgeInsets.all(1.h),
+                          child: Text(searchResults[index].name),
+                        ),
+                      ),
+                      itemCount: searchResults.length,
+                    ),
+                  ),
+                  TextFieldBlue(
+                    textcontent: 'Amount',
+                    controller: _budgetController,
+                    keyType: TextInputType.number,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Amount is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFieldBlue(
+                      textcontent: 'Note', controller: _noteController),
+                  Date(
+                    defaultdata: _dateController.text,
+                    controller: _dateController,
+                  ),
+                  Time(
+                    defaultdata: _timeController.text,
+                    controller: _timeController,
+                  )
+                ]);
+              },
+            ),
           ),
         ),
       ),

@@ -39,12 +39,37 @@ class ContactState extends StatelessWidget {
             indent: 40,
           ),
           TextFieldBlue(
+            validator: (value) {
+              if (value!.isNotEmpty) {
+                final phoneNumberWithoutSpaces = value.replaceAll(' ', '');
+
+                if (phoneNumberWithoutSpaces.startsWith('+') &&
+                    phoneNumberWithoutSpaces.length >= 13) {
+                  return null;
+                } else if (!phoneNumberWithoutSpaces.startsWith('+') &&
+                    phoneNumberWithoutSpaces.length == 10) {
+                  return null;
+                } else {
+                  return 'Enter a valid phone number';
+                }
+              }
+              return null;
+            },
             keyType: TextInputType.phone,
             controller: pcontroller,
             textcontent: 'Phone Number',
             posticondata: Icons.call,
           ),
           TextFieldBlue(
+            validator: (value) {
+              if (value!.isNotEmpty) {
+                if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+                    .hasMatch(value)) {
+                  return 'Enter a valid email address';
+                }
+              }
+              return null;
+            },
             keyType: TextInputType.emailAddress,
             controller: econtroller,
             textcontent: 'Email Id',

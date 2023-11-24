@@ -25,49 +25,52 @@ class _AddTaskState extends State<AddTask> {
   @override
   Widget build(BuildContext context) {
     log(widget.eventID.toString());
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                addTaskclick(context);
-              }),
-        ],
-        titleText: 'Add Task',
-      ),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(2.h),
-          child: Column(children: [
-            TextFieldBlue(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Task name is required';
-                  }
-                  return null;
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  addTaskclick(context);
+                }),
+          ],
+          titleText: 'Add Task',
+        ),
+        body: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(2.h),
+            child: Column(children: [
+              TextFieldBlue(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Task name is required';
+                    }
+                    return null;
+                  },
+                  keyType: TextInputType.name,
+                  textcontent: 'Task Name',
+                  controller: _tasknameController),
+              CategoryDown(
+                onCategorySelected: (String value) {
+                  _categoryController.text = value;
                 },
-                keyType: TextInputType.name,
-                textcontent: 'Task Name',
-                controller: _tasknameController),
-            CategoryDown(
-              onCategorySelected: (String value) {
-                _categoryController.text = value;
-              },
-            ),
-            TextFieldBlue(textcontent: 'Note', controller: _noteController),
-            StatusBar(
-              textcontent1: 'Pending',
-              textcontent2: 'Completed',
-              onStatusChange: (bool status) {
-                _statusController = status == true ? 1 : 0;
-              },
-            ),
-            Date(
-              controller: _dateController,
-            ),
-          ]),
+              ),
+              TextFieldBlue(textcontent: 'Note', controller: _noteController),
+              StatusBar(
+                textcontent1: 'Pending',
+                textcontent2: 'Completed',
+                onStatusChange: (bool status) {
+                  _statusController = status == true ? 1 : 0;
+                },
+              ),
+              Date(
+                controller: _dateController,
+              ),
+            ]),
+          ),
         ),
       ),
     );

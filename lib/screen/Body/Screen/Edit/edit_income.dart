@@ -38,64 +38,68 @@ class _EditIncomeState extends State<EditIncome> {
   Widget build(BuildContext context) {
     refreshPaymentpayid(widget.paydata.eventid);
 
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.delete,
-              onPressed: () {
-                dodeleteincome(context, widget.paydata);
-              }),
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                editPaymentclick(context);
-              }),
-        ],
-        titleText: 'Edit Payments',
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(1.h),
-        child: Form(
-          key: _formKey,
-          child: ValueListenableBuilder(
-            valueListenable: paymentTypeNotifier,
-            builder: (context, value, child) {
-              log(paymentTypeNotifier.value.toString());
-              return Column(children: [
-                TextFieldBlue(
-                  textcontent: 'Receiver Name',
-                  controller: _pnameController,
-                  keyType: TextInputType.name,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Name is required';
-                    }
-                    return null;
-                  },
-                ),
-                TextFieldBlue(
-                  textcontent: 'Amount',
-                  controller: _budgetController,
-                  keyType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Amount is required';
-                    }
-                    return null;
-                  },
-                ),
-                TextFieldBlue(textcontent: 'Note', controller: _noteController),
-                Date(
-                  defaultdata: _dateController.text,
-                  controller: _dateController,
-                ),
-                Time(
-                  defaultdata: _timeController.text,
-                  controller: _timeController,
-                )
-              ]);
-            },
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.delete,
+                onPressed: () {
+                  dodeleteincome(context, widget.paydata);
+                }),
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  editPaymentclick(context);
+                }),
+          ],
+          titleText: 'Edit Payments',
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.h),
+          child: Form(
+            key: _formKey,
+            child: ValueListenableBuilder(
+              valueListenable: paymentTypeNotifier,
+              builder: (context, value, child) {
+                log(paymentTypeNotifier.value.toString());
+                return Column(children: [
+                  TextFieldBlue(
+                    textcontent: 'Receiver Name',
+                    controller: _pnameController,
+                    keyType: TextInputType.name,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Name is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFieldBlue(
+                    textcontent: 'Amount',
+                    controller: _budgetController,
+                    keyType: TextInputType.number,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Amount is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFieldBlue(
+                      textcontent: 'Note', controller: _noteController),
+                  Date(
+                    defaultdata: _dateController.text,
+                    controller: _dateController,
+                  ),
+                  Time(
+                    defaultdata: _timeController.text,
+                    controller: _timeController,
+                  )
+                ]);
+              },
+            ),
           ),
         ),
       ),

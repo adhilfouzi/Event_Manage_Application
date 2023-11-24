@@ -149,7 +149,7 @@ class TaskList extends StatelessWidget {
               return Center(
                 child: Text(
                   'No Task available',
-                  style: TextStyle(fontSize: 10.sp),
+                  style: TextStyle(fontSize: 15.sp),
                 ),
               );
             }

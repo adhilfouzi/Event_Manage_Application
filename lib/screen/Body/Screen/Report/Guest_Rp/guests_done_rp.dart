@@ -13,10 +13,7 @@ class DoneRpGuests extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(actions: [
-        AppAction(icon: Icons.search, onPressed: () {}),
-        AppAction(icon: Icons.more_vert, onPressed: () {})
-      ], titleText: 'Guests List'),
+      appBar: const CustomAppBar(actions: [], titleText: 'Guests List'),
       body: Padding(
         padding: EdgeInsets.all(1.h),
         child: ValueListenableBuilder(

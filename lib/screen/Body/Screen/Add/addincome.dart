@@ -24,53 +24,56 @@ class _AddIncomeState extends State<AddIncome> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                addincomeclick(context);
-              }),
-        ],
-        titleText: 'Add Income',
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(1.h),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFieldBlue(
-                textcontent: 'Name',
-                controller: _pnameController,
-                keyType: TextInputType.name,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Name is required';
-                  }
-                  return null;
-                },
-              ),
-              TextFieldBlue(
-                textcontent: 'Amount',
-                controller: _budgetController,
-                keyType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Amount is required';
-                  }
-                  return null;
-                },
-              ),
-              TextFieldBlue(textcontent: 'Note', controller: _noteController),
-              Date(
-                controller: _dateController,
-              ),
-              Time(
-                controller: _timeController,
-              )
-            ],
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  addincomeclick(context);
+                }),
+          ],
+          titleText: 'Add Income',
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.h),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFieldBlue(
+                  textcontent: 'Name',
+                  controller: _pnameController,
+                  keyType: TextInputType.name,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Name is required';
+                    }
+                    return null;
+                  },
+                ),
+                TextFieldBlue(
+                  textcontent: 'Amount',
+                  controller: _budgetController,
+                  keyType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Amount is required';
+                    }
+                    return null;
+                  },
+                ),
+                TextFieldBlue(textcontent: 'Note', controller: _noteController),
+                Date(
+                  controller: _dateController,
+                ),
+                Time(
+                  controller: _timeController,
+                )
+              ],
+            ),
           ),
         ),
       ),

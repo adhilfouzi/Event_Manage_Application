@@ -19,58 +19,61 @@ class _EditBudgetState extends State<EditBudget> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        actions: [
-          AppAction(
-              icon: Icons.delete,
-              onPressed: () {
-                dodeletebudget(context, widget.budgetdata);
-              }),
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                editGuestclick(context, widget.budgetdata);
-              }),
-        ],
-        titleText: 'Edit Budget',
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(1.h),
-        child: Form(
-          key: _formKey,
-          child: Column(children: [
-            TextFieldBlue(
-              textcontent: 'Name',
-              controller: _nameController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return ' name is required';
-                }
-                return null; // Return null if the input is valid
-              },
-            ),
-            CategoryDown(
-              defaultdata: _categoryController.text,
-              onCategorySelected: (String value) {
-                _categoryController.text = value;
-              },
-            ),
-            TextFieldBlue(textcontent: 'Note', controller: _noteController),
-            TextFieldBlue(
-              keyType: TextInputType.number,
-              textcontent: 'Estimatrd Amount',
-              controller: _budgetController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return ' Estimatrd Amount is required';
-                }
-                return null;
-              },
-            ),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          actions: [
+            AppAction(
+                icon: Icons.delete,
+                onPressed: () {
+                  dodeletebudget(context, widget.budgetdata);
+                }),
+            AppAction(
+                icon: Icons.done,
+                onPressed: () {
+                  editGuestclick(context, widget.budgetdata);
+                }),
+          ],
+          titleText: 'Edit Budget',
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.h),
+          child: Form(
+            key: _formKey,
+            child: Column(children: [
+              TextFieldBlue(
+                textcontent: 'Name',
+                controller: _nameController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return ' name is required';
+                  }
+                  return null; // Return null if the input is valid
+                },
+              ),
+              CategoryDown(
+                defaultdata: _categoryController.text,
+                onCategorySelected: (String value) {
+                  _categoryController.text = value;
+                },
+              ),
+              TextFieldBlue(textcontent: 'Note', controller: _noteController),
+              TextFieldBlue(
+                keyType: TextInputType.number,
+                textcontent: 'Estimatrd Amount',
+                controller: _budgetController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return ' Estimatrd Amount is required';
+                  }
+                  return null;
+                },
+              ),
 
-            // Payments(goto: AddPayments())
-          ]),
+              // Payments(goto: AddPayments())
+            ]),
+          ),
         ),
       ),
     );
