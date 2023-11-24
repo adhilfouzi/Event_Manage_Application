@@ -33,6 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     search.value.pass = 0;
     finduser = eventList.value;
+    if (finduser.isEmpty) {
+      search.value.pass = 8;
+    }
   }
 
   List<Eventmodel> finduser = [];
@@ -92,7 +95,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     : Ionicons.close_outline,
                 sizer: 4.h,
                 onPressed: () {
-                  print("Before - search.value.pass: ${search.value.pass}");
                   setState(() {
                     if (search.value.pass == 0) {
                       search.value.pass = 8;
@@ -102,7 +104,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       FocusScope.of(context).unfocus();
                     }
                   });
-                  print("After - search.value.pass: ${search.value.pass}");
                 },
               ),
               AppAction(
@@ -123,8 +124,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: TextFieldicon(
                       onChanged: (value) => _runFilter(value),
                       controller: searchController,
-                      icondata: Icons.search,
-                      textcontent: 'Search event',
+                      // icondata: Icons.search,
+                      textcontent: 'Search event...',
                     ),
                   );
                 },

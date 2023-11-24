@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
+import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:sizer/sizer.dart';
 
@@ -52,11 +53,11 @@ class _ResetState extends State<Reset> {
                       onPressed: () {
                         if (checkboxValue == true) {
                           clearDb();
-
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                              builder: (context) => const HomeScreen(),
+                              builder: (context) => const MainBottom(),
                             ),
+                            (route) => false,
                           );
                         } else {
                           return;

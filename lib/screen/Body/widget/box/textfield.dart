@@ -4,14 +4,14 @@ import 'package:sizer/sizer.dart';
 
 class TextFieldicon extends StatelessWidget {
   final TextEditingController controller;
-  final IconData icondata;
+  final IconData? icondata;
   final String textcontent;
   final void Function(String)? onChanged;
 
   const TextFieldicon({
     super.key,
     required this.controller,
-    required this.icondata,
+    this.icondata,
     required this.textcontent,
     this.onChanged,
   });
@@ -28,14 +28,14 @@ class TextFieldicon extends StatelessWidget {
         onChanged: onChanged,
         controller: controller,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(
-              horizontal: 1.h, vertical: 1.h), // Adjust vertical padding.
+          // contentPadding: EdgeInsets.symmetric(
+          //     horizontal: 0.5.h, vertical: 0.5.h), // Adjust vertical padding.
           prefixIcon: Icon(icondata, size: 4.h), // Increase the icon size.
           hintText: textcontent,
           hintStyle: raleway(
               color: Colors.black,
               fontWeight: FontWeight.normal,
-              fontSize: 12.sp),
+              fontSize: 14.sp),
           border: InputBorder.none,
         ),
       ),

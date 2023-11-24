@@ -51,9 +51,9 @@ class Entry extends StatelessWidget {
                   children: [
                     Text(
                       'Life is only once, Enjoy your life!',
-                      style: TextStyle(color: Colors.white, fontSize: 1.7.h),
+                      style: TextStyle(color: Colors.white, fontSize: 10.sp),
                     ),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: 1.h),
                     Row(
                       children: [
                         Expanded(
@@ -73,14 +73,14 @@ class Entry extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: 1.h),
                     const Text(
                       'OR',
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: 1.h),
                     Row(
                       children: [
                         Expanded(
