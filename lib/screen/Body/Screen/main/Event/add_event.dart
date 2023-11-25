@@ -238,16 +238,6 @@ class _AddEventState extends State<AddEvent> {
           ),
         );
       }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text("Fill the Task Name"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(2.h),
-          backgroundColor: Colors.red,
-          duration: const Duration(seconds: 2),
-        ),
-      );
     }
   }
 

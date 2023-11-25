@@ -5,7 +5,6 @@ import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/budget_settelment.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/income_settelment.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/vendor_settlement.dart';
-import 'package:project_event/screen/Body/Screen/Search/settlement_search.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:sizer/sizer.dart';
 

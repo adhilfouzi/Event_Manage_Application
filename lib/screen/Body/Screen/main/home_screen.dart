@@ -10,6 +10,7 @@ import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
+import 'package:project_event/screen/Body/Screen/Drawer/notification.dart';
 
 import 'package:project_event/screen/Body/Screen/main/Event/viewevent.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     } else {
                       search.value.pass = 0;
                       searchController.clear();
-                      FocusScope.of(context).unfocus();
+                      finduser = eventList.value;
                     }
                   });
                 },
@@ -109,7 +110,10 @@ class _HomeScreenState extends State<HomeScreen> {
               AppAction(
                   icon: Ionicons.notifications_outline,
                   sizer: 4.h,
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const NotificationBar()));
+                  }),
             ],
             centerTitle: false,
           ),
@@ -184,13 +188,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomRight,
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomLeft,
                                         colors: [
-                                          Colors
-                                              .transparent, // Start with transparency
-                                          Colors.black.withOpacity(
-                                              0.9), // Adjust opacity as needed
+                                          Colors.transparent,
+                                          Colors.black.withOpacity(1),
                                         ],
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
