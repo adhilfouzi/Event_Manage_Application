@@ -7,7 +7,9 @@ import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:sizer/sizer.dart';
 
 class Reset extends StatefulWidget {
-  const Reset({super.key});
+  final int profileid;
+
+  const Reset({super.key, required this.profileid});
 
   @override
   State<Reset> createState() => _ResetState();
@@ -55,7 +57,8 @@ class _ResetState extends State<Reset> {
                           clearDb();
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                              builder: (context) => const MainBottom(),
+                              builder: (context) =>
+                                  MainBottom(profileid: widget.profileid),
                             ),
                             (route) => false,
                           );

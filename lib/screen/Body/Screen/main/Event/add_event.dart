@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -16,7 +17,9 @@ import 'package:project_event/screen/Body/widget/sub/time.dart';
 import 'package:sizer/sizer.dart';
 
 class AddEvent extends StatefulWidget {
-  const AddEvent({super.key});
+  final int profileid;
+
+  const AddEvent({super.key, required this.profileid});
 
   @override
   State<AddEvent> createState() => _AddEventState();
@@ -30,13 +33,15 @@ class _AddEventState extends State<AddEvent> {
   File? imageevent;
   @override
   Widget build(BuildContext context) {
+    log('profile id in AddEvent  : ${widget.profileid}');
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: WillPopScope(
         onWillPop: () async {
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => const MainBottom(),
+              builder: (context) => MainBottom(profileid: widget.profileid),
             ),
             (route) => false,
           );
@@ -189,7 +194,6 @@ class _AddEventState extends State<AddEvent> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pnoController = TextEditingController();
-  final int favorite = 0;
   Future addEventcliked(context) async {
     if (imagepath == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -205,26 +209,29 @@ class _AddEventState extends State<AddEvent> {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       if (_eventnameController.text.toUpperCase().isNotEmpty &&
           _locationController.text.toUpperCase().isNotEmpty) {
+        log('profile id in AddEvent after click : ${widget.profileid}');
+
         final event = Eventmodel(
-          favorite: favorite,
           eventname: _eventnameController.text.toUpperCase(),
-          budget: _budgetController.text.trim(),
           location: _locationController.text.toUpperCase(),
           startingDay: _stdateController.text,
-          clientname: _clientnameController.text.toUpperCase(),
-          phoneNumber: _pnoController.text.trim(),
           startingTime: _sttimeController.text,
           imagex: imagepath!,
-          emailId: _emailController.text.trim().toLowerCase(),
+          favorite: 0,
+          profile: widget.profileid,
           about: _aboutController.text.trimLeft().trimRight(),
           address: _addressController.text.trimLeft().trimRight(),
+          budget: _budgetController.text.trim(),
+          emailId: _emailController.text.trim().toLowerCase(),
+          clientname: _clientnameController.text.toUpperCase(),
+          phoneNumber: _pnoController.text.trim(),
         );
 
         await addEvent(event);
 
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => const MainBottom(),
+            builder: (context) => MainBottom(profileid: widget.profileid),
           ),
           (route) => false,
         );

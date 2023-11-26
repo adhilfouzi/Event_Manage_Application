@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -18,7 +19,8 @@ import 'package:project_event/screen/Body/widget/box/textfield.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final int profileid;
+  const HomeScreen({super.key, required this.profileid});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -34,9 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     search.value.pass = 0;
     finduser = eventList.value;
-    // if (finduser.isEmpty) {
-    //   search.value.pass = 8;
-    // }
   }
 
   List<Eventmodel> finduser = [];
@@ -66,7 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    refreshEventdata();
+    log('profile id in HomeScreen : ${widget.profileid}');
+
+    refreshEventdata(widget.profileid);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: WillPopScope(
@@ -299,5 +300,6 @@ isFavorite(Eventmodel data) {
       data.phoneNumber,
       data.emailId,
       data.address,
-      data.imagex);
+      data.imagex,
+      data.profile);
 }

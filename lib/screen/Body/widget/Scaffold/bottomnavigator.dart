@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/calender.dart';
@@ -7,7 +9,9 @@ import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class MainBottom extends StatefulWidget {
-  const MainBottom({super.key});
+  final int profileid;
+
+  const MainBottom({Key? key, required this.profileid}) : super(key: key);
 
   @override
   State<MainBottom> createState() => _MainButtomState();
@@ -15,6 +19,22 @@ class MainBottom extends StatefulWidget {
 
 class _MainButtomState extends State<MainBottom> {
   int _selectedIndex = 0;
+  late List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    log('profile id in MainBottom : ${widget.profileid}');
+
+    _pages = [
+      HomeScreen(profileid: widget.profileid),
+      AddEvent(profileid: widget.profileid),
+      Calender(profileid: widget.profileid),
+      ProfileAccount(
+        profileid: widget.profileid,
+      )
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +71,4 @@ class _MainButtomState extends State<MainBottom> {
       body: _pages[_selectedIndex],
     );
   }
-
-  // Define your pages or sections here
-  final List<Widget> _pages = [
-    // Replace these with your actual pages or widgets
-    const HomeScreen(),
-    const AddEvent(),
-    const Calender(),
-    const ProfileAccount()
-  ];
 }

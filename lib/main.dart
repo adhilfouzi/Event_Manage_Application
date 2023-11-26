@@ -7,6 +7,7 @@ import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/Database/functions/fn_incomemodel.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
+import 'package:project_event/Database/functions/fn_profilemodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/screen/intro/intro.dart';
@@ -21,6 +22,7 @@ Future<void> main() async {
   await initializeVendorDatabase();
   await initializePaymentDatabase();
   await initializeIncomeDatabase();
+  await initializeProfileDB();
   runApp(
     const MyApp(),
   );

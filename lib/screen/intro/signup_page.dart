@@ -1,62 +1,140 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
+import 'package:project_event/Database/functions/fn_profilemodel.dart';
+import 'package:project_event/Database/model/Profile/profile_model.dart';
+import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:sizer/sizer.dart';
 
 class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final _formKey = GlobalKey<FormState>();
   bool checkboxValue = false;
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPassController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    refreshRefreshdata();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.h),
           child: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(1.50.h),
+            child: Form(
+              key: _formKey,
               child: Column(
-                //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 5.h),
+                  SizedBox(height: 2.h),
                   Text(
                     'Let’s Begin the game',
                     style: TextStyle(
-                        fontSize: 3.5.h,
-                        fontWeight: FontWeight.bold,
-                        color: buttoncolor),
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                      color: buttoncolor,
+                    ),
                   ),
-                  SizedBox(height: 5.h),
+                  SizedBox(height: 3.h),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const TextFieldBlue(
-                          textcontent: 'Full Name',
-                          keyType: TextInputType.name),
-                      SizedBox(height: 1.5.h),
-                      const TextFieldBlue(
+                      TextFieldBlue(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter a Name';
+                          }
+                          return null;
+                        },
+                        textcontent: 'Full Name',
+                        keyType: TextInputType.name,
+                        controller: nameController,
+                      ),
+                      SizedBox(height: 1.h),
+                      ValueListenableBuilder(
+                        valueListenable: profileList,
+                        builder: (context, valueList, child) => TextFieldBlue(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter a valid email address';
+                            }
+                            if (!RegExp(
+                                    r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+                                .hasMatch(value)) {
+                              return 'Enter a valid email address';
+                            }
+                            return null;
+                          },
                           textcontent: 'Email',
-                          keyType: TextInputType.emailAddress),
-                      SizedBox(height: 1.5.h),
-                      const TextFieldBlue(
-                          textcontent: 'Phone Number',
-                          keyType: TextInputType.number),
-                      SizedBox(height: 1.5.h),
-                      const TextFieldBlue(
+                          keyType: TextInputType.emailAddress,
+                          controller: emailController,
+                        ),
+                      ),
+                      SizedBox(height: 1.h),
+                      TextFieldBlue(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter a valid phone number';
+                          }
+                          final phoneNumberWithoutSpaces =
+                              value.replaceAll(' ', '');
+
+                          if (phoneNumberWithoutSpaces.startsWith('+') &&
+                              phoneNumberWithoutSpaces.length >= 13) {
+                            return null;
+                          } else if (!phoneNumberWithoutSpaces
+                                  .startsWith('+') &&
+                              phoneNumberWithoutSpaces.length == 10) {
+                            return null;
+                          } else {
+                            return 'Enter a valid phone number';
+                          }
+                        },
+                        textcontent: 'Phone Number',
+                        keyType: TextInputType.number,
+                        controller: phoneController,
+                      ),
+                      SizedBox(height: 1.h),
+                      TextFieldBlue(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter a password';
+                          }
+                          if (value.length < 8) {
+                            return 'Password must be at least 8 characters long';
+                          }
+
+                          return null;
+                        },
                         obscureText: true,
                         textcontent: 'Password',
+                        controller: passwordController,
                       ),
-                      SizedBox(height: 1.5.h),
-                      const TextFieldBlue(
+                      SizedBox(height: 1.h),
+                      TextFieldBlue(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please confirm your password';
+                          }
+                          if (value != passwordController.text) {
+                            return 'Passwords do not match';
+                          }
+                          return null;
+                        },
                         obscureText: true,
                         textcontent: 'Confirm Password',
+                        controller: confirmPassController,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -69,10 +147,15 @@ class _SignupScreenState extends State<SignupScreen> {
                               });
                             },
                           ),
-                          Text(
-                            'I agree with Terms and Privacy ',
-                            style:
-                                TextStyle(color: buttoncolor, fontSize: 1.52.h),
+                          InkWell(
+                            onTap: launchPrivacyPolicy,
+                            child: Text(
+                              'I agree with Terms and Privacy ',
+                              style: TextStyle(
+                                color: buttoncolor,
+                                fontSize: 1.52.h,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -82,19 +165,19 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: ElevatedButton(
                               style: firstbutton(),
                               onPressed: () {
-                                if (checkboxValue == true) {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginScreen(),
-                                    ),
-                                  );
-                                } else {
-                                  return;
+                                if (_formKey.currentState?.validate() ??
+                                    false) {
+                                  // Perform signup logic here
+                                  addProfileclick(context);
                                 }
                               },
-                              child: Text('Signup',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 2.5.h)),
+                              child: Text(
+                                'Signup',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 2.5.h,
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -104,8 +187,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         children: [
                           Text(
                             'Already have an account -',
-                            style:
-                                TextStyle(color: buttoncolor, fontSize: 1.52.h),
+                            style: TextStyle(
+                              color: buttoncolor,
+                              fontSize: 1.52.h,
+                            ),
                           ),
                           TextButton(
                             onPressed: () {
@@ -118,7 +203,9 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: Text(
                               'Login',
                               style: TextStyle(
-                                  color: buttoncolor, fontSize: 1.52.h),
+                                color: buttoncolor,
+                                fontSize: 1.52.h,
+                              ),
                             ),
                           ),
                         ],
@@ -132,5 +219,47 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> addProfileclick(mtx) async {
+    if (_formKey.currentState != null &&
+        _formKey.currentState!.validate() &&
+        checkboxValue == true) {
+      try {
+        final existingProfiles = profileList.value
+            .where((profile) => profile.email == emailController.text)
+            .toList();
+
+        if (existingProfiles.isNotEmpty) {
+          ScaffoldMessenger.of(mtx).showSnackBar(
+            const SnackBar(
+              content: Text('This email is already registered'),
+              backgroundColor: Colors.red,
+            ),
+          );
+          return;
+        }
+
+        final profile = ProfileModel(
+          name: nameController.text.toUpperCase(),
+          email: emailController.text.toLowerCase().trim(),
+          phone: phoneController.text.trimLeft().trimRight(),
+          password: passwordController.text,
+          imagex: 'assets/UI/icons/profile.png',
+        );
+
+        await addProfile(profile).then((value) {
+          log("Profile added successfully");
+        });
+        await refreshRefreshdata();
+        Navigator.of(mtx).push(
+          MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
+          ),
+        );
+      } catch (e) {
+        log('Error inserting data: $e');
+      }
+    }
   }
 }

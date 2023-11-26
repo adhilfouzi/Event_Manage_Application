@@ -235,11 +235,13 @@ class _EditEventState extends State<EditEvent> {
             _pnoController.text.trim(),
             _emailController.text.trim().toLowerCase(),
             _addressController.text.trimLeft().trimRight(),
-            imagepath);
+            imagepath,
+            widget.event.profile);
 
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-              builder: (BuildContext context) => const MainBottom()),
+              builder: (BuildContext context) =>
+                  MainBottom(profileid: widget.event.profile)),
           (route) => false,
         );
         ScaffoldMessenger.of(context).showSnackBar(

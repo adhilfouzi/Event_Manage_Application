@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/appinfo.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/favorite.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/feedback.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/reset.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/terms.dart';
+import 'package:project_event/screen/Body/Screen/Edit/edit_profile.dart';
 import 'package:project_event/screen/Body/widget/List/listtiledrawer.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfileAccount extends StatelessWidget {
-  const ProfileAccount({super.key});
+  final int profileid;
+
+  const ProfileAccount({super.key, required this.profileid});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class ProfileAccount extends StatelessWidget {
       onWillPop: () async {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => const MainBottom(),
+            builder: (context) => MainBottom(profileid: profileid),
           ),
           (route) => false,
         );
@@ -36,37 +40,74 @@ class ProfileAccount extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Container(
-                  height: 20.h,
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  //  height: 20.h,
+                  padding: EdgeInsets.fromLTRB(1.h, 1.h, 1.h, 1.h),
+                  child: Column(
                     children: [
-                      const CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/UI/icons/profile.png'),
-                        radius: 50.0,
-                        backgroundColor: Colors.white,
+                      Container(
+                        padding: EdgeInsets.fromLTRB(2.h, 2.h, 2.h, 1.h),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const CircleAvatar(
+                              backgroundImage:
+                                  AssetImage('assets/UI/icons/profile.png'),
+                              radius: 50.0,
+                              backgroundColor: Colors.white,
+                            ),
+                            SizedBox(width: 1.h),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Abhishek Mishra",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 4.0),
+                                Text(
+                                  "abhishekmishra@gmail.com",
+                                  style: TextStyle(fontSize: 8.sp),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                          ],
+                        ),
                       ),
-                      SizedBox(width: 2.h),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
                         children: [
-                          Text(
-                            "Abhishek Mishra",
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                padding: MaterialStatePropertyAll(
+                                    EdgeInsets.symmetric(vertical: 0.8.h)),
+                                side:
+                                    MaterialStateProperty.all(BorderSide.none),
+                                backgroundColor:
+                                    MaterialStateProperty.all(buttoncolor[300]),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => const EditProfile(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Update',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
                             ),
                           ),
-                          const SizedBox(height: 4.0),
-                          Text(
-                            "abhishekmishra@gmail.com",
-                            style: TextStyle(fontSize: 8.sp),
-                          ),
                         ],
-                      ),
-                      const Spacer(),
+                      )
                     ],
                   ),
                 ),
@@ -112,9 +153,9 @@ class ProfileAccount extends StatelessWidget {
                         textdata: 'Terms of Service',
                       ),
                       SizedBox(height: 1.h),
-                      const ListTileDrawer(
+                      ListTileDrawer(
                         so: 1,
-                        map: Reset(),
+                        map: Reset(profileid: profileid),
                         imagedata: 'assets/UI/icons/backup.png',
                         textdata: 'Reset Data',
                       ),

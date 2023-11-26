@@ -1,5 +1,7 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -23,15 +25,21 @@ Future<void> initialize_event_db() async {
     onCreate: (eventDB, version) async {
       // Create the 'student' table when the database is created.
       await eventDB.execute(
-          'CREATE TABLE event (id INTEGER PRIMARY KEY, eventname TEXT, budget TEXT, location TEXT, about TEXT, startingDay TEXT, startingTime TEXT, clientname TEXT, phoneNumber TEXT,emailId TEXT, address TEXT, imagex TEXT, favorite INTEGER)');
+          'CREATE TABLE event (id INTEGER PRIMARY KEY, eventname TEXT, budget TEXT, location TEXT, about TEXT, startingDay TEXT, startingTime TEXT, clientname TEXT, phoneNumber TEXT,emailId TEXT, address TEXT, imagex TEXT, favorite INTEGER, profile INTEGER, FOREIGN KEY (profile) REFERENCES profile(id))');
     },
   );
   //print("student_db created successfully.");
 }
 
 // Function to retrieve student data from the database.
-Future<void> refreshEventdata() async {
-  final result = await eventDB.rawQuery("SELECT * FROM event ORDER BY id DESC");
+Future<void> refreshEventdata(int profile) async {
+  final result1 =
+      await eventDB.rawQuery("SELECT * FROM event ORDER BY id DESC");
+  log('All result1 data : ${result1}');
+
+  final result = await eventDB.rawQuery(
+      "SELECT * FROM event WHERE profile = ? ORDER BY id DESC",
+      [profile.toString()]);
   print('All event data : ${result}');
   eventList.value.clear();
   for (var map in result) {
@@ -62,7 +70,7 @@ Future<void> refreshEventdata() async {
 Future<void> addEvent(Eventmodel value) async {
   try {
     await eventDB.rawInsert(
-      'INSERT INTO event (favorite, eventname, budget, location, about, startingDay, startingTime, clientname, phoneNumber, emailId, address, imagex) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)',
+      'INSERT INTO event (favorite, eventname, budget, location, about, startingDay, startingTime, clientname, phoneNumber, emailId, address, imagex, profile) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)',
       [
         value.favorite,
         value.eventname,
@@ -76,10 +84,11 @@ Future<void> addEvent(Eventmodel value) async {
         value.emailId,
         value.address,
         value.imagex,
+        value.profile,
       ],
     );
 
-    refreshEventdata();
+    refreshEventdata(value.profile);
   } catch (e) {
     // Handle any errors that occur during data insertion.
     print('Error inserting data: $e');
@@ -87,9 +96,9 @@ Future<void> addEvent(Eventmodel value) async {
 }
 
 // Function to delete a student from the database by their ID.
-Future<void> deleteEventdata(id) async {
+Future<void> deleteEventdata(id, int profileid) async {
   await eventDB.delete('event', where: 'id=?', whereArgs: [id]);
-  refreshEventdata();
+  refreshEventdata(profileid);
 }
 
 // Function to edit/update a student's information in the database.
@@ -106,7 +115,8 @@ Future<void> editeventdata(
     phoneNumber,
     emailId,
     address,
-    imagex) async {
+    imagex,
+    profileid) async {
   final dataflow = {
     'favorite': favorite,
     'eventname': eventname,
@@ -119,10 +129,11 @@ Future<void> editeventdata(
     'phoneNumber': phoneNumber,
     'emailId': emailId,
     'address': address,
-    'imagex': imagex
+    'imagex': imagex,
+    'profile': profileid, // Change 'profileid' to 'profile'
   };
   await eventDB.update('event', dataflow, where: 'id=?', whereArgs: [id]);
-  refreshEventdata();
+  refreshEventdata(profileid);
 }
 
 // Function to delete data from event's database.
@@ -130,7 +141,6 @@ Future<void> clearEventDatabase() async {
   try {
     await eventDB.delete('event');
     print(' cleared the event database');
-    refreshEventdata();
   } catch (e) {
     print('Error while clearing the database: $e');
   }

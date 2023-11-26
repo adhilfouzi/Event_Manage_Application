@@ -5,14 +5,14 @@ import 'package:project_event/Database/model/Payment/pay_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_payments.dart';
 import 'package:sizer/sizer.dart';
 
-class VendorSettlement extends StatefulWidget {
-  const VendorSettlement({super.key});
+class VendorSettlementSearch extends StatefulWidget {
+  const VendorSettlementSearch({super.key});
 
   @override
-  State<VendorSettlement> createState() => _VendorSettlementState();
+  State<VendorSettlementSearch> createState() => _VendorSettlementSearchState();
 }
 
-class _VendorSettlementState extends State<VendorSettlement> {
+class _VendorSettlementSearchState extends State<VendorSettlementSearch> {
   List<PaymentModel> finduser = [];
 
   @override
@@ -106,7 +106,6 @@ class _VendorSettlementState extends State<VendorSettlement> {
                                   MaterialPageRoute(
                                     builder: (ctr) => EditPayments(
                                       paydata: finduserItem,
-                                      // val: 1,
                                     ),
                                   ),
                                 );

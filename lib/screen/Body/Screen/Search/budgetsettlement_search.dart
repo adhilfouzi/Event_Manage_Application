@@ -5,14 +5,14 @@ import 'package:project_event/Database/model/Payment/pay_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_payments.dart';
 import 'package:sizer/sizer.dart';
 
-class BudgetSettlement extends StatefulWidget {
-  const BudgetSettlement({super.key});
+class BudgetSettlementSearch extends StatefulWidget {
+  const BudgetSettlementSearch({super.key});
 
   @override
-  State<BudgetSettlement> createState() => _BudgetSettlementState();
+  State<BudgetSettlementSearch> createState() => _BudgetSettlementSearchState();
 }
 
-class _BudgetSettlementState extends State<BudgetSettlement> {
+class _BudgetSettlementSearchState extends State<BudgetSettlementSearch> {
   List<PaymentModel> finduser = [];
 
   @override

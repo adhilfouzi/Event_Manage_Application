@@ -5,17 +5,34 @@ import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/budget_settelment.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/income_settelment.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/vendor_settlement.dart';
+import 'package:project_event/screen/Body/Screen/Search/budgetsettlement_search.dart';
+import 'package:project_event/screen/Body/Screen/Search/settlement_search.dart';
+import 'package:project_event/screen/Body/Screen/Search/vendorsettlement_search.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:sizer/sizer.dart';
 
-class Settlement extends StatelessWidget {
+class Settlement extends StatefulWidget {
   final int eventID;
 
   const Settlement({super.key, required this.eventID});
+
+  @override
+  State<Settlement> createState() => _SettlementState();
+}
+
+class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
+  late TabController tabController;
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 3, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
-    refreshPaymentData(eventID);
-    refreshmainbalancedata(eventID);
+    refreshPaymentData(widget.eventID);
+    refreshmainbalancedata(widget.eventID);
+    tabController.index;
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -24,26 +41,29 @@ class Settlement extends StatelessWidget {
           backgroundColor: Colors.transparent,
           actions: [
             AppAction(
-                icon: Icons.search,
-                onPressed: () {
-                  // var index = DefaultTabController.of(context).index;
-                  // if (index == 1) {
-                  //   Navigator.of(context).push(MaterialPageRoute(
-                  //       builder: (context) =>
-                  //           BudgetSettlement(eventID: eventID)));
-                  // } else if (index == 2) {
-                  //   Navigator.of(context).push(MaterialPageRoute(
-                  //       builder: (context) =>
-                  //           VendorSettlement(eventID: eventID)));
-                  // } else if (index == 3) {
-                  //   Navigator.of(context).push(MaterialPageRoute(
-                  //       builder: (context) => const IncomeSearch()));
-                  // }
-                }),
+              icon: Icons.search,
+              onPressed: () {
+                setState(() {
+                  var indexcount = tabController.index;
+                  if (indexcount == 0) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const BudgetSettlementSearch(),
+                    ));
+                  } else if (indexcount == 1) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const VendorSettlementSearch(),
+                    ));
+                  } else if (indexcount == 2) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const IncomeSearch(),
+                    ));
+                  }
+                });
+              },
+            ),
             SizedBox(
               width: 2.h,
             )
-            //  AppAction(icon: Icons.more_vert, onPressed: () {}),
           ],
           title: Text(
             'Settlement',
@@ -143,8 +163,9 @@ class Settlement extends StatelessWidget {
                     },
                   ),
                 ),
-                const TabBar(
-                  tabs: [
+                TabBar(
+                  controller: tabController,
+                  tabs: const [
                     Tab(text: 'Budget'),
                     Tab(text: 'Vendor'),
                     Tab(text: 'Income'),
@@ -153,6 +174,11 @@ class Settlement extends StatelessWidget {
                   labelColor: Colors.black,
                   dividerColor: Colors.transparent,
                   indicatorColor: Colors.black,
+                  // onTap: (index) {
+                  //   print("Tab tapped: $index");
+
+                  //   tabController.index = index;
+                  // },
                 ),
               ],
             ),
@@ -161,15 +187,16 @@ class Settlement extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.all(1.h),
           child: TabBarView(
+            controller: tabController,
             children: [
               BudgetSettlement(
-                eventID: eventID,
+                eventID: widget.eventID,
               ),
               VendorSettlement(
-                eventID: eventID,
+                eventID: widget.eventID,
               ),
               IncomeSettlement(
-                eventID: eventID,
+                eventID: widget.eventID,
               ),
             ],
           ),

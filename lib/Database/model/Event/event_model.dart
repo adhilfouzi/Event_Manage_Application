@@ -12,21 +12,23 @@ class Eventmodel {
   final String? address;
   final String imagex;
   int favorite;
+  final int profile;
 
   Eventmodel({
-    required this.eventname,
-    required this.location,
-    required this.startingDay,
-    required this.imagex,
-    required this.startingTime,
-    required this.favorite,
     this.id,
+    required this.eventname,
+    this.budget,
+    required this.location,
+    this.about,
+    required this.startingDay,
+    required this.startingTime,
     this.clientname,
     this.phoneNumber,
-    this.budget,
     this.emailId,
     this.address,
-    this.about,
+    required this.imagex,
+    required this.favorite,
+    required this.profile,
   });
   static Eventmodel fromMap(Map<String, Object?> map) {
     final id = map['id'] as int;
@@ -45,7 +47,10 @@ class Eventmodel {
         ? map['favorite'] as int
         : (map['favorite'] is String
             ? int.tryParse(map['favorite'] as String) ?? 0
-            : 0);
+            : map['favorite'] == null
+                ? 0
+                : 0);
+    final profile = map['profile'] as int;
 
     return Eventmodel(
         id: id,
@@ -60,6 +65,7 @@ class Eventmodel {
         startingDay: startingDay,
         imagex: imagex,
         startingTime: startingTime,
-        favorite: favorite);
+        favorite: favorite,
+        profile: profile);
   }
 }

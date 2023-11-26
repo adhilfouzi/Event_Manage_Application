@@ -175,12 +175,10 @@ void delecteventYes(
   ctx,
   Eventmodel student,
 ) {
-  deleteEventdata(
-    student.id,
-  );
+  deleteEventdata(student.id, student.profile);
   Navigator.of(ctx).pushAndRemoveUntil(
     MaterialPageRoute(
-      builder: (context) => const MainBottom(),
+      builder: (context) => MainBottom(profileid: student.profile),
     ),
     (route) => false,
   );

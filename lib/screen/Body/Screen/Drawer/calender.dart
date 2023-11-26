@@ -11,7 +11,9 @@ import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calender extends StatefulWidget {
-  const Calender({super.key});
+  final int profileid;
+
+  const Calender({super.key, required this.profileid});
 
   @override
   State<Calender> createState() => _CalenderState();
@@ -49,7 +51,7 @@ class _CalenderState extends State<Calender> {
           MaterialPageRoute(
             allowSnapshotting: false,
             fullscreenDialog: true,
-            builder: (context) => const MainBottom(),
+            builder: (context) => MainBottom(profileid: widget.profileid),
           ),
           (route) => false,
         );
