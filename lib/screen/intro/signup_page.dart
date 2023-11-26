@@ -245,7 +245,6 @@ class _SignupScreenState extends State<SignupScreen> {
           email: emailController.text.toLowerCase().trim(),
           phone: phoneController.text.trimLeft().trimRight(),
           password: passwordController.text,
-          imagex: 'assets/UI/icons/profile.png',
         );
 
         await addProfile(profile).then((value) {

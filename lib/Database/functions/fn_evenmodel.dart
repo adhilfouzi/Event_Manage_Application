@@ -36,7 +36,6 @@ Future<void> refreshEventdata(int profile) async {
   final result1 =
       await eventDB.rawQuery("SELECT * FROM event ORDER BY id DESC");
   log('All result1 data : ${result1}');
-
   final result = await eventDB.rawQuery(
       "SELECT * FROM event WHERE profile = ? ORDER BY id DESC",
       [profile.toString()]);
@@ -60,10 +59,6 @@ Future<void> refreshEventdata(int profile) async {
     favoriteEventlist.value.add(student);
   }
   favoriteEventlist.notifyListeners();
-
-  ///-----------------------------------------
-  ///-----------------------------------------
-  ///-----------------------------------------
 }
 
 // Function to add a new event to the database.

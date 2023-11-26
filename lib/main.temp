@@ -1,196 +1,183 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/Database/functions/fn_paymentdetail.dart';
-import 'package:project_event/Database/functions/fn_paymodel.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/budget_settelment.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/income_settelment.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/vendor_settlement.dart';
-import 'package:project_event/screen/Body/Screen/Search/settlement_search.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:project_event/Database/functions/fn_profilemodel.dart';
+import 'package:project_event/Database/model/Profile/profile_model.dart';
+import 'package:project_event/screen/Body/Screen/main/Event/accountscreen.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
+import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
+import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:sizer/sizer.dart';
 
-class Settlement extends StatefulWidget {
-  final int eventID;
+class EditProfile extends StatefulWidget {
+  final ProfileModel profileid;
 
-  const Settlement({super.key, required this.eventID});
+  const EditProfile({super.key, required this.profileid});
 
   @override
-  State<Settlement> createState() => _SettlementState();
+  State<EditProfile> createState() => _EditProfileState();
 }
 
-class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
-  late TabController tabController;
+class _EditProfileState extends State<EditProfile> {
+  final TextEditingController addressPassController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  late String? imagepath;
+  File? imageprofile;
+  String? updatedImagepath;
+
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
+    addressPassController.text = widget.profileid.address ?? '';
+    emailController.text = widget.profileid.email;
+    phoneController.text = widget.profileid.phone;
+    nameController.text = widget.profileid.name;
+    // updatedImagepath = widget.profileid.imagex ?? 'assets/UI/icons/profile.png';
   }
 
   @override
   Widget build(BuildContext context) {
-    refreshPaymentData(widget.eventID);
-    refreshmainbalancedata(widget.eventID);
-    tabController.index;
-    return DefaultTabController(
-      length: 3,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 16.h,
-          backgroundColor: Colors.transparent,
-          actions: [
-            AppAction(
-                icon: Icons.search,
-                onPressed: () {
-                  var index = tabController.index;
-                  if (index == 0) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            BudgetSettlement(eventID: widget.eventID)));
-                  } else if (index == 1) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            VendorSettlement(eventID: widget.eventID)));
-                  } else if (index == 2) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const IncomeSearch()));
-                  }
-                }),
-            SizedBox(
-              width: 2.h,
-            )
-            //  AppAction(icon: Icons.more_vert, onPressed: () {}),
-          ],
-          title: Text(
-            'Settlement',
-            style: racingSansOne(
-                fontWeight: FontWeight.w500,
-                fontSize: 20.sp,
-                color: Colors.black),
-          ),
-          bottom: PreferredSize(
-            preferredSize: Size(double.infinity, 4.h),
+        appBar: const CustomAppBar(actions: [], titleText: 'Edit Profile'),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(1.h),
+          child: Form(
+            key: _formKey,
             child: Column(
               children: [
-                Container(
-                  height: 10.h,
-                  padding: EdgeInsets.symmetric(horizontal: 1.5.h),
-                  child: ValueListenableBuilder(
-                    valueListenable: mainbalance,
-                    builder: (context, value, child) {
-                      return Card(
-                        elevation: 4,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Expenses',
-                                    style: readexPro(
-                                        fontWeight: FontWeight.normal),
-                                  ),
-                                  Text(
-                                    '₹${value.paid.toString()}',
-                                    style: readexPro(
-                                        color: Colors.red,
-                                        fontSize: 11.sp,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
-                            ),
-                            const VerticalDivider(
-                              endIndent: 15,
-                              indent: 15,
-                              width: 1,
-                              thickness: 2,
-                              color: Colors.black,
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Credit',
-                                    style: readexPro(
-                                        fontWeight: FontWeight.normal),
-                                  ),
-                                  Text(
-                                    '₹${value.pending.toString()}',
-                                    style: readexPro(
-                                        color: Colors.green,
-                                        fontSize: 11.sp,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
-                            ),
-                            const VerticalDivider(
-                              endIndent: 15,
-                              indent: 15,
-                              width: 1,
-                              thickness: 2,
-                              color: Colors.black,
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Balance',
-                                    style: readexPro(
-                                        fontWeight: FontWeight.normal),
-                                  ),
-                                  Text(
-                                    '₹${value.total.toString()}',
-                                    style: readexPro(
-                                        color: Colors.green,
-                                        fontSize: 11.sp,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
+                SizedBox(height: 2.h),
+                InkWell(
+                  // onTap: () => addoneditphoto(context),
+                  child: CircleAvatar(
+                    backgroundImage: imageprofile != null
+                        ? FileImage(imageprofile!)
+                        : const AssetImage('assets/UI/icons/profile.png')
+                            as ImageProvider,
+                    radius: 50.0,
+                    backgroundColor: Colors.white,
                   ),
                 ),
-                TabBar(
-                  controller: tabController,
-                  tabs: const [
-                    Tab(text: 'Budget'),
-                    Tab(text: 'Vendor'),
-                    Tab(text: 'Income'),
+                SizedBox(height: 2.h),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextFieldBlue(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a Name';
+                        }
+                        return null;
+                      },
+                      controller: nameController,
+                      textcontent: 'Full Name',
+                      keyType: TextInputType.name,
+                    ),
+                    SizedBox(height: 1.h),
+                    ContactState(
+                      pcontroller: phoneController,
+                      acontroller: addressPassController,
+                      econtroller: emailController,
+                    ),
+                    SizedBox(height: 2.h),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: firstbutton(),
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ProfileAccount(
+                                      profileid: widget.profileid.id!),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'Update',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
-                  unselectedLabelColor: Colors.black45,
-                  labelColor: Colors.black,
-                  dividerColor: Colors.transparent,
-                  indicatorColor: Colors.black,
                 ),
               ],
             ),
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.all(1.h),
-          child: TabBarView(
-            children: [
-              BudgetSettlement(
-                eventID: widget.eventID,
-              ),
-              VendorSettlement(
-                eventID: widget.eventID,
-              ),
-              IncomeSettlement(
-                eventID: widget.eventID,
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
+
+  Future editProfilecliked(context) async {
+    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+      await editProfiledata(
+          widget.profileid.id,
+          widget.profileid.imagex,
+          nameController.text.toUpperCase(),
+          emailController.text.toLowerCase(),
+          phoneController.text,
+          addressPassController,
+           widget.profileid.password);
+    }
+  }
+
+  // Future<void> getimage(ImageSource source) async {
+  //   try {
+  //     final image = await ImagePicker().pickImage(source: source);
+  //     if (image == null) {
+  //       return;
+  //     }
+  //     setState(() {
+  //       imageprofile = File(image.path);
+  //       imagepath = image.path; // Remove toString() here
+  //     });
+  //   } catch (e) {
+  //     print('Failed image picker: $e');
+  //   }
+  // }
+
+  // void addoneditphoto(ctx) {
+  //   showDialog(
+  //     context: ctx,
+  //     builder: (ctx) {
+  //       return AlertDialog(
+  //         content: const Text('Choose Image From.......'),
+  //         actions: [
+  //           IconButton(
+  //             onPressed: () {
+  //               getimage(ImageSource.camera);
+  //               Navigator.of(context).pop();
+  //             },
+  //             icon: const Icon(
+  //               Icons.camera_alt_rounded,
+  //               color: Colors.red,
+  //             ),
+  //           ),
+  //           IconButton(
+  //             onPressed: () {
+  //               getimage(ImageSource.gallery);
+  //               Navigator.of(context).pop();
+  //             },
+  //             icon: const Icon(
+  //               Icons.image,
+  //               color: Colors.red,
+  //             ),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 }

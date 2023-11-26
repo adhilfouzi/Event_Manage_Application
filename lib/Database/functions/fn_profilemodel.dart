@@ -8,6 +8,8 @@ import 'package:sqflite/sqflite.dart';
 
 ValueNotifier<List<ProfileModel>> profileList =
     ValueNotifier<List<ProfileModel>>([]);
+ValueNotifier<List<ProfileModel>> profileData =
+    ValueNotifier<List<ProfileModel>>([]);
 late Database profileDB;
 
 // Function to initialize the database.
@@ -36,6 +38,18 @@ Future<void> refreshRefreshdata() async {
   profileList.notifyListeners();
 }
 
+Future<void> refreshRefreshid(int id) async {
+  final profiledata = await profileDB
+      .rawQuery("SELECT * FROM profile WHERE id = ?", [id.toString()]);
+  log('My profile data : ${profiledata}');
+  profileData.value.clear();
+  for (var map in profiledata) {
+    final student = ProfileModel.fromMap(map);
+    profileData.value.add(student);
+  }
+  profileData.notifyListeners();
+}
+
 // Function to add a new event to the database.
 Future<void> addProfile(ProfileModel value) async {
   try {
@@ -60,14 +74,20 @@ Future<void> addProfile(ProfileModel value) async {
 
 Future<void> editProfiledata(
     id, imagex, name, email, phone, address, password) async {
-  final dataflow = {
-    'imagex': imagex,
-    'name': name,
-    'email': email,
-    'phone': phone,
-    'address': address,
-    'password': password,
-  };
-  await profileDB.update('profile', dataflow, where: 'id=?', whereArgs: [id]);
-  refreshRefreshdata();
+  try {
+    final dataflow = {
+      'imagex': imagex,
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'address': address,
+      'password': password,
+    };
+    log('My dataflow data : ${dataflow}');
+
+    await profileDB.update('profile', dataflow, where: 'id=?', whereArgs: [id]);
+    refreshRefreshdata();
+  } catch (e) {
+    log('Error editing data: $e');
+  }
 }

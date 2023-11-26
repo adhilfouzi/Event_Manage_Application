@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:project_event/Database/functions/fn_profilemodel.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/calender.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/accountscreen.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/add_event.dart';
@@ -38,6 +39,7 @@ class _MainButtomState extends State<MainBottom> {
 
   @override
   Widget build(BuildContext context) {
+    refreshRefreshid(widget.profileid);
     return Scaffold(
       bottomNavigationBar: Container(
         color: const Color.fromRGBO(255, 200, 200, 1),

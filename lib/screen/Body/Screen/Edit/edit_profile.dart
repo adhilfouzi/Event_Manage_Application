@@ -1,19 +1,41 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:project_event/Database/functions/fn_profilemodel.dart';
+import 'package:project_event/Database/model/Profile/profile_model.dart';
+import 'package:project_event/screen/Body/Screen/main/Event/accountscreen.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
-import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:sizer/sizer.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({Key? key}) : super(key: key);
+  final ProfileModel profileid;
+
+  const EditProfile({super.key, required this.profileid});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
-  bool checkboxValue = false;
+  final TextEditingController addressPassController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  late String? imagepath;
+  File? imageprofile;
+
+  @override
+  void initState() {
+    super.initState();
+    addressPassController.text = widget.profileid.address ?? '';
+    emailController.text = widget.profileid.email;
+    phoneController.text = widget.profileid.phone;
+    nameController.text = widget.profileid.name;
+    // updatedImagepath = widget.profileid.imagex ?? 'assets/UI/icons/profile.png';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,54 +45,138 @@ class _EditProfileState extends State<EditProfile> {
         appBar: const CustomAppBar(actions: [], titleText: 'Edit Profile'),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(1.h),
-          child: Column(
-            children: [
-              SizedBox(height: 2.h),
-              const CircleAvatar(
-                backgroundImage: AssetImage('assets/UI/icons/profile.png'),
-                radius: 50.0,
-                backgroundColor: Colors.white,
-              ),
-              SizedBox(height: 2.h),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const TextFieldBlue(
-                    textcontent: 'Full Name',
-                    keyType: TextInputType.name,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(height: 2.h),
+                InkWell(
+                  // onTap: () => addoneditphoto(context),
+                  child: CircleAvatar(
+                    backgroundImage: imageprofile != null
+                        ? FileImage(imageprofile!)
+                        : const AssetImage('assets/UI/icons/profile.png')
+                            as ImageProvider,
+                    radius: 50.0,
+                    backgroundColor: Colors.white,
                   ),
-                  SizedBox(height: 1.h),
-                  ContactState(),
-                  SizedBox(height: 2.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          style: firstbutton(),
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            'Update',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.sp,
-                            ),
+                ),
+                TextFieldBlue(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a Name';
+                    }
+                    return null;
+                  },
+                  textcontent: 'Full Name',
+                  keyType: TextInputType.name,
+                  controller: nameController,
+                ),
+                // SizedBox(height: 1.h),
+                TextFieldBlue(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a valid email address';
+                    }
+                    if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+                        .hasMatch(value)) {
+                      return 'Enter a valid email address';
+                    }
+                    return null;
+                  },
+                  textcontent: 'Email',
+                  keyType: TextInputType.emailAddress,
+                  controller: emailController,
+                ),
+                // SizedBox(height: 1.h),
+                TextFieldBlue(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a valid phone number';
+                    }
+                    final phoneNumberWithoutSpaces = value.replaceAll(' ', '');
+
+                    if (phoneNumberWithoutSpaces.startsWith('+') &&
+                        phoneNumberWithoutSpaces.length >= 13) {
+                      return null;
+                    } else if (!phoneNumberWithoutSpaces.startsWith('+') &&
+                        phoneNumberWithoutSpaces.length == 10) {
+                      return null;
+                    } else {
+                      return 'Enter a valid phone number';
+                    }
+                  },
+                  textcontent: 'Phone Number',
+                  keyType: TextInputType.number,
+                  controller: phoneController,
+                ),
+                TextFieldBlue(
+                  keyType: TextInputType.streetAddress,
+                  controller: addressPassController,
+                  textcontent: 'Address',
+                  posticondata: Icons.location_on,
+                ),
+                SizedBox(height: 2.h),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: firstbutton(),
+                        onPressed: () {
+                          editProfilecliked(context);
+                        },
+                        child: Text(
+                          'Update',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.sp,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  Future editProfilecliked(context) async {
+    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+      final existingProfiles = profileList.value
+          .where((profile) => profile.email == emailController.text)
+          .toList();
+      if (emailController.text != widget.profileid.email) {
+        if (existingProfiles.isNotEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('This email is already registered'),
+              backgroundColor: Colors.red,
+            ),
+          );
+          return;
+        }
+      }
+
+      await editProfiledata(
+          widget.profileid.id,
+          widget.profileid.imagex,
+          nameController.text,
+          emailController.text.toLowerCase(),
+          phoneController.text,
+          addressPassController.text,
+          widget.profileid.password);
+      refreshRefreshid(widget.profileid.id!);
+
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ProfileAccount(profileid: widget.profileid.id!),
+        ),
+      );
+    }
   }
 }
