@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
-import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_payments.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 import 'package:sizer/sizer.dart';
 
 class BudgetSettlement extends StatelessWidget {
@@ -47,7 +45,7 @@ class BudgetSettlement extends StatelessWidget {
                           style: raleway(color: Colors.black),
                         ),
                         subtitle: Text(
-                          'Paid on ${data.date}, ${data.time}',
+                          'Paid on ${data.date}, \n${data.time}',
                           style: readexPro(
                             color: Colors.black45,
                             fontSize: 8.sp,
@@ -74,10 +72,6 @@ class BudgetSettlement extends StatelessWidget {
             }
           },
         ),
-        floatingActionButton: FloatingPointx(
-            goto: AddPayments(
-          eventID: eventID,
-        )),
       ),
     );
   }

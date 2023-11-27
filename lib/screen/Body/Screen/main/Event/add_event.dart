@@ -131,11 +131,27 @@ class _AddEventState extends State<AddEvent> {
                       textcontent: 'Event Name',
                       controller: _eventnameController),
                   TextFieldBlue(
+                    onChanged: (value) {
+                      String numericValue =
+                          value.replaceAll(RegExp(r'[^0-9]'), '');
+                      _budgetController.value =
+                          _budgetController.value.copyWith(
+                        text: numericValue,
+                        selection: TextSelection.collapsed(
+                            offset: numericValue.length),
+                      );
+                    },
                     keyType: TextInputType.number,
                     textcontent: 'Budget',
                     controller: _budgetController,
                   ),
                   TextFieldBlue(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter a Venue';
+                      }
+                      return null;
+                    },
                     keyType: TextInputType.streetAddress,
                     textcontent: 'Venue',
                     posticondata: Icons.location_on,

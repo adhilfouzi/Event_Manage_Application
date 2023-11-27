@@ -139,6 +139,16 @@ class _AddPaymentsState extends State<AddPayments> {
                       }
                       return null;
                     },
+                    onChanged: (value) {
+                      String numericValue =
+                          value.replaceAll(RegExp(r'[^0-9]'), '');
+                      _budgetController.value =
+                          _budgetController.value.copyWith(
+                        text: numericValue,
+                        selection: TextSelection.collapsed(
+                            offset: numericValue.length),
+                      );
+                    },
                   ),
                   TextFieldBlue(
                       textcontent: 'Note', controller: _noteController),

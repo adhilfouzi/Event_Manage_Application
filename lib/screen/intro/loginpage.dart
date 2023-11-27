@@ -176,6 +176,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             (route) => false,
           );
+          // final sharedPrefer = await SharedPreferences.getInstance();
+          // await sharedPrefer.setBool(sharedPreferences, true);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(

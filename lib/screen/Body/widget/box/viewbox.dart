@@ -26,7 +26,7 @@ class ViewBox extends StatelessWidget {
                 child: Text('$textcontent : ',
                     style: raleway(
                       color: Colors.black,
-                      fontSize: 12.sp,
+                      fontSize: 10.sp,
                     )),
               ),
             ),
@@ -36,7 +36,7 @@ class ViewBox extends StatelessWidget {
                 child: Text(
                   controller.isNotEmpty == true ? controller : '-',
                   style: readexPro(
-                    fontSize: 12.sp,
+                    fontSize: 10.sp,
                     color: Colors.black,
                   ),
                 ),

@@ -117,6 +117,7 @@ flutter:
     - assets/UI/icons/favorite.png
     - assets/UI/icons/calendar.png
     - assets/UI/icons/profile.png
+    - assets/UI/icons/logout.png
 
   
 

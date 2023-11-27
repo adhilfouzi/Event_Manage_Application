@@ -21,7 +21,7 @@ class TextFieldicon extends StatelessWidget {
       margin: EdgeInsets.symmetric(
           vertical: 0.5.h, horizontal: 2.h), // Adjust the margin.
       decoration: BoxDecoration(
-        color: Colors.white, // Set your desired background color.
+        color: Colors.black12, // Set your desired background color.
         borderRadius: BorderRadius.circular(40),
       ),
       child: TextField(

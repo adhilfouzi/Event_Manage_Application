@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
+import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
+import 'package:project_event/screen/Body/Screen/Add/addincome.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/budget_settelment.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/income_settelment.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/vendor_settlement.dart';
@@ -37,7 +39,7 @@ class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 16.h,
+          toolbarHeight: 20.h,
           backgroundColor: Colors.transparent,
           actions: [
             AppAction(
@@ -189,17 +191,49 @@ class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
           child: TabBarView(
             controller: tabController,
             children: [
-              BudgetSettlement(
-                eventID: widget.eventID,
+              Hero(
+                tag: 'budget_settlement_body', // Unique tag
+                child: BudgetSettlement(
+                  eventID: widget.eventID,
+                ),
               ),
-              VendorSettlement(
-                eventID: widget.eventID,
+              Hero(
+                tag: 'vendor_settlement_body', // Unique tag
+                child: VendorSettlement(
+                  eventID: widget.eventID,
+                ),
               ),
-              IncomeSettlement(
-                eventID: widget.eventID,
+              Hero(
+                tag: 'income_settlement_body', // Unique tag
+                child: IncomeSettlement(
+                  eventID: widget.eventID,
+                ),
               ),
             ],
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color(0xFF80B3FF),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            var indexcount = tabController.index;
+            if (indexcount == 0) {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => AddPayments(eventID: widget.eventID)));
+            } else if (indexcount == 1) {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => AddPayments(eventID: widget.eventID)));
+            } else if (indexcount == 2) {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => AddIncome(
+                  eventID: widget.eventID,
+                ),
+              ));
+            }
+          },
         ),
       ),
     );

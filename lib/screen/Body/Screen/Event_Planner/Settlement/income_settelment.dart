@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_incomemodel.dart';
-import 'package:project_event/screen/Body/Screen/Add/addincome.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_income.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/floatingpointx.dart';
 import 'package:sizer/sizer.dart';
 
 class IncomeSettlement extends StatelessWidget {
@@ -47,13 +45,13 @@ class IncomeSettlement extends StatelessWidget {
                           data.name,
                           style: raleway(color: Colors.black),
                         ),
-                        // subtitle: Text(
-                        //   'payid : ${data.payid}, paytype : ${data.},eventid : ${data.eventid}',
-                        //   style: readexPro(
-                        //     color: Colors.black45,
-                        //     fontSize: 10,
-                        //   ),
-                        // ),
+                        subtitle: Text(
+                          'Paid on ${data.date}, \n${data.time}',
+                          style: readexPro(
+                            color: Colors.black45,
+                            fontSize: 7.sp,
+                          ),
+                        ),
                         trailing: Text(
                           "₹${data.pyamount}",
                           style: racingSansOne(
@@ -75,10 +73,6 @@ class IncomeSettlement extends StatelessWidget {
             }
           },
         ),
-        floatingActionButton: FloatingPointx(
-            goto: AddIncome(
-          eventID: eventID,
-        )),
       ),
     );
   }

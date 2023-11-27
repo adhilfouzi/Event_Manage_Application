@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/Database/functions/fn_paymentdetail.dart';
+import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/model/Payment/pay_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_payments.dart';
 import 'package:sizer/sizer.dart';
@@ -18,15 +18,15 @@ class _VendorSettlementSearchState extends State<VendorSettlementSearch> {
   @override
   void initState() {
     super.initState();
-    finduser = vendorPaymentDetails.value;
+    finduser = vendorPaymentlist.value;
   }
 
   void _runFilter(String enteredKeyword) {
     List<PaymentModel> result = [];
     if (enteredKeyword.isEmpty) {
-      result = vendorPaymentDetails.value;
+      result = vendorPaymentlist.value;
     } else {
-      result = vendorPaymentDetails.value
+      result = vendorPaymentlist.value
           .where((student) =>
               student.name
                   .toLowerCase()
@@ -46,7 +46,9 @@ class _VendorSettlementSearchState extends State<VendorSettlementSearch> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(255, 200, 200, 1),
+          backgroundColor:
+              Colors.white, //const Color.fromRGBO(255, 200, 200, 1),
+
           automaticallyImplyLeading: false,
           title: Padding(
             padding: EdgeInsets.symmetric(vertical: 2.h),
@@ -62,14 +64,14 @@ class _VendorSettlementSearchState extends State<VendorSettlementSearch> {
           )),
       body: SafeArea(
         child: ValueListenableBuilder<List<PaymentModel>>(
-            valueListenable: vendorPaymentDetails,
+            valueListenable: vendorPaymentlist,
             builder: (context, value, child) {
               return Padding(
                 padding: EdgeInsets.all(1.h),
                 child: finduser.isEmpty
                     ? Center(
                         child: Text(
-                          'No Data Available',
+                          'No Vendor settlement Available',
                           style: TextStyle(fontSize: 15.sp),
                         ),
                       )
@@ -96,7 +98,7 @@ class _VendorSettlementSearchState extends State<VendorSettlementSearch> {
                                 ),
                               ),
                               trailing: Text(
-                                finduserItem.pyamount,
+                                "₹${finduserItem.pyamount}",
                                 style: const TextStyle(
                                   color: Colors.black,
                                 ),

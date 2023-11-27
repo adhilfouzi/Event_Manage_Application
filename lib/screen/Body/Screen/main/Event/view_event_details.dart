@@ -50,7 +50,7 @@ class ViewEventDetails extends StatelessWidget {
                   children: [
                     Text(
                       'Event Details',
-                      style: raleway(fontSize: 18.sp, color: Colors.black),
+                      style: raleway(fontSize: 15.sp, color: Colors.black),
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(2.h, 1.h, 2.h, 1.h),
@@ -112,7 +112,7 @@ class ViewEventDetails extends StatelessWidget {
                   children: [
                     Text(
                       'Client Details',
-                      style: raleway(fontSize: 18.sp, color: Colors.black),
+                      style: raleway(fontSize: 15.sp, color: Colors.black),
                     ),
                     SizedBox(height: 2.h),
                     ViewBox(

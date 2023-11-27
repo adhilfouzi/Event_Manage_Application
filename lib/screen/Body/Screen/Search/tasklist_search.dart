@@ -46,7 +46,8 @@ class _TaskSearchState extends State<TaskSearch> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(255, 200, 200, 1),
+        backgroundColor: Colors.white, //const Color.fromRGBO(255, 200, 200, 1),
+
         automaticallyImplyLeading: false,
         title: Padding(
           padding: EdgeInsets.symmetric(vertical: 2.h),

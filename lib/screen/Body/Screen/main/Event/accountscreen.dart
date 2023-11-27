@@ -169,6 +169,12 @@ class ProfileAccount extends StatelessWidget {
                         imagedata: 'assets/UI/icons/backup.png',
                         textdata: 'Reset Data',
                       ),
+                      SizedBox(height: 1.h),
+                      const ListTileDrawer(
+                        so: 4,
+                        imagedata: 'assets/UI/icons/logout.png',
+                        textdata: 'Logout',
+                      ),
                     ],
                   ),
                 ),

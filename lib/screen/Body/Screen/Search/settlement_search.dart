@@ -46,7 +46,9 @@ class _IncomeSearchState extends State<IncomeSearch> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(255, 200, 200, 1),
+          backgroundColor:
+              Colors.white, //const Color.fromRGBO(255, 200, 200, 1),
+
           automaticallyImplyLeading: false,
           title: Padding(
             padding: EdgeInsets.symmetric(vertical: 2.h),
@@ -69,7 +71,7 @@ class _IncomeSearchState extends State<IncomeSearch> {
                 child: finduser.isEmpty
                     ? Center(
                         child: Text(
-                          'No Data Available',
+                          'No Income Data Available',
                           style: TextStyle(fontSize: 15.sp),
                         ),
                       )

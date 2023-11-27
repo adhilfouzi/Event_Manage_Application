@@ -46,7 +46,7 @@ class _AddBudgetState extends State<AddBudget> {
                   if (value == null || value.isEmpty) {
                     return 'Name is required';
                   }
-                  return null; // Return null if the input is valid
+                  return null;
                 },
               ),
               CategoryDown(
@@ -60,7 +60,16 @@ class _AddBudgetState extends State<AddBudget> {
                     if (value == null || value.isEmpty) {
                       return 'Estimatrd Amount is required';
                     }
-                    return null; // Return null if the input is valid
+                    return null;
+                  },
+                  onChanged: (value) {
+                    String numericValue =
+                        value.replaceAll(RegExp(r'[^0-9]'), '');
+                    _budgetController.value = _budgetController.value.copyWith(
+                      text: numericValue,
+                      selection:
+                          TextSelection.collapsed(offset: numericValue.length),
+                    );
                   },
                   textcontent: 'Estimatrd Amount',
                   controller: _budgetController,

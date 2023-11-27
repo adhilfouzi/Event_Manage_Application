@@ -73,6 +73,17 @@ class _AddVendorState extends State<AddVendor> {
                     }
                     return null;
                   },
+                  onChanged: (value) {
+                    // Filter out non-numeric characters
+                    String numericValue =
+                        value.replaceAll(RegExp(r'[^0-9]'), '');
+                    // Set the filtered value back to the text field
+                    _budgetController.value = _budgetController.value.copyWith(
+                      text: numericValue,
+                      selection:
+                          TextSelection.collapsed(offset: numericValue.length),
+                    );
+                  },
                   keyType: TextInputType.number,
                   textcontent: 'Estimatrd Amount',
                   controller: _budgetController),

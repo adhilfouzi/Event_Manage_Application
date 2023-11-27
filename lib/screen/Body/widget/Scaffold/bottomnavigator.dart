@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:project_event/Database/functions/fn_profilemodel.dart';
@@ -25,7 +23,6 @@ class _MainButtomState extends State<MainBottom> {
   @override
   void initState() {
     super.initState();
-    log('profile id in MainBottom : ${widget.profileid}');
 
     _pages = [
       HomeScreen(profileid: widget.profileid),
@@ -42,11 +39,12 @@ class _MainButtomState extends State<MainBottom> {
     refreshRefreshid(widget.profileid);
     return Scaffold(
       bottomNavigationBar: Container(
-        color: const Color.fromRGBO(255, 200, 200, 1),
+        color: Colors.white, //const Color.fromRGBO(255, 200, 200, 1),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 1.5.h, vertical: 1.5.h),
           child: GNav(
-            backgroundColor: const Color.fromRGBO(255, 200, 200, 1),
+            backgroundColor:
+                Colors.white, //const Color.fromRGBO(255, 200, 200, 1),
             color: const Color.fromARGB(255, 250, 3, 3),
             activeColor: const Color.fromARGB(255, 255, 255, 255),
             tabBackgroundColor: const Color(0XFFFFE6C7),

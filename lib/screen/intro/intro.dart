@@ -15,28 +15,28 @@ class OnBoardingPage extends StatefulWidget {
 class OnBoardingPageState extends State<OnBoardingPage> {
   final List<Introduction> list = [
     Introduction(
-      title: 'Effortless Event\n Planning',
+      title: 'Effortless Event Planning',
       subTitle: '',
       imageUrl: 'assets/UI/image/template/1-03.png',
       imageWidth: 80.w,
       imageHeight: 50.h,
-      titleTextStyle: TextStyle(fontSize: 20.sp),
+      titleTextStyle: TextStyle(fontSize: 17.sp),
     ),
     Introduction(
-      title: 'Time-Saving\n Solution',
-      subTitle: ' ',
+      title: 'Time-Saving Solution',
+      subTitle: '',
       imageUrl: 'assets/UI/image/template/1-01.png',
       imageWidth: 80.w,
       imageHeight: 50.h,
-      titleTextStyle: TextStyle(fontSize: 20.sp),
+      titleTextStyle: TextStyle(fontSize: 17.sp),
     ),
     Introduction(
       title: 'Make Work Smart',
-      subTitle: ' ',
+      subTitle: '',
       imageUrl: 'assets/UI/image/template/1-02.png',
       imageWidth: 80.w,
       imageHeight: 50.h,
-      titleTextStyle: TextStyle(fontSize: 20.sp),
+      titleTextStyle: TextStyle(fontSize: 17.sp),
     ),
   ];
   @override
@@ -52,7 +52,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
           )),
       skipTextStyle: TextStyle(
         color: Colors.blueGrey,
-        fontSize: 18.sp,
+        fontSize: 15.sp,
       ),
     );
   }

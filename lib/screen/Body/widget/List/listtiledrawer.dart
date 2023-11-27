@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
+import 'package:project_event/screen/intro/loginpage.dart';
 
 class ListTileDrawer extends StatelessWidget {
   final int so;
@@ -29,8 +30,41 @@ class ListTileDrawer extends StatelessWidget {
           launchPrivacyPolicy();
         } else if (so == 3) {
           launchTerms();
+        } else if (so == 4) {
+          confirmLogout(context);
         }
       },
     );
   }
+}
+
+Future<void> confirmLogout(BuildContext context) async {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Confirm Logout'),
+        content: const Text('Are you sure you want to log out?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (route) => false);
+              // final logsharedPreferences =
+              //     await SharedPreferences.getInstance();
+              // await logsharedPreferences.clear();
+            },
+            child: const Text('Logout'),
+          ),
+        ],
+      );
+    },
+  );
 }

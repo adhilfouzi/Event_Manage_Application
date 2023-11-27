@@ -62,12 +62,11 @@ class ContactState extends StatelessWidget {
           ),
           TextFieldBlue(
             validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter a valid email address';
-              }
-              if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-                  .hasMatch(value)) {
-                return 'Enter a valid email address';
+              if (value!.isNotEmpty) {
+                if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+                    .hasMatch(value)) {
+                  return 'Enter a valid email address';
+                }
               }
               return null;
             },

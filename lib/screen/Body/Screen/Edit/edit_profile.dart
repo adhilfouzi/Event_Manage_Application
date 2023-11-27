@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:project_event/Database/functions/fn_profilemodel.dart';
 import 'package:project_event/Database/model/Profile/profile_model.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/accountscreen.dart';
@@ -34,7 +35,10 @@ class _EditProfileState extends State<EditProfile> {
     emailController.text = widget.profileid.email;
     phoneController.text = widget.profileid.phone;
     nameController.text = widget.profileid.name;
-    // updatedImagepath = widget.profileid.imagex ?? 'assets/UI/icons/profile.png';
+    if (widget.profileid.imagex != null) {
+      imagepath = widget.profileid.imagex;
+      imageprofile = File(imagepath!);
+    }
   }
 
   @override
@@ -52,7 +56,7 @@ class _EditProfileState extends State<EditProfile> {
               children: [
                 SizedBox(height: 2.h),
                 InkWell(
-                  // onTap: () => addoneditphoto(context),
+                  onTap: () => addoneditphoto(context),
                   child: CircleAvatar(
                     backgroundImage: imageprofile != null
                         ? FileImage(imageprofile!)
@@ -66,6 +70,9 @@ class _EditProfileState extends State<EditProfile> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please enter a Name';
+                    }
+                    if (value.length >= 16) {
+                      return "Name is too long";
                     }
                     return null;
                   },
@@ -164,8 +171,8 @@ class _EditProfileState extends State<EditProfile> {
 
       await editProfiledata(
           widget.profileid.id,
-          widget.profileid.imagex,
-          nameController.text,
+          imagepath,
+          nameController.text.toUpperCase(),
           emailController.text.toLowerCase(),
           phoneController.text,
           addressPassController.text,
@@ -178,5 +185,53 @@ class _EditProfileState extends State<EditProfile> {
         ),
       );
     }
+  }
+
+  Future<void> getimage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) {
+        return;
+      }
+      setState(() {
+        imageprofile = File(image.path);
+        imagepath = image.path; // Remove toString() here
+      });
+    } catch (e) {
+      print('Failed image picker: $e');
+    }
+  }
+
+  void addoneditphoto(ctx) {
+    showDialog(
+      context: ctx,
+      builder: (ctx) {
+        return AlertDialog(
+          content: const Text('Choose Image From.......'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                getimage(ImageSource.camera);
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(
+                Icons.camera_alt_rounded,
+                color: Colors.red,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                getimage(ImageSource.gallery);
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(
+                Icons.image,
+                color: Colors.red,
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

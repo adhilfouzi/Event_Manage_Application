@@ -64,8 +64,8 @@ class Favorite extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomRight,
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomLeft,
                               colors: [
                                 Colors.transparent, // Start with transparency
                                 Colors.black.withOpacity(

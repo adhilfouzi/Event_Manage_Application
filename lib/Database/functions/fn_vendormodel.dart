@@ -24,7 +24,7 @@ Future<void> initializeVendorDatabase() async {
     version: 1,
     onCreate: (Database db, version) async {
       await db.execute(
-          'CREATE TABLE vendortb (id INTEGER PRIMARY KEY, name TEXT, category TEXT, note TEXT,esamount TEXT, clientname TEXT, number TEXT,   email TEXT, address TEXT, paid INTEGER, pending INTEGER, status INTEGER, eventid INTEGER, FOREIGN KEY (eventid) REFERENCES event(id))');
+          'CREATE TABLE vendortb (id INTEGER PRIMARY KEY, name TEXT, category TEXT, note TEXT,esamount TEXT, clientname TEXT, number TEXT, email TEXT, address TEXT, paid INTEGER, pending INTEGER, status INTEGER, eventid INTEGER, FOREIGN KEY (eventid) REFERENCES event(id))');
     },
   );
   print("vendorDB created successfully.");

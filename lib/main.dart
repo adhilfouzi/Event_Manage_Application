@@ -6,6 +6,7 @@ import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
 import 'package:project_event/Database/functions/fn_incomemodel.dart';
+import 'package:project_event/Database/functions/fn_lock.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/functions/fn_profilemodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
@@ -23,6 +24,7 @@ Future<void> main() async {
   await initializePaymentDatabase();
   await initializeIncomeDatabase();
   await initializeProfileDB();
+  await initializelock();
   runApp(
     const MyApp(),
   );
@@ -39,27 +41,30 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return Sizer(
-      builder: (context, orientation, deviceType) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'event',
-        theme: ThemeData(
-          appBarTheme: const AppBarTheme(),
-          primaryColor: Colors.grey[300],
-          scaffoldBackgroundColor: const Color.fromRGBO(255, 200, 200, 1),
-          textTheme: const TextTheme(
-            bodyMedium: TextStyle(
-              fontFamily: 'ReadexPro',
+    return SafeArea(
+      child: Sizer(
+        builder: (context, orientation, deviceType) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'event',
+          theme: ThemeData(
+            appBarTheme: const AppBarTheme(),
+            primaryColor: Colors.grey[300],
+            scaffoldBackgroundColor:
+                Colors.white, //const Color.fromRGBO(255, 200, 200, 1),
+            textTheme: const TextTheme(
+              bodyMedium: TextStyle(
+                fontFamily: 'ReadexPro',
+              ),
             ),
           ),
-        ),
-        home: AnimatedSplashScreen(
-          splash: 'assets/UI/Event Logo/event logo top.png',
-          splashIconSize: 50.h,
-          nextScreen: const OnBoardingPage(),
-          backgroundColor: appbarcolor,
-          duration: 3000,
-          splashTransition: SplashTransition.sizeTransition,
+          home: AnimatedSplashScreen(
+            splash: 'assets/UI/Event Logo/event logo top.png',
+            splashIconSize: 50.h,
+            nextScreen: const OnBoardingPage(),
+            backgroundColor: appbarcolor,
+            duration: 3000,
+            splashTransition: SplashTransition.sizeTransition,
+          ),
         ),
       ),
     );

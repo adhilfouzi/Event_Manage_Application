@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/Database/functions/fn_paymentdetail.dart';
+import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/model/Payment/pay_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_payments.dart';
 import 'package:sizer/sizer.dart';
@@ -18,15 +18,15 @@ class _BudgetSettlementSearchState extends State<BudgetSettlementSearch> {
   @override
   void initState() {
     super.initState();
-    finduser = budgetPaymentDetails.value;
+    finduser = budgetPaymentList.value;
   }
 
   void _runFilter(String enteredKeyword) {
     List<PaymentModel> result = [];
     if (enteredKeyword.isEmpty) {
-      result = budgetPaymentDetails.value;
+      result = budgetPaymentList.value;
     } else {
-      result = budgetPaymentDetails.value
+      result = budgetPaymentList.value
           .where((student) =>
               student.name
                   .toLowerCase()
@@ -46,7 +46,9 @@ class _BudgetSettlementSearchState extends State<BudgetSettlementSearch> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(255, 200, 200, 1),
+          backgroundColor:
+              Colors.white, //const Color.fromRGBO(255, 200, 200, 1),
+
           automaticallyImplyLeading: false,
           title: Padding(
             padding: EdgeInsets.symmetric(vertical: 2.h),
@@ -62,7 +64,7 @@ class _BudgetSettlementSearchState extends State<BudgetSettlementSearch> {
           )),
       body: SafeArea(
         child: ValueListenableBuilder<List<PaymentModel>>(
-            valueListenable: budgetPaymentDetails,
+            valueListenable: budgetPaymentList,
             builder: (context, value, child) {
               return Padding(
                 padding: EdgeInsets.all(1.h),
@@ -96,7 +98,7 @@ class _BudgetSettlementSearchState extends State<BudgetSettlementSearch> {
                                 ),
                               ),
                               trailing: Text(
-                                finduserItem.pyamount,
+                                "₹${finduserItem.pyamount}",
                                 style: const TextStyle(
                                   color: Colors.black,
                                 ),

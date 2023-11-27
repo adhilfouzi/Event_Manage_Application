@@ -55,6 +55,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           if (value!.isEmpty) {
                             return 'Please enter a Name';
                           }
+                          if (value.length >= 16) {
+                            return "Name is too long";
+                          }
                           return null;
                         },
                         textcontent: 'Full Name',

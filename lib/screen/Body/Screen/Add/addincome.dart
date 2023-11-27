@@ -58,6 +58,15 @@ class _AddIncomeState extends State<AddIncome> {
                   textcontent: 'Amount',
                   controller: _budgetController,
                   keyType: TextInputType.number,
+                  onChanged: (value) {
+                    String numericValue =
+                        value.replaceAll(RegExp(r'[^0-9]'), '');
+                    _budgetController.value = _budgetController.value.copyWith(
+                      text: numericValue,
+                      selection:
+                          TextSelection.collapsed(offset: numericValue.length),
+                    );
+                  },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Amount is required';
