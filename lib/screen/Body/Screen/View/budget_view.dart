@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_budget.dart';
+import 'package:project_event/screen/Body/Screen/Search/budget_search.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dart';
 import 'package:project_event/screen/Body/widget/box/viewbox.dart';
@@ -21,7 +22,11 @@ class BudgetView extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         actions: [
-          AppAction(icon: Icons.delete, onPressed: () {}),
+          AppAction(
+              icon: Icons.delete,
+              onPressed: () {
+                dodeletebudget(context, budget);
+              }),
           AppAction(
               icon: Icons.edit,
               onPressed: () {

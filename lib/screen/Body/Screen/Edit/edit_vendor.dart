@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:intl/intl.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Vendors/vendors_model.dart';
 import 'package:project_event/screen/Body/Screen/Search/vendor_search.dart';
@@ -72,15 +74,28 @@ class _EditVendorState extends State<EditVendor> {
               ),
               TextFieldBlue(textcontent: 'Note', controller: _noteController),
               TextFieldBlue(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a Estimatrd Amount';
-                    }
-                    return null;
-                  },
-                  keyType: TextInputType.number,
-                  textcontent: 'Estimatrd Amount',
-                  controller: _budgetController),
+                onChanged: (value) {
+                  String numericValue = value.replaceAll(RegExp(r'[^0-9]'), '');
+                  final formatValue = _formatCurrency(numericValue);
+                  _budgetController.value = _budgetController.value.copyWith(
+                    text: formatValue,
+                    selection:
+                        TextSelection.collapsed(offset: formatValue.length),
+                  );
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Estimated Amount is required';
+                  }
+                  return null;
+                },
+                keyType: TextInputType.number,
+                textcontent: 'Estimated Amount',
+                controller: _budgetController,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+              ),
               TextFieldBlue(
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -103,6 +118,15 @@ class _EditVendorState extends State<EditVendor> {
         ),
       ),
     );
+  }
+
+  String _formatCurrency(String value) {
+    if (value.isNotEmpty) {
+      final format = NumberFormat("#,##0", "en_US");
+      return format.format(int.parse(value));
+    } else {
+      return value;
+    }
   }
 
   final TextEditingController _nameController = TextEditingController();
@@ -156,16 +180,6 @@ class _EditVendorState extends State<EditVendor> {
       } else if (widget.val == 0) {
         Navigator.of(mtx).pop();
       }
-    } else {
-      ScaffoldMessenger.of(mtx).showSnackBar(
-        SnackBar(
-          content: const Text("Fill the Name & Estimatrd Amount"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(1.h),
-          backgroundColor: Colors.red,
-          duration: const Duration(seconds: 2),
-        ),
-      );
     }
   }
 

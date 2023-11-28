@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
 import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
@@ -56,28 +58,28 @@ class _AddBudgetState extends State<AddBudget> {
               ),
               TextFieldBlue(textcontent: 'Note', controller: _noteController),
               TextFieldBlue(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Estimatrd Amount is required';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    String numericValue =
-                        value.replaceAll(RegExp(r'[^0-9]'), '');
-                    _budgetController.value = _budgetController.value.copyWith(
-                      text: numericValue,
-                      selection:
-                          TextSelection.collapsed(offset: numericValue.length),
-                    );
-                  },
-                  textcontent: 'Estimatrd Amount',
-                  controller: _budgetController,
-                  keyType: TextInputType.number),
-              // Payments(
-              //     goto: AddPayments(
-              //   payment1: paymentdata,
-              // ))
+                onChanged: (value) {
+                  String numericValue = value.replaceAll(RegExp(r'[^0-9]'), '');
+                  final formatValue = _formatCurrency(numericValue);
+                  _budgetController.value = _budgetController.value.copyWith(
+                    text: formatValue,
+                    selection:
+                        TextSelection.collapsed(offset: formatValue.length),
+                  );
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Estimated Amount is required';
+                  }
+                  return null;
+                },
+                keyType: TextInputType.number,
+                textcontent: 'Estimated Amount',
+                controller: _budgetController,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+              ),
             ]),
           ),
         ),
@@ -85,12 +87,19 @@ class _AddBudgetState extends State<AddBudget> {
     );
   }
 
-  // final PaymentModel paymentdata;
+  String _formatCurrency(String value) {
+    if (value.isNotEmpty) {
+      final format = NumberFormat("#,##0", "en_US");
+      return format.format(int.parse(value));
+    } else {
+      return value;
+    }
+  }
+
   final _budgetController = TextEditingController();
   final _nameController = TextEditingController();
   final _categoryController = TextEditingController();
   final _noteController = TextEditingController();
-  //List<PaymentModel> store = [];
   Future<void> addGuestclick(mtx) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final name = _nameController.text.toUpperCase().trimLeft().trimRight();
@@ -104,31 +113,11 @@ class _AddBudgetState extends State<AddBudget> {
           esamount: budget,
           note: note,
           paid: 0,
-          pending: int.parse(budget),
+          pending: int.parse(budget.replaceAll(RegExp(r'[^0-9]'), '')),
           status: 0);
-
       await addBudget(budgetdata);
       refreshBudgetData(widget.eventid);
-      ScaffoldMessenger.of(mtx).showSnackBar(
-        SnackBar(
-          content: const Text("Successfully added"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(1.h),
-          backgroundColor: Colors.greenAccent,
-          duration: const Duration(seconds: 2),
-        ),
-      );
       Navigator.pop(mtx);
-    } else {
-      ScaffoldMessenger.of(mtx).showSnackBar(
-        SnackBar(
-          content: const Text("Fill the Name & Estimatrd Amount"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(2.h),
-          backgroundColor: Colors.red,
-          duration: const Duration(seconds: 2),
-        ),
-      );
     }
   }
 }

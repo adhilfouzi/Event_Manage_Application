@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
+import 'package:project_event/screen/Body/Screen/Event_Planner/budget.dart';
 import 'package:project_event/screen/Body/Screen/Search/budget_search.dart';
 import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
@@ -18,7 +21,7 @@ class EditBudget extends StatefulWidget {
 class _EditBudgetState extends State<EditBudget> {
   final _formKey = GlobalKey<FormState>();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext ctx) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -60,15 +63,27 @@ class _EditBudgetState extends State<EditBudget> {
               ),
               TextFieldBlue(textcontent: 'Note', controller: _noteController),
               TextFieldBlue(
-                keyType: TextInputType.number,
-                textcontent: 'Estimatrd Amount',
-                controller: _budgetController,
+                onChanged: (value) {
+                  String numericValue = value.replaceAll(RegExp(r'[^0-9]'), '');
+                  final formatValue = _formatCurrency(numericValue);
+                  _budgetController.value = _budgetController.value.copyWith(
+                    text: formatValue,
+                    selection:
+                        TextSelection.collapsed(offset: formatValue.length),
+                  );
+                },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return ' Estimatrd Amount is required';
+                    return 'Estimated Amount is required';
                   }
                   return null;
                 },
+                keyType: TextInputType.number,
+                textcontent: 'Estimated Amount',
+                controller: _budgetController,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
               ),
 
               // Payments(goto: AddPayments())
@@ -77,6 +92,15 @@ class _EditBudgetState extends State<EditBudget> {
         ),
       ),
     );
+  }
+
+  String _formatCurrency(String value) {
+    if (value.isNotEmpty) {
+      final format = NumberFormat("#,##0", "en_US");
+      return format.format(int.parse(value));
+    } else {
+      return value;
+    }
   }
 
   final _budgetController = TextEditingController();
@@ -95,6 +119,9 @@ class _EditBudgetState extends State<EditBudget> {
 
   Future<void> editGuestclick(BuildContext ctx, BudgetModel budget) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+      Navigator.of(ctx).pushReplacement(
+          MaterialPageRoute(builder: (ctx) => Budget(eventid: budget.eventid)));
+
       await editBudget(
           budget.id,
           _nameController.text.toUpperCase().trimLeft().trimRight(),
@@ -107,26 +134,6 @@ class _EditBudgetState extends State<EditBudget> {
           budget.status);
 
       refreshBudgetData(budget.eventid);
-      ScaffoldMessenger.of(ctx).showSnackBar(
-        SnackBar(
-          content: const Text("Successfully Edited"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(2.h),
-          backgroundColor: Colors.greenAccent,
-          duration: const Duration(seconds: 2),
-        ),
-      );
-      Navigator.pop(ctx);
-    } else {
-      ScaffoldMessenger.of(ctx).showSnackBar(
-        SnackBar(
-          content: const Text("Fill the Name & Estimatrd Amount"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(2.h),
-          backgroundColor: Colors.red,
-          duration: const Duration(seconds: 2),
-        ),
-      );
     }
   }
 }

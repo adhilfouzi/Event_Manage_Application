@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
@@ -138,15 +140,29 @@ class _EditPaymentsState extends State<EditPayments> {
                     ),
                   ),
                   TextFieldBlue(
-                    textcontent: 'Amount',
-                    controller: _budgetController,
-                    keyType: TextInputType.number,
+                    onChanged: (value) {
+                      String numericValue =
+                          value.replaceAll(RegExp(r'[^0-9]'), '');
+                      final formatValue = _formatCurrency(numericValue);
+                      _budgetController.value =
+                          _budgetController.value.copyWith(
+                        text: formatValue,
+                        selection:
+                            TextSelection.collapsed(offset: formatValue.length),
+                      );
+                    },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Amount is required';
                       }
                       return null;
                     },
+                    keyType: TextInputType.number,
+                    textcontent: 'Amount',
+                    controller: _budgetController,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                   ),
                   TextFieldBlue(
                       textcontent: 'Note', controller: _noteController),
@@ -165,6 +181,15 @@ class _EditPaymentsState extends State<EditPayments> {
         ),
       ),
     );
+  }
+
+  String _formatCurrency(String value) {
+    if (value.isNotEmpty) {
+      final format = NumberFormat("#,##0", "en_US");
+      return format.format(int.parse(value));
+    } else {
+      return value;
+    }
   }
 
   final TextEditingController _pnameController = TextEditingController();

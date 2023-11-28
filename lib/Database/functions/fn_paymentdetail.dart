@@ -90,6 +90,30 @@ Future<void> refreshPaymentpayid(int eventid) async {
 ValueNotifier<Balence> balance =
     ValueNotifier<Balence>(Balence(paid: 0, total: 0, pending: 0));
 
+// Future<void> refreshbalancedata(
+//     int payid, int eventid, int bol, String amound) async {
+//   try {
+//     final resulter = await paymentDB.rawQuery(
+//         "SELECT * FROM payment WHERE eventid = ? AND paytype = ? AND payid = ?",
+//         [eventid.toString(), bol, payid.toString()]);
+//     print('All budgetPaymentdetiled data: $resulter');
+//     int paid = 0;
+//     for (var map in resulter) {
+//       final student = PaymentModel.fromMap(map);
+//       int amound = int.parse(student.pyamount);
+//       paid += amound;
+//     }
+//       Balence b = Balence(
+//         paid: paid,
+//         total: int.parse(amound),
+//         pending: int.parse(amound) - paid);
+//     balance.value = b;
+//     balance.notifyListeners();
+//   } catch (e, stackTrace) {
+//     log('Error in refreshPaymentTypeData: $e\n$stackTrace');
+//   }
+// }
+
 Future<void> refreshbalancedata(
     int payid, int eventid, int bol, String amound) async {
   try {
@@ -100,16 +124,22 @@ Future<void> refreshbalancedata(
     int paid = 0;
     for (var map in resulter) {
       final student = PaymentModel.fromMap(map);
-      int amound = int.parse(student.pyamount);
+
+      // Filter out non-numeric characters and parse the amount
+      int amound =
+          int.parse(student.pyamount.replaceAll(RegExp(r'[^0-9]'), ''));
+
       paid += amound;
     }
 
-    // int total = int.parse(amound);
-    // int pending = total - paid;
+    // Filter out non-numeric characters and parse the total amount
+    int totalAmound = int.parse(amound.replaceAll(RegExp(r'[^0-9]'), ''));
+
     Balence b = Balence(
-        paid: paid,
-        total: int.parse(amound),
-        pending: int.parse(amound) - paid);
+      paid: paid,
+      total: totalAmound,
+      pending: totalAmound - paid,
+    );
     balance.value = b;
     balance.notifyListeners();
   } catch (e, stackTrace) {
@@ -138,7 +168,11 @@ Future<void> refreshmainbalancedata(int eventid) async {
     int payment = 0;
     for (var map in resultpayment) {
       final student = PaymentModel.fromMap(map);
-      int amound = int.parse(student.pyamount);
+
+      // Filter out non-numeric characters and parse the amount
+      int amound =
+          int.parse(student.pyamount.replaceAll(RegExp(r'[^0-9]'), ''));
+
       payment += amound;
     }
     log('payment :${payment}');
@@ -150,19 +184,23 @@ Future<void> refreshmainbalancedata(int eventid) async {
     int income = 0;
     for (var dora in resultincome) {
       final student = IncomeModel.fromMap(dora);
-      int amound = int.parse(student.pyamount);
+
+      // Filter out non-numeric characters and parse the amount
+      int amound =
+          int.parse(student.pyamount.replaceAll(RegExp(r'[^0-9]'), ''));
+
       income += amound;
     }
-    log('payment :${payment}');
     log('income :${income}');
-
-    Balence b =
-        Balence(paid: payment, total: income - payment, pending: income);
+///////////////////////////////////////////////////////////
+    Balence b = Balence(
+      paid: payment,
+      total: income - payment,
+      pending: income,
+    );
     print(b);
     mainbalance.value = b;
     mainbalance.notifyListeners();
-    // refreshBudgetData(eventid);
-    // refreshVendorData(eventid);
   } catch (e, stackTrace) {
     log('Error in refreshPaymentTypeData: $e\n$stackTrace');
   }

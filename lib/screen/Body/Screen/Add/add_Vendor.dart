@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:intl/intl.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Vendors/vendors_model.dart';
 import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
@@ -67,26 +69,28 @@ class _AddVendorState extends State<AddVendor> {
               ),
               TextFieldBlue(textcontent: 'Note', controller: _noteController),
               TextFieldBlue(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a Estimatrd Amount';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    // Filter out non-numeric characters
-                    String numericValue =
-                        value.replaceAll(RegExp(r'[^0-9]'), '');
-                    // Set the filtered value back to the text field
-                    _budgetController.value = _budgetController.value.copyWith(
-                      text: numericValue,
-                      selection:
-                          TextSelection.collapsed(offset: numericValue.length),
-                    );
-                  },
-                  keyType: TextInputType.number,
-                  textcontent: 'Estimatrd Amount',
-                  controller: _budgetController),
+                onChanged: (value) {
+                  String numericValue = value.replaceAll(RegExp(r'[^0-9]'), '');
+                  final formatValue = _formatCurrency(numericValue);
+                  _budgetController.value = _budgetController.value.copyWith(
+                    text: formatValue,
+                    selection:
+                        TextSelection.collapsed(offset: formatValue.length),
+                  );
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Estimated Amount is required';
+                  }
+                  return null;
+                },
+                keyType: TextInputType.number,
+                textcontent: 'Estimated Amount',
+                controller: _budgetController,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+              ),
               TextFieldBlue(
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -102,13 +106,20 @@ class _AddVendorState extends State<AddVendor> {
                   acontroller: _acontroller,
                   econtroller: _econtroller,
                   pcontroller: _phoneController),
-              // PaymentsBar(),
-              // Payments(),
             ]),
           ),
         ),
       ),
     );
+  }
+
+  String _formatCurrency(String value) {
+    if (value.isNotEmpty) {
+      final format = NumberFormat("#,##0", "en_US");
+      return format.format(int.parse(value));
+    } else {
+      return value;
+    }
   }
 
   final TextEditingController _nameController = TextEditingController();
@@ -135,35 +146,17 @@ class _AddVendorState extends State<AddVendor> {
           email: _econtroller.text,
           number: _phoneController.text.trimLeft().trimRight(),
           paid: 0,
-          pending: int.parse(_budgetController.text.trimLeft().trimRight()),
+          pending: int.parse(
+              _budgetController.text.replaceAll(RegExp(r'[^0-9]'), '')),
           status: 0,
         );
+        Navigator.pop(ctx);
 
         await addVendor(vendordata).then((value) => log("success "));
         await refreshVendorData(widget.eventid);
-        ScaffoldMessenger.of(ctx).showSnackBar(
-          SnackBar(
-            content: const Text("Successfully added"),
-            behavior: SnackBarBehavior.floating,
-            margin: EdgeInsets.all(1.h),
-            backgroundColor: Colors.greenAccent,
-            duration: const Duration(seconds: 2),
-          ),
-        );
-        Navigator.pop(ctx);
       } catch (e) {
         log('Error adding vendor: $e');
       }
-    } else {
-      ScaffoldMessenger.of(ctx).showSnackBar(
-        SnackBar(
-          content: const Text("Fill the Name & Estimated Amount"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(1.h),
-          backgroundColor: Colors.redAccent,
-          duration: const Duration(seconds: 2),
-        ),
-      );
     }
   }
 

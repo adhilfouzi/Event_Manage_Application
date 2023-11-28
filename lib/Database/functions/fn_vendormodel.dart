@@ -47,11 +47,15 @@ Future<void> refreshVendorData(int eventid) async {
     for (var parent in payment) {
       final father = PaymentModel.fromMap(parent);
       if (student.id == father.payid) {
-        paid += int.parse(father.pyamount);
+        paid += int.parse(father.pyamount.replaceAll(RegExp(r'[^0-9]'), ''));
       }
     }
-    int pending = int.parse(student.esamount) - paid;
-    int status = paid >= int.parse(student.esamount) ? 1 : 0;
+    int pending =
+        int.parse(student.esamount.replaceAll(RegExp(r'[^0-9]'), '')) - paid;
+    int status =
+        paid >= int.parse(student.esamount.replaceAll(RegExp(r'[^0-9]'), ''))
+            ? 1
+            : 0;
     await editVendor(
       student.id,
       student.name,

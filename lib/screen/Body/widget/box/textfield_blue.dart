@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:sizer/sizer.dart';
@@ -13,6 +14,7 @@ class TextFieldBlue extends StatelessWidget {
   final bool? obscureText;
   final bool? enabled;
   final void Function(String)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
 
   const TextFieldBlue(
       {super.key,
@@ -24,7 +26,8 @@ class TextFieldBlue extends StatelessWidget {
       this.keyType,
       this.obscureText,
       this.enabled,
-      this.onChanged});
+      this.onChanged,
+      this.inputFormatters});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +41,7 @@ class TextFieldBlue extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 1.h),
           child: TextFormField(
+            inputFormatters: inputFormatters,
             enabled: enabled == null ? true : false,
             obscureText: obscureText == null ? false : true,
             keyboardType: keyType,

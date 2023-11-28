@@ -2,8 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
@@ -134,16 +136,20 @@ class _AddEventState extends State<AddEvent> {
                     onChanged: (value) {
                       String numericValue =
                           value.replaceAll(RegExp(r'[^0-9]'), '');
+                      final formatValue = _formatCurrency(numericValue);
                       _budgetController.value =
                           _budgetController.value.copyWith(
-                        text: numericValue,
-                        selection: TextSelection.collapsed(
-                            offset: numericValue.length),
+                        text: formatValue,
+                        selection:
+                            TextSelection.collapsed(offset: formatValue.length),
                       );
                     },
                     keyType: TextInputType.number,
                     textcontent: 'Budget',
                     controller: _budgetController,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                   ),
                   TextFieldBlue(
                     validator: (value) {
@@ -198,6 +204,15 @@ class _AddEventState extends State<AddEvent> {
         ),
       ),
     );
+  }
+
+  String _formatCurrency(String value) {
+    if (value.isNotEmpty) {
+      final format = NumberFormat("#,##0", "en_US");
+      return format.format(int.parse(value));
+    } else {
+      return value;
+    }
   }
 
   final TextEditingController _eventnameController = TextEditingController();

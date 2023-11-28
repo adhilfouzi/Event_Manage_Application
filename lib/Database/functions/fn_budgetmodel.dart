@@ -47,7 +47,7 @@ Future<void> refreshBudgetData(int eventid) async {
     for (var parent in payment) {
       final father = PaymentModel.fromMap(parent);
       if (student.id == father.payid) {
-        paid += int.parse(father.pyamount);
+        paid += int.parse(father.pyamount.replaceAll(RegExp(r'[^0-9]'), ''));
       }
     }
 
@@ -58,9 +58,11 @@ Future<void> refreshBudgetData(int eventid) async {
         student.note,
         student.esamount,
         paid,
-        int.parse(student.esamount) - paid,
+        int.parse(student.esamount.replaceAll(RegExp(r'[^0-9]'), '')) - paid,
         eventid,
-        paid >= int.parse(student.esamount) ? 1 : 0);
+        paid >= int.parse(student.esamount.replaceAll(RegExp(r'[^0-9]'), ''))
+            ? 1
+            : 0);
   }
   await refreshmainbalancedata(eventid);
 
@@ -149,7 +151,6 @@ Future<void> editBudget(
     'status': status
   };
   await budgetDB.update('budget', dataflow, where: 'id=?', whereArgs: [id]);
-  // refreshBudgetData(eventid);
 }
 
 // Function to delete data from event's database.
