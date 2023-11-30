@@ -249,10 +249,14 @@ class _SignupScreenState extends State<SignupScreen> {
           phone: phoneController.text.trimLeft().trimRight(),
           password: passwordController.text,
         );
+        ScaffoldMessenger.of(mtx).showSnackBar(
+          const SnackBar(
+            content: Text('Sign up Successfully'),
+            backgroundColor: Colors.green,
+          ),
+        );
 
-        await addProfile(profile).then((value) {
-          log("Profile added successfully");
-        });
+        await addProfile(profile);
         await refreshRefreshdata();
         Navigator.of(mtx).push(
           MaterialPageRoute(

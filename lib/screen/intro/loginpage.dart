@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Database/functions/fn_profilemodel.dart';
@@ -168,7 +166,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (existingProfiles.isNotEmpty) {
         final matchingProfile = existingProfiles.first;
-        log('profile id in login : ${matchingProfile.id!}');
         if (matchingProfile.password == password) {
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
@@ -176,8 +173,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             (route) => false,
           );
-          // final sharedPrefer = await SharedPreferences.getInstance();
-          // await sharedPrefer.setBool(sharedPreferences, true);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
