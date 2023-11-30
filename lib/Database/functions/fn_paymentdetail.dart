@@ -89,31 +89,6 @@ Future<void> refreshPaymentpayid(int eventid) async {
 
 ValueNotifier<Balence> balance =
     ValueNotifier<Balence>(Balence(paid: 0, total: 0, pending: 0));
-
-// Future<void> refreshbalancedata(
-//     int payid, int eventid, int bol, String amound) async {
-//   try {
-//     final resulter = await paymentDB.rawQuery(
-//         "SELECT * FROM payment WHERE eventid = ? AND paytype = ? AND payid = ?",
-//         [eventid.toString(), bol, payid.toString()]);
-//     print('All budgetPaymentdetiled data: $resulter');
-//     int paid = 0;
-//     for (var map in resulter) {
-//       final student = PaymentModel.fromMap(map);
-//       int amound = int.parse(student.pyamount);
-//       paid += amound;
-//     }
-//       Balence b = Balence(
-//         paid: paid,
-//         total: int.parse(amound),
-//         pending: int.parse(amound) - paid);
-//     balance.value = b;
-//     balance.notifyListeners();
-//   } catch (e, stackTrace) {
-//     log('Error in refreshPaymentTypeData: $e\n$stackTrace');
-//   }
-// }
-
 Future<void> refreshbalancedata(
     int payid, int eventid, int bol, String amound) async {
   try {
@@ -159,9 +134,6 @@ ValueNotifier<Balence> mainbalance =
 
 Future<void> refreshmainbalancedata(int eventid) async {
   try {
-    log('refresh start');
-    log('eventid :${eventid}');
-
     final resultpayment = await paymentDB.rawQuery(
         "SELECT * FROM payment WHERE eventid = ?", [eventid.toString()]);
     print('All resultpayment data: $resultpayment');
@@ -175,7 +147,6 @@ Future<void> refreshmainbalancedata(int eventid) async {
 
       payment += amound;
     }
-    log('payment :${payment}');
 ///////////////////////////////////////////////////////////
     final resultincome = await incomeDB.rawQuery(
         "SELECT * FROM income WHERE eventid = ?", [eventid.toString()]);
@@ -191,14 +162,12 @@ Future<void> refreshmainbalancedata(int eventid) async {
 
       income += amound;
     }
-    log('income :${income}');
 ///////////////////////////////////////////////////////////
     Balence b = Balence(
       paid: payment,
       total: income - payment,
       pending: income,
     );
-    print(b);
     mainbalance.value = b;
     mainbalance.notifyListeners();
   } catch (e, stackTrace) {
@@ -219,7 +188,6 @@ Future<void> deletePayBudget(int eventid, payid) async {
     refreshPaymentTypeData(payid, eventid);
   } catch (e) {
     print('Error deleting payments: $e');
-    // Handle the error as needed
   }
 }
 

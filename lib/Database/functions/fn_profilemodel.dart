@@ -29,7 +29,6 @@ Future<void> initializeProfileDB() async {
 // Function to retrieve student data from the database.
 Future<void> refreshRefreshdata() async {
   final result = await profileDB.rawQuery("SELECT * FROM profile");
-  log('All profile data : ${result}');
   profileList.value.clear();
   for (var map in result) {
     final student = ProfileModel.fromMap(map);
@@ -41,7 +40,6 @@ Future<void> refreshRefreshdata() async {
 Future<void> refreshRefreshid(int id) async {
   final profiledata = await profileDB
       .rawQuery("SELECT * FROM profile WHERE id = ?", [id.toString()]);
-  log('My profile data : ${profiledata}');
   profileData.value.clear();
   for (var map in profiledata) {
     final student = ProfileModel.fromMap(map);
@@ -83,7 +81,6 @@ Future<void> editProfiledata(
       'address': address,
       'password': password,
     };
-    log('My dataflow data : ${dataflow}');
 
     await profileDB.update('profile', dataflow, where: 'id=?', whereArgs: [id]);
     refreshRefreshdata();

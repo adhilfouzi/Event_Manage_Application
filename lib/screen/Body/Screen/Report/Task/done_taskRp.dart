@@ -17,7 +17,7 @@ class DoneRpTaskList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(actions: const [], titleText: 'Task List'),
+      appBar: const CustomAppBar(actions: [], titleText: 'Task List'),
       body: Padding(
         padding: EdgeInsets.all(1.h),
         child: ValueListenableBuilder(

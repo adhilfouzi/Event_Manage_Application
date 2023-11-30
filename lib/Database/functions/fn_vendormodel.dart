@@ -114,7 +114,7 @@ Future<void> refreshVendorData(int eventid) async {
 Future<void> addVendor(VendorsModel value) async {
   try {
     log("Adding vendor: $value");
-    final vendortb = await vendorDB.rawInsert(
+    await vendorDB.rawInsert(
       'INSERT INTO vendortb (name, category, note, esamount, number, email, address, clientname, eventid, paid, pending, status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)',
       [
         value.name,
@@ -131,13 +131,6 @@ Future<void> addVendor(VendorsModel value) async {
         value.status
       ],
     );
-    log('eventid:${value.eventid}');
-
-    //refreshVendorData(value.eventid);
-    log('added data:${vendortb}');
-    log('eventid:${value.name}');
-
-    log("Adding completed succesfully");
   } catch (e) {
     if (e is DatabaseException) {
       // Handle SQLite-specific errors

@@ -87,7 +87,6 @@ Future<void> addPayment(PaymentModel value) async {
 
     refreshPaymentData(value.eventid);
     refreshPaymentTypeData(value.payid, value.eventid);
-    log('id:${value.eventid}');
   } catch (e) {
     log('Error inserting data: $e');
   }
@@ -127,7 +126,6 @@ Future<void> editPayment(id, name, paytype, paytypename, pyamount, note, date,
 Future<void> clearPaymentDatabase() async {
   try {
     await paymentDB.delete('payment');
-    print(' cleared the task database');
   } catch (e) {
     log('Error while clearing the database: $e');
   }

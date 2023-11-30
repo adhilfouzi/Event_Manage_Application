@@ -14,7 +14,7 @@ ValueNotifier<List<TaskModel>> pendingRpTaskList = ValueNotifier([]);
 late Database taskDB;
 
 // Function to initialize the database.
-Future<void> initialize_task_db() async {
+Future<void> initializeTaskDb() async {
   taskDB = await openDatabase(
     'task_db',
     version: 1,
@@ -85,7 +85,6 @@ Future<void> addTask(TaskModel value) async {
         value.id
       ],
     );
-    log(value.id.toString());
     refreshEventtaskdata(value.eventid);
   } catch (e) {
     //------> Handle any errors that occur during data insertion.

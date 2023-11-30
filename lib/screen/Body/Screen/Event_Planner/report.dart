@@ -97,7 +97,7 @@ class Report extends StatelessWidget {
                                     fontSize: 11.sp,
                                   ),
                                 ),
-                                valueListenable: guestDonelist,
+                                valueListenable: doneRpTaskList,
                               ),
                             ),
                             InkWell(

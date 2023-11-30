@@ -18,7 +18,7 @@ class SearchModel {
 late Database eventDB;
 
 // Function to initialize the database.
-Future<void> initialize_event_db() async {
+Future<void> initializeEventDb() async {
   eventDB = await openDatabase(
     'event_db',
     version: 1,
@@ -33,11 +33,11 @@ Future<void> initialize_event_db() async {
 
 // Function to retrieve student data from the database.
 Future<void> refreshEventdata(int profile) async {
-  final result1 =
-      await eventDB.rawQuery("SELECT * FROM event ORDER BY id DESC");
-  log('All result1 data : ${result1}');
+  // final result1 =
+  //     await eventDB.rawQuery("SELECT * FROM event ORDER BY id DESC");
+  // log('All result1 data : ${result1}');
   final result = await eventDB.rawQuery(
-      "SELECT * FROM event WHERE profile = ? ORDER BY id DESC",
+      "SELECT * FROM event WHERE profile = ? ORDER BY startingDay DESC",
       [profile.toString()]);
   print('All event data : ${result}');
   eventList.value.clear();
@@ -50,8 +50,8 @@ Future<void> refreshEventdata(int profile) async {
   ///-----------------------------------------
   ///-----------------------------------------
   ///-----------------------------------------
-  final favResult = await eventDB
-      .rawQuery("SELECT * FROM event WHERE favorite = 1 ORDER BY id DESC");
+  final favResult = await eventDB.rawQuery(
+      "SELECT * FROM event WHERE favorite = 1 ORDER BY startingDay DESC");
   print('Favorite event data : ${favResult}');
   favoriteEventlist.value.clear();
   for (var map in favResult) {

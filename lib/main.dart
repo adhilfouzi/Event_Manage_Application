@@ -16,8 +16,8 @@ import 'package:sizer/sizer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initialize_event_db();
-  await initialize_task_db();
+  await initializeEventDb();
+  await initializeTaskDb();
   await initialize_guest_database();
   await initializeBudgetDatabase();
   await initializeVendorDatabase();
