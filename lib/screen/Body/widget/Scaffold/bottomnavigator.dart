@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:project_event/Database/functions/fn_profilemodel.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/calender.dart';
+import 'package:project_event/screen/Body/Screen/profile/calender.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/accountscreen.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/add_event.dart';
 import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
@@ -9,7 +9,6 @@ import 'package:sizer/sizer.dart';
 
 class MainBottom extends StatefulWidget {
   final int profileid;
-
   const MainBottom({Key? key, required this.profileid}) : super(key: key);
 
   @override
@@ -39,12 +38,11 @@ class _MainButtomState extends State<MainBottom> {
     refreshRefreshid(widget.profileid);
     return Scaffold(
       bottomNavigationBar: Container(
-        color: Colors.white, //const Color.fromRGBO(255, 200, 200, 1),
+        color: Colors.white,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 1.5.h, vertical: 1.5.h),
           child: GNav(
-            backgroundColor:
-                Colors.white, //const Color.fromRGBO(255, 200, 200, 1),
+            backgroundColor: Colors.white,
             color: const Color.fromARGB(255, 250, 3, 3),
             activeColor: const Color.fromARGB(255, 255, 255, 255),
             tabBackgroundColor: const Color(0XFFFFE6C7),

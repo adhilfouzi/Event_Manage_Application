@@ -19,7 +19,7 @@ class TextFieldicon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
-          vertical: 0.5.h, horizontal: 2.h), // Adjust the margin.
+          vertical: 0.5.h, horizontal: 2.5.h), // Adjust the margin.
       decoration: BoxDecoration(
         color: Colors.black12, // Set your desired background color.
         borderRadius: BorderRadius.circular(40),
@@ -28,8 +28,8 @@ class TextFieldicon extends StatelessWidget {
         onChanged: onChanged,
         controller: controller,
         decoration: InputDecoration(
-          // contentPadding: EdgeInsets.symmetric(
-          //     horizontal: 0.5.h, vertical: 0.5.h), // Adjust vertical padding.
+          contentPadding: EdgeInsets.symmetric(
+              horizontal: 0.8.h, vertical: 0.8.h), // Adjust vertical padding.
           prefixIcon: Icon(icondata, size: 4.h), // Increase the icon size.
           hintText: textcontent,
           hintStyle: raleway(

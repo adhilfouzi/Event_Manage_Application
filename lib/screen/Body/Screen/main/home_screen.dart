@@ -1,6 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -13,8 +12,6 @@ import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/notification.dart';
-
 import 'package:project_event/screen/Body/Screen/main/Event/viewevent.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield.dart';
@@ -69,8 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    log('profile id in HomeScreen : ${widget.profileid}');
-
     refreshEventdata(widget.profileid);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -112,13 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   });
                 },
               ),
-              AppAction(
-                  icon: Ionicons.notifications_outline,
-                  sizer: 4.h,
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const NotificationBar()));
-                  }),
             ],
             centerTitle: false,
           ),

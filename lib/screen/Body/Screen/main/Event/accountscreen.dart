@@ -3,11 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Database/functions/fn_profilemodel.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/appinfo.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/favorite.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/feedback.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/reset.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/terms.dart';
+import 'package:project_event/screen/Body/Screen/profile/appinfo.dart';
+import 'package:project_event/screen/Body/Screen/profile/favorite.dart';
+import 'package:project_event/screen/Body/Screen/profile/feedback.dart';
+import 'package:project_event/screen/Body/Screen/profile/reset.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_profile.dart';
 import 'package:project_event/screen/Body/widget/List/listtiledrawer.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
@@ -158,7 +157,6 @@ class ProfileAccount extends StatelessWidget {
                       SizedBox(height: 1.h),
                       const ListTileDrawer(
                         so: 3,
-                        map: Terms(),
                         imagedata: 'assets/UI/icons/terms of service.png',
                         textdata: 'Terms of Service',
                       ),

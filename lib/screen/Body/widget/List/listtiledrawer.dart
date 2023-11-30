@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
+import 'package:project_event/screen/Body/Screen/profile/privacy.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
 
 class ListTileDrawer extends StatelessWidget {
@@ -57,9 +57,12 @@ Future<void> confirmLogout(BuildContext context) async {
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => const LoginScreen()),
                   (route) => false);
-              // final logsharedPreferences =
-              //     await SharedPreferences.getInstance();
-              // await logsharedPreferences.clear();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('LogOut Successfully'),
+                  backgroundColor: Colors.green,
+                ),
+              );
             },
             child: const Text('Logout'),
           ),
