@@ -27,12 +27,13 @@ class AppAction extends StatelessWidget {
 //-----------------------------------------------
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final bool? automaticallyImplyLeadingtitle;
+  final Function()? leading;
   final List<Widget> actions;
   final String titleText;
   final Color? backgroundColor;
   final Color? textcolor;
   final PreferredSizeWidget? bottom;
+
   const CustomAppBar({
     Key? key,
     required this.actions,
@@ -40,17 +41,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.textcolor,
     this.bottom,
-    this.automaticallyImplyLeadingtitle,
+    this.leading,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      automaticallyImplyLeading: automaticallyImplyLeadingtitle ?? true,
+      automaticallyImplyLeading: leading == null ? true : false,
       centerTitle: true,
       foregroundColor: textcolor ?? Colors.black,
-      backgroundColor: Colors.transparent, // backgroundColor ?? appbarcolor,
+      backgroundColor: Colors.transparent,
+      leading: leading != null
+          ? IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: leading,
+            )
+          : null,
       title: Text(
         titleText,
         style: readexPro(fontSize: 17.sp, color: textcolor ?? Colors.black),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_vendor.dart';
 import 'package:project_event/screen/Body/Screen/View/view_vendor.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
@@ -9,7 +10,9 @@ import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:sizer/sizer.dart';
 
 class PendingRpVendorList extends StatelessWidget {
-  const PendingRpVendorList({super.key});
+  final Eventmodel eventModel;
+
+  const PendingRpVendorList({super.key, required this.eventModel});
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +46,16 @@ class PendingRpVendorList extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: ListTile(
-                        onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ViewVendor(vendor: data))),
+                        onTap: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ViewVendor(
+                                      vendor: data,
+                                      eventModel: eventModel,
+                                    ))),
                         onLongPress: () =>
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => EditVendor(
+                                      eventModel: eventModel,
                                       vendordataway: data,
                                       val: 0,
                                     ))),

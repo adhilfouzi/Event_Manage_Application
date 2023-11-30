@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_budget.dart';
 import 'package:project_event/screen/Body/Screen/Search/budget_search.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
@@ -11,8 +12,10 @@ import 'package:project_event/screen/Body/widget/sub/payments.dart';
 import 'package:sizer/sizer.dart';
 
 class BudgetView extends StatelessWidget {
+  final Eventmodel eventModel;
+
   final BudgetModel budget;
-  const BudgetView({super.key, required this.budget});
+  const BudgetView({super.key, required this.budget, required this.eventModel});
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +28,14 @@ class BudgetView extends StatelessWidget {
           AppAction(
               icon: Icons.delete,
               onPressed: () {
-                dodeletebudget(context, budget);
+                dodeletebudget(context, budget, 2, eventModel);
               }),
           AppAction(
               icon: Icons.edit,
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => EditBudget(budgetdata: budget),
+                  builder: (context) =>
+                      EditBudget(budgetdata: budget, eventModel: eventModel),
                 ));
               }),
         ],

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/budget.dart';
 import 'package:project_event/screen/Body/Screen/Search/budget_search.dart';
 import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
@@ -11,8 +12,11 @@ import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:sizer/sizer.dart';
 
 class EditBudget extends StatefulWidget {
+  final Eventmodel eventModel;
+
   final BudgetModel budgetdata;
-  const EditBudget({super.key, required this.budgetdata});
+  const EditBudget(
+      {super.key, required this.budgetdata, required this.eventModel});
 
   @override
   State<EditBudget> createState() => _EditBudgetState();
@@ -30,7 +34,8 @@ class _EditBudgetState extends State<EditBudget> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  dodeletebudget(context, widget.budgetdata);
+                  dodeletebudget(
+                      context, widget.budgetdata, 2, widget.eventModel);
                 }),
             AppAction(
                 icon: Icons.done,
@@ -119,8 +124,11 @@ class _EditBudgetState extends State<EditBudget> {
 
   Future<void> editGuestclick(BuildContext ctx, BudgetModel budget) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      Navigator.of(ctx).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => Budget(eventid: budget.eventid)));
+      Navigator.of(ctx).pushReplacement(MaterialPageRoute(
+          builder: (ctx) => Budget(
+                eventid: budget.eventid,
+                eventModel: widget.eventModel,
+              )));
 
       await editBudget(
           budget.id,

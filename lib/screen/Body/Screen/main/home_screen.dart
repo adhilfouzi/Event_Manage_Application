@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+
 import 'dart:developer';
 import 'dart:io';
 
@@ -17,6 +19,8 @@ import 'package:project_event/screen/Body/Screen/main/Event/viewevent.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield.dart';
 import 'package:sizer/sizer.dart';
+
+ValueNotifier<List<Eventmodel>> eventdata = ValueNotifier([]);
 
 class HomeScreen extends StatefulWidget {
   final int profileid;
@@ -152,7 +156,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ScrollViewKeyboardDismissBehavior.onDrag,
                         itemCount: finduser.length,
                         itemBuilder: (context, index) {
+                          eventdata.value.clear();
                           final data = finduser[index];
+                          eventdata.value.add(data);
+                          eventdata.notifyListeners();
                           return Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 1.h, vertical: 0.5.h),
@@ -225,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   style: racingSansOne(
                                                       fontSize: 10.sp),
                                                 ),
-                                                const SizedBox(width: 30),
+                                                SizedBox(width: 3.w),
                                                 Text(
                                                   overflow:
                                                       TextOverflow.ellipsis,

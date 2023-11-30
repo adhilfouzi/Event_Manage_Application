@@ -154,6 +154,7 @@ class _EditEventState extends State<EditEvent> {
                   controller: _aboutController,
                 ),
                 Date(
+                  defaultdata: _stdateController.text,
                   textdate: 'Event Day',
                   controller: _stdateController,
                 ),

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/Database/model/Guest_Model/guest_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_guest.dart';
+import 'package:project_event/screen/Body/Screen/Event_Planner/guests.dart';
 import 'package:sizer/sizer.dart';
 
 class GuestSearch extends StatefulWidget {
-  const GuestSearch({super.key});
+  final Eventmodel eventModel;
+
+  const GuestSearch({super.key, required this.eventModel});
 
   @override
   State<GuestSearch> createState() => _GuestSearchState();
@@ -107,13 +111,15 @@ class _GuestSearchState extends State<GuestSearch> {
                                     trailing: IconButton(
                                         icon: const Icon(Icons.delete),
                                         onPressed: () {
-                                          dodeleteguest(context, finduserItem);
+                                          dodeleteguest(context, finduserItem,
+                                              1, widget.eventModel);
                                         }),
                                     onTap: () {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                        builder: (ctr) =>
-                                            EditGuest(guestdata: finduserItem),
+                                        builder: (ctr) => EditGuest(
+                                            guestdata: finduserItem,
+                                            eventModel: widget.eventModel),
                                       ));
                                     },
                                   ),
@@ -129,7 +135,7 @@ class _GuestSearchState extends State<GuestSearch> {
   }
 }
 
-void dodeleteguest(rtx, GuestModel student) {
+void dodeleteguest(rtx, GuestModel student, int step, Eventmodel eventModel) {
   try {
     showDialog(
       context: rtx,
@@ -140,7 +146,7 @@ void dodeleteguest(rtx, GuestModel student) {
           actions: [
             TextButton(
                 onPressed: () {
-                  delectYes(context, student);
+                  delectYes(context, student, step, eventModel);
                 },
                 child: const Text('Yes')),
             TextButton(
@@ -157,18 +163,20 @@ void dodeleteguest(rtx, GuestModel student) {
   }
 }
 
-void delectYes(ctx, GuestModel student) {
+void delectYes(ctx, GuestModel student, int step, Eventmodel eventModel) {
   deleteGuest(student.id, student.eventid);
 
-  ScaffoldMessenger.of(ctx).showSnackBar(
-    SnackBar(
-      content: const Text("Successfully Deleted"),
-      behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.all(1.h),
-      backgroundColor: Colors.redAccent,
-      duration: const Duration(seconds: 2),
-    ),
-  );
-  Navigator.of(ctx).pop();
-  Navigator.of(ctx).pop();
+  if (step == 2) {
+    Navigator.of(ctx).pushAndRemoveUntil(
+      MaterialPageRoute(
+          builder: (ctx) => Guests(
+                eventModel: eventModel,
+                eventid: student.eventid,
+              )),
+      (route) => false,
+    );
+  } else if (step == 1) {
+    Navigator.pop(ctx);
+    refreshguestdata(student.eventid);
+  }
 }

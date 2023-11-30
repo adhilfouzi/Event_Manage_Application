@@ -5,13 +5,16 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_task.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:sizer/sizer.dart';
 
 class PendingRpTaskList extends StatelessWidget {
-  const PendingRpTaskList({super.key});
+  final Eventmodel eventModel;
+
+  const PendingRpTaskList({super.key, required this.eventModel});
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +123,7 @@ class PendingRpTaskList extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => EditTask(
+                                      eventModel: eventModel,
                                       taskdata: data,
                                     )));
                           },

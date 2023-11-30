@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/Database/model/Task/task_model.dart';
 import 'package:project_event/screen/Body/Screen/Search/tasklist_search.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
@@ -10,9 +11,11 @@ import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:sizer/sizer.dart';
 
 class EditTask extends StatefulWidget {
+  final Eventmodel eventModel;
+
   final TaskModel taskdata;
 
-  const EditTask({super.key, required this.taskdata});
+  const EditTask({super.key, required this.taskdata, required this.eventModel});
 
   @override
   State<EditTask> createState() => _EditTaskState();
@@ -27,11 +30,10 @@ class _EditTaskState extends State<EditTask> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: CustomAppBar(actions: [
-          AppAction(icon: Icons.contacts, onPressed: () {}),
           AppAction(
               icon: Icons.delete,
               onPressed: () {
-                dodeletetask(context, widget.taskdata);
+                dodeletetask(context, widget.taskdata, 2, widget.eventModel);
               }),
           AppAction(
               icon: Icons.done,

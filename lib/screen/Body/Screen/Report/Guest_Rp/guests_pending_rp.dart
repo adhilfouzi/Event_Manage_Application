@@ -3,12 +3,15 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_guest.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:sizer/sizer.dart';
 
 class PendingRpGuests extends StatelessWidget {
-  const PendingRpGuests({super.key});
+  final Eventmodel eventModel;
+
+  const PendingRpGuests({super.key, required this.eventModel});
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +109,7 @@ class PendingRpGuests extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => EditGuest(
+                                      eventModel: eventModel,
                                       guestdata: data,
                                     )));
                           },

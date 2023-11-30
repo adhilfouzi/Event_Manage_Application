@@ -61,7 +61,6 @@ class _CalenderState extends State<Calender> {
         appBar: const CustomAppBar(
           actions: [],
           titleText: '',
-          automaticallyImplyLeadingtitle: false,
           bottom: BottomBorderNull(),
         ),
         body: Column(

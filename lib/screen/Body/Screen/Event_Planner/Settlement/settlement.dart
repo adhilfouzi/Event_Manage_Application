@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Add/add_payments.dart';
 import 'package:project_event/screen/Body/Screen/Add/addincome.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/budget_settelment.dart';
@@ -10,13 +11,16 @@ import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/vendor
 import 'package:project_event/screen/Body/Screen/Search/budgetsettlement_search.dart';
 import 'package:project_event/screen/Body/Screen/Search/settlement_search.dart';
 import 'package:project_event/screen/Body/Screen/Search/vendorsettlement_search.dart';
+import 'package:project_event/screen/Body/Screen/main/Event/viewevent.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:sizer/sizer.dart';
 
 class Settlement extends StatefulWidget {
   final int eventID;
+  final Eventmodel eventModel;
 
-  const Settlement({super.key, required this.eventID});
+  const Settlement(
+      {super.key, required this.eventID, required this.eventModel});
 
   @override
   State<Settlement> createState() => _SettlementState();
@@ -39,6 +43,15 @@ class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => ViewEvent(eventModel: widget.eventModel),
+              ),
+              (route) => false,
+            ),
+          ),
           toolbarHeight: 20.h,
           backgroundColor: Colors.transparent,
           actions: [
@@ -64,7 +77,7 @@ class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
               },
             ),
             SizedBox(
-              width: 2.h,
+              width: 2.w,
             )
           ],
           title: Text(

@@ -119,13 +119,10 @@ Future<void> addBudget(BudgetModel value) async {
         value.status
       ],
     );
-    // refreshBudgetData(value.eventid);
   } catch (e) {
     if (e is DatabaseException) {
-      // Handle SQLite-specific errors
       print('SQLite Error: $e');
     } else {
-      // Handle other exceptions
       print('Error inserting data: $e');
     }
   }
@@ -134,7 +131,6 @@ Future<void> addBudget(BudgetModel value) async {
 // Function to delete a student from the database by their ID.
 Future<void> deleteBudget(id, int eventid) async {
   await budgetDB.delete('budget', where: 'id=?', whereArgs: [id]);
-  refreshBudgetData(eventid);
 }
 
 // Function to edit/update a student's information in the database.

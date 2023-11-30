@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/Database/model/Task/task_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_task.dart';
+import 'package:project_event/screen/Body/Screen/Event_Planner/task_list.dart';
 import 'package:sizer/sizer.dart';
 
 class TaskSearch extends StatefulWidget {
-  const TaskSearch({super.key});
+  final Eventmodel eventModel;
+
+  const TaskSearch({super.key, required this.eventModel});
 
   @override
   State<TaskSearch> createState() => _TaskSearchState();
@@ -104,13 +108,15 @@ class _TaskSearchState extends State<TaskSearch> {
                               trailing: IconButton(
                                   icon: const Icon(Icons.delete),
                                   onPressed: () {
-                                    dodeletetask(context, finduserItem);
+                                    dodeletetask(context, finduserItem, 1,
+                                        widget.eventModel);
                                   }),
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (ctr) =>
-                                        EditTask(taskdata: finduserItem),
+                                    builder: (ctr) => EditTask(
+                                        taskdata: finduserItem,
+                                        eventModel: widget.eventModel),
                                   ),
                                 );
                               },
@@ -125,7 +131,7 @@ class _TaskSearchState extends State<TaskSearch> {
   }
 }
 
-void dodeletetask(rtx, TaskModel student) {
+void dodeletetask(rtx, TaskModel student, int step, Eventmodel eventModel) {
   try {
     showDialog(
       context: rtx,
@@ -136,7 +142,7 @@ void dodeletetask(rtx, TaskModel student) {
           actions: [
             TextButton(
                 onPressed: () {
-                  delectYes(context, student);
+                  delectYes(context, student, step, eventModel);
                 },
                 child: const Text('Yes')),
             TextButton(
@@ -153,25 +159,23 @@ void dodeletetask(rtx, TaskModel student) {
   }
 }
 
-void delectYes(
-  ctx,
-  TaskModel student,
-) {
+void delectYes(ctx, TaskModel student, int step, Eventmodel eventModel) {
   try {
     deletetask(student.id, student.eventid);
 
-    Navigator.of(ctx).pop();
-    Navigator.of(ctx).pop();
-
-    ScaffoldMessenger.of(ctx).showSnackBar(
-      SnackBar(
-        content: const Text("Successfully Deleted"),
-        behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(2.h),
-        backgroundColor: Colors.grey,
-        duration: const Duration(seconds: 2),
-      ),
-    );
+    if (step == 2) {
+      Navigator.of(ctx).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (ctx) => TaskList(
+                  eventid: student.eventid,
+                  eventModel: eventModel,
+                )),
+        (route) => false,
+      );
+    } else if (step == 1) {
+      Navigator.pop(ctx);
+      refreshEventtaskdata(student.eventid);
+    }
   } catch (e) {
     print('Error inserting data: $e');
   }

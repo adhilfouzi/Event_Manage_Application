@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_paymentdetail.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/Database/model/Vendors/vendors_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_vendor.dart';
 import 'package:project_event/screen/Body/Screen/Search/vendor_search.dart';
@@ -13,9 +14,11 @@ import 'package:project_event/screen/Body/widget/sub/payments.dart';
 import 'package:sizer/sizer.dart';
 
 class ViewVendor extends StatelessWidget {
+  final Eventmodel eventModel;
+
   final VendorsModel vendor;
 
-  const ViewVendor({super.key, required this.vendor});
+  const ViewVendor({super.key, required this.vendor, required this.eventModel});
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +31,14 @@ class ViewVendor extends StatelessWidget {
           AppAction(
               icon: Icons.delete,
               onPressed: () {
-                dodeletevendor(context, vendor);
+                dodeletevendor(context, vendor, 2, eventModel);
               }),
           AppAction(
               icon: Icons.edit,
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => EditVendor(
+                    eventModel: eventModel,
                     vendordataway: vendor,
                     val: 1,
                   ),

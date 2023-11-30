@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
+import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/model/Budget_Model/budget_model.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_budget.dart';
 import 'package:project_event/screen/Body/Screen/Event_Planner/budget.dart';
 import 'package:sizer/sizer.dart';
 
 class BudgetSearch extends StatefulWidget {
-  const BudgetSearch({super.key});
+  final Eventmodel eventModel;
+
+  const BudgetSearch({super.key, required this.eventModel});
 
   @override
   State<BudgetSearch> createState() => _BudgetSearchState();
@@ -104,12 +108,14 @@ class _BudgetSearchState extends State<BudgetSearch> {
                               trailing: IconButton(
                                   icon: const Icon(Icons.delete),
                                   onPressed: () {
-                                    dodeletebudget(context, finduserItem);
+                                    dodeletebudget(context, finduserItem, 3,
+                                        widget.eventModel);
                                   }),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (ctr) =>
-                                      EditBudget(budgetdata: finduserItem),
+                                  builder: (ctr) => EditBudget(
+                                      budgetdata: finduserItem,
+                                      eventModel: widget.eventModel),
                                 ));
                               },
                             ),
@@ -122,7 +128,7 @@ class _BudgetSearchState extends State<BudgetSearch> {
   }
 }
 
-void dodeletebudget(rtx, BudgetModel student) {
+void dodeletebudget(rtx, BudgetModel student, int step, Eventmodel eventModel) {
   try {
     showDialog(
       context: rtx,
@@ -133,7 +139,7 @@ void dodeletebudget(rtx, BudgetModel student) {
           actions: [
             TextButton(
                 onPressed: () {
-                  delectYes(context, student);
+                  delectYes(context, student, step, eventModel);
                 },
                 child: const Text('Yes')),
             TextButton(
@@ -150,18 +156,21 @@ void dodeletebudget(rtx, BudgetModel student) {
   }
 }
 
-void delectYes(ctx, BudgetModel student) {
+void delectYes(ctx, BudgetModel student, int step, Eventmodel eventModel) {
   deleteBudget(student.id, student.eventid);
+  deletePayBudget(student.eventid, student.id);
 
-  ScaffoldMessenger.of(ctx).showSnackBar(
-    SnackBar(
-      content: const Text("Successfully Deleted"),
-      behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.all(1.h),
-      backgroundColor: Colors.redAccent,
-      duration: const Duration(seconds: 2),
-    ),
-  );
-  Navigator.of(ctx).pushReplacement(
-      MaterialPageRoute(builder: (ctx) => Budget(eventid: student.eventid)));
+  if (step == 2) {
+    Navigator.of(ctx).pushAndRemoveUntil(
+      MaterialPageRoute(
+          builder: (ctx) => Budget(
+                eventid: student.eventid,
+                eventModel: eventModel,
+              )),
+      (route) => false,
+    );
+  } else if (step == 3) {
+    Navigator.pop(ctx);
+    refreshBudgetData(student.eventid);
+  }
 }

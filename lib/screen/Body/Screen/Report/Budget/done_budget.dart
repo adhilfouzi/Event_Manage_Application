@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_budgetmodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_budget.dart';
 import 'package:project_event/screen/Body/Screen/View/budget_view.dart';
 import 'package:project_event/screen/Body/widget/List/list.dart';
@@ -9,7 +10,9 @@ import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:sizer/sizer.dart';
 
 class DoneRpBudget extends StatelessWidget {
-  const DoneRpBudget({super.key});
+  final Eventmodel eventModel;
+
+  const DoneRpBudget({super.key, required this.eventModel});
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +49,17 @@ class DoneRpBudget extends StatelessWidget {
                       child: ListTile(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => BudgetView(budget: data)));
+                              builder: (context) => BudgetView(
+                                    budget: data,
+                                    eventModel: eventModel,
+                                  )));
                         },
                         onLongPress: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  EditBudget(budgetdata: data)));
+                              builder: (context) => EditBudget(
+                                    budgetdata: data,
+                                    eventModel: eventModel,
+                                  )));
                         },
                         leading: Image(image: categoryItem['image']),
                         title: Text(

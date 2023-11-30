@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/Database/model/Vendors/vendors_model.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_vendor.dart';
+import 'package:project_event/screen/Body/Screen/Event_Planner/vendors.dart';
 import 'package:sizer/sizer.dart';
 
 class VendorSearch extends StatefulWidget {
-  const VendorSearch({super.key});
+  final Eventmodel eventModel;
+
+  const VendorSearch({super.key, required this.eventModel});
 
   @override
   State<VendorSearch> createState() => _VendorSearchState();
@@ -99,12 +104,14 @@ class _VendorSearchState extends State<VendorSearch> {
                               trailing: IconButton(
                                   icon: const Icon(Icons.delete),
                                   onPressed: () {
-                                    dodeletevendor(context, finduserItem);
+                                    dodeletevendor(context, finduserItem, 1,
+                                        widget.eventModel);
                                   }),
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (ctr) => EditVendor(
+                                      eventModel: widget.eventModel,
                                       vendordataway: finduserItem,
                                       val: 1,
                                     ),
@@ -122,7 +129,8 @@ class _VendorSearchState extends State<VendorSearch> {
   }
 }
 
-void dodeletevendor(rtx, VendorsModel student) {
+void dodeletevendor(
+    rtx, VendorsModel student, int step, Eventmodel eventModel) {
   try {
     showDialog(
       context: rtx,
@@ -133,7 +141,7 @@ void dodeletevendor(rtx, VendorsModel student) {
           actions: [
             TextButton(
                 onPressed: () {
-                  delectYes(context, student);
+                  delectYes(context, student, step, eventModel);
                 },
                 child: const Text('Yes')),
             TextButton(
@@ -150,22 +158,24 @@ void dodeletevendor(rtx, VendorsModel student) {
   }
 }
 
-void delectYes(ctx, VendorsModel student) {
+void delectYes(ctx, VendorsModel student, int step, Eventmodel eventModel) {
   try {
     deleteVendor(student.id, student.eventid);
+    deletePayVendor(student.eventid, student.id);
 
-    Navigator.of(ctx).pop();
-    Navigator.of(ctx).pop();
-
-    ScaffoldMessenger.of(ctx).showSnackBar(
-      SnackBar(
-        content: const Text("Successfully Deleted"),
-        behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(1.h),
-        backgroundColor: Colors.grey,
-        duration: const Duration(seconds: 2),
-      ),
-    );
+    if (step == 2) {
+      Navigator.of(ctx).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (ctx) => Vendors(
+                  eventModel: eventModel,
+                  eventid: student.eventid,
+                )),
+        (route) => false,
+      );
+    } else if (step == 1) {
+      Navigator.pop(ctx);
+      refreshVendorData(student.eventid);
+    }
   } catch (e) {
     print('Error inserting data: $e');
   }

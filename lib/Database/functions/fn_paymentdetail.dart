@@ -205,3 +205,36 @@ Future<void> refreshmainbalancedata(int eventid) async {
     log('Error in refreshPaymentTypeData: $e\n$stackTrace');
   }
 }
+
+Future<void> deletePayBudget(int eventid, payid) async {
+  try {
+    final resulter = await paymentDB.rawQuery(
+        "SELECT * FROM payment WHERE eventid = ? AND paytype = 0 AND payid = ?",
+        [eventid.toString(), payid.toString()]);
+    print('All budgetPaymentdetiled data: $resulter');
+    for (var del in resulter) {
+      await paymentDB.delete('payment', where: 'id=?', whereArgs: [del['id']]);
+    }
+    refreshPaymentData(eventid);
+    refreshPaymentTypeData(payid, eventid);
+  } catch (e) {
+    print('Error deleting payments: $e');
+    // Handle the error as needed
+  }
+}
+
+Future<void> deletePayVendor(int eventid, payid) async {
+  try {
+    final resulter = await paymentDB.rawQuery(
+        "SELECT * FROM payment WHERE eventid = ? AND paytype = 1 AND payid = ?",
+        [eventid.toString(), payid.toString()]);
+    print('All budgetPaymentdetiled data: $resulter');
+    for (var del in resulter) {
+      await paymentDB.delete('payment', where: 'id=?', whereArgs: [del['id']]);
+    }
+    refreshPaymentData(eventid);
+    refreshPaymentTypeData(payid, eventid);
+  } catch (e) {
+    print('Error deleting payments: $e');
+  }
+}

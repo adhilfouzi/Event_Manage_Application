@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:project_event/Database/functions/fn_guestmodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/Database/model/Guest_Model/guest_model.dart';
 import 'package:project_event/screen/Body/Screen/Search/guest_search.dart';
 import 'package:project_event/screen/Body/widget/List/sexdropdown.dart';
@@ -11,9 +12,12 @@ import 'package:project_event/screen/Body/widget/sub/status.dart';
 import 'package:sizer/sizer.dart';
 
 class EditGuest extends StatefulWidget {
+  final Eventmodel eventModel;
+
   final GuestModel guestdata;
 
-  const EditGuest({super.key, required this.guestdata});
+  const EditGuest(
+      {super.key, required this.guestdata, required this.eventModel});
 
   @override
   State<EditGuest> createState() => _EditGuestState();
@@ -38,7 +42,8 @@ class _EditGuestState extends State<EditGuest> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  dodeleteguest(context, widget.guestdata);
+                  dodeleteguest(
+                      context, widget.guestdata, 2, widget.eventModel);
                 }),
             AppAction(
                 icon: Icons.done,

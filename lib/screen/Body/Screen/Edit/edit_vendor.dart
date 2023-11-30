@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
+import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/Database/model/Vendors/vendors_model.dart';
 import 'package:project_event/screen/Body/Screen/Search/vendor_search.dart';
 import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
@@ -14,9 +15,14 @@ import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
 import 'package:sizer/sizer.dart';
 
 class EditVendor extends StatefulWidget {
+  final Eventmodel eventModel;
   final int val;
   final VendorsModel vendordataway;
-  const EditVendor({super.key, required this.vendordataway, required this.val});
+  const EditVendor(
+      {super.key,
+      required this.vendordataway,
+      required this.val,
+      required this.eventModel});
 
   @override
   State<EditVendor> createState() => _EditVendorState();
@@ -37,7 +43,8 @@ class _EditVendorState extends State<EditVendor> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  dodeletevendor(context, widget.vendordataway);
+                  dodeletevendor(
+                      context, widget.vendordataway, 2, widget.eventModel);
                 }),
             AppAction(
                 icon: Icons.contacts,
