@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         borderRadius:
                                             BorderRadius.circular(20.0),
                                         child: SizedBox(
-                                          height: 20.h,
+                                          height: 28.h,
                                           width: double.infinity,
                                           child: Image.file(
                                             File(data.imagex),
@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         )),
                                   ),
                                   Container(
-                                    height: 21.2.h,
+                                    height: 29.2.h,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
@@ -211,24 +211,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                               style: racingSansOne(
                                                   fontSize: 13.sp),
                                             ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Text(
-                                                  '${data.startingDay}  at  ${data.startingTime}',
-                                                  style: racingSansOne(
-                                                      fontSize: 10.sp),
-                                                ),
-                                                SizedBox(width: 3.w),
-                                                Text(
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  data.location,
-                                                  style: racingSansOne(
-                                                      fontSize: 10.sp),
-                                                ),
-                                              ],
+                                            Text(
+                                              overflow: TextOverflow.ellipsis,
+                                              data.location,
+                                              style: racingSansOne(
+                                                  fontSize: 10.sp),
+                                            ),
+                                            Text(
+                                              '${data.startingDay}  at  ${data.startingTime}',
+                                              style: racingSansOne(
+                                                  fontSize: 10.sp),
                                             ),
                                           ],
                                         ),

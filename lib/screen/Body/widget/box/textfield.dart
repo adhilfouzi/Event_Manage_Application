@@ -18,19 +18,19 @@ class TextFieldicon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-          vertical: 0.5.h, horizontal: 2.5.h), // Adjust the margin.
-      decoration: BoxDecoration(
-        color: Colors.black12, // Set your desired background color.
-        borderRadius: BorderRadius.circular(40),
-      ),
+      margin: EdgeInsets.symmetric(vertical: 0.5.h, horizontal: 2.5.h),
       child: TextField(
         onChanged: onChanged,
         controller: controller,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(
-              horizontal: 0.8.h, vertical: 0.8.h), // Adjust vertical padding.
-          prefixIcon: Icon(icondata, size: 4.h), // Increase the icon size.
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(40.0),
+              borderSide: BorderSide.none),
+          filled: true,
+          fillColor: Colors.black12,
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 0.8.h, vertical: 0.8.h),
+          prefixIcon: Icon(icondata, size: 4.h),
           hintText: textcontent,
           hintStyle: raleway(
               color: Colors.black,

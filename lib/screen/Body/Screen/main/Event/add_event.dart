@@ -77,13 +77,13 @@ class _AddEventState extends State<AddEvent> {
                   ),
                   Divider(
                     color: buttoncolor,
-                    height: 2.h,
+                    height: 1.h,
                     thickness: 2,
                     endIndent: 40,
                     indent: 40,
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(1.h, 3.h, 1.h, 1.h),
+                    padding: EdgeInsets.fromLTRB(1.h, 1.h, 1.h, 1.h),
                     child: InkWell(
                       onTap: () {
                         addphoto(context);

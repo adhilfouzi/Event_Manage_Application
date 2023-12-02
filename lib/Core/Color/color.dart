@@ -75,3 +75,53 @@ const MaterialColor buttoncolorAccent =
   700: Color(0xFFC9CEFF),
 });
 const int _buttoncolorAccentValue = 0xFFFFFFFF;
+
+///****************************************************************///
+
+const MaterialColor graylight =
+    MaterialColor(_graylightPrimaryValue, <int, Color>{
+  50: Color(0xFFEEEEEE),
+  100: Color(0xFFD4D4D5),
+  200: Color(0xFFB8B8BA),
+  300: Color(0xFF9C9C9E),
+  400: Color(0xFF868689),
+  500: Color(_graylightPrimaryValue),
+  600: Color(0xFF69696C),
+  700: Color(0xFF5E5E61),
+  800: Color(0xFF545457),
+  900: Color(0xFF424244),
+});
+const int _graylightPrimaryValue = 0xFF717174;
+
+const MaterialColor graylightAccent =
+    MaterialColor(_graylightAccentValue, <int, Color>{
+  100: Color(0xFFABABF7),
+  200: Color(_graylightAccentValue),
+  400: Color(0xFF3D3DFF),
+  700: Color(0xFF2424FF),
+});
+const int _graylightAccentValue = 0xFF7D7DF2;
+
+const MaterialColor backcolor =
+    MaterialColor(_backcolorPrimaryValue, <int, Color>{
+  50: Color(0xFFE6E6E6),
+  100: Color(0xFFBFC0C1),
+  200: Color(0xFF959697),
+  300: Color(0xFF6B6B6D),
+  400: Color(0xFF4B4C4E),
+  500: Color(_backcolorPrimaryValue),
+  600: Color(0xFF26272A),
+  700: Color(0xFF202123),
+  800: Color(0xFF1A1B1D),
+  900: Color(0xFF101012),
+});
+const int _backcolorPrimaryValue = 0xFF2B2C2F;
+
+const MaterialColor backcolorAccent =
+    MaterialColor(_backcolorAccentValue, <int, Color>{
+  100: Color(0xFF6666F2),
+  200: Color(_backcolorAccentValue),
+  400: Color(0xFF0000F2),
+  700: Color(0xFF0000D9),
+});
+const int _backcolorAccentValue = 0xFF3737EE;

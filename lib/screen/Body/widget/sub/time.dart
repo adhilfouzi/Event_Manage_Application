@@ -88,34 +88,39 @@ class _TimeState extends State<Time> {
         ),
         Padding(
           padding: EdgeInsets.fromLTRB(1.h, 0.5.h, 1.h, 0.5.h),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: buttoncolor, width: 1),
-              borderRadius: BorderRadius.circular(40.0),
-            ),
-            child: InkWell(
-              onTap: () => _selectTime(context),
-              child: TextFormField(
-                readOnly: true,
-                controller: widget.controller,
-                decoration: InputDecoration(
-                  iconColor: buttoncolor,
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 1.h,
-                    vertical: 1.h,
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.access_time,
-                        size: 24, color: buttoncolor[700]),
-                    onPressed: () => _selectTime(context),
-                  ),
-                  hintText: _formatTime(selectedTime),
-                  hintStyle: const TextStyle(
-                    color: Color.fromRGBO(0, 0, 0, 0.5),
-                    fontFamily: 'ReadexPro',
-                  ),
-                  border: InputBorder.none,
+          child: TextFormField(
+            readOnly: true,
+            controller: widget.controller,
+            decoration: InputDecoration(
+              filled: true, // Set filled to true
+              fillColor: Colors.black12, iconColor: buttoncolor,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 1.h,
+                vertical: 1.h,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40.0),
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 0.4.w,
                 ),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40.0),
+                borderSide: BorderSide(
+                  color: graylight,
+                  width: 0.4.w,
+                ),
+              ),
+              suffixIcon: IconButton(
+                icon:
+                    Icon(Icons.access_time, size: 24, color: buttoncolor[700]),
+                onPressed: () => _selectTime(context),
+              ),
+              hintText: _formatTime(selectedTime),
+              hintStyle: const TextStyle(
+                color: Color.fromRGBO(0, 0, 0, 0.5),
+                fontFamily: 'ReadexPro',
               ),
             ),
           ),

@@ -8,8 +8,10 @@ import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class MainBottom extends StatefulWidget {
+  final int? selectedIndex;
   final int profileid;
-  const MainBottom({Key? key, required this.profileid}) : super(key: key);
+  const MainBottom({Key? key, required this.profileid, this.selectedIndex})
+      : super(key: key);
 
   @override
   State<MainBottom> createState() => _MainButtomState();
@@ -22,6 +24,9 @@ class _MainButtomState extends State<MainBottom> {
   @override
   void initState() {
     super.initState();
+    if (widget.selectedIndex != null) {
+      _selectedIndex = widget.selectedIndex!;
+    }
 
     _pages = [
       HomeScreen(profileid: widget.profileid),
@@ -51,7 +56,7 @@ class _MainButtomState extends State<MainBottom> {
               Color.fromARGB(255, 250, 3, 3)
             ]),
             gap: 6.0,
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(1.h),
             tabs: const [
               GButton(text: 'Home', icon: Icons.home),
               GButton(text: 'Add Event', icon: Icons.add),

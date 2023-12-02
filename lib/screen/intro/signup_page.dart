@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Database/functions/fn_profilemodel.dart';
 import 'package:project_event/Database/model/Profile/profile_model.dart';
-import 'package:project_event/screen/Body/Screen/Drawer/privacy.dart';
+import 'package:project_event/screen/Body/Screen/profile/privacy.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:sizer/sizer.dart';
@@ -170,7 +170,6 @@ class _SignupScreenState extends State<SignupScreen> {
                               onPressed: () {
                                 if (_formKey.currentState?.validate() ??
                                     false) {
-                                  // Perform signup logic here
                                   addProfileclick(context);
                                 }
                               },

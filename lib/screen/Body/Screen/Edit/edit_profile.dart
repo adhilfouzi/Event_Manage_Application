@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_event/Database/functions/fn_profilemodel.dart';
 import 'package:project_event/Database/model/Profile/profile_model.dart';
-import 'package:project_event/screen/Body/Screen/main/Event/accountscreen.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
@@ -178,12 +177,7 @@ class _EditProfileState extends State<EditProfile> {
           addressPassController.text,
           widget.profileid.password);
       refreshRefreshid(widget.profileid.id!);
-
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => ProfileAccount(profileid: widget.profileid.id!),
-        ),
-      );
+      Navigator.of(context).pop();
     }
   }
 

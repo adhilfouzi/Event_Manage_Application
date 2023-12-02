@@ -78,31 +78,40 @@ class _MyWidgetState extends State<Date> {
         ),
         Padding(
           padding: EdgeInsets.fromLTRB(1.h, 0.5.h, 1.h, 0.5.h),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: buttoncolor, width: 1),
-              borderRadius: BorderRadius.circular(40.0),
-            ),
-            child: TextFormField(
-              readOnly: true,
-              controller: widget.controller,
-              decoration: InputDecoration(
-                iconColor: buttoncolor,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 1.h,
-                  vertical: 1.h,
+          child: TextFormField(
+            readOnly: true,
+            controller: widget.controller,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40.0),
+                borderSide: BorderSide(
+                  color: graylight,
+                  width: 0.4.w,
                 ),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.calendar_month,
-                      size: 20.sp, color: buttoncolor[700]),
-                  onPressed: () => _selectDate(context),
+              ),
+              filled: true, // Set filled to true
+              fillColor: Colors.black12,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40.0),
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 0.4.w,
                 ),
-                hintText: _formatDate(selectedDate!),
-                hintStyle: const TextStyle(
-                  color: Color.fromRGBO(0, 0, 0, 0.5),
-                  fontFamily: 'ReadexPro',
-                ),
-                border: InputBorder.none,
+              ),
+              iconColor: buttoncolor,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 1.h,
+                vertical: 1.h,
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(Icons.calendar_month,
+                    size: 20.sp, color: buttoncolor[700]),
+                onPressed: () => _selectDate(context),
+              ),
+              hintText: _formatDate(selectedDate!),
+              hintStyle: const TextStyle(
+                color: Color.fromRGBO(0, 0, 0, 0.5),
+                fontFamily: 'ReadexPro',
               ),
             ),
           ),

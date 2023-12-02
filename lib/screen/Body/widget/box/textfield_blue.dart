@@ -36,10 +36,10 @@ class TextFieldBlue extends StatelessWidget {
         Container(
           alignment: Alignment.centerLeft,
           padding: EdgeInsets.only(left: 2.h),
-          child: Text(textcontent, style: raleway(fontSize: 2.2.h)),
+          child: Text(textcontent, style: raleway(fontSize: 13.sp)),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 1.h),
+          padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 0.2.h),
           child: TextFormField(
             inputFormatters: inputFormatters,
             enabled: enabled == null ? true : false,
@@ -49,28 +49,30 @@ class TextFieldBlue extends StatelessWidget {
             controller: controller,
             onChanged: onChanged,
             decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.black12,
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40.0),
                 borderSide: BorderSide(
                   color: Colors.red,
-                  width: 0.3.h,
+                  width: 0.4.w,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40.0),
                 borderSide: BorderSide(
-                  color: buttoncolor,
-                  width: 0.2.h,
+                  color: Colors.black,
+                  width: 0.4.w,
                 ),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40.0),
                 borderSide: BorderSide(
-                  color: buttoncolor,
-                  width: 0.2.h,
+                  color: graylight,
+                  width: 0.4.w,
                 ),
               ),
-              iconColor: buttoncolor,
+              iconColor: graylight,
               contentPadding: EdgeInsets.symmetric(
                 horizontal: 1.h,
                 vertical: 1.h,
@@ -83,9 +85,9 @@ class TextFieldBlue extends StatelessWidget {
                   : null,
               hintText: textcontent,
               hintStyle: TextStyle(
-                  color: Color.fromRGBO(0, 0, 0, 0.5),
+                  color: const Color.fromRGBO(0, 0, 0, 0.5),
                   fontFamily: 'Raleway',
-                  fontSize: 1.8.h),
+                  fontSize: 11.sp),
             ),
           ),
         ),
