@@ -127,6 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
+              // Container(
+              //     constraints: BoxConstraints(maxHeight: 30.h, minHeight: 0)),
               Expanded(
                 child: ValueListenableBuilder(
                   valueListenable: eventList,
@@ -180,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         )),
                                   ),
                                   Container(
-                                    height: 29.2.h,
+                                    height: 28.8.h,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
@@ -188,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         end: Alignment.bottomLeft,
                                         colors: [
                                           Colors.transparent,
-                                          Colors.black.withOpacity(1),
+                                          Colors.black.withOpacity(0.8),
                                         ],
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),

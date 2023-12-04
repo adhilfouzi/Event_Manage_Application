@@ -125,19 +125,19 @@ class ProfileAccount extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      // SizedBox(height: 1.h),
-                      // const ListTileDrawer(
-                      //   so: 1,
-                      //   map: Privacy(),
-                      //   imagedata: 'assets/UI/icons/icons8-settings-500.png',
-                      //   textdata: 'Settings++++',
-                      // ),
                       SizedBox(height: 1.h),
                       const ListTileDrawer(
                         so: 1,
                         map: Favorite(),
                         imagedata: 'assets/UI/icons/favorite.png',
                         textdata: 'Favorite',
+                      ),
+                      SizedBox(height: 1.h),
+                      ListTileDrawer(
+                        so: 1,
+                        map: Reset(profileid: profileid),
+                        imagedata: 'assets/UI/icons/Sales.png',
+                        textdata: 'Transaction history',
                       ),
                       SizedBox(height: 1.h),
                       const ListTileDrawer(

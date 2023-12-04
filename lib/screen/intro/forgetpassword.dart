@@ -42,7 +42,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     SizedBox(height: 2.h),
                     Image.asset(
                       'assets/UI/image/template/pass.png',
-                      height: 25.h,
+                      height: 35.h,
                       width: 90.w,
                     ),
                     SizedBox(height: 3.h),
@@ -92,7 +92,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       textcontent: 'Confirm Password',
                       controller: confirmPassController,
                     ),
-                    SizedBox(height: 1.5.h),
+                    SizedBox(height: 2.h),
                     Row(
                       children: [
                         Expanded(

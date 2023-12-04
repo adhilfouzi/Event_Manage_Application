@@ -41,6 +41,7 @@ class TextFieldBlue extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 0.2.h),
           child: TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             inputFormatters: inputFormatters,
             enabled: enabled == null ? true : false,
             obscureText: obscureText == null ? false : true,

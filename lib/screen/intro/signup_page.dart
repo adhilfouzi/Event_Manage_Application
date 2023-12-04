@@ -37,16 +37,18 @@ class _SignupScreenState extends State<SignupScreen> {
               key: _formKey,
               child: Column(
                 children: [
-                  SizedBox(height: 2.h),
-                  Text(
-                    'Let’s Begin the game',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: buttoncolor,
+                  SizedBox(height: 7.h),
+                  SizedBox(
+                    height: 11.h,
+                    child: Text(
+                      'Let’s Begin the game',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                        color: buttoncolor,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 3.h),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -156,7 +158,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               'I agree with Terms and Privacy ',
                               style: TextStyle(
                                 color: buttoncolor,
-                                fontSize: 1.52.h,
+                                fontSize: 10.sp,
                               ),
                             ),
                           ),
@@ -177,7 +179,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 'Signup',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 2.5.h,
+                                  fontSize: 14.sp,
                                 ),
                               ),
                             ),
@@ -191,7 +193,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             'Already have an account -',
                             style: TextStyle(
                               color: buttoncolor,
-                              fontSize: 1.52.h,
+                              fontSize: 10.sp,
                             ),
                           ),
                           TextButton(
@@ -206,7 +208,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               'Login',
                               style: TextStyle(
                                 color: buttoncolor,
-                                fontSize: 1.52.h,
+                                fontSize: 10.sp,
                               ),
                             ),
                           ),

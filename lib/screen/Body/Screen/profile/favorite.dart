@@ -89,21 +89,14 @@ class Favorite extends StatelessWidget {
                                     data.eventname,
                                     style: racingSansOne(fontSize: 13.sp),
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text(
-                                        '${data.startingDay}  at  ${data.startingTime}',
-                                        style: racingSansOne(fontSize: 10.sp),
-                                      ),
-                                      const SizedBox(width: 30),
-                                      Text(
-                                        overflow: TextOverflow.ellipsis,
-                                        data.location,
-                                        style: racingSansOne(fontSize: 10.sp),
-                                      ),
-                                    ],
+                                  Text(
+                                    '${data.startingDay}  at  ${data.startingTime}',
+                                    style: racingSansOne(fontSize: 10.sp),
+                                  ),
+                                  Text(
+                                    overflow: TextOverflow.ellipsis,
+                                    data.location,
+                                    style: racingSansOne(fontSize: 10.sp),
                                   ),
                                 ],
                               ),
