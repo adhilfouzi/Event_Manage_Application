@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
 
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
-import 'package:project_event/screen/Body/widget/sub/date.dart';
-import 'package:project_event/screen/Body/widget/sub/todata.dart';
+
 import 'package:sizer/sizer.dart';
 
 class Transaction extends StatefulWidget {
@@ -22,8 +21,8 @@ class _TransactionState extends State<Transaction> {
   //   super.initState();
   //   tabController = TabController(length: 3, vsync: this);
   // }
-  final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _todateController = TextEditingController();
+  // final TextEditingController _dateController = TextEditingController();
+  // final TextEditingController _todateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

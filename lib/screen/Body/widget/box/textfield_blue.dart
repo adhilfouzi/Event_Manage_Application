@@ -79,10 +79,10 @@ class TextFieldBlue extends StatelessWidget {
                 vertical: 1.h,
               ),
               prefixIcon: preicondata != null
-                  ? Icon(preicondata, size: 4.h, color: buttoncolor[700])
+                  ? Icon(preicondata, size: 3.5.h, color: buttoncolor[700])
                   : null,
               suffixIcon: posticondata != null
-                  ? Icon(posticondata, size: 4.h, color: buttoncolor[700])
+                  ? Icon(posticondata, size: 3.5.h, color: buttoncolor[700])
                   : null,
               hintText: textcontent,
               hintStyle: TextStyle(

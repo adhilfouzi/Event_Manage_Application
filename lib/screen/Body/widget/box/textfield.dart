@@ -23,6 +23,9 @@ class TextFieldicon extends StatelessWidget {
         onChanged: onChanged,
         controller: controller,
         decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(40.0),
+              borderSide: BorderSide.none),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(40.0),
               borderSide: BorderSide.none),

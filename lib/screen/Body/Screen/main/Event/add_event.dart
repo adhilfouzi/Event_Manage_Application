@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/Core/Color/color.dart';
@@ -284,13 +285,34 @@ class _AddEventState extends State<AddEvent> {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) {
         return;
+      } else {
+        final croppedFile = await ImageCropper().cropImage(
+          sourcePath: image.path,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.ratio3x2,
+            CropAspectRatioPreset.ratio4x3,
+          ],
+          uiSettings: [
+            AndroidUiSettings(
+                lockAspectRatio: true,
+                toolbarTitle: 'Crop',
+                toolbarColor: Colors.deepOrange,
+                toolbarWidgetColor: Colors.white,
+                initAspectRatio: CropAspectRatioPreset.ratio4x3),
+            IOSUiSettings(
+              title: 'Crop',
+            ),
+          ],
+        );
+        if (croppedFile != null) {
+          setState(() {
+            imageevent = File(croppedFile.path);
+            imagepath = croppedFile.path;
+          });
+        }
       }
-      setState(() {
-        imageevent = File(image.path);
-        imagepath = image.path.toString();
-      });
     } catch (e) {
-      print('Failed image picker:$e');
+      print('Failed image picker: $e');
     }
   }
 

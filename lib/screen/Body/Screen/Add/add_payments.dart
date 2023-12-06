@@ -125,7 +125,14 @@ class _AddPaymentsState extends State<AddPayments> {
                         child: Container(
                           margin: EdgeInsets.all(1.h),
                           padding: EdgeInsets.all(0.5.h),
-                          child: Text(searchResults[index].name),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(searchResults[index].name),
+                              Text(
+                                  'Pending: ₹${searchResults[index].pending.toString()}'),
+                            ],
+                          ),
                         ),
                       ),
                       itemCount: searchResults.length,

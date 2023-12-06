@@ -4,6 +4,7 @@ import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/Database/functions/fn_evenmodel.dart';
 import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/Screen/main/Event/view_event_details.dart';
+import 'package:project_event/screen/Body/Screen/main/Event/viewevent.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
@@ -124,11 +125,17 @@ class _CalenderState extends State<Calender> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: ListTile(
-                          onTap: () {
+                          onLongPress: () {
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   ViewEventDetails(eventModel: data),
                             ));
+                          },
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ViewEvent(
+                                      eventModel: data,
+                                    )));
                           },
                           title: Text(
                             data.eventname,

@@ -131,9 +131,16 @@ class _EditPaymentsState extends State<EditPayments> {
                           });
                         },
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 1.h),
-                          padding: EdgeInsets.all(1.h),
-                          child: Text(searchResults[index].name),
+                          margin: EdgeInsets.all(1.h),
+                          padding: EdgeInsets.all(0.5.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(searchResults[index].name),
+                              Text(
+                                  'Pending: ₹${searchResults[index].pending.toString()}'),
+                            ],
+                          ),
                         ),
                       ),
                       itemCount: searchResults.length,

@@ -8,7 +8,6 @@ import 'package:project_event/screen/Body/Screen/profile/favorite.dart';
 import 'package:project_event/screen/Body/Screen/profile/feedback.dart';
 import 'package:project_event/screen/Body/Screen/profile/reset.dart';
 import 'package:project_event/screen/Body/Screen/Edit/edit_profile.dart';
-import 'package:project_event/screen/Body/Screen/profile/transation_history.dart';
 import 'package:project_event/screen/Body/widget/List/listtiledrawer.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
