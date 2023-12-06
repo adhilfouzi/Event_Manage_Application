@@ -140,8 +140,6 @@ class _EditBudgetState extends State<EditBudget> {
           budget.pending,
           budget.eventid,
           budget.status);
-
-      refreshBudgetData(budget.eventid);
     }
   }
 }

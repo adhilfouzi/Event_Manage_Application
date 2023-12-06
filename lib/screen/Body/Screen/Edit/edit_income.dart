@@ -175,7 +175,7 @@ void dodeleteincome(rtx, IncomeModel student) {
       },
     );
   } catch (e) {
-    print('Error deleting data: $e');
+    // print('Error deleting data: $e');
   }
 }
 
@@ -198,6 +198,6 @@ void delectpayYes(
       ),
     );
   } catch (e) {
-    print('Error inserting data: $e');
+    // print('Error inserting data: $e');
   }
 }

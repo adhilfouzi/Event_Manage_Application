@@ -31,7 +31,7 @@ class ListTileDrawerEmail extends StatelessWidget {
         try {
           await launchUrl(emailUri);
         } catch (e) {
-          print('Error launching email: $e');
+          // print('Error launching email: $e');
         }
       },
     );

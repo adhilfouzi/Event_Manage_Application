@@ -1,7 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/model/Profile/profile_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -23,7 +21,7 @@ Future<void> initializeProfileDB() async {
           'CREATE TABLE profile (id INTEGER PRIMARY KEY, imagex TEXT, name TEXT, email TEXT, phone TEXT, address TEXT, password TEXT)');
     },
   );
-  log("profileDB created successfully.");
+  // log("profileDB created successfully.");
 }
 
 // Function to retrieve student data from the database.
@@ -66,7 +64,7 @@ Future<void> addProfile(ProfileModel value) async {
     refreshRefreshdata();
   } catch (e) {
     // Handle any errors that occur during data insertion.
-    log('Error inserting data: $e');
+    // log('Error inserting data: $e');
   }
 }
 
@@ -85,6 +83,6 @@ Future<void> editProfiledata(
     await profileDB.update('profile', dataflow, where: 'id=?', whereArgs: [id]);
     refreshRefreshdata();
   } catch (e) {
-    log('Error editing data: $e');
+    // log('Error editing data: $e');
   }
 }

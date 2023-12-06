@@ -11,7 +11,7 @@ import 'package:project_event/screen/Body/Screen/Search/vendor_search.dart';
 import 'package:project_event/screen/Body/widget/List/categorydropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
-import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
+import 'package:project_event/screen/Body/widget/sub/contactstate.dart';
 import 'package:sizer/sizer.dart';
 
 class EditVendor extends StatefulWidget {

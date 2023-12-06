@@ -14,7 +14,7 @@ import 'package:project_event/Database/model/Event/event_model.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
-import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
+import 'package:project_event/screen/Body/widget/sub/contactstate.dart';
 import 'package:project_event/screen/Body/widget/sub/date.dart';
 import 'package:project_event/screen/Body/widget/sub/time.dart';
 import 'package:sizer/sizer.dart';
@@ -312,7 +312,7 @@ class _AddEventState extends State<AddEvent> {
         }
       }
     } catch (e) {
-      print('Failed image picker: $e');
+      // print('Failed image picker: $e');
     }
   }
 
@@ -373,11 +373,11 @@ class _AddEventState extends State<AddEvent> {
       }
     } catch (e) {
       if (e is UserCancelledPickingException) {
-        print('User cancelled picking contact');
+        // print('User cancelled picking contact');
         // Handle the cancellation (e.g., show a message to the user)
       } else {
         // Handle other exceptions
-        print('Error picking contact: $e');
+        // print('Error picking contact: $e');
       }
     }
   }

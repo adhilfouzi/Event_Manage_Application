@@ -7,7 +7,7 @@ import 'package:project_event/screen/Body/Screen/Search/guest_search.dart';
 import 'package:project_event/screen/Body/widget/List/sexdropdown.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
-import 'package:project_event/screen/Body/widget/sub/ContactState.dart';
+import 'package:project_event/screen/Body/widget/sub/contactstate.dart';
 import 'package:project_event/screen/Body/widget/sub/status.dart';
 import 'package:sizer/sizer.dart';
 
@@ -123,13 +123,12 @@ class _EditGuestState extends State<EditGuest> {
       final eventId = guest.eventid;
       final number = _pcontroller.text;
       final adress = _acontroller.text;
+      Navigator.pop(context);
 
       await editGuest(guest.id, eventId, name, sex, note, _statusController,
           number, email, adress);
 
       refreshguestdata(guest.eventid);
-
-      Navigator.pop(context);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -166,11 +165,11 @@ class _EditGuestState extends State<EditGuest> {
       }
     } catch (e) {
       if (e is UserCancelledPickingException) {
-        print('User cancelled picking contact');
+        // print('User cancelled picking contact');
         // Handle the cancellation (e.g., show a message to the user)
       } else {
         // Handle other exceptions
-        print('Error picking contact: $e');
+        // print('Error picking contact: $e');
       }
     }
   }

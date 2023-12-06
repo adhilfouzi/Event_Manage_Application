@@ -25,7 +25,6 @@ Future<void> initializeBudgetDatabase() async {
           'CREATE TABLE budget (id INTEGER PRIMARY KEY, name TEXT, category TEXT, note TEXT, esamount TEXT, paid INTEGER, pending INTEGER,status INTEGER, eventid TEXT, FOREIGN KEY (eventid) REFERENCES event(id))');
     },
   );
-  print("budgetDB created successfully.");
 }
 
 // Function to retrieve task data from the database.
@@ -33,13 +32,11 @@ Future<void> refreshBudgetData(int eventid) async {
   final budget = await budgetDB.rawQuery(
       "SELECT * FROM budget WHERE eventid = ?  ORDER BY status ASC",
       [eventid.toString()]);
-  print('All budget data: $budget');
   budgetlist.value.clear();
 //////////////////////////////////////////////////////////////
   final payment = await paymentDB.rawQuery(
       "SELECT * FROM payment WHERE eventid = ? AND paytype = 0 ORDER BY id DESC",
       [eventid.toString()]);
-  print('All payment data: $payment');
 ////////////////////////////////////////////////////////.
   for (var teacher in budget) {
     int paid = 0;
@@ -80,7 +77,6 @@ Future<void> refreshBudgetData(int eventid) async {
       "SELECT * FROM budget WHERE eventid = ? AND status = 1",
       [eventid.toString()]);
 
-  print('rpDonebudget : $rpDonebudget');
   budgetDonelist.value.clear();
   for (var map in rpDonebudget) {
     final student = BudgetModel.fromMap(map);
@@ -94,7 +90,6 @@ Future<void> refreshBudgetData(int eventid) async {
   final rpPendingbudget = await budgetDB.rawQuery(
       "SELECT * FROM budget WHERE eventid = ? AND status = 0",
       [eventid.toString()]);
-  print('rpPendingbudget : $rpPendingbudget');
   budgetPendinglist.value.clear();
   for (var map in rpPendingbudget) {
     final student = BudgetModel.fromMap(map);
@@ -105,27 +100,19 @@ Future<void> refreshBudgetData(int eventid) async {
 
 // Function to add a new student to the database.
 Future<void> addBudget(BudgetModel value) async {
-  try {
-    await budgetDB.rawInsert(
-      'INSERT INTO budget(name, category, note, esamount, eventid, paid, pending, status) VALUES(?,?,?,?,?,?,?,?)',
-      [
-        value.name,
-        value.category,
-        value.note,
-        value.esamount,
-        value.eventid,
-        value.paid,
-        value.pending,
-        value.status
-      ],
-    );
-  } catch (e) {
-    if (e is DatabaseException) {
-      print('SQLite Error: $e');
-    } else {
-      print('Error inserting data: $e');
-    }
-  }
+  await budgetDB.rawInsert(
+    'INSERT INTO budget(name, category, note, esamount, eventid, paid, pending, status) VALUES(?,?,?,?,?,?,?,?)',
+    [
+      value.name,
+      value.category,
+      value.note,
+      value.esamount,
+      value.eventid,
+      value.paid,
+      value.pending,
+      value.status
+    ],
+  );
 }
 
 // Function to delete a student from the database by their ID.
@@ -151,10 +138,5 @@ Future<void> editBudget(
 
 // Function to delete data from event's database.
 Future<void> clearBudgetDatabase() async {
-  try {
-    await budgetDB.delete('budget');
-    print(' cleared the budget database');
-  } catch (e) {
-    print('Error while clearing the database: $e');
-  }
+  await budgetDB.delete('budget');
 }

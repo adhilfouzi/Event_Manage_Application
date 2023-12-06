@@ -192,7 +192,7 @@ class _EditProfileState extends State<EditProfile> {
         imagepath = image.path; // Remove toString() here
       });
     } catch (e) {
-      print('Failed image picker: $e');
+      // print('Failed image picker: $e');
     }
   }
 

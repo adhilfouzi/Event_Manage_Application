@@ -159,7 +159,7 @@ void dodeleteguest(rtx, GuestModel student, int step, Eventmodel eventModel) {
       },
     );
   } catch (e) {
-    print('Error deleting data: $e');
+    // print('Error deleting data: $e');
   }
 }
 

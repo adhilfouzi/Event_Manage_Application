@@ -167,7 +167,7 @@ void dodeleteevent(rtx, Eventmodel student) {
       },
     );
   } catch (e) {
-    print('Error deleting data: $e');
+    // print('Error deleting data: $e');
   }
 }
 

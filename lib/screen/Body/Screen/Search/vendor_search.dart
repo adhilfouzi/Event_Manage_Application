@@ -154,7 +154,7 @@ void dodeletevendor(
       },
     );
   } catch (e) {
-    print('Error deleting data: $e');
+    // print('Error deleting data: $e');
   }
 }
 
@@ -177,6 +177,6 @@ void delectYes(ctx, VendorsModel student, int step, Eventmodel eventModel) {
       refreshVendorData(student.eventid);
     }
   } catch (e) {
-    print('Error inserting data: $e');
+    // print('Error inserting data: $e');
   }
 }

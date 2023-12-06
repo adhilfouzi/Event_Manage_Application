@@ -40,70 +40,65 @@ class Entry extends StatelessWidget {
             ],
           ),
           // Buttons at the bottom center
-          Column(
-            // Use Column instead of Expanded
-            children: [
-              Container(
-                padding: const EdgeInsets.fromLTRB(25, 580, 25, 50),
-                alignment: Alignment.bottomCenter,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Container(
+            padding: EdgeInsets.fromLTRB(2.h, 65.h, 2.h, 10.h),
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  'Life is only once, Enjoy your life!',
+                  style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                ),
+                SizedBox(height: 1.h),
+                Row(
                   children: [
-                    Text(
-                      'Life is only once, Enjoy your life!',
-                      style: TextStyle(color: Colors.white, fontSize: 10.sp),
-                    ),
-                    SizedBox(height: 1.h),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            style: withr,
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const SignupScreen(),
-                                ),
-                              );
-                            },
-                            child: Text('Signup',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14.sp)),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 1.h),
-                    const Text(
-                      'OR',
-                      style: TextStyle(
-                        color: Colors.white,
+                    Expanded(
+                      child: ElevatedButton(
+                        style: withr,
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const SignupScreen(),
+                            ),
+                          );
+                        },
+                        child: Text('Signup',
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 14.sp)),
                       ),
-                    ),
-                    SizedBox(height: 1.h),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            style: withr,
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginScreen(),
-                                ),
-                              );
-                            },
-                            child: Text('Login',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14.sp)),
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),
-              ),
-            ],
+                SizedBox(height: 1.h),
+                const Text(
+                  'OR',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 1.h),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: withr,
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                          );
+                        },
+                        child: Text('Login',
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 14.sp)),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

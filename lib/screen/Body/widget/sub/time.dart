@@ -38,7 +38,7 @@ class _TimeState extends State<Time> {
     try {
       return DateFormat('HH:mm').parse(time);
     } catch (e) {
-      print("Error parsing time: $e");
+      // print("Error parsing time: $e");
       return DateTime.now();
     }
   }

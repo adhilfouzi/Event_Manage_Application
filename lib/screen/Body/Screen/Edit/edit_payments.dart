@@ -31,6 +31,8 @@ class _EditPaymentsState extends State<EditPayments> {
   @override
   void initState() {
     super.initState();
+    refreshBudgetData(widget.paydata.eventid);
+    refreshVendorData(widget.paydata.eventid);
     _pnameController.text = widget.paydata.name;
     _budgetController.text = widget.paydata.pyamount;
     _noteController.text = widget.paydata.note!;
@@ -312,7 +314,7 @@ void dodeletepayment(rtx, PaymentModel student) {
       },
     );
   } catch (e) {
-    print('Error deleting data: $e');
+    // print('Error deleting data: $e');
   }
 }
 
@@ -335,6 +337,6 @@ void delectpayYes(
       ),
     );
   } catch (e) {
-    print('Error inserting data: $e');
+    // print('Error inserting data: $e');
   }
 }

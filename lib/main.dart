@@ -18,7 +18,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeEventDb();
   await initializeTaskDb();
-  await initialize_guest_database();
+  await initializeGuestDatabase();
   await initializeBudgetDatabase();
   await initializeVendorDatabase();
   await initializePaymentDatabase();

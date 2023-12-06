@@ -7,7 +7,7 @@ Future<void> launchPrivacyPolicy() async {
   try {
     await launchUrl(url);
   } catch (e) {
-    print('Error launching email: $e');
+    // print('Error launching email: $e');
   }
 }
 
@@ -18,6 +18,6 @@ Future<void> launchTerms() async {
   try {
     await launchUrl(url);
   } catch (e) {
-    print('Error launching email: $e');
+    // print('Error launching email: $e');
   }
 }

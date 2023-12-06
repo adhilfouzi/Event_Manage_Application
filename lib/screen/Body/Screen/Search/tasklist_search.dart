@@ -155,7 +155,7 @@ void dodeletetask(rtx, TaskModel student, int step, Eventmodel eventModel) {
       },
     );
   } catch (e) {
-    print('Error deleting data: $e');
+    // print('Error deleting data: $e');
   }
 }
 
@@ -177,6 +177,6 @@ void delectYes(ctx, TaskModel student, int step, Eventmodel eventModel) {
       refreshEventtaskdata(student.eventid);
     }
   } catch (e) {
-    print('Error inserting data: $e');
+    // print('Error inserting data: $e');
   }
 }

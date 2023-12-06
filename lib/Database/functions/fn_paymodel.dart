@@ -1,7 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/model/Payment/pay_model.dart';
@@ -30,7 +28,6 @@ Future<void> initializePaymentDatabase() async {
           'CREATE TABLE payment (id INTEGER PRIMARY KEY, name TEXT,paytype INTEGER, paytypename TEXT, pyamount TEXT, note TEXT, date TEXT, time TEXT, payid INTEGER, eventid TEXT, FOREIGN KEY (eventid) REFERENCES event(id))');
     },
   );
-  print("paymentDB created successfully.");
 }
 
 // Function to retrieve payment data from the database.
@@ -39,7 +36,6 @@ Future<void> refreshPaymentData(int eventid) async {
     final resultbd = await paymentDB.rawQuery(
         "SELECT * FROM payment WHERE eventid = ? AND paytype = 0 ORDER BY id DESC",
         [eventid.toString()]);
-    print('All budgetPaymentList data: $resultbd');
     budgetPaymentList.value.clear();
     for (var map in resultbd) {
       final student = PaymentModel.fromMap(map);
@@ -53,7 +49,6 @@ Future<void> refreshPaymentData(int eventid) async {
     final resultvn = await paymentDB.rawQuery(
         "SELECT * FROM payment WHERE eventid = ? AND paytype = 1 ORDER BY id DESC",
         [eventid.toString()]);
-    print('All vendorPaymentlist data: $resultvn');
     vendorPaymentlist.value.clear();
     for (var map in resultvn) {
       final studentvn = PaymentModel.fromMap(map);
@@ -62,14 +57,14 @@ Future<void> refreshPaymentData(int eventid) async {
     vendorPaymentlist.notifyListeners();
     await refreshmainbalancedata(eventid);
   } catch (e) {
-    log('Error Refresh data: $e');
+    // log('Error Refresh data: $e');
   }
 }
 
 // Function to add a new student to the database.
 Future<void> addPayment(PaymentModel value) async {
   try {
-    log("Adding payment: $value");
+    // log("Adding payment: $value");
     await paymentDB.rawInsert(
       'INSERT INTO payment (name, paytype, paytypename, pyamount, note, date, time, payid, eventid) VALUES(?,?,?,?,?,?,?,?,?)',
       [
@@ -88,7 +83,7 @@ Future<void> addPayment(PaymentModel value) async {
     refreshPaymentData(value.eventid);
     refreshPaymentTypeData(value.payid, value.eventid);
   } catch (e) {
-    log('Error inserting data: $e');
+    // log('Error inserting data: $e');
   }
 }
 
@@ -118,7 +113,7 @@ Future<void> editPayment(id, name, paytype, paytypename, pyamount, note, date,
     refreshPaymentData(eventid);
     refreshPaymentTypeData(payid, eventid);
   } catch (e) {
-    log('Error while editing the database: $e');
+    // log('Error while editing the database: $e');
   }
 }
 
@@ -127,6 +122,6 @@ Future<void> clearPaymentDatabase() async {
   try {
     await paymentDB.delete('payment');
   } catch (e) {
-    log('Error while clearing the database: $e');
+    // log('Error while clearing the database: $e');
   }
 }

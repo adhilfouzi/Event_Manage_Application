@@ -20,7 +20,8 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       imageUrl: 'assets/UI/image/template/1-03.png',
       imageWidth: 80.w,
       imageHeight: 50.h,
-      titleTextStyle: TextStyle(fontSize: 17.sp),
+      titleTextStyle: TextStyle(fontSize: 12.sp),
+      subTitleTextStyle: TextStyle(fontSize: 1.sp),
     ),
     Introduction(
       title: 'Time-Saving Solution',
@@ -28,7 +29,8 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       imageUrl: 'assets/UI/image/template/1-01.png',
       imageWidth: 80.w,
       imageHeight: 50.h,
-      titleTextStyle: TextStyle(fontSize: 17.sp),
+      titleTextStyle: TextStyle(fontSize: 12.sp),
+      subTitleTextStyle: TextStyle(fontSize: 1.sp),
     ),
     Introduction(
       title: 'Make Work Smart',
@@ -36,7 +38,8 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       imageUrl: 'assets/UI/image/template/1-02.png',
       imageWidth: 80.w,
       imageHeight: 50.h,
-      titleTextStyle: TextStyle(fontSize: 17.sp),
+      titleTextStyle: TextStyle(fontSize: 12.sp),
+      subTitleTextStyle: TextStyle(fontSize: 1.sp),
     ),
   ];
   @override

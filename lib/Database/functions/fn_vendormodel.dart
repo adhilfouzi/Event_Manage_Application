@@ -1,7 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:project_event/Database/functions/fn_paymentdetail.dart';
 import 'package:project_event/Database/functions/fn_paymodel.dart';
@@ -27,7 +25,7 @@ Future<void> initializeVendorDatabase() async {
           'CREATE TABLE vendortb (id INTEGER PRIMARY KEY, name TEXT, category TEXT, note TEXT,esamount TEXT, clientname TEXT, number TEXT, email TEXT, address TEXT, paid INTEGER, pending INTEGER, status INTEGER, eventid INTEGER, FOREIGN KEY (eventid) REFERENCES event(id))');
     },
   );
-  print("vendorDB created successfully.");
+  // print("vendorDB created successfully.");
 }
 
 // Function to retrieve vendor data from the database.
@@ -86,7 +84,7 @@ Future<void> refreshVendorData(int eventid) async {
       "SELECT * FROM vendortb WHERE eventid = ? AND status = 1",
       [eventid.toString()]);
 
-  print('rpDonevendortb : $rpDoneVendor');
+  // print('rpDonevendortb : $rpDoneVendor');
   vendorDonelist.value.clear();
   for (var map in rpDoneVendor) {
     final student = VendorsModel.fromMap(map);
@@ -100,7 +98,7 @@ Future<void> refreshVendorData(int eventid) async {
   final rpPendingvendor = await vendorDB.rawQuery(
       "SELECT * FROM vendortb WHERE eventid = ? AND status = 0",
       [eventid.toString()]);
-  print('rpDonevendortb : $rpPendingvendor');
+  // print('rpDonevendortb : $rpPendingvendor');
   vendorPendinglist.value.clear();
   for (var map in rpPendingvendor) {
     final student = VendorsModel.fromMap(map);
@@ -113,7 +111,7 @@ Future<void> refreshVendorData(int eventid) async {
 // Function to add a new student to the database.
 Future<void> addVendor(VendorsModel value) async {
   try {
-    log("Adding vendor: $value");
+    // log("Adding vendor: $value");
     await vendorDB.rawInsert(
       'INSERT INTO vendortb (name, category, note, esamount, number, email, address, clientname, eventid, paid, pending, status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)',
       [
@@ -134,10 +132,10 @@ Future<void> addVendor(VendorsModel value) async {
   } catch (e) {
     if (e is DatabaseException) {
       // Handle SQLite-specific errors
-      log('SQLite Error: $e');
+      // log('SQLite Error: $e');
     } else {
       // Handle other exceptions
-      log('Error inserting data: $e');
+      // log('Error inserting data: $e');
     }
   }
 }
@@ -174,8 +172,8 @@ Future<void> editVendor(id, name, category, note, number, esamount, eventid,
 Future<void> clearVendorDatabase() async {
   try {
     await vendorDB.delete('vendortb');
-    print(' cleared the vendortb database');
+    // print(' cleared the vendortb database');
   } catch (e) {
-    print('Error while clearing the database: $e');
+    // print('Error while clearing the database: $e');
   }
 }

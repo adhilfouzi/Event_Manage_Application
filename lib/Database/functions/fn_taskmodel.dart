@@ -1,6 +1,5 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:project_event/Database/functions/fn_paymentdetail.dart';
@@ -24,7 +23,7 @@ Future<void> initializeTaskDb() async {
           'CREATE TABLE task (id INTEGER PRIMARY KEY, taskname TEXT, category TEXT, note TEXT, status INTEGER, date TEXT, eventid TEXT, FOREIGN KEY (eventid) REFERENCES event(id))');
     },
   );
-  log("task_db created successfully.");
+  // log("task_db created successfully.");
 }
 
 // Function to retrieve task data from the database.
@@ -32,7 +31,7 @@ Future<void> refreshEventtaskdata(int id) async {
   final result = await taskDB.rawQuery(
       "SELECT * FROM task WHERE eventid = ? ORDER BY status ASC",
       [id.toString()]);
-  log('All task data: $result');
+  // log('All task data: $result');
   taskList.value.clear();
   for (var map in result) {
     final student = TaskModel.fromMap(map);
@@ -47,7 +46,7 @@ Future<void> refreshEventtaskdata(int id) async {
   final rpDoneTask = await taskDB.rawQuery(
       "SELECT * FROM task WHERE eventid = ? AND status = 1", [id.toString()]);
 
-  log('rpDonetask : $rpDoneTask');
+  // log('rpDonetask : $rpDoneTask');
   doneRpTaskList.value.clear();
   for (var map in rpDoneTask) {
     final student = TaskModel.fromMap(map);
@@ -60,7 +59,7 @@ Future<void> refreshEventtaskdata(int id) async {
   ///-------------------------------------
   final rpPendingtask = await taskDB.rawQuery(
       "SELECT * FROM task WHERE eventid = ? AND status = 0", [id.toString()]);
-  log('rpDonetask : $rpPendingtask');
+  // log('rpDonetask : $rpPendingtask');
   pendingRpTaskList.value.clear();
   for (var map in rpPendingtask) {
     final student = TaskModel.fromMap(map);
@@ -88,7 +87,7 @@ Future<void> addTask(TaskModel value) async {
     refreshEventtaskdata(value.eventid);
   } catch (e) {
     //------> Handle any errors that occur during data insertion.
-    log('Error inserting data: $e');
+    // log('Error inserting data: $e');
   }
 }
 
@@ -117,8 +116,8 @@ Future<void> editTask(
 Future<void> clearTaskDatabase() async {
   try {
     await taskDB.delete('task');
-    log(' cleared the task database');
+    // log(' cleared the task database');
   } catch (e) {
-    log('Error while clearing the database: $e');
+    // log('Error while clearing the database: $e');
   }
 }

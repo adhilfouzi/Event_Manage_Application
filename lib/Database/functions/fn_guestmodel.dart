@@ -14,7 +14,7 @@ ValueNotifier<List<GuestModel>> guestPendinglist =
 late Database guestDB;
 
 // Function to initialize the database.
-Future<void> initialize_guest_database() async {
+Future<void> initializeGuestDatabase() async {
   guestDB = await openDatabase(
     'guestDB',
     version: 1,
@@ -24,7 +24,6 @@ Future<void> initialize_guest_database() async {
           'CREATE TABLE guest (id INTEGER PRIMARY KEY, gname TEXT, sex TEXT, status INTEGER, note TEXT, number TEXT,  email TEXT, address TEXT, eventid INTEGER, FOREIGN KEY (eventid) REFERENCES event(id))');
     },
   );
-  print("guestDB created successfully.");
 }
 
 // Function to retrieve guest data from the database.
@@ -32,7 +31,6 @@ Future<void> refreshguestdata(int id) async {
   final result = await guestDB.rawQuery(
       "SELECT * FROM guest WHERE eventid = ? ORDER BY status ASC",
       [id.toString()]);
-  print('All guest data: $result');
   guestlist.value.clear();
   for (var map in result) {
     final student = GuestModel.fromMap(map);
@@ -47,7 +45,6 @@ Future<void> refreshguestdata(int id) async {
   final rpDoneGuest = await guestDB.rawQuery(
       "SELECT * FROM guest WHERE eventid = ? AND status = 1", [id.toString()]);
 
-  print('rpDoneguest : $rpDoneGuest');
   guestDonelist.value.clear();
   for (var map in rpDoneGuest) {
     final student = GuestModel.fromMap(map);
@@ -61,7 +58,6 @@ Future<void> refreshguestdata(int id) async {
   ///-------------------------------------
   final rpPendingGuest = await guestDB.rawQuery(
       "SELECT * FROM guest WHERE eventid = ? AND status = 0", [id.toString()]);
-  print('rpDoneguest : $rpPendingGuest');
   guestPendinglist.value.clear();
   for (var map in rpPendingGuest) {
     final student = GuestModel.fromMap(map);
@@ -72,25 +68,20 @@ Future<void> refreshguestdata(int id) async {
 
 // Function to add a new student to the database.
 Future<void> addguest(GuestModel value) async {
-  try {
-    await guestDB.rawInsert(
-      'INSERT INTO guest(eventid,gname,sex,note,status,number,email,address) VALUES(?,?,?,?,?,?,?,?)',
-      [
-        value.eventid,
-        value.gname,
-        value.sex,
-        value.note,
-        value.status,
-        value.number,
-        value.email,
-        value.address
-      ],
-    );
-    refreshguestdata(value.eventid);
-  } catch (e) {
-    //------> Handle any errors that occur during data insertion.
-    print('Error inserting data: $e');
-  }
+  await guestDB.rawInsert(
+    'INSERT INTO guest(eventid,gname,sex,note,status,number,email,address) VALUES(?,?,?,?,?,?,?,?)',
+    [
+      value.eventid,
+      value.gname,
+      value.sex,
+      value.note,
+      value.status,
+      value.number,
+      value.email,
+      value.address
+    ],
+  );
+  refreshguestdata(value.eventid);
 }
 
 // Function to delete a student from the database by their ID.
@@ -118,10 +109,5 @@ Future<void> editGuest(
 
 // Function to delete data from event's database.
 Future<void> clearGuestDatabase() async {
-  try {
-    await guestDB.delete('guest');
-    print(' cleared the guest database');
-  } catch (e) {
-    print('Error while clearing the database: $e');
-  }
+  await guestDB.delete('guest');
 }

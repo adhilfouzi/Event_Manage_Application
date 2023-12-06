@@ -41,7 +41,7 @@ class _MyWidgetState extends State<Date> {
     try {
       return DateFormat('dd-MMMM-yyyy', 'en_US').parse(date);
     } catch (e) {
-      print("Error parsing date: $e");
+      // print("Error parsing date: $e");
       return DateTime.now();
     }
   }
