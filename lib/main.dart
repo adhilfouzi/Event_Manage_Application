@@ -8,7 +8,7 @@ import 'package:project_event/Database/functions/fn_paymodel.dart';
 import 'package:project_event/Database/functions/fn_profilemodel.dart';
 import 'package:project_event/Database/functions/fn_taskmodel.dart';
 import 'package:project_event/Database/functions/fn_vendormodel.dart';
-import 'package:project_event/screen/intro/SplashScreen.dart';
+import 'package:project_event/screen/intro/splashscreen.dart';
 import 'package:sizer/sizer.dart';
 
 const logedinsp = 'UserLoggedin';

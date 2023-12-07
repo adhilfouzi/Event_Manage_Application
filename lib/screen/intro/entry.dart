@@ -44,7 +44,6 @@ class Entry extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(2.h, 65.h, 2.h, 10.h),
             alignment: Alignment.bottomCenter,
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
                   'Life is only once, Enjoy your life!',
@@ -57,10 +56,9 @@ class Entry extends StatelessWidget {
                       child: ElevatedButton(
                         style: withr,
                         onPressed: () {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => const SignupScreen(),
-                            ),
+                                builder: (context) => const SignupScreen()),
                           );
                         },
                         child: Text('Signup',
@@ -84,10 +82,9 @@ class Entry extends StatelessWidget {
                       child: ElevatedButton(
                         style: withr,
                         onPressed: () {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ),
+                                builder: (context) => const LoginScreen()),
                           );
                         },
                         child: Text('Login',
