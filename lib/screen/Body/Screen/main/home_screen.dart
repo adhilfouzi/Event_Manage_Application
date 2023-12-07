@@ -121,14 +121,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: TextFieldicon(
                       onChanged: (value) => _runFilter(value),
                       controller: searchController,
-                      // icondata: Icons.search,
                       textcontent: 'Search event...',
                     ),
                   );
                 },
               ),
-              // Container(
-              //     constraints: BoxConstraints(maxHeight: 30.h, minHeight: 0)),
               Expanded(
                 child: ValueListenableBuilder(
                   valueListenable: eventList,
@@ -137,7 +134,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Center(
                         child: Text(
                           'No Event available',
-                          style: TextStyle(fontSize: 14.sp),
+                          style: TextStyle(
+                            fontSize: 15.sp,
+                          ),
                         ),
                       );
                     } else {

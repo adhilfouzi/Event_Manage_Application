@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/font.dart';
+import 'package:project_event/main.dart';
 import 'package:project_event/screen/Body/Screen/profile/privacy.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ListTileDrawer extends StatelessWidget {
   final int so;
@@ -63,6 +65,8 @@ Future<void> confirmLogout(BuildContext context) async {
                   backgroundColor: Colors.green,
                 ),
               );
+              final sharedPrefer = await SharedPreferences.getInstance();
+              await sharedPrefer.remove(logedinsp);
             },
             child: const Text('Logout'),
           ),

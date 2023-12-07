@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Database/functions/fn_profilemodel.dart';
+import 'package:project_event/main.dart';
 import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
 import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/intro/forgetpassword.dart';
 import 'package:project_event/screen/intro/signup_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -172,6 +174,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             (route) => false,
           );
+
+          final sharedPrefer = await SharedPreferences.getInstance();
+          await sharedPrefer.setInt(logedinsp, matchingProfile.id!);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(

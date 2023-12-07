@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intro_screen_onboarding_flutter/introduction.dart';
 import 'package:intro_screen_onboarding_flutter/introscreenonboarding.dart';
+import 'package:project_event/main.dart';
 
 import 'package:project_event/screen/intro/entry.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -13,6 +15,12 @@ class OnBoardingPage extends StatefulWidget {
 }
 
 class OnBoardingPageState extends State<OnBoardingPage> {
+  @override
+  void initState() {
+    super.initState();
+    introadd();
+  }
+
   final List<Introduction> list = [
     Introduction(
       title: 'Effortless Event Planning',
@@ -59,4 +67,9 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       ),
     );
   }
+}
+
+Future<void> introadd() async {
+  final sharedPrefer = await SharedPreferences.getInstance();
+  await sharedPrefer.setBool(introsp, true);
 }
