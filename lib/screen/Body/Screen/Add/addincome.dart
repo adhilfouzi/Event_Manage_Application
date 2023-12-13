@@ -59,7 +59,7 @@ class _AddIncomeState extends State<AddIncome> {
                 TextFieldBlue(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Name is required';
+                      return 'Amount is required';
                     }
                     return null;
                   },

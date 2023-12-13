@@ -34,7 +34,7 @@ Future<void> initializePaymentDatabase() async {
 Future<void> refreshPaymentData(int eventid) async {
   try {
     final resultbd = await paymentDB.rawQuery(
-        "SELECT * FROM payment WHERE eventid = ? AND paytype = 0 ORDER BY id DESC",
+        "SELECT * FROM payment WHERE eventid = ? AND paytype = 0 ORDER BY date DESC, time DESC",
         [eventid.toString()]);
     budgetPaymentList.value.clear();
     for (var map in resultbd) {
@@ -47,7 +47,7 @@ Future<void> refreshPaymentData(int eventid) async {
     ///-----------------------------------------
 
     final resultvn = await paymentDB.rawQuery(
-        "SELECT * FROM payment WHERE eventid = ? AND paytype = 1 ORDER BY id DESC",
+        "SELECT * FROM payment WHERE eventid = ? AND paytype = 1 ORDER BY date DESC, time DESC",
         [eventid.toString()]);
     vendorPaymentlist.value.clear();
     for (var map in resultvn) {

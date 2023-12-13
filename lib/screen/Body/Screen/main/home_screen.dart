@@ -84,9 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: Colors.transparent, //appbarcolor,
             toolbarHeight: 12.h,
             title: SizedBox(
-              height: 14.h,
+              height: 10.h,
               child: Image.asset(
-                'assets/UI/Event Logo/event logo name.png',
+                'assets/UI/Event Logo/event logo.png',
               ),
             ),
             actions: [

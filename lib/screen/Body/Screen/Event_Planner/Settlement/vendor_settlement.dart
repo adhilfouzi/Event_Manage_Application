@@ -48,7 +48,7 @@ class VendorSettlement extends StatelessWidget {
                             style: raleway(color: Colors.black),
                           ),
                           subtitle: Text(
-                            'Paid on ${data.date}, \n${data.time}',
+                            'Paid on ${data.date}',
                             style: readexPro(
                               color: Colors.black45,
                               fontSize: 7.sp,

@@ -67,6 +67,7 @@ Future<void> editincome(id, name, pyamount, note, date, time, eventid) async {
   };
   await incomeDB.update('income', dataflow, where: 'id=?', whereArgs: [id]);
   await refreshincomedata(eventid);
+  await refreshmainbalancedata(eventid);
 }
 
 Future<void> clearincomeDatabase() async {

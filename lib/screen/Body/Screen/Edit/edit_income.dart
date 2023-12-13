@@ -68,6 +68,17 @@ class _EditIncomeState extends State<EditIncome> {
                 log(paymentTypeNotifier.value.toString());
                 return Column(children: [
                   TextFieldBlue(
+                    textcontent: 'Name',
+                    controller: _pnameController,
+                    keyType: TextInputType.name,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Name is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFieldBlue(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Name is required';
@@ -91,17 +102,6 @@ class _EditIncomeState extends State<EditIncome> {
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                     ],
-                  ),
-                  TextFieldBlue(
-                    textcontent: 'Amount',
-                    controller: _budgetController,
-                    keyType: TextInputType.number,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Amount is required';
-                      }
-                      return null;
-                    },
                   ),
                   TextFieldBlue(
                       textcontent: 'Note', controller: _noteController),
