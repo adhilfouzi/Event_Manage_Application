@@ -53,13 +53,13 @@ class _SplashScreenState extends State<SplashScreen> {
         if (introcheck == null || introcheck == false) {
           goToLogin(context);
         } else {
-          await Future.delayed(const Duration(seconds: 2));
+          await Future.delayed(const Duration(seconds: 1));
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const LoginScreen()),
           );
         }
       } else {
-        await Future.delayed(const Duration(seconds: 2));
+        await Future.delayed(const Duration(seconds: 1));
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
               builder: (context) => MainBottom(profileid: userlogged)),
@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> goToLogin(context) async {
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 3));
 
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => const OnBoardingPage()),
