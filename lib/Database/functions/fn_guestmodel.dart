@@ -26,8 +26,6 @@ Future<void> initializeGuestDatabase() async {
   );
 }
 
-//********************** */
-int i = 0;
 // Function to retrieve guest data from the database.
 Future<void> refreshguestdata(int id) async {
   final result = await guestDB.rawQuery(
