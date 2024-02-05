@@ -120,10 +120,12 @@ class PendingRpTaskList extends StatelessWidget {
                             ],
                           ),
                           onTap: () {
-                            Get.to(EditTask(
-                              eventModel: eventModel,
-                              taskdata: data,
-                            ));
+                            Get.to(
+                                transition: Transition.rightToLeftWithFade,
+                                EditTask(
+                                  eventModel: eventModel,
+                                  taskdata: data,
+                                ));
                           },
                         ),
                       ),

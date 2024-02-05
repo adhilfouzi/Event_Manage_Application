@@ -51,6 +51,7 @@ class _CalenderState extends State<Calender> {
       canPop: false,
       onPopInvoked: (didPop) {
         Get.offAll(
+            transition: Transition.leftToRightWithFade,
             //allowSnapshotting: false,
             fullscreenDialog: true,
             MainBottom(profileid: widget.profileid));
@@ -123,10 +124,14 @@ class _CalenderState extends State<Calender> {
                         ),
                         child: ListTile(
                           onLongPress: () {
-                            Get.to(ViewEventDetails(eventModel: data));
+                            Get.to(
+                                transition: Transition.leftToRightWithFade,
+                                ViewEventDetails(eventModel: data));
                           },
                           onTap: () {
-                            Get.to(ViewEvent(eventModel: data));
+                            Get.to(
+                                transition: Transition.leftToRightWithFade,
+                                ViewEvent(eventModel: data));
                           },
                           title: Text(
                             data.eventname,

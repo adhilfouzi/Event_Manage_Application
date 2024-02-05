@@ -57,7 +57,9 @@ class Entry extends StatelessWidget {
                       child: ElevatedButton(
                         style: withr,
                         onPressed: () {
-                          Get.off(const SignupScreen());
+                          Get.off(
+                              transition: Transition.leftToRightWithFade,
+                              const SignupScreen());
                         },
                         child: Text('Signup',
                             style: TextStyle(
@@ -80,7 +82,9 @@ class Entry extends StatelessWidget {
                       child: ElevatedButton(
                         style: withr,
                         onPressed: () {
-                          Get.off(const LoginScreen());
+                          Get.off(
+                              transition: Transition.leftToRightWithFade,
+                              const LoginScreen());
                         },
                         child: Text('Login',
                             style: TextStyle(

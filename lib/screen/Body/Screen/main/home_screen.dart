@@ -159,7 +159,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               horizontal: 1.h, vertical: 0.5.h),
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(ViewEvent(eventModel: data));
+                              Get.to(
+                                  transition: Transition.rightToLeftWithFade,
+                                  ViewEvent(eventModel: data));
                             },
                             child: Stack(
                               children: [

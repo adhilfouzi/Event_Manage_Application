@@ -34,6 +34,7 @@ class TaskList extends StatelessWidget {
       canPop: false,
       onPopInvoked: (didPop) {
         Get.offAll(
+            transition: Transition.leftToRightWithFade,
             //     allowSnapshotting: false,
             fullscreenDialog: true,
             ViewEvent(eventModel: eventModel));
@@ -42,6 +43,7 @@ class TaskList extends StatelessWidget {
         appBar: CustomAppBar(
             leading: () {
               Get.offAll(
+                  transition: Transition.leftToRightWithFade,
                   //     allowSnapshotting: false,
                   fullscreenDialog: true,
                   ViewEvent(eventModel: eventModel));
@@ -50,7 +52,9 @@ class TaskList extends StatelessWidget {
               AppAction(
                   icon: Icons.search,
                   onPressed: () {
-                    Get.to(TaskSearch(eventModel: eventModel));
+                    Get.to(
+                        transition: Transition.rightToLeftWithFade,
+                        TaskSearch(eventModel: eventModel));
                   }),
               SizedBox(
                 width: 2.w,
@@ -162,10 +166,10 @@ class TaskList extends StatelessWidget {
                               ],
                             ),
                             onTap: () {
-                              Get.to(EditTask(
-                                taskdata: data,
-                                eventModel: eventModel,
-                              ));
+                              Get.to(
+                                  transition: Transition.rightToLeftWithFade,
+                                  EditTask(
+                                      taskdata: data, eventModel: eventModel));
                             },
                           ),
                         ),

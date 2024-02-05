@@ -37,11 +37,13 @@ class ViewVendor extends StatelessWidget {
           AppAction(
               icon: Icons.edit,
               onPressed: () {
-                Get.to(EditVendor(
-                  eventModel: eventModel,
-                  vendordataway: vendor,
-                  val: 1,
-                ));
+                Get.to(
+                    transition: Transition.rightToLeftWithFade,
+                    EditVendor(
+                      eventModel: eventModel,
+                      vendordataway: vendor,
+                      val: 1,
+                    ));
               }),
         ],
         titleText: ' ',

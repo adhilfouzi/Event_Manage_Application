@@ -45,6 +45,7 @@ class _AddEventState extends State<AddEvent> {
         canPop: false,
         onPopInvoked: (didPop) {
           Get.offAll(
+              transition: Transition.leftToRightWithFade,
               //     allowSnapshotting: false,
               fullscreenDialog: true,
               MainBottom(profileid: widget.profileid));

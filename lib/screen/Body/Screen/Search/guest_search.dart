@@ -117,9 +117,12 @@ class _GuestSearchState extends State<GuestSearch> {
                                               1, widget.eventModel);
                                         }),
                                     onTap: () {
-                                      Get.to(EditGuest(
-                                          guestdata: finduserItem,
-                                          eventModel: widget.eventModel));
+                                      Get.to(
+                                          transition:
+                                              Transition.rightToLeftWithFade,
+                                          EditGuest(
+                                              guestdata: finduserItem,
+                                              eventModel: widget.eventModel));
                                     },
                                   ),
                                 );
@@ -167,6 +170,7 @@ void delectYes(ctx, GuestModel student, int step, Eventmodel eventModel) {
 
   if (step == 2) {
     Get.offAll(
+        transition: Transition.rightToLeftWithFade,
         //     allowSnapshotting: false,
         fullscreenDialog: true,
         Guests(

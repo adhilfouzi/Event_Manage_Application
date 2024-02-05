@@ -28,6 +28,7 @@ class Guests extends StatelessWidget {
       canPop: false,
       onPopInvoked: (didPop) {
         Get.offAll(
+            transition: Transition.leftToRightWithFade,
             //     allowSnapshotting: false,
             fullscreenDialog: true,
             ViewEvent(eventModel: eventModel));
@@ -36,6 +37,7 @@ class Guests extends StatelessWidget {
         appBar: CustomAppBar(
             leading: () {
               Get.offAll(
+                  transition: Transition.leftToRightWithFade,
                   //     allowSnapshotting: false,
                   fullscreenDialog: true,
                   ViewEvent(eventModel: eventModel));
@@ -44,7 +46,9 @@ class Guests extends StatelessWidget {
               AppAction(
                   icon: Icons.search,
                   onPressed: () {
-                    Get.to(GuestSearch(eventModel: eventModel));
+                    Get.to(
+                        transition: Transition.rightToLeftWithFade,
+                        GuestSearch(eventModel: eventModel));
                   }),
               SizedBox(
                 width: 2.w,
@@ -127,10 +131,12 @@ class Guests extends StatelessWidget {
                           ),
                           child: ListTile(
                             onTap: () {
-                              Get.to(EditGuest(
-                                guestdata: data,
-                                eventModel: eventModel,
-                              ));
+                              Get.to(
+                                  transition: Transition.rightToLeftWithFade,
+                                  EditGuest(
+                                    guestdata: data,
+                                    eventModel: eventModel,
+                                  ));
                             },
                             leading: Image.asset('assets/UI/icons/person.png'),
                             title: Text(

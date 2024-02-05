@@ -31,7 +31,9 @@ class ViewEventDetails extends StatelessWidget {
           AppAction(
               icon: Icons.edit,
               onPressed: () {
-                Get.to(EditEvent(event: eventModel));
+                Get.to(
+                    transition: Transition.rightToLeftWithFade,
+                    EditEvent(event: eventModel));
               }),
           SizedBox(width: 2.h)
         ],
@@ -177,6 +179,8 @@ void delecteventYes(
 ) {
   deleteEventdata(student.id, student.profile);
   Get.offAll(
+      transition: Transition.leftToRightWithFade,
+
       //     allowSnapshotting: false,
       fullscreenDialog: true,
       MainBottom(profileid: student.profile));

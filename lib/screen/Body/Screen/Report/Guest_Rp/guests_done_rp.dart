@@ -109,10 +109,12 @@ class DoneRpGuests extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            Get.to(EditGuest(
-                              eventModel: eventModel,
-                              guestdata: data,
-                            ));
+                            Get.to(
+                                transition: Transition.rightToLeftWithFade,
+                                EditGuest(
+                                  eventModel: eventModel,
+                                  guestdata: data,
+                                ));
                           },
                         ),
                       ),

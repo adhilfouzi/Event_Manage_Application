@@ -47,15 +47,19 @@ class PendingRpVendorList extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: ListTile(
-                        onTap: () => Get.to(ViewVendor(
-                          vendor: data,
-                          eventModel: eventModel,
-                        )),
-                        onLongPress: () => Get.to(EditVendor(
-                          eventModel: eventModel,
-                          vendordataway: data,
-                          val: 0,
-                        )),
+                        onTap: () => Get.to(
+                            transition: Transition.rightToLeftWithFade,
+                            ViewVendor(
+                              vendor: data,
+                              eventModel: eventModel,
+                            )),
+                        onLongPress: () => Get.to(
+                            transition: Transition.rightToLeftWithFade,
+                            EditVendor(
+                              eventModel: eventModel,
+                              vendordataway: data,
+                              val: 0,
+                            )),
                         leading: Image(image: categoryItem['image']),
                         title: Text(
                           data.name,

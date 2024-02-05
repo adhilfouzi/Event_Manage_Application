@@ -57,6 +57,7 @@ class _ResetState extends State<Reset> {
                         if (checkboxValue == true) {
                           clearDb();
                           Get.offAll(
+                              transition: Transition.leftToRightWithFade,
                               //     allowSnapshotting: false,
                               fullscreenDialog: true,
                               MainBottom(profileid: widget.profileid));

@@ -114,9 +114,11 @@ class _BudgetSearchState extends State<BudgetSearch> {
                                         widget.eventModel);
                                   }),
                               onTap: () {
-                                Get.to(EditBudget(
-                                    budgetdata: finduserItem,
-                                    eventModel: widget.eventModel));
+                                Get.to(
+                                    transition: Transition.rightToLeftWithFade,
+                                    EditBudget(
+                                        budgetdata: finduserItem,
+                                        eventModel: widget.eventModel));
                               },
                             ),
                           );
@@ -162,6 +164,7 @@ void delectYes(ctx, BudgetModel student, int step, Eventmodel eventModel) {
 
   if (step == 2) {
     Get.offAll(
+        transition: Transition.rightToLeftWithFade,
         //     allowSnapshotting: false,
         fullscreenDialog: true,
         Budget(

@@ -105,9 +105,11 @@ class _VendorSettlementSearchState extends State<VendorSettlementSearch> {
                                 ),
                               ),
                               onTap: () {
-                                Get.to(EditPayments(
-                                  paydata: finduserItem,
-                                ));
+                                Get.to(
+                                    transition: Transition.rightToLeftWithFade,
+                                    EditPayments(
+                                      paydata: finduserItem,
+                                    ));
                               },
                             ),
                           );

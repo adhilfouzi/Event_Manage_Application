@@ -96,7 +96,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {
-                              Get.to(const ForgetPassword());
+                              Get.to(
+                                  transition: Transition.rightToLeftWithFade,
+                                  const ForgetPassword());
                             },
                             child: const Text(
                               'Forget your password ?',
@@ -129,7 +131,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: ElevatedButton(
                                 style: secbutton(),
                                 onPressed: () {
-                                  Get.to(const SignupScreen());
+                                  Get.to(
+                                      transition:
+                                          Transition.rightToLeftWithFade,
+                                      const SignupScreen());
                                 },
                                 child: Text('Signup',
                                     style: TextStyle(
@@ -160,7 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
       if (existingProfiles.isNotEmpty) {
         final matchingProfile = existingProfiles.first;
         if (matchingProfile.password == password) {
-          Get.offAll(MainBottom(profileid: matchingProfile.id!));
+          Get.offAll(
+              transition: Transition.leftToRightWithFade,
+              MainBottom(profileid: matchingProfile.id!));
 
           final sharedPrefer = await SharedPreferences.getInstance();
           await sharedPrefer.setInt(logedinsp, matchingProfile.id!);

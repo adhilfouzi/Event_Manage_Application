@@ -57,7 +57,8 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       backgroudColor: const Color(0xFFf9f9f9),
       foregroundColor: const Color(0xFFFFAA00),
       introductionList: list,
-      onTapSkipButton: () => Get.off(const Entry()),
+      onTapSkipButton: () =>
+          Get.off(transition: Transition.leftToRightWithFade, const Entry()),
       skipTextStyle: TextStyle(
         color: Colors.blueGrey,
         fontSize: 15.sp,

@@ -28,7 +28,7 @@ class ListTileDrawer extends StatelessWidget {
       ),
       onTap: () {
         if (so == 1) {
-          Get.to(map!);
+          Get.to(transition: Transition.rightToLeftWithFade, map!);
         } else if (so == 2) {
           launchPrivacyPolicy();
         } else if (so == 3) {
@@ -58,6 +58,7 @@ Future<void> confirmLogout(BuildContext context) async {
           TextButton(
             onPressed: () async {
               Get.offAll(
+                  transition: Transition.rightToLeftWithFade,
                   //     allowSnapshotting: false,
                   fullscreenDialog: true,
                   const LoginScreen());

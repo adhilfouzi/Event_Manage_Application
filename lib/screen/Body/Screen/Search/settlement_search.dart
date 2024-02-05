@@ -105,10 +105,12 @@ class _IncomeSearchState extends State<IncomeSearch> {
                                 ),
                               ),
                               onTap: () {
-                                Get.to(EditIncome(
-                                  paydata: finduserItem,
-                                  // val: 1,
-                                ));
+                                Get.to(
+                                    transition: Transition.rightToLeftWithFade,
+                                    EditIncome(
+                                      paydata: finduserItem,
+                                      // val: 1,
+                                    ));
                               },
                             ),
                           );

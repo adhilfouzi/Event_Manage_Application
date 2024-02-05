@@ -199,7 +199,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Get.off(const LoginScreen());
+                              Get.off(
+                                  transition: Transition.leftToRightWithFade,
+                                  const LoginScreen());
                             },
                             child: Text(
                               'Login',
@@ -256,7 +258,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
         await addProfile(profile);
         await refreshRefreshdata();
-        Get.off(const LoginScreen());
+        Get.off(
+            transition: Transition.leftToRightWithFade, const LoginScreen());
       } catch (e) {
         log('Error inserting data: $e');
       }

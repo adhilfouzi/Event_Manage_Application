@@ -50,16 +50,20 @@ class DoneRpBudget extends StatelessWidget {
                       ),
                       child: ListTile(
                         onTap: () {
-                          Get.to(BudgetView(
-                            budget: data,
-                            eventModel: eventModel,
-                          ));
+                          Get.to(
+                              transition: Transition.rightToLeftWithFade,
+                              BudgetView(
+                                budget: data,
+                                eventModel: eventModel,
+                              ));
                         },
                         onLongPress: () {
-                          Get.to(EditBudget(
-                            budgetdata: data,
-                            eventModel: eventModel,
-                          ));
+                          Get.to(
+                              transition: Transition.rightToLeftWithFade,
+                              EditBudget(
+                                budgetdata: data,
+                                eventModel: eventModel,
+                              ));
                         },
                         leading: Image(image: categoryItem['image']),
                         title: Text(

@@ -35,7 +35,9 @@ class BudgetView extends StatelessWidget {
           AppAction(
               icon: Icons.edit,
               onPressed: () {
-                Get.to(EditBudget(budgetdata: budget, eventModel: eventModel));
+                Get.to(
+                    transition: Transition.rightToLeftWithFade,
+                    EditBudget(budgetdata: budget, eventModel: eventModel));
               }),
         ],
         titleText: ' ',

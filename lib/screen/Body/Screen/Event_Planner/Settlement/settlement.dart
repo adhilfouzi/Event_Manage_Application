@@ -48,6 +48,7 @@ class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
           leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () => Get.offAll(
+                  transition: Transition.leftToRightWithFade,
                   //     allowSnapshotting: false,
                   fullscreenDialog: true,
                   ViewEvent(eventModel: widget.eventModel))),
@@ -60,11 +61,17 @@ class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
                 setState(() {
                   var indexcount = tabController.index;
                   if (indexcount == 0) {
-                    Get.to(const BudgetSettlementSearch());
+                    Get.to(
+                        transition: Transition.rightToLeftWithFade,
+                        const BudgetSettlementSearch());
                   } else if (indexcount == 1) {
-                    Get.to(const VendorSettlementSearch());
+                    Get.to(
+                        transition: Transition.rightToLeftWithFade,
+                        const VendorSettlementSearch());
                   } else if (indexcount == 2) {
-                    Get.to(const IncomeSearch());
+                    Get.to(
+                        transition: Transition.rightToLeftWithFade,
+                        const IncomeSearch());
                   }
                 });
               },
@@ -227,13 +234,19 @@ class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
           onPressed: () {
             var indexcount = tabController.index;
             if (indexcount == 0) {
-              Get.to(AddPayments(eventID: widget.eventID));
+              Get.to(
+                  transition: Transition.rightToLeftWithFade,
+                  AddPayments(eventID: widget.eventID));
             } else if (indexcount == 1) {
-              Get.to(AddPayments(eventID: widget.eventID));
+              Get.to(
+                  transition: Transition.rightToLeftWithFade,
+                  AddPayments(eventID: widget.eventID));
             } else if (indexcount == 2) {
-              Get.to(AddIncome(
-                eventID: widget.eventID,
-              ));
+              Get.to(
+                  transition: Transition.rightToLeftWithFade,
+                  AddIncome(
+                    eventID: widget.eventID,
+                  ));
             }
           },
         ),

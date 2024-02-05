@@ -110,11 +110,13 @@ class _VendorSearchState extends State<VendorSearch> {
                                         widget.eventModel);
                                   }),
                               onTap: () {
-                                Get.to(EditVendor(
-                                  eventModel: widget.eventModel,
-                                  vendordataway: finduserItem,
-                                  val: 1,
-                                ));
+                                Get.to(
+                                    transition: Transition.rightToLeftWithFade,
+                                    EditVendor(
+                                      eventModel: widget.eventModel,
+                                      vendordataway: finduserItem,
+                                      val: 1,
+                                    ));
                               },
                             ),
                           );
@@ -163,6 +165,7 @@ void delectYes(ctx, VendorsModel student, int step, Eventmodel eventModel) {
 
     if (step == 2) {
       Get.offAll(
+          transition: Transition.rightToLeftWithFade,
           //     allowSnapshotting: false,
           fullscreenDialog: true,
           Vendors(

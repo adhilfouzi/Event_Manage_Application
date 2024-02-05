@@ -27,6 +27,8 @@ class ProfileAccount extends StatelessWidget {
       canPop: false,
       onPopInvoked: (didPop) {
         Get.offAll(
+            transition: Transition.leftToRightWithFade,
+
             //  allowSnapshotting: false,
             fullscreenDialog: true,
             MainBottom(profileid: profileid));
@@ -102,8 +104,11 @@ class ProfileAccount extends StatelessWidget {
                                     MaterialStateProperty.all(buttoncolor[300]),
                               ),
                               onPressed: () {
-                                Get.to(EditProfile(
-                                    profileid: profileData.value.first));
+                                Get.to(
+                                  transition: Transition.rightToLeftWithFade,
+                                  EditProfile(
+                                      profileid: profileData.value.first),
+                                );
                               },
                               child: Text(
                                 'Update',

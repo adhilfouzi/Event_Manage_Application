@@ -29,6 +29,7 @@ class ViewEvent extends StatelessWidget {
       canPop: false,
       onPopInvoked: (didPop) {
         Get.offAll(
+            transition: Transition.leftToRightWithFade,
             //     allowSnapshotting: false,
             fullscreenDialog: true,
             MainBottom(profileid: eventModel.id!));
@@ -38,6 +39,7 @@ class ViewEvent extends StatelessWidget {
         appBar: CustomAppBar(
           leading: () {
             Get.offAll(
+                transition: Transition.leftToRightWithFade,
                 //     allowSnapshotting: false,
                 fullscreenDialog: true,
                 MainBottom(profileid: eventModel.id!));
@@ -92,10 +94,14 @@ class ViewEvent extends StatelessWidget {
                   ).then((value) {
                     switch (value) {
                       case 'view':
-                        Get.to(ViewEventDetails(eventModel: eventModel));
+                        Get.to(
+                            transition: Transition.leftToRightWithFade,
+                            ViewEventDetails(eventModel: eventModel));
                         break;
                       case 'Edit':
-                        Get.to(EditEvent(event: eventModel));
+                        Get.to(
+                            transition: Transition.rightToLeftWithFade,
+                            EditEvent(event: eventModel));
                         break;
                       case 'Delete':
                         dodeleteevent(context, eventModel);
@@ -181,10 +187,12 @@ class ViewEvent extends StatelessWidget {
                         children: [
                           Expanded(
                             child: InkWell(
-                              onTap: () => Get.to(TaskList(
-                                eventModel: eventModel,
-                                eventid: eventModel.id!,
-                              )),
+                              onTap: () => Get.to(
+                                  transition: Transition.rightToLeftWithFade,
+                                  TaskList(
+                                    eventModel: eventModel,
+                                    eventid: eventModel.id!,
+                                  )),
                               child: Card(
                                 margin: EdgeInsets.all(1.4.h),
                                 elevation: 4,
@@ -208,9 +216,11 @@ class ViewEvent extends StatelessWidget {
                           ),
                           Expanded(
                             child: InkWell(
-                              onTap: () => Get.to(Guests(
-                                  eventid: eventModel.id!,
-                                  eventModel: eventModel)),
+                              onTap: () => Get.to(
+                                  transition: Transition.rightToLeftWithFade,
+                                  Guests(
+                                      eventid: eventModel.id!,
+                                      eventModel: eventModel)),
                               child: Card(
                                 margin: EdgeInsets.all(1.4.h),
                                 elevation: 4,
@@ -266,9 +276,11 @@ class ViewEvent extends StatelessWidget {
                           ),
                           Expanded(
                             child: InkWell(
-                              onTap: () => Get.to(Vendors(
-                                  eventid: eventModel.id!,
-                                  eventModel: eventModel)),
+                              onTap: () => Get.to(
+                                  transition: Transition.rightToLeftWithFade,
+                                  Vendors(
+                                      eventid: eventModel.id!,
+                                      eventModel: eventModel)),
                               child: Card(
                                 margin: EdgeInsets.all(1.4.h),
                                 elevation: 4,
@@ -297,10 +309,12 @@ class ViewEvent extends StatelessWidget {
                         children: [
                           Expanded(
                             child: InkWell(
-                              onTap: () => Get.to(Report(
-                                eventModel: eventModel,
-                                eventid: eventModel.id!,
-                              )),
+                              onTap: () => Get.to(
+                                  transition: Transition.rightToLeftWithFade,
+                                  Report(
+                                    eventModel: eventModel,
+                                    eventid: eventModel.id!,
+                                  )),
                               child: Card(
                                 margin: EdgeInsets.all(1.4.h),
                                 elevation: 4,
@@ -324,9 +338,11 @@ class ViewEvent extends StatelessWidget {
                           ),
                           Expanded(
                             child: InkWell(
-                              onTap: () => Get.to(Settlement(
-                                  eventID: eventModel.id!,
-                                  eventModel: eventModel)),
+                              onTap: () => Get.to(
+                                  transition: Transition.rightToLeftWithFade,
+                                  Settlement(
+                                      eventID: eventModel.id!,
+                                      eventModel: eventModel)),
                               child: Card(
                                 margin: EdgeInsets.all(1.4.h),
                                 elevation: 4,

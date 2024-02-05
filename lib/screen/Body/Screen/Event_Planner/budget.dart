@@ -28,6 +28,7 @@ class Budget extends StatelessWidget {
       canPop: false,
       onPopInvoked: (didPop) {
         Get.offAll(
+            transition: Transition.leftToRightWithFade,
             //     allowSnapshotting: false,
             fullscreenDialog: true,
             ViewEvent(eventModel: eventModel));
@@ -36,6 +37,7 @@ class Budget extends StatelessWidget {
         appBar: CustomAppBar(
             leading: () async {
               Get.offAll(
+                  transition: Transition.leftToRightWithFade,
                   //     allowSnapshotting: false,
                   fullscreenDialog: true,
                   ViewEvent(eventModel: eventModel));
@@ -44,7 +46,9 @@ class Budget extends StatelessWidget {
               AppAction(
                   icon: Icons.search,
                   onPressed: () {
-                    Get.to(BudgetSearch(eventModel: eventModel));
+                    Get.to(
+                        transition: Transition.rightToLeftWithFade,
+                        BudgetSearch(eventModel: eventModel));
                   }),
               SizedBox(
                 width: 2.w,
@@ -80,16 +84,20 @@ class Budget extends StatelessWidget {
                         ),
                         child: ListTile(
                           onTap: () {
-                            Get.to(BudgetView(
-                              budget: data,
-                              eventModel: eventModel,
-                            ));
+                            Get.to(
+                                transition: Transition.rightToLeftWithFade,
+                                BudgetView(
+                                  budget: data,
+                                  eventModel: eventModel,
+                                ));
                           },
                           onLongPress: () {
-                            Get.to(EditBudget(
-                              budgetdata: data,
-                              eventModel: eventModel,
-                            ));
+                            Get.to(
+                                transition: Transition.rightToLeftWithFade,
+                                EditBudget(
+                                  budgetdata: data,
+                                  eventModel: eventModel,
+                                ));
                           },
                           leading: Image(image: categoryItem['image']),
                           title: Text(

@@ -106,6 +106,7 @@ class _BudgetSettlementSearchState extends State<BudgetSettlementSearch> {
                               ),
                               onTap: () {
                                 Get.to(
+                                  transition: Transition.rightToLeftWithFade,
                                   EditPayments(
                                     paydata: finduserItem,
                                     // val: 1,

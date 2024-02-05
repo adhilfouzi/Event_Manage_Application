@@ -267,6 +267,8 @@ class _EditEventState extends State<EditEvent> {
             widget.event.profile);
 
         Get.offAll(
+            transition: Transition.leftToRightWithFade,
+
             //     allowSnapshotting: false,
             fullscreenDialog: true,
             MainBottom(profileid: widget.event.id!));

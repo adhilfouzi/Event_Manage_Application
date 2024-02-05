@@ -38,7 +38,9 @@ class VendorSettlement extends StatelessWidget {
                         ),
                         child: ListTile(
                           onTap: () {
-                            Get.to(EditPayments(paydata: data));
+                            Get.to(
+                                transition: Transition.rightToLeftWithFade,
+                                EditPayments(paydata: data));
                           },
                           leading: Image.asset(
                             'assets/UI/icons/person.png',

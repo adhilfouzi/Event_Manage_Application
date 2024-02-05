@@ -115,9 +115,11 @@ class _TaskSearchState extends State<TaskSearch> {
                                         widget.eventModel);
                                   }),
                               onTap: () {
-                                Get.to(EditTask(
-                                    taskdata: finduserItem,
-                                    eventModel: widget.eventModel));
+                                Get.to(
+                                    transition: Transition.rightToLeftWithFade,
+                                    EditTask(
+                                        taskdata: finduserItem,
+                                        eventModel: widget.eventModel));
                               },
                             ),
                           );
@@ -164,6 +166,7 @@ void delectYes(ctx, TaskModel student, int step, Eventmodel eventModel) {
 
     if (step == 2) {
       Get.offAll(
+          transition: Transition.rightToLeftWithFade,
           //     allowSnapshotting: false,
           fullscreenDialog: true,
           TaskList(

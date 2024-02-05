@@ -18,7 +18,7 @@ class FloatingPointx extends StatelessWidget {
           color: Colors.white,
         ),
         onPressed: () {
-          Get.to(goto);
+          Get.to(transition: Transition.rightToLeftWithFade, goto);
         },
       ),
     );

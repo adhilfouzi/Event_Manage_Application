@@ -37,7 +37,9 @@ class IncomeSettlement extends StatelessWidget {
                       ),
                       child: ListTile(
                         onTap: () {
-                          Get.to(EditIncome(paydata: data));
+                          Get.to(
+                              transition: Transition.rightToLeftWithFade,
+                              EditIncome(paydata: data));
                         },
                         leading: Image.asset(
                           'assets/UI/icons/person.png',

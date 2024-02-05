@@ -127,6 +127,7 @@ class _EditBudgetState extends State<EditBudget> {
   Future<void> editGuestclick(BuildContext ctx, BudgetModel budget) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       Get.off(
+          transition: Transition.leftToRightWithFade,
           //     allowSnapshotting: false,
           fullscreenDialog: true,
           Budget(

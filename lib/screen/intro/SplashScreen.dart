@@ -55,11 +55,14 @@ class _SplashScreenState extends State<SplashScreen> {
           goToLogin(context);
         } else {
           await Future.delayed(const Duration(seconds: 1));
-          Get.off(const LoginScreen());
+          Get.off(
+              transition: Transition.leftToRightWithFade, const LoginScreen());
         }
       } else {
         await Future.delayed(const Duration(seconds: 1));
-        Get.off(MainBottom(profileid: userlogged));
+        Get.off(
+            transition: Transition.leftToRightWithFade,
+            MainBottom(profileid: userlogged));
       }
     } catch (e) {
       log('Error querying the database: $e');
@@ -68,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> goToLogin(context) async {
     await Future.delayed(const Duration(seconds: 3));
-    Get.off(const OnBoardingPage());
+    Get.off(transition: Transition.leftToRightWithFade, const OnBoardingPage());
 
     log('goToLogin:   OnBoardingPage');
   }

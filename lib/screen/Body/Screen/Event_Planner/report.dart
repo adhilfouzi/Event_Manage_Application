@@ -36,6 +36,7 @@ class Report extends StatelessWidget {
       canPop: false,
       onPopInvoked: (didPop) {
         Get.offAll(
+            transition: Transition.leftToRightWithFade,
             //     allowSnapshotting: false,
             fullscreenDialog: true,
             ViewEvent(eventModel: eventModel));
@@ -44,6 +45,7 @@ class Report extends StatelessWidget {
         appBar: CustomAppBar(
           leading: () {
             Get.offAll(
+                transition: Transition.leftToRightWithFade,
                 //     allowSnapshotting: false,
                 fullscreenDialog: true,
                 ViewEvent(eventModel: eventModel));
@@ -82,7 +84,9 @@ class Report extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                Get.to(DoneRpTaskList(eventModel: eventModel));
+                                Get.to(
+                                    transition: Transition.rightToLeftWithFade,
+                                    DoneRpTaskList(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                 builder: (context, value, child) => Text(
@@ -98,6 +102,7 @@ class Report extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 Get.to(
+                                    transition: Transition.rightToLeftWithFade,
                                     PendingRpTaskList(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
@@ -143,7 +148,9 @@ class Report extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                Get.to(DoneRpGuests(eventModel: eventModel));
+                                Get.to(
+                                    transition: Transition.rightToLeftWithFade,
+                                    DoneRpGuests(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(
@@ -157,7 +164,9 @@ class Report extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.to(PendingRpGuests(eventModel: eventModel));
+                                Get.to(
+                                    transition: Transition.rightToLeftWithFade,
+                                    PendingRpGuests(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(
@@ -202,7 +211,9 @@ class Report extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                Get.to(DoneRpBudget(eventModel: eventModel));
+                                Get.to(
+                                    transition: Transition.rightToLeftWithFade,
+                                    DoneRpBudget(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(
@@ -216,7 +227,9 @@ class Report extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.to(PendingRpBudget(eventModel: eventModel));
+                                Get.to(
+                                    transition: Transition.rightToLeftWithFade,
+                                    PendingRpBudget(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(
@@ -263,6 +276,7 @@ class Report extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 Get.to(
+                                    transition: Transition.rightToLeftWithFade,
                                     DoneRpVendorList(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
@@ -277,8 +291,10 @@ class Report extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.to(PendingRpVendorList(
-                                    eventModel: eventModel));
+                                Get.to(
+                                    transition: Transition.rightToLeftWithFade,
+                                    PendingRpVendorList(
+                                        eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(
