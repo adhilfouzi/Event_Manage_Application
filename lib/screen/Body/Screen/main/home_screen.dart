@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_budgetmodel.dart';
@@ -158,10 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               horizontal: 1.h, vertical: 0.5.h),
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ViewEvent(
-                                        eventModel: data,
-                                      )));
+                              Get.to(ViewEvent(eventModel: data));
                             },
                             child: Stack(
                               children: [

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/database/functions/fn_incomemodel.dart';
 import 'package:project_event/database/functions/fn_paymentdetail.dart';
@@ -147,7 +148,7 @@ class _EditIncomeState extends State<EditIncome> {
           _dateController.text,
           _timeController.text,
           widget.paydata.eventid);
-      Navigator.pop(mtx);
+      Get.back();
     }
   }
 }
@@ -168,7 +169,7 @@ void dodeleteincome(rtx, IncomeModel student) {
                 child: const Text('Yes')),
             TextButton(
                 onPressed: () {
-                  Navigator.pop(rtx);
+                  Get.back();
                 },
                 child: const Text('No'))
           ],
@@ -186,8 +187,8 @@ void delectpayYes(
 ) {
   try {
     deleteincome(student.id, student.eventid);
-    Navigator.of(ctx).pop();
-    Navigator.of(ctx).pop();
+    Get.back();
+    Get.back();
 
     ScaffoldMessenger.of(ctx).showSnackBar(
       SnackBar(

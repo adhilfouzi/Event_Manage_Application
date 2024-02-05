@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_paymodel.dart';
@@ -37,9 +38,7 @@ class VendorSettlement extends StatelessWidget {
                         ),
                         child: ListTile(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    EditPayments(paydata: data)));
+                            Get.to(EditPayments(paydata: data));
                           },
                           leading: Image.asset(
                             'assets/UI/icons/person.png',

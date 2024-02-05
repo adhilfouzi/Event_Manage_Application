@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:get/get.dart';
 import 'package:project_event/database/functions/fn_guestmodel.dart';
 import 'package:project_event/database/model/event/event_model.dart';
 import 'package:project_event/database/model/guest_model/guest_model.dart';
@@ -124,7 +125,7 @@ class _EditGuestState extends State<EditGuest> {
       final eventId = guest.eventid;
       final number = _pcontroller.text;
       final adress = _acontroller.text;
-      Navigator.pop(context);
+      Get.back();
 
       await editGuest(guest.id, eventId, name, sex, note, _statusController,
           number, email, adress);

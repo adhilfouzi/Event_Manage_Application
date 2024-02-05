@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/database/functions/fn_taskmodel.dart';
 import 'package:project_event/database/model/task/task_model.dart';
 import 'package:project_event/screen/body/widget/box/textfield_blue.dart';
@@ -112,7 +113,7 @@ class _AddTaskState extends State<AddTask> {
           duration: const Duration(seconds: 2),
         ),
       );
-      Navigator.pop(mtx);
+      Get.back();
     } else {
       ScaffoldMessenger.of(mtx).showSnackBar(
         SnackBar(

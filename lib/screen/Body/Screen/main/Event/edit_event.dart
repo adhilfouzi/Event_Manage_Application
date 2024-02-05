@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -265,12 +266,10 @@ class _EditEventState extends State<EditEvent> {
             imagepath,
             widget.event.profile);
 
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  MainBottom(profileid: widget.event.profile)),
-          (route) => false,
-        );
+        Get.offAll(
+            //     allowSnapshotting: false,
+            fullscreenDialog: true,
+            MainBottom(profileid: widget.event.id!));
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Successfully added"),
@@ -330,7 +329,7 @@ class _EditEventState extends State<EditEvent> {
             IconButton(
               onPressed: () {
                 getimage(ImageSource.camera);
-                Navigator.of(context).pop();
+                Get.back();
               },
               icon: const Icon(
                 Icons.camera_alt_rounded,
@@ -340,7 +339,7 @@ class _EditEventState extends State<EditEvent> {
             IconButton(
               onPressed: () {
                 getimage(ImageSource.gallery);
-                Navigator.of(context).pop();
+                Get.back();
               },
               icon: const Icon(
                 Icons.image,

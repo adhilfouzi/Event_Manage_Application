@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_guestmodel.dart';
 import 'package:project_event/database/model/event/event_model.dart';
@@ -116,12 +117,9 @@ class _GuestSearchState extends State<GuestSearch> {
                                               1, widget.eventModel);
                                         }),
                                     onTap: () {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (ctr) => EditGuest(
-                                            guestdata: finduserItem,
-                                            eventModel: widget.eventModel),
-                                      ));
+                                      Get.to(EditGuest(
+                                          guestdata: finduserItem,
+                                          eventModel: widget.eventModel));
                                     },
                                   ),
                                 );
@@ -152,7 +150,7 @@ void dodeleteguest(rtx, GuestModel student, int step, Eventmodel eventModel) {
                 child: const Text('Yes')),
             TextButton(
                 onPressed: () {
-                  Navigator.pop(rtx);
+                  Get.back();
                 },
                 child: const Text('No'))
           ],
@@ -168,16 +166,16 @@ void delectYes(ctx, GuestModel student, int step, Eventmodel eventModel) {
   deleteGuest(student.id, student.eventid);
 
   if (step == 2) {
-    Navigator.of(ctx).pushAndRemoveUntil(
-      MaterialPageRoute(
-          builder: (ctx) => Guests(
-                eventModel: eventModel,
-                eventid: student.eventid,
-              )),
-      (route) => false,
-    );
+    Get.offAll(
+        //     allowSnapshotting: false,
+        fullscreenDialog: true,
+        Guests(
+          eventModel: eventModel,
+          eventid: student.eventid,
+        ));
   } else if (step == 1) {
-    Navigator.pop(ctx);
+    Get.back();
+
     refreshguestdata(student.eventid);
   }
 }

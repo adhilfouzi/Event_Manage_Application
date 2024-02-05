@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_taskmodel.dart';
 import 'package:project_event/database/model/event/event_model.dart';
@@ -114,13 +115,9 @@ class _TaskSearchState extends State<TaskSearch> {
                                         widget.eventModel);
                                   }),
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (ctr) => EditTask(
-                                        taskdata: finduserItem,
-                                        eventModel: widget.eventModel),
-                                  ),
-                                );
+                                Get.to(EditTask(
+                                    taskdata: finduserItem,
+                                    eventModel: widget.eventModel));
                               },
                             ),
                           );
@@ -149,7 +146,7 @@ void dodeletetask(rtx, TaskModel student, int step, Eventmodel eventModel) {
                 child: const Text('Yes')),
             TextButton(
                 onPressed: () {
-                  Navigator.pop(rtx);
+                  Get.back();
                 },
                 child: const Text('No'))
           ],
@@ -166,16 +163,16 @@ void delectYes(ctx, TaskModel student, int step, Eventmodel eventModel) {
     deletetask(student.id, student.eventid);
 
     if (step == 2) {
-      Navigator.of(ctx).pushAndRemoveUntil(
-        MaterialPageRoute(
-            builder: (ctx) => TaskList(
-                  eventid: student.eventid,
-                  eventModel: eventModel,
-                )),
-        (route) => false,
-      );
+      Get.offAll(
+          //     allowSnapshotting: false,
+          fullscreenDialog: true,
+          TaskList(
+            eventid: student.eventid,
+            eventModel: eventModel,
+          ));
     } else if (step == 1) {
-      Navigator.pop(ctx);
+      Get.back();
+
       refreshEventtaskdata(student.eventid);
     }
   } catch (e) {

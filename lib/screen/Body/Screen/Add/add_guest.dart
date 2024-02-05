@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:get/get.dart';
 import 'package:project_event/database/functions/fn_guestmodel.dart';
 import 'package:project_event/database/model/guest_model/guest_model.dart';
 import 'package:project_event/screen/body/widget/box/textfield_blue.dart';
@@ -140,7 +141,7 @@ class _AddGuestState extends State<AddGuest> {
         _acontroller.clear();
       });
 
-      Navigator.of(context).pop();
+      Get.back();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

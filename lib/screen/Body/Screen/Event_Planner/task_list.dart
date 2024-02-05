@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_taskmodel.dart';
@@ -32,29 +33,24 @@ class TaskList extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => ViewEvent(eventModel: eventModel)),
-          (route) => false,
-        );
+        Get.offAll(
+            //     allowSnapshotting: false,
+            fullscreenDialog: true,
+            ViewEvent(eventModel: eventModel));
       },
       child: Scaffold(
         appBar: CustomAppBar(
             leading: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => ViewEvent(eventModel: eventModel),
-                ),
-                (route) => false,
-              );
+              Get.offAll(
+                  //     allowSnapshotting: false,
+                  fullscreenDialog: true,
+                  ViewEvent(eventModel: eventModel));
             },
             actions: [
               AppAction(
                   icon: Icons.search,
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (ctr) => TaskSearch(eventModel: eventModel),
-                    ));
+                    Get.to(TaskSearch(eventModel: eventModel));
                   }),
               SizedBox(
                 width: 2.w,
@@ -87,9 +83,14 @@ class TaskList extends StatelessWidget {
                         children: [
                           SlidableAction(
                             onPressed: (BuildContext context) {
-                              int fine = data.status = 0;
-                              editTask(data.id, data.taskname, data.category,
-                                  data.note, fine, data.date, data.eventid);
+                              editTask(
+                                  data.id,
+                                  data.taskname,
+                                  data.category,
+                                  data.note,
+                                  data.status = 0,
+                                  data.date,
+                                  data.eventid);
                             },
                             backgroundColor: Colors.redAccent,
                             foregroundColor: Colors.white,
@@ -161,11 +162,10 @@ class TaskList extends StatelessWidget {
                               ],
                             ),
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => EditTask(
-                                        taskdata: data,
-                                        eventModel: eventModel,
-                                      )));
+                              Get.to(EditTask(
+                                taskdata: data,
+                                eventModel: eventModel,
+                              ));
                             },
                           ),
                         ),

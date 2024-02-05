@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/database/functions/fn_profilemodel.dart';
 import 'package:project_event/main.dart';
@@ -95,11 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const ForgetPassword(),
-                                ),
-                              );
+                              Get.to(const ForgetPassword());
                             },
                             child: const Text(
                               'Forget your password ?',
@@ -132,12 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: ElevatedButton(
                                 style: secbutton(),
                                 onPressed: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SignupScreen(),
-                                    ),
-                                  );
+                                  Get.to(const SignupScreen());
                                 },
                                 child: Text('Signup',
                                     style: TextStyle(
@@ -168,12 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (existingProfiles.isNotEmpty) {
         final matchingProfile = existingProfiles.first;
         if (matchingProfile.password == password) {
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => MainBottom(profileid: matchingProfile.id!),
-            ),
-            (route) => false,
-          );
+          Get.offAll(MainBottom(profileid: matchingProfile.id!));
 
           final sharedPrefer = await SharedPreferences.getInstance();
           await sharedPrefer.setInt(logedinsp, matchingProfile.id!);

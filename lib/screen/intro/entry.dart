@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:project_event/screen/intro/signup_page.dart';
 import 'package:sizer/sizer.dart';
@@ -56,10 +57,7 @@ class Entry extends StatelessWidget {
                       child: ElevatedButton(
                         style: withr,
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                                builder: (context) => const SignupScreen()),
-                          );
+                          Get.off(const SignupScreen());
                         },
                         child: Text('Signup',
                             style: TextStyle(
@@ -82,10 +80,7 @@ class Entry extends StatelessWidget {
                       child: ElevatedButton(
                         style: withr,
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                                builder: (context) => const LoginScreen()),
-                          );
+                          Get.off(const LoginScreen());
                         },
                         child: Text('Login',
                             style: TextStyle(

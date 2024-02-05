@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/main.dart';
 import 'package:project_event/screen/body/widget/scaffold/bottomnavigator.dart';
@@ -54,18 +55,12 @@ class _SplashScreenState extends State<SplashScreen> {
           goToLogin(context);
         } else {
           await Future.delayed(const Duration(seconds: 1));
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const LoginScreen()),
-          );
+          Get.off(const LoginScreen());
         }
       } else {
         await Future.delayed(const Duration(seconds: 1));
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-              builder: (context) => MainBottom(profileid: userlogged)),
-        );
+        Get.off(MainBottom(profileid: userlogged));
       }
-      // Rest of your code...
     } catch (e) {
       log('Error querying the database: $e');
     }
@@ -73,10 +68,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> goToLogin(context) async {
     await Future.delayed(const Duration(seconds: 3));
+    Get.off(const OnBoardingPage());
 
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const OnBoardingPage()),
-    );
     log('goToLogin:   OnBoardingPage');
   }
 }

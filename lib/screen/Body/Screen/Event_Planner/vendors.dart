@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_vendormodel.dart';
@@ -26,29 +27,24 @@ class Vendors extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => ViewEvent(eventModel: eventModel)),
-          (route) => false,
-        );
+        Get.offAll(
+            //     allowSnapshotting: false,
+            fullscreenDialog: true,
+            ViewEvent(eventModel: eventModel));
       },
       child: Scaffold(
         appBar: CustomAppBar(
             leading: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => ViewEvent(eventModel: eventModel),
-                ),
-                (route) => false,
-              );
+              Get.offAll(
+                  //     allowSnapshotting: false,
+                  fullscreenDialog: true,
+                  ViewEvent(eventModel: eventModel));
             },
             actions: [
               AppAction(
                   icon: Icons.search,
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (ctr) => VendorSearch(eventModel: eventModel),
-                    ));
+                    Get.to(VendorSearch(eventModel: eventModel));
                   }),
               SizedBox(
                 width: 2.w,
@@ -83,19 +79,15 @@ class Vendors extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: ListTile(
-                          onTap: () =>
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ViewVendor(
-                                        vendor: data,
-                                        eventModel: eventModel,
-                                      ))),
-                          onLongPress: () =>
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => EditVendor(
-                                        eventModel: eventModel,
-                                        vendordataway: data,
-                                        val: 0,
-                                      ))),
+                          onTap: () => Get.to(ViewVendor(
+                            vendor: data,
+                            eventModel: eventModel,
+                          )),
+                          onLongPress: () => Get.to(EditVendor(
+                            eventModel: eventModel,
+                            vendordataway: data,
+                            val: 0,
+                          )),
                           leading: Image(image: categoryItem['image']),
                           title: Text(
                             data.name,

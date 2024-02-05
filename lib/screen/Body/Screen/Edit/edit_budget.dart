@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/database/functions/fn_budgetmodel.dart';
 import 'package:project_event/database/model/budget_model/budget_model.dart';
@@ -125,11 +126,13 @@ class _EditBudgetState extends State<EditBudget> {
 
   Future<void> editGuestclick(BuildContext ctx, BudgetModel budget) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      Navigator.of(ctx).pushReplacement(MaterialPageRoute(
-          builder: (ctx) => Budget(
-                eventid: budget.eventid,
-                eventModel: widget.eventModel,
-              )));
+      Get.off(
+          //     allowSnapshotting: false,
+          fullscreenDialog: true,
+          Budget(
+            eventid: budget.eventid,
+            eventModel: widget.eventModel,
+          ));
 
       await editBudget(
           budget.id,

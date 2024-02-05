@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_paymentdetail.dart';
@@ -36,12 +37,10 @@ class ViewVendor extends StatelessWidget {
           AppAction(
               icon: Icons.edit,
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => EditVendor(
-                    eventModel: eventModel,
-                    vendordataway: vendor,
-                    val: 1,
-                  ),
+                Get.to(EditVendor(
+                  eventModel: eventModel,
+                  vendordataway: vendor,
+                  val: 1,
                 ));
               }),
         ],

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/database/functions/fn_vendormodel.dart';
 import 'package:project_event/database/model/event/event_model.dart';
@@ -183,10 +184,10 @@ class _EditVendorState extends State<EditVendor> {
 
       await refreshVendorData(widget.vendordataway.eventid);
       if (widget.val == 1) {
-        Navigator.of(mtx).pop();
-        Navigator.of(mtx).pop();
+        Get.back();
+        Get.back();
       } else if (widget.val == 0) {
-        Navigator.of(mtx).pop();
+        Get.back();
       }
     }
   }

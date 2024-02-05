@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/model/event/event_model.dart';
@@ -27,25 +28,19 @@ class ViewEvent extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            allowSnapshotting: false,
+        Get.offAll(
+            //     allowSnapshotting: false,
             fullscreenDialog: true,
-            builder: (context) => MainBottom(profileid: eventModel.id!),
-          ),
-          (route) => false,
-        );
+            MainBottom(profileid: eventModel.id!));
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: CustomAppBar(
           leading: () {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => MainBottom(profileid: eventModel.profile),
-              ),
-              (route) => false,
-            );
+            Get.offAll(
+                //     allowSnapshotting: false,
+                fullscreenDialog: true,
+                MainBottom(profileid: eventModel.id!));
           },
           textcolor: Colors.white,
           actions: [
@@ -97,15 +92,10 @@ class ViewEvent extends StatelessWidget {
                   ).then((value) {
                     switch (value) {
                       case 'view':
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              ViewEventDetails(eventModel: eventModel),
-                        ));
+                        Get.to(ViewEventDetails(eventModel: eventModel));
                         break;
                       case 'Edit':
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => EditEvent(event: eventModel),
-                        ));
+                        Get.to(EditEvent(event: eventModel));
                         break;
                       case 'Delete':
                         dodeleteevent(context, eventModel);
@@ -191,14 +181,10 @@ class ViewEvent extends StatelessWidget {
                         children: [
                           Expanded(
                             child: InkWell(
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (ctr) => TaskList(
-                                    eventModel: eventModel,
-                                    eventid: eventModel.id!,
-                                  ),
-                                ),
-                              ),
+                              onTap: () => Get.to(TaskList(
+                                eventModel: eventModel,
+                                eventid: eventModel.id!,
+                              )),
                               child: Card(
                                 margin: EdgeInsets.all(1.4.h),
                                 elevation: 4,
@@ -222,13 +208,9 @@ class ViewEvent extends StatelessWidget {
                           ),
                           Expanded(
                             child: InkWell(
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (ctr) => Guests(
-                                      eventid: eventModel.id!,
-                                      eventModel: eventModel),
-                                ),
-                              ),
+                              onTap: () => Get.to(Guests(
+                                  eventid: eventModel.id!,
+                                  eventModel: eventModel)),
                               child: Card(
                                 margin: EdgeInsets.all(1.4.h),
                                 elevation: 4,
@@ -257,14 +239,10 @@ class ViewEvent extends StatelessWidget {
                         children: [
                           Expanded(
                             child: InkWell(
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (ctr) => Budget(
-                                    eventModel: eventModel,
-                                    eventid: eventModel.id!,
-                                  ),
-                                ),
-                              ),
+                              onTap: () => Get.to(Budget(
+                                eventModel: eventModel,
+                                eventid: eventModel.id!,
+                              )),
                               child: Card(
                                 margin: EdgeInsets.all(1.4.h),
                                 elevation: 4,
@@ -288,13 +266,9 @@ class ViewEvent extends StatelessWidget {
                           ),
                           Expanded(
                             child: InkWell(
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (ctr) => Vendors(
-                                      eventid: eventModel.id!,
-                                      eventModel: eventModel),
-                                ),
-                              ),
+                              onTap: () => Get.to(Vendors(
+                                  eventid: eventModel.id!,
+                                  eventModel: eventModel)),
                               child: Card(
                                 margin: EdgeInsets.all(1.4.h),
                                 elevation: 4,
@@ -323,14 +297,10 @@ class ViewEvent extends StatelessWidget {
                         children: [
                           Expanded(
                             child: InkWell(
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (ctr) => Report(
-                                    eventModel: eventModel,
-                                    eventid: eventModel.id!,
-                                  ),
-                                ),
-                              ),
+                              onTap: () => Get.to(Report(
+                                eventModel: eventModel,
+                                eventid: eventModel.id!,
+                              )),
                               child: Card(
                                 margin: EdgeInsets.all(1.4.h),
                                 elevation: 4,
@@ -354,13 +324,9 @@ class ViewEvent extends StatelessWidget {
                           ),
                           Expanded(
                             child: InkWell(
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (ctr) => Settlement(
-                                      eventID: eventModel.id!,
-                                      eventModel: eventModel),
-                                ),
-                              ),
+                              onTap: () => Get.to(Settlement(
+                                  eventID: eventModel.id!,
+                                  eventModel: eventModel)),
                               child: Card(
                                 margin: EdgeInsets.all(1.4.h),
                                 elevation: 4,

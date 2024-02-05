@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/database/functions/fn_budgetmodel.dart';
 import 'package:project_event/database/functions/fn_paymentdetail.dart';
@@ -281,7 +282,8 @@ class _AddPaymentsState extends State<AddPayments> {
       // if (paymentTypeNotifier.value == PaymentType.budget) {
       // } else if (paymentTypeNotifier.value == PaymentType.vendor) {}
       setState(() {
-        Navigator.pop(context);
+        Get.back();
+
         _pnameController.clear();
         _budgetController.clear();
         _noteController.clear();

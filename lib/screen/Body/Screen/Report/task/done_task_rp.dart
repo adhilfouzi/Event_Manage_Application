@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_taskmodel.dart';
@@ -119,11 +120,10 @@ class DoneRpTaskList extends StatelessWidget {
                             ],
                           ),
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => EditTask(
-                                      eventModel: eventModel,
-                                      taskdata: data,
-                                    )));
+                            Get.to(EditTask(
+                              eventModel: eventModel,
+                              taskdata: data,
+                            ));
                           },
                         ),
                       ),

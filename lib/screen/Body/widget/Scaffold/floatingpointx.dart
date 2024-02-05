@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class FloatingPointx extends StatelessWidget {
@@ -17,8 +18,7 @@ class FloatingPointx extends StatelessWidget {
           color: Colors.white,
         ),
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => goto));
+          Get.to(goto);
         },
       ),
     );

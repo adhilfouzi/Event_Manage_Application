@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/screen/body/screen/main/home_screen.dart';
@@ -55,13 +56,10 @@ class _ResetState extends State<Reset> {
                       onPressed: () {
                         if (checkboxValue == true) {
                           clearDb();
-                          Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  MainBottom(profileid: widget.profileid),
-                            ),
-                            (route) => false,
-                          );
+                          Get.offAll(
+                              //     allowSnapshotting: false,
+                              fullscreenDialog: true,
+                              MainBottom(profileid: widget.profileid));
                         } else {
                           return;
                         }

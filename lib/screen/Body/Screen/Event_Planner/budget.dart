@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_budgetmodel.dart';
@@ -26,29 +27,24 @@ class Budget extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => ViewEvent(eventModel: eventModel)),
-          (route) => false,
-        );
+        Get.offAll(
+            //     allowSnapshotting: false,
+            fullscreenDialog: true,
+            ViewEvent(eventModel: eventModel));
       },
       child: Scaffold(
         appBar: CustomAppBar(
             leading: () async {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => ViewEvent(eventModel: eventModel),
-                ),
-                (route) => false,
-              );
+              Get.offAll(
+                  //     allowSnapshotting: false,
+                  fullscreenDialog: true,
+                  ViewEvent(eventModel: eventModel));
             },
             actions: [
               AppAction(
                   icon: Icons.search,
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (ctr) => BudgetSearch(eventModel: eventModel),
-                    ));
+                    Get.to(BudgetSearch(eventModel: eventModel));
                   }),
               SizedBox(
                 width: 2.w,
@@ -84,18 +80,16 @@ class Budget extends StatelessWidget {
                         ),
                         child: ListTile(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => BudgetView(
-                                      budget: data,
-                                      eventModel: eventModel,
-                                    )));
+                            Get.to(BudgetView(
+                              budget: data,
+                              eventModel: eventModel,
+                            ));
                           },
                           onLongPress: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => EditBudget(
-                                      budgetdata: data,
-                                      eventModel: eventModel,
-                                    )));
+                            Get.to(EditBudget(
+                              budgetdata: data,
+                              eventModel: eventModel,
+                            ));
                           },
                           leading: Image(image: categoryItem['image']),
                           title: Text(

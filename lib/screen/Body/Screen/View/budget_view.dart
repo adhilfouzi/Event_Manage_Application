@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/database/functions/fn_paymentdetail.dart';
 import 'package:project_event/database/model/budget_model/budget_model.dart';
 import 'package:project_event/database/model/event/event_model.dart';
@@ -34,10 +35,7 @@ class BudgetView extends StatelessWidget {
           AppAction(
               icon: Icons.edit,
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      EditBudget(budgetdata: budget, eventModel: eventModel),
-                ));
+                Get.to(EditBudget(budgetdata: budget, eventModel: eventModel));
               }),
         ],
         titleText: ' ',

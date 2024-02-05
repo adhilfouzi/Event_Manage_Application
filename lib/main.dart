@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:project_event/database/functions/fn_budgetmodel.dart';
 import 'package:project_event/database/functions/fn_evenmodel.dart';
 import 'package:project_event/database/functions/fn_guestmodel.dart';
@@ -43,14 +44,13 @@ class MyApp extends StatelessWidget {
 
     return SafeArea(
       child: Sizer(
-        builder: (context, orientation, deviceType) => MaterialApp(
+        builder: (context, orientation, deviceType) => GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'event',
             theme: ThemeData(
               appBarTheme: const AppBarTheme(),
               primaryColor: Colors.grey[300],
-              scaffoldBackgroundColor:
-                  Colors.white, //const Color.fromRGBO(255, 200, 200, 1),
+              scaffoldBackgroundColor: Colors.white,
               textTheme: const TextTheme(
                 bodyMedium: TextStyle(
                   fontFamily: 'ReadexPro',

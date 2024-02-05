@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_budgetmodel.dart';
 import 'package:project_event/database/functions/fn_paymentdetail.dart';
@@ -113,11 +114,9 @@ class _BudgetSearchState extends State<BudgetSearch> {
                                         widget.eventModel);
                                   }),
                               onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (ctr) => EditBudget(
-                                      budgetdata: finduserItem,
-                                      eventModel: widget.eventModel),
-                                ));
+                                Get.to(EditBudget(
+                                    budgetdata: finduserItem,
+                                    eventModel: widget.eventModel));
                               },
                             ),
                           );
@@ -145,7 +144,7 @@ void dodeletebudget(rtx, BudgetModel student, int step, Eventmodel eventModel) {
                 child: const Text('Yes')),
             TextButton(
                 onPressed: () {
-                  Navigator.pop(rtx);
+                  Get.back();
                 },
                 child: const Text('No'))
           ],
@@ -162,16 +161,16 @@ void delectYes(ctx, BudgetModel student, int step, Eventmodel eventModel) {
   deletePayBudget(student.eventid, student.id);
 
   if (step == 2) {
-    Navigator.of(ctx).pushAndRemoveUntil(
-      MaterialPageRoute(
-          builder: (ctx) => Budget(
-                eventid: student.eventid,
-                eventModel: eventModel,
-              )),
-      (route) => false,
-    );
+    Get.offAll(
+        //     allowSnapshotting: false,
+        fullscreenDialog: true,
+        Budget(
+          eventid: student.eventid,
+          eventModel: eventModel,
+        ));
   } else if (step == 3) {
-    Navigator.pop(ctx);
+    Get.back();
+
     refreshBudgetData(student.eventid);
   }
 }

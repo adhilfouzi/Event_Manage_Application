@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_incomemodel.dart';
 import 'package:project_event/database/model/payment/pay_model.dart';
@@ -104,14 +105,10 @@ class _IncomeSearchState extends State<IncomeSearch> {
                                 ),
                               ),
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (ctr) => EditIncome(
-                                      paydata: finduserItem,
-                                      // val: 1,
-                                    ),
-                                  ),
-                                );
+                                Get.to(EditIncome(
+                                  paydata: finduserItem,
+                                  // val: 1,
+                                ));
                               },
                             ),
                           );

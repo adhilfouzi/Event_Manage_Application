@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_paymentdetail.dart';
 import 'package:project_event/database/functions/fn_paymodel.dart';
@@ -45,14 +46,11 @@ class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => ViewEvent(eventModel: widget.eventModel),
-              ),
-              (route) => false,
-            ),
-          ),
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () => Get.offAll(
+                  //     allowSnapshotting: false,
+                  fullscreenDialog: true,
+                  ViewEvent(eventModel: widget.eventModel))),
           toolbarHeight: 20.h,
           backgroundColor: Colors.transparent,
           actions: [
@@ -62,17 +60,11 @@ class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
                 setState(() {
                   var indexcount = tabController.index;
                   if (indexcount == 0) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const BudgetSettlementSearch(),
-                    ));
+                    Get.to(const BudgetSettlementSearch());
                   } else if (indexcount == 1) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const VendorSettlementSearch(),
-                    ));
+                    Get.to(const VendorSettlementSearch());
                   } else if (indexcount == 2) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const IncomeSearch(),
-                    ));
+                    Get.to(const IncomeSearch());
                   }
                 });
               },
@@ -235,16 +227,12 @@ class _SettlementState extends State<Settlement> with TickerProviderStateMixin {
           onPressed: () {
             var indexcount = tabController.index;
             if (indexcount == 0) {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => AddPayments(eventID: widget.eventID)));
+              Get.to(AddPayments(eventID: widget.eventID));
             } else if (indexcount == 1) {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => AddPayments(eventID: widget.eventID)));
+              Get.to(AddPayments(eventID: widget.eventID));
             } else if (indexcount == 2) {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => AddIncome(
-                  eventID: widget.eventID,
-                ),
+              Get.to(AddIncome(
+                eventID: widget.eventID,
               ));
             }
           },

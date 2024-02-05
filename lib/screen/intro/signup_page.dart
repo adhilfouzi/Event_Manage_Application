@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/database/functions/fn_profilemodel.dart';
 import 'package:project_event/database/model/profile/profile_model.dart';
@@ -198,11 +199,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginScreen(),
-                                ),
-                              );
+                              Get.off(const LoginScreen());
                             },
                             child: Text(
                               'Login',
@@ -259,11 +256,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
         await addProfile(profile);
         await refreshRefreshdata();
-        Navigator.of(mtx).push(
-          MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
-          ),
-        );
+        Get.off(const LoginScreen());
       } catch (e) {
         log('Error inserting data: $e');
       }

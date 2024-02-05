@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_evenmodel.dart';
@@ -49,14 +50,10 @@ class _CalenderState extends State<Calender> {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            allowSnapshotting: false,
+        Get.offAll(
+            //allowSnapshotting: false,
             fullscreenDialog: true,
-            builder: (context) => MainBottom(profileid: widget.profileid),
-          ),
-          (route) => false,
-        );
+            MainBottom(profileid: widget.profileid));
       },
       child: Scaffold(
         appBar: const CustomAppBar(
@@ -126,16 +123,10 @@ class _CalenderState extends State<Calender> {
                         ),
                         child: ListTile(
                           onLongPress: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  ViewEventDetails(eventModel: data),
-                            ));
+                            Get.to(ViewEventDetails(eventModel: data));
                           },
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => ViewEvent(
-                                      eventModel: data,
-                                    )));
+                            Get.to(ViewEvent(eventModel: data));
                           },
                           title: Text(
                             data.eventname,

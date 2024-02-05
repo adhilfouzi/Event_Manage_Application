@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_incomemodel.dart';
@@ -36,8 +37,7 @@ class IncomeSettlement extends StatelessWidget {
                       ),
                       child: ListTile(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => EditIncome(paydata: data)));
+                          Get.to(EditIncome(paydata: data));
                         },
                         leading: Image.asset(
                           'assets/UI/icons/person.png',

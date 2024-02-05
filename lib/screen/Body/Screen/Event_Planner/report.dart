@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_budgetmodel.dart';
@@ -34,21 +35,18 @@ class Report extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => ViewEvent(eventModel: eventModel)),
-          (route) => false,
-        );
+        Get.offAll(
+            //     allowSnapshotting: false,
+            fullscreenDialog: true,
+            ViewEvent(eventModel: eventModel));
       },
       child: Scaffold(
         appBar: CustomAppBar(
           leading: () {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => ViewEvent(eventModel: eventModel),
-              ),
-              (route) => false,
-            );
+            Get.offAll(
+                //     allowSnapshotting: false,
+                fullscreenDialog: true,
+                ViewEvent(eventModel: eventModel));
           },
           actions: const [],
           titleText: 'Report',
@@ -84,12 +82,7 @@ class Report extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        DoneRpTaskList(eventModel: eventModel),
-                                  ),
-                                );
+                                Get.to(DoneRpTaskList(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                 builder: (context, value, child) => Text(
@@ -104,12 +97,8 @@ class Report extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => PendingRpTaskList(
-                                        eventModel: eventModel),
-                                  ),
-                                );
+                                Get.to(
+                                    PendingRpTaskList(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(
@@ -154,12 +143,7 @@ class Report extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        DoneRpGuests(eventModel: eventModel),
-                                  ),
-                                );
+                                Get.to(DoneRpGuests(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(
@@ -173,12 +157,7 @@ class Report extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PendingRpGuests(eventModel: eventModel),
-                                  ),
-                                );
+                                Get.to(PendingRpGuests(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(
@@ -223,12 +202,7 @@ class Report extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        DoneRpBudget(eventModel: eventModel),
-                                  ),
-                                );
+                                Get.to(DoneRpBudget(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(
@@ -242,12 +216,7 @@ class Report extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PendingRpBudget(eventModel: eventModel),
-                                  ),
-                                );
+                                Get.to(PendingRpBudget(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(
@@ -293,12 +262,8 @@ class Report extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => DoneRpVendorList(
-                                        eventModel: eventModel),
-                                  ),
-                                );
+                                Get.to(
+                                    DoneRpVendorList(eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(
@@ -312,12 +277,8 @@ class Report extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => PendingRpVendorList(
-                                        eventModel: eventModel),
-                                  ),
-                                );
+                                Get.to(PendingRpVendorList(
+                                    eventModel: eventModel));
                               },
                               child: ValueListenableBuilder(
                                   builder: (context, value, child) => Text(

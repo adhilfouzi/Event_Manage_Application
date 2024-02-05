@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_vendormodel.dart';
@@ -47,19 +48,15 @@ class DoneRpVendorList extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: ListTile(
-                        onTap: () =>
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => ViewVendor(
-                                      vendor: data,
-                                      eventModel: eventModel,
-                                    ))),
-                        onLongPress: () =>
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => EditVendor(
-                                      eventModel: eventModel,
-                                      vendordataway: data,
-                                      val: 0,
-                                    ))),
+                        onTap: () => Get.to(ViewVendor(
+                          vendor: data,
+                          eventModel: eventModel,
+                        )),
+                        onLongPress: () => Get.to(EditVendor(
+                          eventModel: eventModel,
+                          vendordataway: data,
+                          val: 0,
+                        )),
                         leading: Image(image: categoryItem['image']),
                         title: Text(
                           data.name,

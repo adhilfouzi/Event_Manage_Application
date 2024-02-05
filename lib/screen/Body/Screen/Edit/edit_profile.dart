@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_event/database/functions/fn_profilemodel.dart';
 import 'package:project_event/database/model/profile/profile_model.dart';
@@ -178,7 +179,7 @@ class _EditProfileState extends State<EditProfile> {
           addressPassController.text,
           widget.profileid.password);
       refreshRefreshid(widget.profileid.id!);
-      Navigator.of(context).pop();
+      Get.back();
     }
   }
 
@@ -207,7 +208,7 @@ class _EditProfileState extends State<EditProfile> {
             IconButton(
               onPressed: () {
                 getimage(ImageSource.camera);
-                Navigator.of(context).pop();
+                Get.back();
               },
               icon: const Icon(
                 Icons.camera_alt_rounded,
@@ -217,7 +218,7 @@ class _EditProfileState extends State<EditProfile> {
             IconButton(
               onPressed: () {
                 getimage(ImageSource.gallery);
-                Navigator.of(context).pop();
+                Get.back();
               },
               icon: const Icon(
                 Icons.image,

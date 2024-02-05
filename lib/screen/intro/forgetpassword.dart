@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/database/functions/fn_profilemodel.dart';
 import 'package:project_event/screen/body/widget/box/textfield_blue.dart';
@@ -142,7 +143,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           existingProfiles.first.phone,
           existingProfiles.first.address,
           password);
-      Navigator.of(mtx).pop();
+      Get.back();
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/database/functions/fn_taskmodel.dart';
 import 'package:project_event/database/model/event/event_model.dart';
 import 'package:project_event/database/model/task/task_model.dart';
@@ -40,7 +41,7 @@ class _EditTaskState extends State<EditTask> {
               icon: Icons.done,
               onPressed: () {
                 edittaskclicked(context, widget.taskdata);
-                Navigator.of(context).pop();
+                Get.back();
               })
         ], titleText: 'Edit Task'),
         body: SingleChildScrollView(

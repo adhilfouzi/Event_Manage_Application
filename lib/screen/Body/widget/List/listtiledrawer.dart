@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/main.dart';
 import 'package:project_event/screen/body/screen/profile/privacy.dart';
@@ -27,7 +28,7 @@ class ListTileDrawer extends StatelessWidget {
       ),
       onTap: () {
         if (so == 1) {
-          Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => map!));
+          Get.to(map!);
         } else if (so == 2) {
           launchPrivacyPolicy();
         } else if (so == 3) {
@@ -50,15 +51,17 @@ Future<void> confirmLogout(BuildContext context) async {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop(); // Close the dialog
+              Get.back();
             },
             child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () async {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  (route) => false);
+              Get.offAll(
+                  //     allowSnapshotting: false,
+                  fullscreenDialog: true,
+                  const LoginScreen());
+
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('LogOut Successfully'),

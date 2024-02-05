@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/Core/Color/font.dart';
 import 'package:project_event/database/functions/fn_paymentdetail.dart';
 import 'package:project_event/database/functions/fn_vendormodel.dart';
@@ -109,15 +110,11 @@ class _VendorSearchState extends State<VendorSearch> {
                                         widget.eventModel);
                                   }),
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (ctr) => EditVendor(
-                                      eventModel: widget.eventModel,
-                                      vendordataway: finduserItem,
-                                      val: 1,
-                                    ),
-                                  ),
-                                );
+                                Get.to(EditVendor(
+                                  eventModel: widget.eventModel,
+                                  vendordataway: finduserItem,
+                                  val: 1,
+                                ));
                               },
                             ),
                           );
@@ -147,7 +144,7 @@ void dodeletevendor(
                 child: const Text('Yes')),
             TextButton(
                 onPressed: () {
-                  Navigator.pop(rtx);
+                  Get.back();
                 },
                 child: const Text('No'))
           ],
@@ -165,16 +162,16 @@ void delectYes(ctx, VendorsModel student, int step, Eventmodel eventModel) {
     deletePayVendor(student.eventid, student.id);
 
     if (step == 2) {
-      Navigator.of(ctx).pushAndRemoveUntil(
-        MaterialPageRoute(
-            builder: (ctx) => Vendors(
-                  eventModel: eventModel,
-                  eventid: student.eventid,
-                )),
-        (route) => false,
-      );
+      Get.offAll(
+          //     allowSnapshotting: false,
+          fullscreenDialog: true,
+          Vendors(
+            eventModel: eventModel,
+            eventid: student.eventid,
+          ));
     } else if (step == 1) {
-      Navigator.pop(ctx);
+      Get.back();
+
       refreshVendorData(student.eventid);
     }
   } catch (e) {

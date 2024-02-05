@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_evenmodel.dart';
 import 'package:project_event/database/model/event/event_model.dart';
@@ -30,9 +31,7 @@ class ViewEventDetails extends StatelessWidget {
           AppAction(
               icon: Icons.edit,
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => EditEvent(event: eventModel),
-                ));
+                Get.to(EditEvent(event: eventModel));
               }),
           SizedBox(width: 2.h)
         ],
@@ -160,7 +159,7 @@ void dodeleteevent(rtx, Eventmodel student) {
                 child: const Text('Yes')),
             TextButton(
                 onPressed: () {
-                  Navigator.pop(rtx);
+                  Get.back();
                 },
                 child: const Text('No'))
           ],
@@ -177,12 +176,11 @@ void delecteventYes(
   Eventmodel student,
 ) {
   deleteEventdata(student.id, student.profile);
-  Navigator.of(ctx).pushAndRemoveUntil(
-    MaterialPageRoute(
-      builder: (context) => MainBottom(profileid: student.profile),
-    ),
-    (route) => false,
-  );
+  Get.offAll(
+      //     allowSnapshotting: false,
+      fullscreenDialog: true,
+      MainBottom(profileid: student.profile));
+
   ScaffoldMessenger.of(ctx).showSnackBar(
     SnackBar(
       content: const Text("Successfully Deleted"),

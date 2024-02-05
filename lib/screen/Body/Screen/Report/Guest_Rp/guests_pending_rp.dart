@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_guestmodel.dart';
@@ -107,11 +108,10 @@ class PendingRpGuests extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => EditGuest(
-                                      eventModel: eventModel,
-                                      guestdata: data,
-                                    )));
+                            Get.to(EditGuest(
+                              eventModel: eventModel,
+                              guestdata: data,
+                            ));
                           },
                         ),
                       ),

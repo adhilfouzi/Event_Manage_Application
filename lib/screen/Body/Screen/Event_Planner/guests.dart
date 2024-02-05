@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_guestmodel.dart';
@@ -26,29 +27,24 @@ class Guests extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => ViewEvent(eventModel: eventModel)),
-          (route) => false,
-        );
+        Get.offAll(
+            //     allowSnapshotting: false,
+            fullscreenDialog: true,
+            ViewEvent(eventModel: eventModel));
       },
       child: Scaffold(
         appBar: CustomAppBar(
             leading: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => ViewEvent(eventModel: eventModel),
-                ),
-                (route) => false,
-              );
+              Get.offAll(
+                  //     allowSnapshotting: false,
+                  fullscreenDialog: true,
+                  ViewEvent(eventModel: eventModel));
             },
             actions: [
               AppAction(
                   icon: Icons.search,
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (ctr) => GuestSearch(eventModel: eventModel),
-                    ));
+                    Get.to(GuestSearch(eventModel: eventModel));
                   }),
               SizedBox(
                 width: 2.w,
@@ -131,11 +127,10 @@ class Guests extends StatelessWidget {
                           ),
                           child: ListTile(
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => EditGuest(
-                                        guestdata: data,
-                                        eventModel: eventModel,
-                                      )));
+                              Get.to(EditGuest(
+                                guestdata: data,
+                                eventModel: eventModel,
+                              ));
                             },
                             leading: Image.asset('assets/UI/icons/person.png'),
                             title: Text(

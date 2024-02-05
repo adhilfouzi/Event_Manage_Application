@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/database/functions/fn_incomemodel.dart';
 import 'package:project_event/database/model/payment/pay_model.dart';
@@ -123,7 +124,8 @@ class _AddIncomeState extends State<AddIncome> {
       );
       await addincome(datas);
       setState(() {
-        Navigator.pop(context);
+        Get.back();
+
         _pnameController.clear();
         _budgetController.clear();
         _noteController.clear();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/database/functions/fn_budgetmodel.dart';
 import 'package:project_event/database/model/budget_model/budget_model.dart';
@@ -118,7 +119,8 @@ class _AddBudgetState extends State<AddBudget> {
           status: 0);
       await addBudget(budgetdata);
       refreshBudgetData(widget.eventid);
-      Navigator.pop(mtx);
+      Get.back();
+      ;
     }
   }
 }

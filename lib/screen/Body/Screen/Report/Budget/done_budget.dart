@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_budgetmodel.dart';
@@ -49,18 +50,16 @@ class DoneRpBudget extends StatelessWidget {
                       ),
                       child: ListTile(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => BudgetView(
-                                    budget: data,
-                                    eventModel: eventModel,
-                                  )));
+                          Get.to(BudgetView(
+                            budget: data,
+                            eventModel: eventModel,
+                          ));
                         },
                         onLongPress: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => EditBudget(
-                                    budgetdata: data,
-                                    eventModel: eventModel,
-                                  )));
+                          Get.to(EditBudget(
+                            budgetdata: data,
+                            eventModel: eventModel,
+                          ));
                         },
                         leading: Image(image: categoryItem['image']),
                         title: Text(

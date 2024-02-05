@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/database/functions/fn_profilemodel.dart';
 import 'package:project_event/core/color/color.dart';
 import 'package:project_event/screen/body/screen/profile/appinfo.dart';
@@ -25,14 +26,10 @@ class ProfileAccount extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            allowSnapshotting: false,
+        Get.offAll(
+            //  allowSnapshotting: false,
             fullscreenDialog: true,
-            builder: (context) => MainBottom(profileid: profileid),
-          ),
-          (route) => false,
-        );
+            MainBottom(profileid: profileid));
       },
       child: Scaffold(
         appBar: const CustomAppBar(actions: [], titleText: 'Profile'),
@@ -105,12 +102,8 @@ class ProfileAccount extends StatelessWidget {
                                     MaterialStateProperty.all(buttoncolor[300]),
                               ),
                               onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => EditProfile(
-                                        profileid: profileData.value.first),
-                                  ),
-                                );
+                                Get.to(EditProfile(
+                                    profileid: profileData.value.first));
                               },
                               child: Text(
                                 'Update',

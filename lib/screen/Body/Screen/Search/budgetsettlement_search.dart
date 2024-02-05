@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_paymodel.dart';
 import 'package:project_event/database/model/payment/pay_model.dart';
@@ -104,12 +105,10 @@ class _BudgetSettlementSearchState extends State<BudgetSettlementSearch> {
                                 ),
                               ),
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (ctr) => EditPayments(
-                                      paydata: finduserItem,
-                                      // val: 1,
-                                    ),
+                                Get.to(
+                                  EditPayments(
+                                    paydata: finduserItem,
+                                    // val: 1,
                                   ),
                                 );
                               },

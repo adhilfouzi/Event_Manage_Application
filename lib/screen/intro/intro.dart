@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intro_screen_onboarding_flutter/introduction.dart';
 import 'package:intro_screen_onboarding_flutter/introscreenonboarding.dart';
 import 'package:project_event/main.dart';
@@ -56,9 +57,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       backgroudColor: const Color(0xFFf9f9f9),
       foregroundColor: const Color(0xFFFFAA00),
       introductionList: list,
-      onTapSkipButton: () => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const Entry()),
-      ),
+      onTapSkipButton: () => Get.off(const Entry()),
       skipTextStyle: TextStyle(
         color: Colors.blueGrey,
         fontSize: 15.sp,

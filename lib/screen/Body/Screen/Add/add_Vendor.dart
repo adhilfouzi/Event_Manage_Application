@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/database/functions/fn_vendormodel.dart';
 import 'package:project_event/database/model/vendors/vendors_model.dart';
@@ -151,7 +152,7 @@ class _AddVendorState extends State<AddVendor> {
               _budgetController.text.replaceAll(RegExp(r'[^0-9]'), '')),
           status: 0,
         );
-        Navigator.pop(ctx);
+        Get.back();
 
         await addVendor(vendordata).then((value) => log("success "));
         await refreshVendorData(widget.eventid);
