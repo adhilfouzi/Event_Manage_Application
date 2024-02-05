@@ -1,16 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/color.dart';
 import 'package:project_event/Database/functions/fn_profilemodel.dart';
+import 'package:project_event/core/color/color.dart';
 import 'package:project_event/screen/Body/Screen/profile/appinfo.dart';
 import 'package:project_event/screen/Body/Screen/profile/favorite.dart';
 import 'package:project_event/screen/Body/Screen/profile/feedback.dart';
 import 'package:project_event/screen/Body/Screen/profile/reset.dart';
-import 'package:project_event/screen/Body/Screen/Edit/edit_profile.dart';
 import 'package:project_event/screen/Body/widget/List/listtiledrawer.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
+import 'package:project_event/screen/body/Screen/edit/edit_profile.dart';
+import 'package:project_event/screen/body/widget/scaffold/app_bar.dart';
+import 'package:project_event/screen/body/widget/scaffold/bottomnavigator.dart';
+
 import 'package:sizer/sizer.dart';
 
 class ProfileAccount extends StatelessWidget {

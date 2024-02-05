@@ -1,10 +1,11 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
 import 'package:flutter/material.dart';
-import 'package:project_event/Database/functions/fn_paymentdetail.dart';
-import 'package:project_event/Database/functions/fn_paymodel.dart';
-import 'package:project_event/Database/model/Payment/pay_model.dart';
-import 'package:project_event/Database/model/Vendors/vendors_model.dart';
+import 'package:project_event/database/functions/fn_paymentdetail.dart';
+import 'package:project_event/database/functions/fn_paymodel.dart';
+import 'package:project_event/database/model/payment/pay_model.dart';
+import 'package:project_event/database/model/vendors/vendors_model.dart';
+
 import 'package:sqflite/sqflite.dart';
 
 ValueNotifier<List<VendorsModel>> vendortlist =

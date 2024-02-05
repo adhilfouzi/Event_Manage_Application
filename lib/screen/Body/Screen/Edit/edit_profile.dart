@@ -2,10 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:project_event/Database/functions/fn_profilemodel.dart';
-import 'package:project_event/Database/model/Profile/profile_model.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
-import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
+import 'package:project_event/database/functions/fn_profilemodel.dart';
+import 'package:project_event/database/model/profile/profile_model.dart';
+import 'package:project_event/screen/body/widget/box/textfield_blue.dart';
+import 'package:project_event/screen/body/widget/scaffold/app_bar.dart';
+
 import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:sizer/sizer.dart';
 

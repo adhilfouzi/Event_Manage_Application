@@ -1,20 +1,21 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/color.dart';
-import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/Database/model/Event/event_model.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/budget.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/guests.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/report.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/Settlement/settlement.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/task_list.dart';
-import 'package:project_event/screen/Body/Screen/Event_Planner/vendors.dart';
-import 'package:project_event/screen/Body/Screen/main/Event/edit_event.dart';
-import 'package:project_event/screen/Body/Screen/main/Event/view_event_details.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/bottomborderappbar.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
+import 'package:project_event/core/color/color.dart';
+import 'package:project_event/core/color/font.dart';
+import 'package:project_event/database/model/event/event_model.dart';
+import 'package:project_event/screen/body/screen/event_planner/budget.dart';
+import 'package:project_event/screen/body/screen/event_planner/guests.dart';
+import 'package:project_event/screen/body/screen/event_planner/report.dart';
+import 'package:project_event/screen/body/screen/event_planner/settlement/settlement.dart';
+import 'package:project_event/screen/body/screen/event_planner/task_list.dart';
+import 'package:project_event/screen/body/screen/event_planner/vendors.dart';
+import 'package:project_event/screen/body/screen/main/event/edit_event.dart';
+import 'package:project_event/screen/body/screen/main/event/view_event_details.dart';
+import 'package:project_event/screen/body/widget/scaffold/app_bar.dart';
+import 'package:project_event/screen/body/widget/scaffold/bottomborderappbar.dart';
+import 'package:project_event/screen/body/widget/scaffold/bottomnavigator.dart';
+
 import 'package:sizer/sizer.dart';
 
 class ViewEvent extends StatelessWidget {

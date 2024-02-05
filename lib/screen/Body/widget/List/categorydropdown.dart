@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/screen/Body/widget/List/list.dart';
+import 'package:project_event/core/color/font.dart';
+import 'package:project_event/screen/body/widget/list/list.dart';
 import 'package:sizer/sizer.dart';
 
 class CategoryDown extends StatefulWidget {

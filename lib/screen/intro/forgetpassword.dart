@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/color.dart';
-import 'package:project_event/Database/functions/fn_profilemodel.dart';
-import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
+import 'package:project_event/core/color/color.dart';
+import 'package:project_event/database/functions/fn_profilemodel.dart';
+import 'package:project_event/screen/body/widget/box/textfield_blue.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:sizer/sizer.dart';
 

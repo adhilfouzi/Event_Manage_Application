@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/color.dart';
-import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
+import 'package:project_event/core/color/color.dart';
+import 'package:project_event/core/color/font.dart';
+import 'package:project_event/screen/body/screen/main/home_screen.dart';
+import 'package:project_event/screen/body/widget/scaffold/bottomnavigator.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:sizer/sizer.dart';
 

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:project_event/Database/functions/fn_paymentdetail.dart';
-import 'package:project_event/Database/model/Task/task_model.dart';
+import 'package:project_event/database/functions/fn_paymentdetail.dart';
+import 'package:project_event/database/model/task/task_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 ValueNotifier<List<TaskModel>> taskList = ValueNotifier<List<TaskModel>>([]);

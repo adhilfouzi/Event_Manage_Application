@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:project_event/Database/functions/fn_profilemodel.dart';
-import 'package:project_event/screen/Body/Screen/profile/calender.dart';
-import 'package:project_event/screen/Body/Screen/main/Event/accountscreen.dart';
-import 'package:project_event/screen/Body/Screen/main/Event/add_event.dart';
-import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
+import 'package:project_event/database/functions/fn_profilemodel.dart';
+import 'package:project_event/screen/body/screen/profile/calender.dart';
+import 'package:project_event/screen/body/screen/main/event/accountscreen.dart';
+import 'package:project_event/screen/body/screen/main/event/add_event.dart';
+import 'package:project_event/screen/body/screen/main/home_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class MainBottom extends StatefulWidget {

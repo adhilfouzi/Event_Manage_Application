@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/color.dart';
+import 'package:project_event/core/color/color.dart';
 import 'package:project_event/main.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
+import 'package:project_event/screen/body/widget/scaffold/bottomnavigator.dart';
 import 'package:project_event/screen/intro/intro.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';

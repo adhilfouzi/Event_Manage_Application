@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/font.dart';
+import 'package:project_event/core/color/font.dart';
 import 'package:sizer/sizer.dart';
 
 class ViewBox extends StatelessWidget {

@@ -1,7 +1,7 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
 import 'package:flutter/material.dart';
-import 'package:project_event/Database/model/Event/event_model.dart';
+import 'package:project_event/database/model/event/event_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 ValueNotifier<List<Eventmodel>> favoriteEventlist = ValueNotifier([]);

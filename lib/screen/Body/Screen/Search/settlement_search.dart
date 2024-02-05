@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/Database/functions/fn_incomemodel.dart';
-import 'package:project_event/Database/model/Payment/pay_model.dart';
-import 'package:project_event/screen/Body/Screen/Edit/edit_income.dart';
+import 'package:project_event/core/color/font.dart';
+import 'package:project_event/database/functions/fn_incomemodel.dart';
+import 'package:project_event/database/model/payment/pay_model.dart';
+import 'package:project_event/screen/body/screen/edit/edit_income.dart';
 import 'package:sizer/sizer.dart';
 
 class IncomeSearch extends StatefulWidget {

@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/Database/functions/fn_evenmodel.dart';
-import 'package:project_event/screen/Body/Screen/main/Event/viewevent.dart';
-import 'package:project_event/screen/Body/Screen/main/home_screen.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
+import 'package:project_event/core/color/font.dart';
+import 'package:project_event/database/functions/fn_evenmodel.dart';
+import 'package:project_event/screen/body/screen/main/event/viewevent.dart';
+import 'package:project_event/screen/body/screen/main/home_screen.dart';
+import 'package:project_event/screen/body/widget/scaffold/app_bar.dart';
 import 'package:sizer/sizer.dart';
 
 class Favorite extends StatelessWidget {

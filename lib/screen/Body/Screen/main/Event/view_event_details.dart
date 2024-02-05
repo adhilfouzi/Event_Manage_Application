@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/Database/functions/fn_evenmodel.dart';
-import 'package:project_event/Database/model/Event/event_model.dart';
-import 'package:project_event/screen/Body/Screen/main/Event/edit_event.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/app_bar.dart';
-import 'package:project_event/screen/Body/widget/Scaffold/bottomnavigator.dart';
-import 'package:project_event/screen/Body/widget/box/viewbox.dart';
+import 'package:project_event/core/color/font.dart';
+import 'package:project_event/database/functions/fn_evenmodel.dart';
+import 'package:project_event/database/model/event/event_model.dart';
+import 'package:project_event/screen/body/screen/main/event/edit_event.dart';
+import 'package:project_event/screen/body/widget/box/viewbox.dart';
+import 'package:project_event/screen/body/widget/scaffold/app_bar.dart';
+import 'package:project_event/screen/body/widget/scaffold/bottomnavigator.dart';
+
 import 'package:sizer/sizer.dart';
 
 class ViewEventDetails extends StatelessWidget {

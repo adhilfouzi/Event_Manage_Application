@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/font.dart';
+import 'package:project_event/core/color/font.dart';
 import 'package:project_event/main.dart';
-import 'package:project_event/screen/Body/Screen/profile/privacy.dart';
+import 'package:project_event/screen/body/screen/profile/privacy.dart';
 import 'package:project_event/screen/intro/loginpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

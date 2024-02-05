@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/color.dart';
+import 'package:project_event/core/color/color.dart';
 
 TextStyle readexPro({
   Color color = Colors.black,

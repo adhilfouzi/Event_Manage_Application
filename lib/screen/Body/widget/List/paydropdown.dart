@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/Database/functions/fn_paymodel.dart';
+import 'package:project_event/core/color/font.dart';
+import 'package:project_event/database/functions/fn_paymodel.dart';
 import 'package:sizer/sizer.dart';
 
 class PayDown extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_event/Core/Color/color.dart';
-import 'package:project_event/Core/Color/font.dart';
-import 'package:project_event/screen/Body/widget/box/textfield_blue.dart';
+import 'package:project_event/core/color/color.dart';
+import 'package:project_event/core/color/font.dart';
+import 'package:project_event/screen/body/widget/box/textfield_blue.dart';
 import 'package:sizer/sizer.dart';
 
 class ContactState extends StatelessWidget {
