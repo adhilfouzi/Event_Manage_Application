@@ -1,14 +1,15 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:project_event/Database/functions/fn_profilemodel.dart';
+import 'package:project_event/database/functions/fn_profilemodel.dart';
 import 'package:project_event/core/color/color.dart';
-import 'package:project_event/screen/Body/Screen/profile/appinfo.dart';
-import 'package:project_event/screen/Body/Screen/profile/favorite.dart';
-import 'package:project_event/screen/Body/Screen/profile/feedback.dart';
-import 'package:project_event/screen/Body/Screen/profile/reset.dart';
-import 'package:project_event/screen/Body/widget/List/listtiledrawer.dart';
-import 'package:project_event/screen/body/Screen/edit/edit_profile.dart';
+import 'package:project_event/screen/body/screen/profile/appinfo.dart';
+import 'package:project_event/screen/body/screen/profile/favorite.dart';
+import 'package:project_event/screen/body/screen/profile/feedback.dart';
+import 'package:project_event/screen/body/screen/profile/reset.dart';
+import 'package:project_event/screen/body/widget/list/listtiledrawer.dart';
+import 'package:project_event/screen/body/screen/edit/edit_profile.dart';
 import 'package:project_event/screen/body/widget/scaffold/app_bar.dart';
 import 'package:project_event/screen/body/widget/scaffold/bottomnavigator.dart';
 
@@ -21,15 +22,17 @@ class ProfileAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
+            allowSnapshotting: false,
+            fullscreenDialog: true,
             builder: (context) => MainBottom(profileid: profileid),
           ),
           (route) => false,
         );
-        return false;
       },
       child: Scaffold(
         appBar: const CustomAppBar(actions: [], titleText: 'Profile'),
@@ -43,49 +46,51 @@ class ProfileAccount extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Container(
-                  //  height: 20.h,
                   padding: EdgeInsets.fromLTRB(1.h, 1.h, 1.h, 1.h),
                   child: Column(
                     children: [
                       ValueListenableBuilder(
                         valueListenable: profileData,
-                        builder: (context, value, child) => Container(
-                          padding: EdgeInsets.fromLTRB(2.h, 2.h, 2.h, 1.h),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                backgroundImage: value.first.imagex != null
-                                    ? FileImage(File(value.first.imagex!))
-                                    : const AssetImage(
-                                            'assets/UI/icons/profile.png')
-                                        as ImageProvider,
-                                radius: 50.0,
-                                backgroundColor: Colors.white,
-                              ),
-                              SizedBox(width: 1.h),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    value.first.name,
-                                    style: TextStyle(
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.bold,
+                        builder: (context, value, child) {
+                          log(value.first.name);
+                          return Container(
+                            padding: EdgeInsets.fromLTRB(2.h, 2.h, 2.h, 1.h),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: value.first.imagex != null
+                                      ? FileImage(File(value.first.imagex!))
+                                      : const AssetImage(
+                                              'assets/UI/icons/profile.png')
+                                          as ImageProvider,
+                                  radius: 50.0,
+                                  backgroundColor: Colors.white,
+                                ),
+                                SizedBox(width: 1.h),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      value.first.name,
+                                      style: TextStyle(
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 4.0),
-                                  Text(
-                                    value.first.email,
-                                    style: TextStyle(fontSize: 8.sp),
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                            ],
-                          ),
-                        ),
+                                    const SizedBox(height: 4.0),
+                                    Text(
+                                      value.first.email,
+                                      style: TextStyle(fontSize: 8.sp),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                              ],
+                            ),
+                          );
+                        },
                       ),
                       Row(
                         children: [

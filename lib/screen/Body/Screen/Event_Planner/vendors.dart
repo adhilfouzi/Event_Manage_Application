@@ -3,7 +3,7 @@ import 'package:project_event/core/color/color.dart';
 import 'package:project_event/core/color/font.dart';
 import 'package:project_event/database/functions/fn_vendormodel.dart';
 import 'package:project_event/database/model/event/event_model.dart';
-import 'package:project_event/screen/body/screen/add/add_Vendor.dart';
+import 'package:project_event/screen/body/screen/add/add_vendor.dart';
 import 'package:project_event/screen/body/screen/edit/edit_vendor.dart';
 import 'package:project_event/screen/body/screen/main/event/viewevent.dart';
 import 'package:project_event/screen/body/screen/search/vendor_search.dart';
@@ -23,14 +23,14 @@ class Vendors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     refreshVendorData(eventid);
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
               builder: (context) => ViewEvent(eventModel: eventModel)),
           (route) => false,
         );
-        return false;
       },
       child: Scaffold(
         appBar: CustomAppBar(

@@ -31,14 +31,14 @@ class Report extends StatelessWidget {
     refreshVendorData(eventid);
     refreshEventtaskdata(eventid);
     refreshguestdata(eventid);
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
               builder: (context) => ViewEvent(eventModel: eventModel)),
           (route) => false,
         );
-        return false;
       },
       child: Scaffold(
         appBar: CustomAppBar(

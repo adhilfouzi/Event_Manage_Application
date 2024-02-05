@@ -40,15 +40,17 @@ class _AddEventState extends State<AddEvent> {
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: WillPopScope(
-        onWillPop: () async {
+      child: PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) {
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
+              allowSnapshotting: false,
+              fullscreenDialog: true,
               builder: (context) => MainBottom(profileid: widget.profileid),
             ),
             (route) => false,
           );
-          return false;
         },
         child: Scaffold(
           appBar: CustomAppBar(

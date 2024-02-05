@@ -46,8 +46,9 @@ class _CalenderState extends State<Calender> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             allowSnapshotting: false,
@@ -56,7 +57,6 @@ class _CalenderState extends State<Calender> {
           ),
           (route) => false,
         );
-        return false;
       },
       child: Scaffold(
         appBar: const CustomAppBar(

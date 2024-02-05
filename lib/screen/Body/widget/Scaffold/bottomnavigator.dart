@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:project_event/database/functions/fn_profilemodel.dart';
@@ -10,6 +12,7 @@ import 'package:sizer/sizer.dart';
 class MainBottom extends StatefulWidget {
   final int? selectedIndex;
   final int profileid;
+
   const MainBottom({Key? key, required this.profileid, this.selectedIndex})
       : super(key: key);
 
@@ -41,6 +44,7 @@ class _MainButtomState extends State<MainBottom> {
   @override
   Widget build(BuildContext context) {
     refreshRefreshid(widget.profileid);
+    log(widget.profileid.toString());
     return Scaffold(
       bottomNavigationBar: Container(
         color: Colors.white,

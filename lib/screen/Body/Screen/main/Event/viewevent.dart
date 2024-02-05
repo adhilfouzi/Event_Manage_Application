@@ -24,15 +24,17 @@ class ViewEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => MainBottom(profileid: eventModel.profile),
+            allowSnapshotting: false,
+            fullscreenDialog: true,
+            builder: (context) => MainBottom(profileid: eventModel.id!),
           ),
           (route) => false,
         );
-        return false;
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
