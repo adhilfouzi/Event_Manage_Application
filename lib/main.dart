@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:project_event/database/functions/fn_budgetmodel.dart';
-import 'package:project_event/database/functions/fn_evenmodel.dart';
-import 'package:project_event/database/functions/fn_guestmodel.dart';
-import 'package:project_event/database/functions/fn_incomemodel.dart';
-import 'package:project_event/database/functions/fn_paymodel.dart';
-import 'package:project_event/database/functions/fn_profilemodel.dart';
-import 'package:project_event/database/functions/fn_taskmodel.dart';
-import 'package:project_event/database/functions/fn_vendormodel.dart';
-
-import 'package:project_event/screen/intro/splashscreen.dart';
+import 'package:project_event/model/db_functions/fn_budgetmodel.dart';
+import 'package:project_event/model/db_functions/fn_evenmodel.dart';
+import 'package:project_event/model/db_functions/fn_guestmodel.dart';
+import 'package:project_event/model/db_functions/fn_incomemodel.dart';
+import 'package:project_event/model/db_functions/fn_paymodel.dart';
+import 'package:project_event/model/db_functions/fn_profilemodel.dart';
+import 'package:project_event/model/db_functions/fn_taskmodel.dart';
+import 'package:project_event/model/db_functions/fn_vendormodel.dart';
+import 'package:project_event/view/intro_screen/splash_screen.dart';
 import 'package:sizer/sizer.dart';
 
 const logedinsp = 'UserLoggedin';
