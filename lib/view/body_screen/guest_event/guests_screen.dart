@@ -134,6 +134,7 @@ class Guests extends StatelessWidget {
                               Get.to(
                                   transition: Transition.rightToLeftWithFade,
                                   EditGuest(
+                                    step: 2,
                                     guestdata: data,
                                     eventModel: eventModel,
                                   ));
@@ -174,6 +175,7 @@ class Guests extends StatelessWidget {
         ),
         floatingActionButton: FloatingPointx(
             goto: AddGuest(
+          eventModel: eventModel,
           eventID: eventid,
         )),
       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:project_event/controller/event_controller/budget_event/budget_do_delect.dart';
+import 'package:project_event/controller/budget_event/budget_do_delect.dart';
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/db_functions/fn_budgetmodel.dart';
 import 'package:project_event/model/data_model/budget_model/budget_model.dart';
@@ -117,6 +116,7 @@ class _BudgetSearchState extends State<BudgetSearch> {
                                 Get.to(
                                     transition: Transition.rightToLeftWithFade,
                                     EditBudget(
+                                        step: 2,
                                         budgetdata: finduserItem,
                                         eventModel: widget.eventModel));
                               },

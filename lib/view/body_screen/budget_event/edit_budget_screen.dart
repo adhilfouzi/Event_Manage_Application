@@ -1,11 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:project_event/controller/event_controller/budget_event/budget_do_delect.dart';
+import 'package:project_event/controller/budget_event/budget_do_delect.dart';
+
 import 'package:project_event/model/db_functions/fn_budgetmodel.dart';
 import 'package:project_event/model/data_model/budget_model/budget_model.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
+import 'package:project_event/view/body_screen/budget_event/budget_report/rp_done_budget_screen.dart';
+import 'package:project_event/view/body_screen/budget_event/budget_report/rp_pending_buget_screen.dart';
 import 'package:project_event/view/body_screen/budget_event/budget_screen.dart';
 
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
@@ -16,10 +22,14 @@ import 'package:sizer/sizer.dart';
 
 class EditBudget extends StatefulWidget {
   final Eventmodel eventModel;
+  final int step;
 
   final BudgetModel budgetdata;
   const EditBudget(
-      {super.key, required this.budgetdata, required this.eventModel});
+      {super.key,
+      required this.budgetdata,
+      required this.eventModel,
+      required this.step});
 
   @override
   State<EditBudget> createState() => _EditBudgetState();
@@ -29,6 +39,7 @@ class _EditBudgetState extends State<EditBudget> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext ctx) {
+    log('EditBudget :${widget.step}');
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -37,12 +48,15 @@ class _EditBudgetState extends State<EditBudget> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  doDeleteBudget(widget.budgetdata, 2, widget.eventModel);
+                  log(widget.step.toString());
+                  doDeleteBudget(
+                      widget.budgetdata, widget.step, widget.eventModel);
                 }),
             AppAction(
                 icon: Icons.done,
                 onPressed: () {
-                  editGuestclick(context, widget.budgetdata);
+                  editGuestclick(context, widget.budgetdata, widget.step,
+                      widget.eventModel);
                 }),
           ],
           titleText: 'Edit Budget',
@@ -124,17 +138,11 @@ class _EditBudgetState extends State<EditBudget> {
     _noteController.text = widget.budgetdata.note!;
   }
 
-  Future<void> editGuestclick(BuildContext ctx, BudgetModel budget) async {
-    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      Get.off(
-          transition: Transition.leftToRightWithFade,
-          //     allowSnapshotting: false,
-          fullscreenDialog: true,
-          Budget(
-            eventid: budget.eventid,
-            eventModel: widget.eventModel,
-          ));
+  Future<void> editGuestclick(BuildContext ctx, BudgetModel budget, int step,
+      Eventmodel eventModel) async {
+    SnackbarModel ber = SnackbarModel();
 
+    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       await editBudget(
           budget.id,
           _nameController.text.toUpperCase().trimLeft().trimRight(),
@@ -145,6 +153,22 @@ class _EditBudgetState extends State<EditBudget> {
           budget.pending,
           budget.eventid,
           budget.status);
+      if (step == 2) {
+        Get.offAll(
+            transition: Transition.rightToLeftWithFade,
+            fullscreenDialog: true,
+            Budget(eventid: budget.eventid, eventModel: eventModel));
+      } else if (step == 3) {
+        Get.back();
+        refreshBudgetData(budget.eventid);
+      } else if (step == 4) {
+        Get.offAll(PendingRpBudget(eventModel: eventModel));
+      } else if (step == 5) {
+        Get.offAll(DoneRpBudget(eventModel: eventModel));
+      }
+      ber.successSnack(message: "Successfully edited");
+    } else {
+      ber.errorSnack();
     }
   }
 }

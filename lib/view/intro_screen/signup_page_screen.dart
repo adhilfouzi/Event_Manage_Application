@@ -6,6 +6,7 @@ import 'package:project_event/model/core/color/color.dart';
 
 import 'package:project_event/model/db_functions/fn_profilemodel.dart';
 import 'package:project_event/model/data_model/profile/profile_model.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 import 'package:project_event/view/body_screen/profile/privacy_function_screen.dart';
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/view/intro_screen/loginpage_screen.dart';
@@ -226,6 +227,8 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Future<void> addProfileclick(mtx) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (_formKey.currentState != null &&
         _formKey.currentState!.validate() &&
         checkboxValue == true) {
@@ -235,15 +238,9 @@ class _SignupScreenState extends State<SignupScreen> {
             .toList();
 
         if (existingProfiles.isNotEmpty) {
-          Get.snackbar(
-            'This email is already registered',
-            '',
-            colorText: Colors.black,
-            backgroundColor: Colors.red,
-            snackPosition: SnackPosition.BOTTOM,
-            duration: const Duration(milliseconds: 1100),
+          ber.errorSnack(
+            message: 'This email is already registered',
           );
-
           return;
         }
 
@@ -253,15 +250,7 @@ class _SignupScreenState extends State<SignupScreen> {
           phone: phoneController.text.trimLeft().trimRight(),
           password: passwordController.text,
         );
-        Get.snackbar(
-          'Great',
-          'Sign up Successfully',
-          colorText: Colors.black,
-          backgroundColor: Colors.greenAccent,
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(milliseconds: 1000),
-        );
-
+        ber.successSnack(message: 'Sign up Successfully');
         await addProfile(profile);
         await refreshRefreshdata();
         Get.off(

@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event_controller/budget_event/budget_do_delect.dart';
+import 'package:project_event/controller/budget_event/budget_do_delect.dart';
+
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
 import 'package:project_event/model/data_model/budget_model/budget_model.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
@@ -16,14 +19,19 @@ import 'package:sizer/sizer.dart';
 
 class BudgetView extends StatelessWidget {
   final Eventmodel eventModel;
-
+  final int step;
   final BudgetModel budget;
-  const BudgetView({super.key, required this.budget, required this.eventModel});
+  const BudgetView(
+      {super.key,
+      required this.budget,
+      required this.eventModel,
+      required this.step});
 
   @override
   Widget build(BuildContext context) {
     refreshPaymentTypeData(budget.id!, budget.eventid);
     refreshbalancedata(budget.id!, budget.eventid, 0, budget.esamount);
+    log('BudgetView :$step');
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -31,14 +39,17 @@ class BudgetView extends StatelessWidget {
           AppAction(
               icon: Icons.delete,
               onPressed: () {
-                doDeleteBudget(budget, 2, eventModel);
+                doDeleteBudget(budget, step, eventModel);
               }),
           AppAction(
               icon: Icons.edit,
               onPressed: () {
                 Get.to(
                     transition: Transition.rightToLeftWithFade,
-                    EditBudget(budgetdata: budget, eventModel: eventModel));
+                    EditBudget(
+                        step: step,
+                        budgetdata: budget,
+                        eventModel: eventModel));
               }),
         ],
         titleText: ' ',

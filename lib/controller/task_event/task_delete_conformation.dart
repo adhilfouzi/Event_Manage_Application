@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event_controller/task_event/task_do_delete.dart';
+import 'package:project_event/controller/task_event/task_do_delete.dart';
+
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/task/task_model.dart';
 

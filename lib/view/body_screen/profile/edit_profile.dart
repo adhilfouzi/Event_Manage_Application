@@ -7,6 +7,7 @@ import 'package:project_event/model/db_functions/fn_profilemodel.dart';
 import 'package:project_event/model/data_model/profile/profile_model.dart';
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 
 import 'package:project_event/view/intro_screen/loginpage_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -154,20 +155,15 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   Future editProfilecliked(context) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final existingProfiles = profileList.value
           .where((profile) => profile.email == emailController.text)
           .toList();
       if (emailController.text != widget.profileid.email) {
         if (existingProfiles.isNotEmpty) {
-          Get.snackbar('Warning', 'This email is already registered',
-              colorText: Colors.black,
-              backgroundColor: Colors.redAccent,
-              snackPosition: SnackPosition.BOTTOM,
-              instantInit: false,
-              duration: const Duration(milliseconds: 1100),
-              dismissDirection: DismissDirection.startToEnd);
-
+          ber.errorSnack(message: 'This email is already registered');
           return;
         }
       }

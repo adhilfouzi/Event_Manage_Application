@@ -84,13 +84,16 @@ class Vendors extends StatelessWidget {
                         child: ListTile(
                           onTap: () => Get.to(
                               transition: Transition.rightToLeftWithFade,
-                              ViewVendor(vendor: data, eventModel: eventModel)),
+                              ViewVendor(
+                                  step: 2,
+                                  vendor: data,
+                                  eventModel: eventModel)),
                           onLongPress: () => Get.to(
                               transition: Transition.rightToLeftWithFade,
                               EditVendor(
+                                step: 2,
                                 eventModel: eventModel,
                                 vendordataway: data,
-                                val: 0,
                               )),
                           leading: Image(image: categoryItem['image']),
                           title: Text(

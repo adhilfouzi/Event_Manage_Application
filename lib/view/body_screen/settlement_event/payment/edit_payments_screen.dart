@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:project_event/controller/event_controller/settlement_event/payment_controller/payment_delete_conformation.dart';
+import 'package:project_event/controller/settlement_event/payment_controller/payment_delete_conformation.dart';
+
 import 'package:project_event/model/db_functions/fn_budgetmodel.dart';
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
 import 'package:project_event/model/db_functions/fn_paymodel.dart';
@@ -15,6 +16,7 @@ import 'package:project_event/controller/widget/list/paydropdown.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/controller/widget/sub/date_widget.dart';
 import 'package:project_event/controller/widget/sub/fn_time.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -211,6 +213,7 @@ class _EditPaymentsState extends State<EditPayments> {
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
   Future<void> editPaymentclick(mtx) async {
+    SnackbarModel ber = SnackbarModel();
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final int paytype =
           paymentTypeNotifier.value == PaymentType.budget ? 0 : 1;
@@ -218,51 +221,25 @@ class _EditPaymentsState extends State<EditPayments> {
       if (paymentTypeNotifier.value == PaymentType.budget) {
         // Check if the payid is in budgetpayid
         if (!budgetpayid.value.contains(payid)) {
-          Get.snackbar('Warning', "Make Proper Item Name",
-              colorText: Colors.black,
-              backgroundColor: Colors.redAccent,
-              snackPosition: SnackPosition.BOTTOM,
-              instantInit: false,
-              duration: const Duration(milliseconds: 1100),
-              dismissDirection: DismissDirection.startToEnd);
+          ber.errorSnack(message: "Make Proper Item Name");
           return;
         }
-
         // Check if the paytypename is in budgetlist
         if (!budgetlist.value
             .any((budget) => budget.name == searchController.text)) {
-          Get.snackbar('Warning', "Make Proper Item Name",
-              colorText: Colors.black,
-              backgroundColor: Colors.redAccent,
-              snackPosition: SnackPosition.BOTTOM,
-              instantInit: false,
-              duration: const Duration(milliseconds: 1100),
-              dismissDirection: DismissDirection.startToEnd);
+          ber.errorSnack(message: "Make Proper Item Name");
           return;
         }
       } else if (paymentTypeNotifier.value == PaymentType.vendor) {
         // Check if the payid is in vendorpayid
         if (!vendorpayid.value.contains(payid)) {
-          Get.snackbar('Warning', "Make Proper Item Name",
-              colorText: Colors.black,
-              backgroundColor: Colors.redAccent,
-              snackPosition: SnackPosition.BOTTOM,
-              instantInit: false,
-              duration: const Duration(milliseconds: 1100),
-              dismissDirection: DismissDirection.startToEnd);
+          ber.errorSnack(message: "Make Proper Item Name");
           return;
         }
-
         // Check if the paytypename is in vendortlist
         if (!vendortlist.value
             .any((vendor) => vendor.name == searchController.text)) {
-          Get.snackbar('Warning', "Make Proper Item Name",
-              colorText: Colors.black,
-              backgroundColor: Colors.redAccent,
-              snackPosition: SnackPosition.BOTTOM,
-              instantInit: false,
-              duration: const Duration(milliseconds: 1100),
-              dismissDirection: DismissDirection.startToEnd);
+          ber.errorSnack(message: "Make Proper Item Name");
           return;
         }
       }

@@ -12,6 +12,7 @@ import 'package:project_event/controller/widget/list/paydropdown.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/controller/widget/sub/date_widget.dart';
 import 'package:project_event/controller/widget/sub/fn_time.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 import 'package:sizer/sizer.dart';
 
 class AddPayments extends StatefulWidget {
@@ -202,56 +203,33 @@ class _AddPaymentsState extends State<AddPayments> {
   //final TextEditingController _categoryController = TextEditingController();
 
   Future<void> addPaymentclick(mtx) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       if (paymentTypeNotifier.value == PaymentType.budget) {
         // Check if the payid is in budgetpayid
         if (!budgetpayid.value.contains(payid)) {
-          Get.snackbar('Warning', "Make Proper Item Name",
-              colorText: Colors.black,
-              backgroundColor: Colors.redAccent,
-              snackPosition: SnackPosition.BOTTOM,
-              instantInit: false,
-              duration: const Duration(milliseconds: 1100),
-              dismissDirection: DismissDirection.startToEnd);
+          ber.errorSnack(message: "Make Proper Item Name");
           return;
         }
 
         // Check if the paytypename is in budgetlist
         if (!budgetlist.value
             .any((budget) => budget.name == searchController.text)) {
-          Get.snackbar('Warning', "Make Proper Item Name",
-              colorText: Colors.black,
-              backgroundColor: Colors.redAccent,
-              snackPosition: SnackPosition.BOTTOM,
-              instantInit: false,
-              duration: const Duration(milliseconds: 1100),
-              dismissDirection: DismissDirection.startToEnd);
-
+          ber.errorSnack(message: "Make Proper Item Name");
           return;
         }
       } else if (paymentTypeNotifier.value == PaymentType.vendor) {
         // Check if the payid is in vendorpayid
         if (!vendorpayid.value.contains(payid)) {
-          Get.snackbar('Warning', "Make Proper Item Name",
-              colorText: Colors.black,
-              backgroundColor: Colors.redAccent,
-              snackPosition: SnackPosition.BOTTOM,
-              instantInit: false,
-              duration: const Duration(milliseconds: 1100),
-              dismissDirection: DismissDirection.startToEnd);
+          ber.errorSnack(message: "Make Proper Item Name");
           return;
         }
 
         // Check if the paytypename is in vendortlist
         if (!vendortlist.value
             .any((vendor) => vendor.name == searchController.text)) {
-          Get.snackbar('Warning', "Make Proper Item Name",
-              colorText: Colors.black,
-              backgroundColor: Colors.redAccent,
-              snackPosition: SnackPosition.BOTTOM,
-              instantInit: false,
-              duration: const Duration(milliseconds: 1100),
-              dismissDirection: DismissDirection.startToEnd);
+          ber.errorSnack(message: "Make Proper Item Name");
           return;
         }
       }
@@ -271,9 +249,6 @@ class _AddPaymentsState extends State<AddPayments> {
       await refreshBudgetData(widget.eventID);
       await refreshVendorData(widget.eventID);
       await refreshmainbalancedata(widget.eventID);
-
-      // if (paymentTypeNotifier.value == PaymentType.budget) {
-      // } else if (paymentTypeNotifier.value == PaymentType.vendor) {}
       setState(() {
         Get.back();
 
@@ -284,13 +259,9 @@ class _AddPaymentsState extends State<AddPayments> {
         _timeController.clear();
         searchController.clear();
       });
-      Get.snackbar(
-        'Great',
-        "Successfully added",
-        colorText: Colors.blueAccent,
-        backgroundColor: Colors.greenAccent,
-        duration: const Duration(milliseconds: 1100),
-      );
+      ber.successSnack();
+    } else {
+      ber.errorSnack();
     }
   }
 }

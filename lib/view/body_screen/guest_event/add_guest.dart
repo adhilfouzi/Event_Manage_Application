@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:get/get.dart';
+import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/db_functions/fn_guestmodel.dart';
 import 'package:project_event/model/data_model/guest_model/guest_model.dart';
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
@@ -8,15 +9,20 @@ import 'package:project_event/controller/widget/list/sexdropdown.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/controller/widget/sub/contact_form_widget.dart';
 import 'package:project_event/controller/widget/sub/status_button_widget.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
+import 'package:project_event/view/body_screen/guest_event/guests_screen.dart';
 
 import 'package:sizer/sizer.dart';
 
 class AddGuest extends StatefulWidget {
+  final Eventmodel eventModel;
+
   final int eventID;
 
   const AddGuest({
     super.key,
     required this.eventID,
+    required this.eventModel,
   });
 
   @override
@@ -101,6 +107,8 @@ class _AddGuestState extends State<AddGuest> {
   final _pcontroller = TextEditingController();
 
   Future<void> addGuestclick(context) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final name = _nameController.text.toUpperCase();
       final sex = _sexController.text;
@@ -122,13 +130,7 @@ class _AddGuestState extends State<AddGuest> {
       );
 
       await addguest(guestdata);
-      Get.snackbar(
-        'Great',
-        "Successfully added",
-        colorText: Colors.blueAccent,
-        backgroundColor: Colors.greenAccent,
-        duration: const Duration(milliseconds: 1100),
-      );
+      ber.successSnack();
       setState(() {
         _statusController = 0;
         _nameController.clear();
@@ -138,16 +140,9 @@ class _AddGuestState extends State<AddGuest> {
         _sexController.clear();
         _acontroller.clear();
       });
-
-      Get.back();
+      Get.off(Guests(eventid: widget.eventID, eventModel: widget.eventModel));
     } else {
-      Get.snackbar('Warning', 'Something is Pending',
-          colorText: Colors.black,
-          backgroundColor: Colors.redAccent,
-          snackPosition: SnackPosition.BOTTOM,
-          instantInit: false,
-          duration: const Duration(milliseconds: 1100),
-          dismissDirection: DismissDirection.startToEnd);
+      ber.errorSnack();
     }
   }
 

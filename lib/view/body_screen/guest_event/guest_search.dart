@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event_controller/guest_event/guest_delete_confirmatiion.dart';
+import 'package:project_event/controller/guest_event/guest_delete_confirmatiion.dart';
+
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/db_functions/fn_guestmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
@@ -121,6 +122,7 @@ class _GuestSearchState extends State<GuestSearch> {
                                           transition:
                                               Transition.rightToLeftWithFade,
                                           EditGuest(
+                                              step: 2,
                                               guestdata: finduserItem,
                                               eventModel: widget.eventModel));
                                     },

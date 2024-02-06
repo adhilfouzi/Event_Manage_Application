@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -7,6 +9,7 @@ import 'package:project_event/model/data_model/budget_model/budget_model.dart';
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/services/categorydropdown_widget.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -32,7 +35,7 @@ class _AddBudgetState extends State<AddBudget> {
             AppAction(
                 icon: Icons.done,
                 onPressed: () {
-                  addGuestclick(context);
+                  addGuestClick(context);
                 }),
           ],
           titleText: 'Add Budget',
@@ -98,29 +101,44 @@ class _AddBudgetState extends State<AddBudget> {
     }
   }
 
+  SnackbarModel ber = SnackbarModel();
   final _budgetController = TextEditingController();
   final _nameController = TextEditingController();
   final _categoryController = TextEditingController();
   final _noteController = TextEditingController();
-  Future<void> addGuestclick(mtx) async {
+  Future<void> addGuestClick(BuildContext context) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      final name = _nameController.text.toUpperCase().trimLeft().trimRight();
-      final category = _categoryController.text;
-      final note = _noteController.text.trimLeft().trimRight();
-      final budget = _budgetController.text.trimLeft().trimRight();
-      final budgetdata = BudgetModel(
+      final name = _nameController.text.trim().toUpperCase();
+      final category = _categoryController.text.trim();
+      final note = _noteController.text.trim();
+      final budget = _budgetController.text.trim();
+
+      try {
+        final parsedBudget =
+            int.parse(budget.replaceAll(RegExp(r'[^0-9]'), ''));
+        final budgetData = BudgetModel(
           name: name,
           category: category,
           eventid: widget.eventid,
           esamount: budget,
           note: note,
           paid: 0,
-          pending: int.parse(budget.replaceAll(RegExp(r'[^0-9]'), '')),
-          status: 0);
-      await addBudget(budgetdata);
-      refreshBudgetData(widget.eventid);
-      Get.back();
-      ;
+          pending: parsedBudget,
+          status: 0,
+        );
+        log('before add');
+
+        await addBudget(budgetData);
+        refreshBudgetData(widget.eventid);
+        log('after add');
+        Get.back();
+        ber.successSnack();
+      } catch (e) {
+        log('Error adding budget: $e');
+        ber.errorSnack(message: 'Error on  adding budget');
+      }
+    } else {
+      ber.errorSnack();
     }
   }
 }

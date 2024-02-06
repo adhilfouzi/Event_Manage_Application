@@ -87,6 +87,7 @@ class Budget extends StatelessWidget {
                             Get.to(
                                 transition: Transition.rightToLeftWithFade,
                                 BudgetView(
+                                  step: 2,
                                   budget: data,
                                   eventModel: eventModel,
                                 ));
@@ -95,6 +96,7 @@ class Budget extends StatelessWidget {
                             Get.to(
                                 transition: Transition.rightToLeftWithFade,
                                 EditBudget(
+                                  step: 2,
                                   budgetdata: data,
                                   eventModel: eventModel,
                                 ));
@@ -175,3 +177,6 @@ class Budget extends StatelessWidget {
     );
   }
 }
+  // SnackbarModel ber = ();
+  //       ber.errorSnack(messagSnackbarModele: 'Error on  adding budget');
+  //       ber.successSnack();

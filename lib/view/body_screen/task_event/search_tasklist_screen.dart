@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event_controller/task_event/task_delete_conformation.dart';
+
+import 'package:project_event/controller/task_event/task_delete_conformation.dart';
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/db_functions/fn_taskmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
@@ -118,6 +119,7 @@ class _TaskSearchState extends State<TaskSearch> {
                                 Get.to(
                                     transition: Transition.rightToLeftWithFade,
                                     EditTask(
+                                        step: 2,
                                         taskdata: finduserItem,
                                         eventModel: widget.eventModel));
                               },

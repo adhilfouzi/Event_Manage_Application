@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event_controller/settlement_event/payment_controller/payment_do_delete.dart';
-import 'package:project_event/model/data_model/payment/pay_model.dart';
+import 'package:project_event/controller/guest_event/guest_do_delect.dart';
 
-void doDeletePayment(PaymentModel payment) {
+import 'package:project_event/model/data_model/event/event_model.dart';
+import 'package:project_event/model/data_model/guest_model/guest_model.dart';
+
+void doDeleteGuest(GuestModel guest, int step, Eventmodel eventModel) {
   try {
     Get.defaultDialog(
       title: 'Delete',
-      content: Text('Do you want to delete payment by ${payment.name}?'),
+      content: Text('Do you want to delete ${guest.gname}?'),
       actions: [
         TextButton(
           onPressed: () {
-            delectpayYes(payment);
+            deleteYes(guest, step, eventModel);
           },
           child: const Text('Yes'),
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event_controller/vendor_event/vendor_delete_conformation.dart';
+import 'package:project_event/controller/vendor_event/vendor_delete_conformation.dart';
+
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/db_functions/fn_vendormodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
@@ -112,9 +113,9 @@ class _VendorSearchState extends State<VendorSearch> {
                                 Get.to(
                                     transition: Transition.rightToLeftWithFade,
                                     EditVendor(
+                                      step: 2,
                                       eventModel: widget.eventModel,
                                       vendordataway: finduserItem,
-                                      val: 1,
                                     ));
                               },
                             ),

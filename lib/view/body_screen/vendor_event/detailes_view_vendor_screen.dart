@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event_controller/vendor_event/vendor_delete_conformation.dart';
+
+import 'package:project_event/controller/vendor_event/vendor_delete_conformation.dart';
 import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
@@ -17,10 +18,14 @@ import 'package:sizer/sizer.dart';
 
 class ViewVendor extends StatelessWidget {
   final Eventmodel eventModel;
-
+  final int step;
   final VendorsModel vendor;
 
-  const ViewVendor({super.key, required this.vendor, required this.eventModel});
+  const ViewVendor(
+      {super.key,
+      required this.vendor,
+      required this.eventModel,
+      required this.step});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,7 @@ class ViewVendor extends StatelessWidget {
           AppAction(
               icon: Icons.delete,
               onPressed: () {
-                doDeleteVendor(vendor, 2, eventModel);
+                doDeleteVendor(vendor, step, eventModel);
               }),
           AppAction(
               icon: Icons.edit,
@@ -41,9 +46,9 @@ class ViewVendor extends StatelessWidget {
                 Get.to(
                     transition: Transition.rightToLeftWithFade,
                     EditVendor(
+                      step: step,
                       eventModel: eventModel,
                       vendordataway: vendor,
-                      val: 1,
                     ));
               }),
         ],

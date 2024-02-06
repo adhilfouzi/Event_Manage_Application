@@ -13,6 +13,7 @@ import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/db_functions/fn_evenmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 import 'package:project_event/view/body_screen/main/main_screem.dart';
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/widget/sub/contact_form_widget.dart';
@@ -228,20 +229,14 @@ class _AddEventState extends State<AddEvent> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pnoController = TextEditingController();
   Future addEventcliked(context) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (imagepath == null) {
-      Get.snackbar('Warning', 'Add Profile Picture',
-          colorText: Colors.black,
-          backgroundColor: Colors.redAccent,
-          snackPosition: SnackPosition.BOTTOM,
-          instantInit: false,
-          duration: const Duration(milliseconds: 1100),
-          dismissDirection: DismissDirection.startToEnd);
+      ber.errorSnack(message: 'Add Profile Picture');
     }
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       if (_eventnameController.text.toUpperCase().isNotEmpty &&
           _locationController.text.toUpperCase().isNotEmpty) {
-        log('profile id in AddEvent after click : ${widget.profileid}');
-
         final event = Eventmodel(
           eventname: _eventnameController.text.toUpperCase(),
           location: _locationController.text.toUpperCase(),
@@ -263,13 +258,7 @@ class _AddEventState extends State<AddEvent> {
             //     allowSnapshotting: false,
             fullscreenDialog: true,
             MainBottom(profileid: widget.profileid));
-        Get.snackbar(
-          'Great',
-          "Successfully added",
-          colorText: Colors.blueAccent,
-          backgroundColor: Colors.greenAccent,
-          duration: const Duration(milliseconds: 1100),
-        );
+        ber.successSnack();
       }
     }
   }

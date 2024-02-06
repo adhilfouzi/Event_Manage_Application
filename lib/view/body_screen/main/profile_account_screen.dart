@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/model/db_functions/fn_profilemodel.dart';
 import 'package:project_event/model/core/color/color.dart';
+import 'package:project_event/model/db_functions/fn_profilemodel.dart';
 import 'package:project_event/view/body_screen/profile/appinfo_screen.dart';
 import 'package:project_event/view/body_screen/profile/favorite_event_screen.dart';
 import 'package:project_event/view/body_screen/profile/feedback_function_screen.dart';

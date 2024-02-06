@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/db_functions/fn_profilemodel.dart';
 import 'package:project_event/main.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 import 'package:project_event/view/body_screen/main/main_screem.dart';
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/view/intro_screen/forgetpassword_screen.dart';
@@ -156,6 +157,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> loginclick(BuildContext context) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final email = emailController.text;
       final password = passwordController.text;
@@ -172,22 +175,10 @@ class _LoginScreenState extends State<LoginScreen> {
           final sharedPrefer = await SharedPreferences.getInstance();
           await sharedPrefer.setInt(logedinsp, matchingProfile.id!);
         } else {
-          Get.snackbar('Warning', 'Incorrect password. Please try again.',
-              colorText: Colors.black,
-              backgroundColor: Colors.red,
-              snackPosition: SnackPosition.BOTTOM,
-              instantInit: false,
-              duration: const Duration(milliseconds: 1100),
-              dismissDirection: DismissDirection.startToEnd);
+          ber.errorSnack(message: 'Incorrect password. Please try again.');
         }
       } else {
-        Get.snackbar('Warning', 'Email not registered. Please sign up.',
-            colorText: Colors.black,
-            backgroundColor: Colors.red,
-            snackPosition: SnackPosition.BOTTOM,
-            instantInit: false,
-            duration: const Duration(milliseconds: 1100),
-            dismissDirection: DismissDirection.startToEnd);
+        ber.errorSnack(message: 'Email not registered. Please sign up.');
       }
     }
   }

@@ -171,7 +171,9 @@ class TaskList extends StatelessWidget {
                               Get.to(
                                   transition: Transition.rightToLeftWithFade,
                                   EditTask(
-                                      taskdata: data, eventModel: eventModel));
+                                      step: 2,
+                                      taskdata: data,
+                                      eventModel: eventModel));
                             },
                           ),
                         ),
@@ -192,6 +194,7 @@ class TaskList extends StatelessWidget {
         ),
         floatingActionButton: FloatingPointx(
             goto: AddTask(
+          eventModel: eventModel,
           eventID: eventid,
         )),
       ),

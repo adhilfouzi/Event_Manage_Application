@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:project_event/controller/event_controller/vendor_event/vendor_delete_conformation.dart';
+import 'package:project_event/controller/vendor_event/vendor_delete_conformation.dart';
+
 import 'package:project_event/model/db_functions/fn_vendormodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/vendors/vendors_model.dart';
@@ -14,18 +15,23 @@ import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/services/categorydropdown_widget.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/controller/widget/sub/contact_form_widget.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
+import 'package:project_event/view/body_screen/vendor_event/vendor_report/rp_done_vendor_screen.dart';
+import 'package:project_event/view/body_screen/vendor_event/vendor_report/rp_pending_vendors_screen.dart';
+import 'package:project_event/view/body_screen/vendor_event/vendors_screen.dart';
 
 import 'package:sizer/sizer.dart';
 
 class EditVendor extends StatefulWidget {
   final Eventmodel eventModel;
-  final int val;
+  final int step;
+
   final VendorsModel vendordataway;
   const EditVendor(
       {super.key,
       required this.vendordataway,
-      required this.val,
-      required this.eventModel});
+      required this.eventModel,
+      required this.step});
 
   @override
   State<EditVendor> createState() => _EditVendorState();
@@ -46,7 +52,8 @@ class _EditVendorState extends State<EditVendor> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  doDeleteVendor(widget.vendordataway, 2, widget.eventModel);
+                  doDeleteVendor(
+                      widget.vendordataway, widget.step, widget.eventModel);
                 }),
             AppAction(
                 icon: Icons.contacts,
@@ -56,7 +63,7 @@ class _EditVendorState extends State<EditVendor> {
             AppAction(
                 icon: Icons.done,
                 onPressed: () {
-                  editVendorclick(context);
+                  editVendorclick(widget.step);
                 }),
           ],
           titleText: 'Edit Vendors',
@@ -165,7 +172,9 @@ class _EditVendorState extends State<EditVendor> {
     _phoneController.text = widget.vendordataway.number ?? '';
   }
 
-  Future<void> editVendorclick(mtx) async {
+  Future<void> editVendorclick(int step) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       await editVendor(
           widget.vendordataway.id,
@@ -183,12 +192,26 @@ class _EditVendorState extends State<EditVendor> {
           widget.vendordataway.status);
 
       await refreshVendorData(widget.vendordataway.eventid);
-      if (widget.val == 1) {
+
+      if (step == 2) {
+        Get.offAll(
+            transition: Transition.rightToLeftWithFade,
+            //     allowSnapshotting: false,
+            fullscreenDialog: true,
+            Vendors(
+              eventModel: widget.eventModel,
+              eventid: widget.eventModel.id!,
+            ));
+      } else if (step == 1) {
         Get.back();
-        Get.back();
-      } else if (widget.val == 0) {
-        Get.back();
+      } else if (step == 3) {
+        Get.offAll(PendingRpVendorList(eventModel: widget.eventModel));
+      } else if (step == 4) {
+        Get.offAll(DoneRpVendorList(eventModel: widget.eventModel));
       }
+      ber.successSnack();
+    } else {
+      ber.errorSnack();
     }
   }
 

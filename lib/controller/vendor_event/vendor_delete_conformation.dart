@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event_controller/vendor_event/vendor_do_delete.dart';
+
+import 'package:project_event/controller/vendor_event/vendor_do_delete.dart';
+
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/vendors/vendors_model.dart';
 

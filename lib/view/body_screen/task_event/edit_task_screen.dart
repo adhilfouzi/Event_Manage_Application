@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event_controller/task_event/task_delete_conformation.dart';
+
+import 'package:project_event/controller/task_event/task_delete_conformation.dart';
 import 'package:project_event/model/db_functions/fn_taskmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/task/task_model.dart';
@@ -10,15 +11,20 @@ import 'package:project_event/controller/services/categorydropdown_widget.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/controller/widget/sub/date_widget.dart';
 import 'package:project_event/controller/widget/sub/status_button_widget.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 
 import 'package:sizer/sizer.dart';
 
 class EditTask extends StatefulWidget {
   final Eventmodel eventModel;
-
+  final int step;
   final TaskModel taskdata;
 
-  const EditTask({super.key, required this.taskdata, required this.eventModel});
+  const EditTask(
+      {super.key,
+      required this.taskdata,
+      required this.eventModel,
+      required this.step});
 
   @override
   State<EditTask> createState() => _EditTaskState();
@@ -36,7 +42,7 @@ class _EditTaskState extends State<EditTask> {
           AppAction(
               icon: Icons.delete,
               onPressed: () {
-                doDeleteTask(widget.taskdata, 2, widget.eventModel);
+                doDeleteTask(widget.taskdata, widget.step, widget.eventModel);
               }),
           AppAction(
               icon: Icons.done,
@@ -107,6 +113,8 @@ class _EditTaskState extends State<EditTask> {
   }
 
   Future<void> edittaskclicked(BuildContext context, TaskModel task) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final taskname = _tasknameController.text.toUpperCase();
       final category = _categoryController.text;
@@ -117,14 +125,9 @@ class _EditTaskState extends State<EditTask> {
       await editTask(
           task.id, taskname, category, note, _statusController, date, eventId);
       refreshEventtaskdata(eventId);
+      ber.successSnack();
     } else {
-      Get.snackbar('Warning', 'Something is Pending',
-          colorText: Colors.black,
-          backgroundColor: Colors.redAccent,
-          snackPosition: SnackPosition.BOTTOM,
-          instantInit: false,
-          duration: const Duration(milliseconds: 1100),
-          dismissDirection: DismissDirection.startToEnd);
+      ber.errorSnack();
     }
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/db_functions/fn_profilemodel.dart';
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 import 'package:project_event/view/intro_screen/loginpage_screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -121,6 +121,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   }
 
   Future<void> setProfileclick(mtx) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final password = passwordController.text;
 
@@ -128,14 +130,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           .where((profile) => profile.email == emailController.text)
           .toList();
       if (existingProfiles.isEmpty) {
-        Get.snackbar('Warning', 'Email not registered. Please sign up.',
-            colorText: Colors.black,
-            backgroundColor: Colors.red,
-            snackPosition: SnackPosition.BOTTOM,
-            instantInit: false,
-            duration: const Duration(milliseconds: 1100),
-            dismissDirection: DismissDirection.startToEnd);
-
+        ber.errorSnack(message: 'Email not registered. Please sign up.');
         return;
       }
       await editProfiledata(

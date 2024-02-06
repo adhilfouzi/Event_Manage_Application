@@ -11,6 +11,7 @@ import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/services/categorydropdown_widget.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/controller/widget/sub/contact_form_widget.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -135,6 +136,8 @@ class _AddVendorState extends State<AddVendor> {
   final TextEditingController _phoneController = TextEditingController();
 
   Future<void> addVendorclick(BuildContext ctx) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       try {
         final vendordata = VendorsModel(
@@ -156,16 +159,12 @@ class _AddVendorState extends State<AddVendor> {
 
         await addVendor(vendordata).then((value) => log("success "));
         await refreshVendorData(widget.eventid);
-        Get.snackbar(
-          'Great',
-          "Successfully added",
-          colorText: Colors.blueAccent,
-          backgroundColor: Colors.greenAccent,
-          duration: const Duration(milliseconds: 1100),
-        );
+        ber.successSnack();
       } catch (e) {
         log('Error adding vendor: $e');
       }
+    } else {
+      ber.errorSnack();
     }
   }
 

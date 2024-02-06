@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event_controller/guest_event/guest_delete_confirmatiion.dart';
+import 'package:project_event/controller/guest_event/guest_delete_confirmatiion.dart';
+
 import 'package:project_event/model/db_functions/fn_guestmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/guest_model/guest_model.dart';
@@ -11,16 +12,20 @@ import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/controller/widget/sub/contact_form_widget.dart';
 
 import 'package:project_event/controller/widget/sub/status_button_widget.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 
 import 'package:sizer/sizer.dart';
 
 class EditGuest extends StatefulWidget {
   final Eventmodel eventModel;
-
+  final int step;
   final GuestModel guestdata;
 
   const EditGuest(
-      {super.key, required this.guestdata, required this.eventModel});
+      {super.key,
+      required this.guestdata,
+      required this.eventModel,
+      required this.step});
 
   @override
   State<EditGuest> createState() => _EditGuestState();
@@ -45,7 +50,8 @@ class _EditGuestState extends State<EditGuest> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  doDeleteGuest(widget.guestdata, 2, widget.eventModel);
+                  doDeleteGuest(
+                      widget.guestdata, widget.step, widget.eventModel);
                 }),
             AppAction(
                 icon: Icons.done,
@@ -117,6 +123,8 @@ class _EditGuestState extends State<EditGuest> {
   }
 
   Future<void> editGuestclick(BuildContext context, GuestModel guest) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final name = _nameController.text.toUpperCase();
       final sex = _sexController.text;
@@ -131,14 +139,9 @@ class _EditGuestState extends State<EditGuest> {
           number, email, adress);
 
       refreshguestdata(guest.eventid);
+      ber.successSnack();
     } else {
-      Get.snackbar('Warning', 'Something is Pending',
-          colorText: Colors.black,
-          backgroundColor: Colors.redAccent,
-          snackPosition: SnackPosition.BOTTOM,
-          instantInit: false,
-          duration: const Duration(milliseconds: 1100),
-          dismissDirection: DismissDirection.startToEnd);
+      ber.errorSnack();
     }
   }
 

@@ -8,6 +8,7 @@ import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/controller/widget/sub/date_widget.dart';
 import 'package:project_event/controller/widget/sub/fn_time.dart';
+import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -113,6 +114,8 @@ class _AddIncomeState extends State<AddIncome> {
   final TextEditingController _timeController = TextEditingController();
 
   Future<void> addincomeclick(mtx) async {
+    SnackbarModel ber = SnackbarModel();
+
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final datas = IncomeModel(
         name: _pnameController.text,
@@ -125,20 +128,15 @@ class _AddIncomeState extends State<AddIncome> {
       await addincome(datas);
       setState(() {
         Get.back();
-
         _pnameController.clear();
         _budgetController.clear();
         _noteController.clear();
         _dateController.clear();
         _timeController.clear();
       });
-      Get.snackbar(
-        'Great',
-        "Successfully added",
-        colorText: Colors.blueAccent,
-        backgroundColor: Colors.greenAccent,
-        duration: const Duration(milliseconds: 1100),
-      );
+      ber.successSnack();
+    } else {
+      ber.errorSnack();
     }
   }
 }
