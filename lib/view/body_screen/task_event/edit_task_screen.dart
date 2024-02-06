@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/event_controller/task_event/task_delete_conformation.dart';
 import 'package:project_event/model/db_functions/fn_taskmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/task/task_model.dart';
-import 'package:project_event/view/body_screen/task_event/search_tasklist_screen.dart';
+
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/services/categorydropdown_widget.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
@@ -35,7 +36,7 @@ class _EditTaskState extends State<EditTask> {
           AppAction(
               icon: Icons.delete,
               onPressed: () {
-                dodeletetask(context, widget.taskdata, 2, widget.eventModel);
+                doDeleteTask(widget.taskdata, 2, widget.eventModel);
               }),
           AppAction(
               icon: Icons.done,
@@ -117,15 +118,13 @@ class _EditTaskState extends State<EditTask> {
           task.id, taskname, category, note, _statusController, date, eventId);
       refreshEventtaskdata(eventId);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text("Fill the Task Name"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(1.5.h),
-          backgroundColor: Colors.red,
-          duration: const Duration(seconds: 2),
-        ),
-      );
+      Get.snackbar('Warning', 'Something is Pending',
+          colorText: Colors.black,
+          backgroundColor: Colors.redAccent,
+          snackPosition: SnackPosition.BOTTOM,
+          instantInit: false,
+          duration: const Duration(milliseconds: 1100),
+          dismissDirection: DismissDirection.startToEnd);
     }
   }
 }

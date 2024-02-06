@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/event_controller/vendor_event/vendor_delete_conformation.dart';
 import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/vendors/vendors_model.dart';
 import 'package:project_event/view/body_screen/vendor_event/edit_vendor_screen.dart';
-import 'package:project_event/view/body_screen/vendor_event/search_vendor_screen.dart';
+
 import 'package:project_event/controller/widget/box/viewbox.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/controller/widget/scaffold/bottomborderappbar.dart';
@@ -32,7 +33,7 @@ class ViewVendor extends StatelessWidget {
           AppAction(
               icon: Icons.delete,
               onPressed: () {
-                dodeletevendor(context, vendor, 2, eventModel);
+                doDeleteVendor(vendor, 2, eventModel);
               }),
           AppAction(
               icon: Icons.edit,

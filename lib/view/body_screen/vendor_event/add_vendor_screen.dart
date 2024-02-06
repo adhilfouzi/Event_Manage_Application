@@ -156,6 +156,13 @@ class _AddVendorState extends State<AddVendor> {
 
         await addVendor(vendordata).then((value) => log("success "));
         await refreshVendorData(widget.eventid);
+        Get.snackbar(
+          'Great',
+          "Successfully added",
+          colorText: Colors.blueAccent,
+          backgroundColor: Colors.greenAccent,
+          duration: const Duration(milliseconds: 1100),
+        );
       } catch (e) {
         log('Error adding vendor: $e');
       }

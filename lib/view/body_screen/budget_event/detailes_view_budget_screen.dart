@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/event_controller/budget_event/budget_do_delect.dart';
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
 import 'package:project_event/model/data_model/budget_model/budget_model.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/view/body_screen/budget_event/edit_budget_screen.dart';
-import 'package:project_event/view/body_screen/budget_event/search_budget_screen.dart';
+
 import 'package:project_event/controller/widget/box/viewbox.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/controller/widget/scaffold/bottomborderappbar.dart';
@@ -30,7 +31,7 @@ class BudgetView extends StatelessWidget {
           AppAction(
               icon: Icons.delete,
               onPressed: () {
-                dodeletebudget(context, budget, 2, eventModel);
+                doDeleteBudget(budget, 2, eventModel);
               }),
           AppAction(
               icon: Icons.edit,

@@ -57,7 +57,7 @@ class _EditProfileState extends State<EditProfile> {
               children: [
                 SizedBox(height: 2.h),
                 InkWell(
-                  onTap: () => addoneditphoto(context),
+                  onTap: () => addonEditPhoto(),
                   child: CircleAvatar(
                     backgroundImage: imageprofile != null
                         ? FileImage(imageprofile!)
@@ -160,12 +160,14 @@ class _EditProfileState extends State<EditProfile> {
           .toList();
       if (emailController.text != widget.profileid.email) {
         if (existingProfiles.isNotEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('This email is already registered'),
-              backgroundColor: Colors.red,
-            ),
-          );
+          Get.snackbar('Warning', 'This email is already registered',
+              colorText: Colors.black,
+              backgroundColor: Colors.redAccent,
+              snackPosition: SnackPosition.BOTTOM,
+              instantInit: false,
+              duration: const Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.startToEnd);
+
           return;
         }
       }
@@ -198,36 +200,43 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
-  void addoneditphoto(ctx) {
-    showDialog(
-      context: ctx,
-      builder: (ctx) {
-        return AlertDialog(
-          content: const Text('Choose Image From.......'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                getimage(ImageSource.camera);
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.camera_alt_rounded,
-                color: Colors.red,
+  void addonEditPhoto() {
+    Get.defaultDialog(
+      title: '',
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Choose Image From.......',
+            style: TextStyle(fontSize: 12.sp),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                onPressed: () {
+                  getimage(ImageSource.camera);
+                  Get.back();
+                },
+                icon: const Icon(
+                  Icons.camera_alt_rounded,
+                  color: Colors.red,
+                ),
               ),
-            ),
-            IconButton(
-              onPressed: () {
-                getimage(ImageSource.gallery);
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.image,
-                color: Colors.red,
+              IconButton(
+                onPressed: () {
+                  getimage(ImageSource.gallery);
+                  Get.back();
+                },
+                icon: const Icon(
+                  Icons.image,
+                  color: Colors.red,
+                ),
               ),
-            ),
-          ],
-        );
-      },
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -88,11 +88,11 @@ class _AddEventState extends State<AddEvent> {
                     padding: EdgeInsets.fromLTRB(1.h, 1.h, 1.h, 1.h),
                     child: InkWell(
                       onTap: () {
-                        addphoto(context);
+                        addPhoto();
                       },
                       child: SizedBox(
                         width: double.infinity,
-                        height: 20.h,
+                        height: 25.h,
                         child: Card(
                           color: Colors.transparent,
                           elevation: 0,
@@ -229,15 +229,13 @@ class _AddEventState extends State<AddEvent> {
   final TextEditingController _pnoController = TextEditingController();
   Future addEventcliked(context) async {
     if (imagepath == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Add Profile Picture '),
-          duration: const Duration(seconds: 2),
-          margin: EdgeInsets.all(2.h),
-          behavior: SnackBarBehavior.floating,
+      Get.snackbar('Warning', 'Add Profile Picture',
+          colorText: Colors.black,
           backgroundColor: Colors.redAccent,
-        ),
-      );
+          snackPosition: SnackPosition.BOTTOM,
+          instantInit: false,
+          duration: const Duration(milliseconds: 1100),
+          dismissDirection: DismissDirection.startToEnd);
     }
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       if (_eventnameController.text.toUpperCase().isNotEmpty &&
@@ -265,15 +263,12 @@ class _AddEventState extends State<AddEvent> {
             //     allowSnapshotting: false,
             fullscreenDialog: true,
             MainBottom(profileid: widget.profileid));
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text("Successfully added"),
-            behavior: SnackBarBehavior.floating,
-            margin: EdgeInsets.all(2.h),
-            backgroundColor: Colors.greenAccent,
-            duration: const Duration(seconds: 2),
-          ),
+        Get.snackbar(
+          'Great',
+          "Successfully added",
+          colorText: Colors.blueAccent,
+          backgroundColor: Colors.greenAccent,
+          duration: const Duration(milliseconds: 1100),
         );
       }
     }
@@ -315,36 +310,32 @@ class _AddEventState extends State<AddEvent> {
     }
   }
 
-  void addphoto(ctxr) {
-    showDialog(
-      context: ctxr,
-      builder: (ctxr) {
-        return AlertDialog(
-          content: const Text('Choose Image From.......'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                getimage(ImageSource.camera);
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.camera_alt_rounded,
-                color: Colors.red,
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                getimage(ImageSource.gallery);
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.image,
-                color: Colors.red,
-              ),
-            ),
-          ],
-        );
-      },
+  void addPhoto() {
+    Get.defaultDialog(
+      title: 'Choose Image Source',
+      content: const Text('Choose Image From.......'),
+      actions: [
+        IconButton(
+          onPressed: () {
+            getimage(ImageSource.camera);
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.camera_alt_rounded,
+            color: Colors.red,
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            getimage(ImageSource.gallery);
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.image,
+            color: Colors.red,
+          ),
+        ),
+      ],
     );
   }
 

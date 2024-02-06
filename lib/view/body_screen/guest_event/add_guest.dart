@@ -122,14 +122,12 @@ class _AddGuestState extends State<AddGuest> {
       );
 
       await addguest(guestdata);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text("Successfully added"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(2.h),
-          backgroundColor: Colors.greenAccent,
-          duration: const Duration(seconds: 2),
-        ),
+      Get.snackbar(
+        'Great',
+        "Successfully added",
+        colorText: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
+        duration: const Duration(milliseconds: 1100),
       );
       setState(() {
         _statusController = 0;
@@ -143,15 +141,13 @@ class _AddGuestState extends State<AddGuest> {
 
       Get.back();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text("Fill the  Name"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(2.h),
-          backgroundColor: Colors.red,
-          duration: const Duration(seconds: 2),
-        ),
-      );
+      Get.snackbar('Warning', 'Something is Pending',
+          colorText: Colors.black,
+          backgroundColor: Colors.redAccent,
+          snackPosition: SnackPosition.BOTTOM,
+          instantInit: false,
+          duration: const Duration(milliseconds: 1100),
+          dismissDirection: DismissDirection.startToEnd);
     }
   }
 

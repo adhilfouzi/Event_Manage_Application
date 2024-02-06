@@ -206,59 +206,52 @@ class _AddPaymentsState extends State<AddPayments> {
       if (paymentTypeNotifier.value == PaymentType.budget) {
         // Check if the payid is in budgetpayid
         if (!budgetpayid.value.contains(payid)) {
-          ScaffoldMessenger.of(mtx).showSnackBar(
-            SnackBar(
-              content: const Text("Make Proper Item Name"),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(1.h),
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 2),
-            ),
-          );
+          Get.snackbar('Warning', "Make Proper Item Name",
+              colorText: Colors.black,
+              backgroundColor: Colors.redAccent,
+              snackPosition: SnackPosition.BOTTOM,
+              instantInit: false,
+              duration: const Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.startToEnd);
           return;
         }
 
         // Check if the paytypename is in budgetlist
         if (!budgetlist.value
             .any((budget) => budget.name == searchController.text)) {
-          ScaffoldMessenger.of(mtx).showSnackBar(
-            SnackBar(
-              content: const Text("Make Proper Item Name"),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(1.h),
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 2),
-            ),
-          );
+          Get.snackbar('Warning', "Make Proper Item Name",
+              colorText: Colors.black,
+              backgroundColor: Colors.redAccent,
+              snackPosition: SnackPosition.BOTTOM,
+              instantInit: false,
+              duration: const Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.startToEnd);
+
           return;
         }
       } else if (paymentTypeNotifier.value == PaymentType.vendor) {
         // Check if the payid is in vendorpayid
         if (!vendorpayid.value.contains(payid)) {
-          ScaffoldMessenger.of(mtx).showSnackBar(
-            SnackBar(
-              content: const Text("Make Proper Item Name"),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(1.h),
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 2),
-            ),
-          );
+          Get.snackbar('Warning', "Make Proper Item Name",
+              colorText: Colors.black,
+              backgroundColor: Colors.redAccent,
+              snackPosition: SnackPosition.BOTTOM,
+              instantInit: false,
+              duration: const Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.startToEnd);
           return;
         }
 
         // Check if the paytypename is in vendortlist
         if (!vendortlist.value
             .any((vendor) => vendor.name == searchController.text)) {
-          ScaffoldMessenger.of(mtx).showSnackBar(
-            SnackBar(
-              content: const Text("Make Proper Item Name"),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(1.h),
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 2),
-            ),
-          );
+          Get.snackbar('Warning', "Make Proper Item Name",
+              colorText: Colors.black,
+              backgroundColor: Colors.redAccent,
+              snackPosition: SnackPosition.BOTTOM,
+              instantInit: false,
+              duration: const Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.startToEnd);
           return;
         }
       }
@@ -291,14 +284,12 @@ class _AddPaymentsState extends State<AddPayments> {
         _timeController.clear();
         searchController.clear();
       });
-      ScaffoldMessenger.of(mtx).showSnackBar(
-        SnackBar(
-          content: const Text("Successfully added"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(1.h),
-          backgroundColor: Colors.greenAccent,
-          duration: const Duration(seconds: 2),
-        ),
+      Get.snackbar(
+        'Great',
+        "Successfully added",
+        colorText: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
+        duration: const Duration(milliseconds: 1100),
       );
     }
   }

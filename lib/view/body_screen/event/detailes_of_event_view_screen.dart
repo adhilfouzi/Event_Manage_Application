@@ -2,13 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/event/event_delete_confirmation.dart';
 import 'package:project_event/model/core/font/font.dart';
-import 'package:project_event/model/db_functions/fn_evenmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/view/body_screen/event/edit_event_screen.dart';
 import 'package:project_event/controller/widget/box/viewbox.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
-import 'package:project_event/view/body_screen/main/main_screem.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -26,7 +25,7 @@ class ViewEventDetails extends StatelessWidget {
           AppAction(
               icon: Icons.delete,
               onPressed: () {
-                dodeleteevent(context, eventModel);
+                doDeleteEvent(eventModel);
               }),
           AppAction(
               icon: Icons.edit,
@@ -142,56 +141,4 @@ class ViewEventDetails extends StatelessWidget {
       ),
     );
   }
-}
-
-void dodeleteevent(rtx, Eventmodel student) {
-  try {
-    showDialog(
-      context: rtx,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Delete'),
-          content: Text(
-              'Do You Want delete  ${student.eventname} of ${student.clientname}?'),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  delecteventYes(context, student);
-                },
-                child: const Text('Yes')),
-            TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text('No'))
-          ],
-        );
-      },
-    );
-  } catch (e) {
-    // print('Error deleting data: $e');
-  }
-}
-
-void delecteventYes(
-  ctx,
-  Eventmodel student,
-) {
-  deleteEventdata(student.id, student.profile);
-  Get.offAll(
-      transition: Transition.leftToRightWithFade,
-
-      //     allowSnapshotting: false,
-      fullscreenDialog: true,
-      MainBottom(profileid: student.profile));
-
-  ScaffoldMessenger.of(ctx).showSnackBar(
-    SnackBar(
-      content: const Text("Successfully Deleted"),
-      behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.all(2.h),
-      backgroundColor: Colors.grey,
-      duration: const Duration(seconds: 2),
-    ),
-  );
 }

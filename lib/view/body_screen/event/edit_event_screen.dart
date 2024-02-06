@@ -7,11 +7,11 @@ import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:project_event/controller/event/event_delete_confirmation.dart';
 import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/db_functions/fn_evenmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
-import 'package:project_event/view/body_screen/event/detailes_of_event_view_screen.dart';
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/view/body_screen/main/main_screem.dart';
@@ -51,7 +51,7 @@ class _EditEventState extends State<EditEvent> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  dodeleteevent(context, widget.event);
+                  doDeleteEvent(widget.event);
                 }),
             AppAction(
                 icon: Icons.done,
@@ -82,7 +82,7 @@ class _EditEventState extends State<EditEvent> {
                   padding: EdgeInsets.fromLTRB(1.h, 3.h, 1.h, 1.h),
                   child: InkWell(
                     onTap: () {
-                      addoneditphoto(context);
+                      addonEditPhoto(context);
                     },
                     child: SizedBox(
                       width: double.infinity,
@@ -237,15 +237,13 @@ class _EditEventState extends State<EditEvent> {
   Future editEventcliked(context) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       if (imagepath.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Add Profile Picture '),
-            duration: const Duration(seconds: 2),
-            margin: EdgeInsets.all(2.h),
-            behavior: SnackBarBehavior.floating,
+        Get.snackbar('Warning', 'Add Profile Picture',
+            colorText: Colors.black,
             backgroundColor: Colors.redAccent,
-          ),
-        );
+            snackPosition: SnackPosition.BOTTOM,
+            instantInit: false,
+            duration: const Duration(milliseconds: 1100),
+            dismissDirection: DismissDirection.startToEnd);
       }
 
       if (_eventnameController.text.toUpperCase().isNotEmpty &&
@@ -272,20 +270,18 @@ class _EditEventState extends State<EditEvent> {
             //     allowSnapshotting: false,
             fullscreenDialog: true,
             MainBottom(profileid: widget.event.id!));
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Successfully added"),
-            behavior: SnackBarBehavior.floating,
-            margin: EdgeInsets.all(10),
-            backgroundColor: Colors.greenAccent,
-            duration: Duration(seconds: 2),
-          ),
+        Get.snackbar(
+          'Great',
+          "Successfully Edited",
+          colorText: Colors.blueAccent,
+          backgroundColor: Colors.greenAccent,
+          duration: const Duration(milliseconds: 1100),
         );
       }
     }
   }
 
-  Future<void> getimage(ImageSource source) async {
+  Future<void> getImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) {
@@ -321,36 +317,32 @@ class _EditEventState extends State<EditEvent> {
     }
   }
 
-  void addoneditphoto(ctx) {
-    showDialog(
-      context: ctx,
-      builder: (ctx) {
-        return AlertDialog(
-          content: const Text('Choose Image From.......'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                getimage(ImageSource.camera);
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.camera_alt_rounded,
-                color: Colors.red,
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                getimage(ImageSource.gallery);
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.image,
-                color: Colors.red,
-              ),
-            ),
-          ],
-        );
-      },
+  void addonEditPhoto(BuildContext context) {
+    Get.defaultDialog(
+      title: 'Choose Image Source',
+      content: const Text('Choose Image From.......'),
+      actions: [
+        IconButton(
+          onPressed: () {
+            getImage(ImageSource.camera);
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.camera_alt_rounded,
+            color: Colors.red,
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            getImage(ImageSource.gallery);
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.image,
+            color: Colors.red,
+          ),
+        ),
+      ],
     );
   }
 

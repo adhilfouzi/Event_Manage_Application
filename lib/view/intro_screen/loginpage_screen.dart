@@ -172,20 +172,22 @@ class _LoginScreenState extends State<LoginScreen> {
           final sharedPrefer = await SharedPreferences.getInstance();
           await sharedPrefer.setInt(logedinsp, matchingProfile.id!);
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Incorrect password. Please try again.'),
+          Get.snackbar('Warning', 'Incorrect password. Please try again.',
+              colorText: Colors.black,
               backgroundColor: Colors.red,
-            ),
-          );
+              snackPosition: SnackPosition.BOTTOM,
+              instantInit: false,
+              duration: const Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.startToEnd);
         }
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Email not registered. Please sign up.'),
+        Get.snackbar('Warning', 'Email not registered. Please sign up.',
+            colorText: Colors.black,
             backgroundColor: Colors.red,
-          ),
-        );
+            snackPosition: SnackPosition.BOTTOM,
+            instantInit: false,
+            duration: const Duration(milliseconds: 1100),
+            dismissDirection: DismissDirection.startToEnd);
       }
     }
   }

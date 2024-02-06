@@ -235,12 +235,15 @@ class _SignupScreenState extends State<SignupScreen> {
             .toList();
 
         if (existingProfiles.isNotEmpty) {
-          ScaffoldMessenger.of(mtx).showSnackBar(
-            const SnackBar(
-              content: Text('This email is already registered'),
-              backgroundColor: Colors.red,
-            ),
+          Get.snackbar(
+            'This email is already registered',
+            '',
+            colorText: Colors.black,
+            backgroundColor: Colors.red,
+            snackPosition: SnackPosition.BOTTOM,
+            duration: const Duration(milliseconds: 1100),
           );
+
           return;
         }
 
@@ -250,11 +253,13 @@ class _SignupScreenState extends State<SignupScreen> {
           phone: phoneController.text.trimLeft().trimRight(),
           password: passwordController.text,
         );
-        ScaffoldMessenger.of(mtx).showSnackBar(
-          const SnackBar(
-            content: Text('Sign up Successfully'),
-            backgroundColor: Colors.green,
-          ),
+        Get.snackbar(
+          'Great',
+          'Sign up Successfully',
+          colorText: Colors.black,
+          backgroundColor: Colors.greenAccent,
+          snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(milliseconds: 1000),
         );
 
         await addProfile(profile);

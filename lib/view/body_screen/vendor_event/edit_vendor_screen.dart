@@ -5,10 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:project_event/controller/event_controller/vendor_event/vendor_delete_conformation.dart';
 import 'package:project_event/model/db_functions/fn_vendormodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/vendors/vendors_model.dart';
-import 'package:project_event/view/body_screen/vendor_event/search_vendor_screen.dart';
+
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/services/categorydropdown_widget.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
@@ -45,8 +46,7 @@ class _EditVendorState extends State<EditVendor> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  dodeletevendor(
-                      context, widget.vendordataway, 2, widget.eventModel);
+                  doDeleteVendor(widget.vendordataway, 2, widget.eventModel);
                 }),
             AppAction(
                 icon: Icons.contacts,

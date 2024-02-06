@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/event_controller/vendor_event/vendor_delete_conformation.dart';
 import 'package:project_event/model/core/font/font.dart';
-import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
 import 'package:project_event/model/db_functions/fn_vendormodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/vendors/vendors_model.dart';
 import 'package:project_event/view/body_screen/vendor_event/edit_vendor_screen.dart';
-import 'package:project_event/view/body_screen/vendor_event/vendors_screen.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -106,8 +105,8 @@ class _VendorSearchState extends State<VendorSearch> {
                               trailing: IconButton(
                                   icon: const Icon(Icons.delete),
                                   onPressed: () {
-                                    dodeletevendor(context, finduserItem, 1,
-                                        widget.eventModel);
+                                    doDeleteVendor(
+                                        finduserItem, 1, widget.eventModel);
                                   }),
                               onTap: () {
                                 Get.to(
@@ -126,58 +125,5 @@ class _VendorSearchState extends State<VendorSearch> {
             }),
       ),
     );
-  }
-}
-
-void dodeletevendor(
-    rtx, VendorsModel student, int step, Eventmodel eventModel) {
-  try {
-    showDialog(
-      context: rtx,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Delete'),
-          content: Text('Do You Want delete  ${student.name} ?'),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  delectYes(context, student, step, eventModel);
-                },
-                child: const Text('Yes')),
-            TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text('No'))
-          ],
-        );
-      },
-    );
-  } catch (e) {
-    // print('Error deleting data: $e');
-  }
-}
-
-void delectYes(ctx, VendorsModel student, int step, Eventmodel eventModel) {
-  try {
-    deleteVendor(student.id, student.eventid);
-    deletePayVendor(student.eventid, student.id);
-
-    if (step == 2) {
-      Get.offAll(
-          transition: Transition.rightToLeftWithFade,
-          //     allowSnapshotting: false,
-          fullscreenDialog: true,
-          Vendors(
-            eventModel: eventModel,
-            eventid: student.eventid,
-          ));
-    } else if (step == 1) {
-      Get.back();
-
-      refreshVendorData(student.eventid);
-    }
-  } catch (e) {
-    // print('Error inserting data: $e');
   }
 }

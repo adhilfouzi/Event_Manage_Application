@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:project_event/controller/event_controller/settlement_event/income_controller/income_delete_conformation.dart';
 import 'package:project_event/model/db_functions/fn_incomemodel.dart';
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
 import 'package:project_event/model/db_functions/fn_paymodel.dart';
@@ -50,7 +51,7 @@ class _EditIncomeState extends State<EditIncome> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  dodeleteincome(context, widget.paydata);
+                  doDeleteIncome(widget.paydata);
                 }),
             AppAction(
                 icon: Icons.done,
@@ -150,56 +151,5 @@ class _EditIncomeState extends State<EditIncome> {
           widget.paydata.eventid);
       Get.back();
     }
-  }
-}
-
-void dodeleteincome(rtx, IncomeModel student) {
-  try {
-    showDialog(
-      context: rtx,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Delete'),
-          content: Text('Do You Want delete Payment by ${student.name} ?'),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  delectpayYes(context, student);
-                },
-                child: const Text('Yes')),
-            TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text('No'))
-          ],
-        );
-      },
-    );
-  } catch (e) {
-    // print('Error deleting data: $e');
-  }
-}
-
-void delectpayYes(
-  ctx,
-  IncomeModel student,
-) {
-  try {
-    deleteincome(student.id, student.eventid);
-    Get.back();
-    Get.back();
-
-    ScaffoldMessenger.of(ctx).showSnackBar(
-      SnackBar(
-        content: const Text("Successfully Deleted"),
-        behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(1.h),
-        backgroundColor: Colors.grey,
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  } catch (e) {
-    // print('Error inserting data: $e');
   }
 }

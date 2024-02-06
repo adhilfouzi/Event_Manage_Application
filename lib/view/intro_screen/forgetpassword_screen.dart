@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/db_functions/fn_profilemodel.dart';
@@ -127,12 +128,14 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           .where((profile) => profile.email == emailController.text)
           .toList();
       if (existingProfiles.isEmpty) {
-        ScaffoldMessenger.of(mtx).showSnackBar(
-          const SnackBar(
-            content: Text('Email not registered. Please sign up.'),
+        Get.snackbar('Warning', 'Email not registered. Please sign up.',
+            colorText: Colors.black,
             backgroundColor: Colors.red,
-          ),
-        );
+            snackPosition: SnackPosition.BOTTOM,
+            instantInit: false,
+            duration: const Duration(milliseconds: 1100),
+            dismissDirection: DismissDirection.startToEnd);
+
         return;
       }
       await editProfiledata(

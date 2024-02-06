@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/event/event_delete_confirmation.dart';
 import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
@@ -104,7 +105,7 @@ class ViewEvent extends StatelessWidget {
                             EditEvent(event: eventModel));
                         break;
                       case 'Delete':
-                        dodeleteevent(context, eventModel);
+                        doDeleteEvent(eventModel);
                         break;
                     }
                   });

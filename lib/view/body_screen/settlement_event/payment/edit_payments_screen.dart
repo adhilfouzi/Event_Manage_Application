@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:project_event/controller/event_controller/settlement_event/payment_controller/payment_delete_conformation.dart';
 import 'package:project_event/model/db_functions/fn_budgetmodel.dart';
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
 import 'package:project_event/model/db_functions/fn_paymodel.dart';
@@ -58,7 +59,7 @@ class _EditPaymentsState extends State<EditPayments> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  dodeletepayment(context, widget.paydata);
+                  doDeletePayment(widget.paydata);
                 }),
             AppAction(
                 icon: Icons.done,
@@ -217,59 +218,51 @@ class _EditPaymentsState extends State<EditPayments> {
       if (paymentTypeNotifier.value == PaymentType.budget) {
         // Check if the payid is in budgetpayid
         if (!budgetpayid.value.contains(payid)) {
-          ScaffoldMessenger.of(mtx).showSnackBar(
-            SnackBar(
-              content: const Text("Make Proper Item Name"),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(1.h),
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 2),
-            ),
-          );
+          Get.snackbar('Warning', "Make Proper Item Name",
+              colorText: Colors.black,
+              backgroundColor: Colors.redAccent,
+              snackPosition: SnackPosition.BOTTOM,
+              instantInit: false,
+              duration: const Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.startToEnd);
           return;
         }
 
         // Check if the paytypename is in budgetlist
         if (!budgetlist.value
             .any((budget) => budget.name == searchController.text)) {
-          ScaffoldMessenger.of(mtx).showSnackBar(
-            SnackBar(
-              content: const Text("Make Proper Item Name"),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(1.h),
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 2),
-            ),
-          );
+          Get.snackbar('Warning', "Make Proper Item Name",
+              colorText: Colors.black,
+              backgroundColor: Colors.redAccent,
+              snackPosition: SnackPosition.BOTTOM,
+              instantInit: false,
+              duration: const Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.startToEnd);
           return;
         }
       } else if (paymentTypeNotifier.value == PaymentType.vendor) {
         // Check if the payid is in vendorpayid
         if (!vendorpayid.value.contains(payid)) {
-          ScaffoldMessenger.of(mtx).showSnackBar(
-            SnackBar(
-              content: const Text("Make Proper Item Name"),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(1.h),
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 2),
-            ),
-          );
+          Get.snackbar('Warning', "Make Proper Item Name",
+              colorText: Colors.black,
+              backgroundColor: Colors.redAccent,
+              snackPosition: SnackPosition.BOTTOM,
+              instantInit: false,
+              duration: const Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.startToEnd);
           return;
         }
 
         // Check if the paytypename is in vendortlist
         if (!vendortlist.value
             .any((vendor) => vendor.name == searchController.text)) {
-          ScaffoldMessenger.of(mtx).showSnackBar(
-            SnackBar(
-              content: const Text("Make Proper Item Name"),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.all(1.h),
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 2),
-            ),
-          );
+          Get.snackbar('Warning', "Make Proper Item Name",
+              colorText: Colors.black,
+              backgroundColor: Colors.redAccent,
+              snackPosition: SnackPosition.BOTTOM,
+              instantInit: false,
+              duration: const Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.startToEnd);
           return;
         }
       }
@@ -289,56 +282,5 @@ class _EditPaymentsState extends State<EditPayments> {
       await refreshmainbalancedata(widget.paydata.eventid);
       Get.back();
     }
-  }
-}
-
-void dodeletepayment(rtx, PaymentModel student) {
-  try {
-    showDialog(
-      context: rtx,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Delete'),
-          content: Text('Do You Want delete Payment by ${student.name} ?'),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  delectpayYes(context, student);
-                },
-                child: const Text('Yes')),
-            TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text('No'))
-          ],
-        );
-      },
-    );
-  } catch (e) {
-    // print('Error deleting data: $e');
-  }
-}
-
-void delectpayYes(
-  ctx,
-  PaymentModel student,
-) {
-  try {
-    deletePayment(student.id, student.eventid, student.payid);
-    Get.back();
-    Get.back();
-
-    ScaffoldMessenger.of(ctx).showSnackBar(
-      SnackBar(
-        content: const Text("Successfully Deleted"),
-        behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(1.h),
-        backgroundColor: Colors.grey,
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  } catch (e) {
-    // print('Error inserting data: $e');
   }
 }

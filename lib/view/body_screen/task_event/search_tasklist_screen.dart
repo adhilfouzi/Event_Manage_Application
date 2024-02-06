@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/event_controller/task_event/task_delete_conformation.dart';
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/db_functions/fn_taskmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 
 import 'package:project_event/model/data_model/task/task_model.dart';
 import 'package:project_event/view/body_screen/task_event/edit_task_screen.dart';
-
-import 'package:project_event/view/body_screen/task_event/task_screen.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -112,8 +111,8 @@ class _TaskSearchState extends State<TaskSearch> {
                               trailing: IconButton(
                                   icon: const Icon(Icons.delete),
                                   onPressed: () {
-                                    dodeletetask(context, finduserItem, 1,
-                                        widget.eventModel);
+                                    doDeleteTask(
+                                        finduserItem, 1, widget.eventModel);
                                   }),
                               onTap: () {
                                 Get.to(
@@ -130,56 +129,5 @@ class _TaskSearchState extends State<TaskSearch> {
             }),
       ),
     );
-  }
-}
-
-void dodeletetask(rtx, TaskModel student, int step, Eventmodel eventModel) {
-  try {
-    showDialog(
-      context: rtx,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Delete'),
-          content: Text('Do You Want delete  ${student.taskname} ?'),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  delectYes(context, student, step, eventModel);
-                },
-                child: const Text('Yes')),
-            TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text('No'))
-          ],
-        );
-      },
-    );
-  } catch (e) {
-    // print('Error deleting data: $e');
-  }
-}
-
-void delectYes(ctx, TaskModel student, int step, Eventmodel eventModel) {
-  try {
-    deletetask(student.id, student.eventid);
-
-    if (step == 2) {
-      Get.offAll(
-          transition: Transition.rightToLeftWithFade,
-          //     allowSnapshotting: false,
-          fullscreenDialog: true,
-          TaskList(
-            eventid: student.eventid,
-            eventModel: eventModel,
-          ));
-    } else if (step == 1) {
-      Get.back();
-
-      refreshEventtaskdata(student.eventid);
-    }
-  } catch (e) {
-    // print('Error inserting data: $e');
   }
 }

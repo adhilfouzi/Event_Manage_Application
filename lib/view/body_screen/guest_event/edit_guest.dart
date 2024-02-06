@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/event_controller/guest_event/guest_delete_confirmatiion.dart';
 import 'package:project_event/model/db_functions/fn_guestmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/guest_model/guest_model.dart';
-import 'package:project_event/view/body_screen/guest_event/guest_search.dart';
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/widget/list/sexdropdown.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
@@ -45,8 +45,7 @@ class _EditGuestState extends State<EditGuest> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  dodeleteguest(
-                      context, widget.guestdata, 2, widget.eventModel);
+                  doDeleteGuest(widget.guestdata, 2, widget.eventModel);
                 }),
             AppAction(
                 icon: Icons.done,
@@ -133,15 +132,13 @@ class _EditGuestState extends State<EditGuest> {
 
       refreshguestdata(guest.eventid);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text("Fill the Guest Name"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(1.h),
-          backgroundColor: Colors.red,
-          duration: const Duration(seconds: 2),
-        ),
-      );
+      Get.snackbar('Warning', 'Something is Pending',
+          colorText: Colors.black,
+          backgroundColor: Colors.redAccent,
+          snackPosition: SnackPosition.BOTTOM,
+          instantInit: false,
+          duration: const Duration(milliseconds: 1100),
+          dismissDirection: DismissDirection.startToEnd);
     }
   }
 

@@ -132,14 +132,12 @@ class _AddIncomeState extends State<AddIncome> {
         _dateController.clear();
         _timeController.clear();
       });
-      ScaffoldMessenger.of(mtx).showSnackBar(
-        SnackBar(
-          content: const Text("Successfully added"),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(1.h),
-          backgroundColor: Colors.greenAccent,
-          duration: const Duration(seconds: 2),
-        ),
+      Get.snackbar(
+        'Great',
+        "Successfully added",
+        colorText: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
+        duration: const Duration(milliseconds: 1100),
       );
     }
   }

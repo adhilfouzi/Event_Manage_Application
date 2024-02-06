@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:project_event/controller/event_controller/budget_event/budget_do_delect.dart';
 import 'package:project_event/model/db_functions/fn_budgetmodel.dart';
 import 'package:project_event/model/data_model/budget_model/budget_model.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/view/body_screen/budget_event/budget_screen.dart';
-import 'package:project_event/view/body_screen/budget_event/search_budget_screen.dart';
+
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/services/categorydropdown_widget.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
@@ -36,8 +37,7 @@ class _EditBudgetState extends State<EditBudget> {
             AppAction(
                 icon: Icons.delete,
                 onPressed: () {
-                  dodeletebudget(
-                      context, widget.budgetdata, 2, widget.eventModel);
+                  doDeleteBudget(widget.budgetdata, 2, widget.eventModel);
                 }),
             AppAction(
                 icon: Icons.done,
