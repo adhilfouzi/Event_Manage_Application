@@ -133,7 +133,7 @@ class _EditProfileState extends State<EditProfile> {
                       child: ElevatedButton(
                         style: firstbutton(),
                         onPressed: () {
-                          editProfilecliked(context);
+                          editProfileClicked();
                         },
                         child: Text(
                           'Update',
@@ -154,13 +154,14 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 
-  Future editProfilecliked(context) async {
+  Future editProfileClicked() async {
     SnackbarModel ber = SnackbarModel();
 
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final existingProfiles = profileList.value
           .where((profile) => profile.email == emailController.text)
           .toList();
+
       if (emailController.text != widget.profileid.email) {
         if (existingProfiles.isNotEmpty) {
           ber.errorSnack(message: 'This email is already registered');
@@ -168,18 +169,54 @@ class _EditProfileState extends State<EditProfile> {
         }
       }
 
+      if (imagepath == null) {
+        ber.errorSnack(message: 'Forgot to add an image');
+        return;
+      }
+
       await editProfiledata(
-          widget.profileid.id,
-          imagepath,
-          nameController.text.toUpperCase(),
-          emailController.text.toLowerCase(),
-          phoneController.text,
-          addressPassController.text,
-          widget.profileid.password);
+        widget.profileid.id,
+        imagepath,
+        nameController.text.toUpperCase(),
+        emailController.text.toLowerCase(),
+        phoneController.text,
+        addressPassController.text,
+        widget.profileid.password,
+      );
+
       refreshRefreshid(widget.profileid.id!);
       Get.back();
     }
   }
+
+  // Future editProfilecliked(context) async {
+  //   SnackbarModel ber = SnackbarModel();
+
+  //   if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+  //     final existingProfiles = profileList.value
+  //         .where((profile) => profile.email == emailController.text)
+  //         .toList();
+  //     if (emailController.text != widget.profileid.email) {
+  //       if (existingProfiles.isNotEmpty) {
+  //         ber.errorSnack(message: 'This email is already registered');
+  //         return;
+  //       }
+  //     }
+  //     if (imagepath == null) {
+  //       ber.errorSnack(message: "forget to add image");
+  //     }
+  //     await editProfiledata(
+  //         widget.profileid.id,
+  //         imagepath,
+  //         nameController.text.toUpperCase(),
+  //         emailController.text.toLowerCase(),
+  //         phoneController.text,
+  //         addressPassController.text,
+  //         widget.profileid.password);
+  //     refreshRefreshid(widget.profileid.id!);
+  //     Get.back();
+  //   }
+  // }
 
   Future<void> getimage(ImageSource source) async {
     try {

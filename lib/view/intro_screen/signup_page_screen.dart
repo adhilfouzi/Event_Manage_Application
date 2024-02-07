@@ -175,7 +175,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               onPressed: () {
                                 if (_formKey.currentState?.validate() ??
                                     false) {
-                                  addProfileclick(context);
+                                  addProfileClick(context);
                                 }
                               },
                               child: Text(
@@ -226,7 +226,7 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Future<void> addProfileclick(mtx) async {
+  Future<void> addProfileClick(BuildContext context) async {
     SnackbarModel ber = SnackbarModel();
 
     if (_formKey.currentState != null &&
@@ -238,26 +238,33 @@ class _SignupScreenState extends State<SignupScreen> {
             .toList();
 
         if (existingProfiles.isNotEmpty) {
-          ber.errorSnack(
-            message: 'This email is already registered',
-          );
+          ber.errorSnack(message: 'This email is already registered');
           return;
         }
 
         final profile = ProfileModel(
-          name: nameController.text.toUpperCase(),
-          email: emailController.text.toLowerCase().trim(),
-          phone: phoneController.text.trimLeft().trimRight(),
+          name: nameController.text.trim().toUpperCase(),
+          email: emailController.text.trim().toLowerCase(),
+          phone: phoneController.text.trim(),
           password: passwordController.text,
         );
-        ber.successSnack(message: 'Sign up Successfully');
+
         await addProfile(profile);
         await refreshRefreshdata();
+
+        ber.successSnack(message: 'Sign up Successfully');
+
         Get.off(
-            transition: Transition.leftToRightWithFade, const LoginScreen());
+          transition: Transition.leftToRightWithFade,
+          const LoginScreen(),
+        );
       } catch (e) {
         log('Error inserting data: $e');
+        ber.errorSnack(message: 'Error occurred. Please try again later.');
       }
+    } else {
+      ber.errorSnack(
+          message: 'Please fill all required fields and accept terms.');
     }
   }
 }

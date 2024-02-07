@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: ElevatedButton(
                                 style: firstbutton(),
                                 onPressed: () {
-                                  loginclick(context);
+                                  loginClick(context);
                                 },
                                 child: Text('Login',
                                     style: TextStyle(
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<void> loginclick(BuildContext context) async {
+  Future<void> loginClick(BuildContext context) async {
     SnackbarModel ber = SnackbarModel();
 
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
@@ -168,16 +168,21 @@ class _LoginScreenState extends State<LoginScreen> {
       if (existingProfiles.isNotEmpty) {
         final matchingProfile = existingProfiles.first;
         if (matchingProfile.password == password) {
+          // Navigate to the main screen after successful login
           Get.offAll(
-              transition: Transition.leftToRightWithFade,
-              MainBottom(profileid: matchingProfile.id!));
+            transition: Transition.leftToRightWithFade,
+            MainBottom(profileid: matchingProfile.id!),
+          );
 
-          final sharedPrefer = await SharedPreferences.getInstance();
-          await sharedPrefer.setInt(logedinsp, matchingProfile.id!);
+          // Store the logged-in user's ID in SharedPreferences
+          final sharedPreferences = await SharedPreferences.getInstance();
+          await sharedPreferences.setInt(logedinsp, matchingProfile.id!);
         } else {
+          // Display error message for incorrect password
           ber.errorSnack(message: 'Incorrect password. Please try again.');
         }
       } else {
+        // Display error message for unregistered email
         ber.errorSnack(message: 'Email not registered. Please sign up.');
       }
     }

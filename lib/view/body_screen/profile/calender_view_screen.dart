@@ -6,8 +6,6 @@ import 'package:project_event/model/db_functions/fn_evenmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/view/body_screen/event/detailes_of_event_view_screen.dart';
 import 'package:project_event/view/body_screen/event/event_view_screen.dart';
-import 'package:project_event/controller/widget/scaffold/app_bar.dart';
-import 'package:project_event/controller/widget/scaffold/bottomborderappbar.dart';
 import 'package:project_event/view/body_screen/main/main_screem.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -57,11 +55,11 @@ class _CalenderState extends State<Calender> {
             MainBottom(profileid: widget.profileid));
       },
       child: Scaffold(
-        appBar: const CustomAppBar(
-          actions: [],
-          titleText: '',
-          bottom: BottomBorderNull(),
-        ),
+        // appBar: const CustomAppBar(
+        //   actions: [],
+        //   titleText: '',
+        //   bottom: BottomBorderNull(),
+        // ),
         body: Column(
           children: [
             Container(
