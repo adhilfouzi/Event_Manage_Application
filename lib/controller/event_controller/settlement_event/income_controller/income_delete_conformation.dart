@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/event_controller/settlement_event/income_controller/income_do_delect.dart';
 
-import 'package:project_event/controller/vendor_event/vendor_do_delete.dart';
+import 'package:project_event/model/data_model/payment/pay_model.dart';
 
-import 'package:project_event/model/data_model/event/event_model.dart';
-import 'package:project_event/model/data_model/vendors/vendors_model.dart';
-
-void doDeleteVendor(VendorsModel vendor, int step, Eventmodel eventModel) {
+void doDeleteIncome(IncomeModel income) {
   try {
     Get.defaultDialog(
       title: 'Delete',
-      content: Text('Do you want to delete ${vendor.name}?'),
+      content: Text('Do you want to delete payment by ${income.name}?'),
       actions: [
         TextButton(
           onPressed: () {
-            deleteYes(vendor, step, eventModel);
+            delectpayYes(income);
           },
           child: const Text('Yes'),
         ),

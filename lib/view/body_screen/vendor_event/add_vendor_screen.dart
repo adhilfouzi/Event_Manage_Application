@@ -136,8 +136,6 @@ class _AddVendorState extends State<AddVendor> {
   final TextEditingController _phoneController = TextEditingController();
 
   Future<void> addVendorclick(BuildContext ctx) async {
-    SnackbarModel ber = SnackbarModel();
-
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       try {
         final vendordata = VendorsModel(
@@ -159,12 +157,12 @@ class _AddVendorState extends State<AddVendor> {
 
         await addVendor(vendordata).then((value) => log("success "));
         await refreshVendorData(widget.eventid);
-        ber.successSnack();
+        SnackbarModel.successSnack();
       } catch (e) {
         log('Error adding vendor: $e');
       }
     } else {
-      ber.errorSnack();
+      SnackbarModel.errorSnack();
     }
   }
 

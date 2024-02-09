@@ -1,5 +1,7 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:project_event/model/data_model/profile/profile_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -43,6 +45,7 @@ Future<void> refreshRefreshid(int id) async {
     final student = ProfileModel.fromMap(map);
     profileData.value.add(student);
   }
+  log('refreshRefreshid called');
   profileData.notifyListeners();
 }
 

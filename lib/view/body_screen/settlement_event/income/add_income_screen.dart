@@ -114,8 +114,6 @@ class _AddIncomeState extends State<AddIncome> {
   final TextEditingController _timeController = TextEditingController();
 
   Future<void> addincomeclick(mtx) async {
-    SnackbarModel ber = SnackbarModel();
-
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final datas = IncomeModel(
         name: _pnameController.text,
@@ -134,9 +132,9 @@ class _AddIncomeState extends State<AddIncome> {
         _dateController.clear();
         _timeController.clear();
       });
-      ber.successSnack();
+      SnackbarModel.successSnack();
     } else {
-      ber.errorSnack();
+      SnackbarModel.errorSnack();
     }
   }
 }

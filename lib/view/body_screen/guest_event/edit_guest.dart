@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/guest_event/guest_delete_confirmatiion.dart';
+import 'package:project_event/controller/event_controller/guest_event/guest_delete_confirmatiion.dart';
 
 import 'package:project_event/model/db_functions/fn_guestmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
@@ -123,8 +123,6 @@ class _EditGuestState extends State<EditGuest> {
   }
 
   Future<void> editGuestclick(BuildContext context, GuestModel guest) async {
-    SnackbarModel ber = SnackbarModel();
-
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final name = _nameController.text.toUpperCase();
       final sex = _sexController.text;
@@ -139,9 +137,9 @@ class _EditGuestState extends State<EditGuest> {
           number, email, adress);
 
       refreshguestdata(guest.eventid);
-      ber.successSnack();
+      SnackbarModel.successSnack();
     } else {
-      ber.errorSnack();
+      SnackbarModel.errorSnack();
     }
   }
 

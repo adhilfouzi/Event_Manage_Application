@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/vendor_event/vendor_delete_conformation.dart';
+import 'package:project_event/controller/event_controller/vendor_event/vendor_delete_conformation.dart';
 
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/db_functions/fn_vendormodel.dart';

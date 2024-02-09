@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:project_event/controller/settlement_event/income_controller/income_delete_conformation.dart';
+import 'package:project_event/controller/event_controller/settlement_event/income_controller/income_delete_conformation.dart';
 
 import 'package:project_event/model/db_functions/fn_incomemodel.dart';
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';

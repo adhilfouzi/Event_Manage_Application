@@ -3,13 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project_event/controller/intro_controller/login_button.dart';
 import 'package:project_event/model/db_functions/fn_profilemodel.dart';
 import 'package:project_event/model/data_model/profile/profile_model.dart';
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/controller/widget/scaffold/app_bar.dart';
 import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
-
-import 'package:project_event/view/intro_screen/loginpage_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class EditProfile extends StatefulWidget {
@@ -27,9 +26,8 @@ class _EditProfileState extends State<EditProfile> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  late String? imagepath;
   File? imageprofile;
-
+  String? imagepath;
   @override
   void initState() {
     super.initState();
@@ -155,8 +153,6 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   Future editProfileClicked() async {
-    SnackbarModel ber = SnackbarModel();
-
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final existingProfiles = profileList.value
           .where((profile) => profile.email == emailController.text)
@@ -164,13 +160,13 @@ class _EditProfileState extends State<EditProfile> {
 
       if (emailController.text != widget.profileid.email) {
         if (existingProfiles.isNotEmpty) {
-          ber.errorSnack(message: 'This email is already registered');
+          SnackbarModel.errorSnack(message: 'This email is already registered');
           return;
         }
       }
 
       if (imagepath == null) {
-        ber.errorSnack(message: 'Forgot to add an image');
+        SnackbarModel.errorSnack(message: 'Forgot to add an image');
         return;
       }
 

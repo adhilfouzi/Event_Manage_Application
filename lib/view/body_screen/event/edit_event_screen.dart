@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:project_event/controller/event/event_delete_confirmation.dart';
+import 'package:project_event/controller/event_controller/event/event_delete_confirmation.dart';
 import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/db_functions/fn_evenmodel.dart';
@@ -236,11 +236,9 @@ class _EditEventState extends State<EditEvent> {
   }
 
   Future editEventcliked(context) async {
-    SnackbarModel ber = SnackbarModel();
-
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       if (imagepath.isEmpty) {
-        ber.errorSnack(message: 'Add Profile Picture');
+        SnackbarModel.errorSnack(message: 'Add Profile Picture');
       }
 
       if (_eventnameController.text.toUpperCase().isNotEmpty &&
@@ -267,7 +265,7 @@ class _EditEventState extends State<EditEvent> {
             //     allowSnapshotting: false,
             fullscreenDialog: true,
             MainBottom(profileid: widget.event.id!));
-        ber.successSnack();
+        SnackbarModel.successSnack();
       }
     }
   }

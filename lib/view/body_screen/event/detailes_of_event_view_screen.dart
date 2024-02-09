@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event/event_delete_confirmation.dart';
+import 'package:project_event/controller/event_controller/event/event_delete_confirmation.dart';
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/view/body_screen/event/edit_event_screen.dart';

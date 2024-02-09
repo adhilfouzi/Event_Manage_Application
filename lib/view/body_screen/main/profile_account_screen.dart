@@ -19,7 +19,7 @@ import 'package:sizer/sizer.dart';
 class ProfileAccount extends StatelessWidget {
   final int profileid;
 
-  const ProfileAccount({super.key, required this.profileid});
+  const ProfileAccount({Key? key, required this.profileid}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class ProfileAccount extends StatelessWidget {
                           Expanded(
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                padding: MaterialStatePropertyAll(
+                                padding: MaterialStateProperty.all(
                                     EdgeInsets.symmetric(vertical: 0.8.h)),
                                 side:
                                     MaterialStateProperty.all(BorderSide.none),
@@ -136,13 +136,6 @@ class ProfileAccount extends StatelessWidget {
                         imagedata: 'assets/UI/icons/favorite.png',
                         textdata: 'Favorite',
                       ),
-                      SizedBox(height: 1.h),
-                      // ListTileDrawer(
-                      //   so: 1,
-                      //   map: Transaction(profileid: profileid),
-                      //   imagedata: 'assets/UI/icons/Sales.png',
-                      //   textdata: 'Transaction history',
-                      // ),
                       SizedBox(height: 1.h),
                       const ListTileDrawer(
                         so: 1,

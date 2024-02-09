@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/intro_controller/entry_buttonstyle.dart';
 import 'package:project_event/view/intro_screen/loginpage_screen.dart';
 import 'package:project_event/view/intro_screen/signup_page_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -11,7 +12,6 @@ class Entry extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -20,9 +20,7 @@ class Entry extends StatelessWidget {
               ),
             ),
           ),
-          // Text at the top center
           Column(
-            // Use Column instead of Expanded
             children: [
               Container(
                 alignment: Alignment.topCenter,
@@ -101,14 +99,3 @@ class Entry extends StatelessWidget {
     );
   }
 }
-
-ButtonStyle withr = ButtonStyle(
-  padding: MaterialStatePropertyAll(
-      EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 1.5.h)),
-  side:
-      MaterialStateProperty.all(BorderSide(color: Colors.white, width: 0.3.h)),
-  backgroundColor: MaterialStateProperty.all(Colors.transparent),
-  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(30.0),
-  )),
-);

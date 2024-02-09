@@ -203,33 +203,31 @@ class _AddPaymentsState extends State<AddPayments> {
   //final TextEditingController _categoryController = TextEditingController();
 
   Future<void> addPaymentclick(mtx) async {
-    SnackbarModel ber = SnackbarModel();
-
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       if (paymentTypeNotifier.value == PaymentType.budget) {
         // Check if the payid is in budgetpayid
         if (!budgetpayid.value.contains(payid)) {
-          ber.errorSnack(message: "Make Proper Item Name");
+          SnackbarModel.errorSnack(message: "Make Proper Item Name");
           return;
         }
 
         // Check if the paytypename is in budgetlist
         if (!budgetlist.value
             .any((budget) => budget.name == searchController.text)) {
-          ber.errorSnack(message: "Make Proper Item Name");
+          SnackbarModel.errorSnack(message: "Make Proper Item Name");
           return;
         }
       } else if (paymentTypeNotifier.value == PaymentType.vendor) {
         // Check if the payid is in vendorpayid
         if (!vendorpayid.value.contains(payid)) {
-          ber.errorSnack(message: "Make Proper Item Name");
+          SnackbarModel.errorSnack(message: "Make Proper Item Name");
           return;
         }
 
         // Check if the paytypename is in vendortlist
         if (!vendortlist.value
             .any((vendor) => vendor.name == searchController.text)) {
-          ber.errorSnack(message: "Make Proper Item Name");
+          SnackbarModel.errorSnack(message: "Make Proper Item Name");
           return;
         }
       }
@@ -259,9 +257,9 @@ class _AddPaymentsState extends State<AddPayments> {
         _timeController.clear();
         searchController.clear();
       });
-      ber.successSnack();
+      SnackbarModel.successSnack();
     } else {
-      ber.errorSnack();
+      SnackbarModel.errorSnack();
     }
   }
 }

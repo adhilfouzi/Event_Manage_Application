@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:project_event/controller/vendor_event/vendor_delete_conformation.dart';
+import 'package:project_event/controller/event_controller/vendor_event/vendor_delete_conformation.dart';
 
 import 'package:project_event/model/db_functions/fn_vendormodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
@@ -173,8 +173,6 @@ class _EditVendorState extends State<EditVendor> {
   }
 
   Future<void> editVendorclick(int step) async {
-    SnackbarModel ber = SnackbarModel();
-
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       await editVendor(
           widget.vendordataway.id,
@@ -209,9 +207,9 @@ class _EditVendorState extends State<EditVendor> {
       } else if (step == 4) {
         Get.offAll(DoneRpVendorList(eventModel: widget.eventModel));
       }
-      ber.successSnack();
+      SnackbarModel.successSnack();
     } else {
-      ber.errorSnack();
+      SnackbarModel.errorSnack();
     }
   }
 

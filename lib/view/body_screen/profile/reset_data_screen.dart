@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/intro_controller/login_button.dart';
 import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/core/font/font.dart';
 import 'package:project_event/view/body_screen/main/home_screen.dart';
 import 'package:project_event/view/body_screen/main/main_screem.dart';
-import 'package:project_event/view/intro_screen/loginpage_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class Reset extends StatefulWidget {

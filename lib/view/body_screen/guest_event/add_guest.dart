@@ -107,8 +107,6 @@ class _AddGuestState extends State<AddGuest> {
   final _pcontroller = TextEditingController();
 
   Future<void> addGuestclick(context) async {
-    SnackbarModel ber = SnackbarModel();
-
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final name = _nameController.text.toUpperCase();
       final sex = _sexController.text;
@@ -130,7 +128,7 @@ class _AddGuestState extends State<AddGuest> {
       );
 
       await addguest(guestdata);
-      ber.successSnack();
+      SnackbarModel.successSnack();
       setState(() {
         _statusController = 0;
         _nameController.clear();
@@ -142,7 +140,7 @@ class _AddGuestState extends State<AddGuest> {
       });
       Get.off(Guests(eventid: widget.eventID, eventModel: widget.eventModel));
     } else {
-      ber.errorSnack();
+      SnackbarModel.errorSnack();
     }
   }
 

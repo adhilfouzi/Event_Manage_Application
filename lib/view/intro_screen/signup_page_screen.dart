@@ -1,270 +1,145 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/controller/intro_controller/fn_signup.dart';
+import 'package:project_event/controller/intro_controller/login_button.dart';
+import 'package:project_event/controller/services/textvalidator.dart';
 import 'package:project_event/model/core/color/color.dart';
-
 import 'package:project_event/model/db_functions/fn_profilemodel.dart';
-import 'package:project_event/model/data_model/profile/profile_model.dart';
-import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
 import 'package:project_event/view/body_screen/profile/privacy_function_screen.dart';
-import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:project_event/view/intro_screen/loginpage_screen.dart';
 import 'package:sizer/sizer.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
-  @override
-  State<SignupScreen> createState() => _SignupScreenState();
-}
-
-class _SignupScreenState extends State<SignupScreen> {
-  final _formKey = GlobalKey<FormState>();
-  bool checkboxValue = false;
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPassController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+    SignupController check = Get.put(SignupController());
+    // bool checkboxValue = false;
+    final TextEditingController passwordController = TextEditingController();
+    final TextEditingController confirmPassController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController phoneController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
+    // ProfileController controller = Get.put(ProfileController());
+    // controller.refreshProfileData();
     refreshRefreshdata();
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(1.h),
-          child: SafeArea(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  SizedBox(height: 7.h),
-                  SizedBox(
-                    height: 11.h,
-                    child: Text(
-                      'Let’s Begin the game',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                        color: buttoncolor,
-                      ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(1.h),
+        child: SafeArea(
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                SizedBox(height: 7.h),
+                SizedBox(
+                  height: 11.h,
+                  child: Text(
+                    "Let's Begin the game",
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                      color: buttoncolor,
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextFieldBlue(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a Name';
-                          }
-                          if (value.length >= 16) {
-                            return "Name is too long";
-                          }
-                          return null;
-                        },
-                        textcontent: 'Full Name',
-                        keyType: TextInputType.name,
-                        controller: nameController,
-                      ),
-                      SizedBox(height: 1.h),
-                      ValueListenableBuilder(
-                        valueListenable: profileList,
-                        builder: (context, valueList, child) => TextFieldBlue(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a valid email address';
-                            }
-                            if (!RegExp(
-                                    r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-                                .hasMatch(value)) {
-                              return 'Enter a valid email address';
-                            }
-                            return null;
-                          },
-                          textcontent: 'Email',
-                          keyType: TextInputType.emailAddress,
-                          controller: emailController,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextValidator()
+                        .nameController(nameController: nameController),
+                    SizedBox(height: 1.h),
+                    TextValidator().emailTextField(emailController),
+                    SizedBox(height: 1.h),
+                    TextValidator()
+                        .phoneNumber(phoneController: phoneController),
+                    SizedBox(height: 1.h),
+                    TextValidator()
+                        .password(passwordController: passwordController),
+                    SizedBox(height: 1.h),
+                    TextValidator().cofirmpassword(
+                        confirmPassController: confirmPassController,
+                        passwordController: passwordController),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Obx(
+                          () => check.checkBox(),
                         ),
-                      ),
-                      SizedBox(height: 1.h),
-                      TextFieldBlue(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a valid phone number';
-                          }
-                          final phoneNumberWithoutSpaces =
-                              value.replaceAll(' ', '');
-
-                          if (phoneNumberWithoutSpaces.startsWith('+') &&
-                              phoneNumberWithoutSpaces.length >= 13) {
-                            return null;
-                          } else if (!phoneNumberWithoutSpaces
-                                  .startsWith('+') &&
-                              phoneNumberWithoutSpaces.length == 10) {
-                            return null;
-                          } else {
-                            return 'Enter a valid phone number';
-                          }
-                        },
-                        textcontent: 'Phone Number',
-                        keyType: TextInputType.number,
-                        controller: phoneController,
-                      ),
-                      SizedBox(height: 1.h),
-                      TextFieldBlue(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a password';
-                          }
-                          if (value.length < 8) {
-                            return 'Password must be at least 8 characters long';
-                          }
-
-                          return null;
-                        },
-                        obscureText: true,
-                        textcontent: 'Password',
-                        controller: passwordController,
-                      ),
-                      SizedBox(height: 1.h),
-                      TextFieldBlue(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please confirm your password';
-                          }
-                          if (value != passwordController.text) {
-                            return 'Passwords do not match';
-                          }
-                          return null;
-                        },
-                        obscureText: true,
-                        textcontent: 'Confirm Password',
-                        controller: confirmPassController,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Checkbox(
-                            value: checkboxValue,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                checkboxValue = value!;
-                              });
-                            },
-                          ),
-                          InkWell(
-                            onTap: launchPrivacyPolicy,
-                            child: Text(
-                              'I agree with Terms and Privacy ',
-                              style: TextStyle(
-                                color: buttoncolor,
-                                fontSize: 10.sp,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              style: firstbutton(),
-                              onPressed: () {
-                                if (_formKey.currentState?.validate() ??
-                                    false) {
-                                  addProfileClick(context);
-                                }
-                              },
-                              child: Text(
-                                'Signup',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14.sp,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Already have an account -',
+                        InkWell(
+                          onTap: launchPrivacyPolicy,
+                          child: Text(
+                            'I agree with Terms and Privacy ',
                             style: TextStyle(
                               color: buttoncolor,
                               fontSize: 10.sp,
                             ),
                           ),
-                          TextButton(
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: firstbutton(),
                             onPressed: () {
-                              Get.off(
-                                  transition: Transition.leftToRightWithFade,
-                                  const LoginScreen());
+                              if (formKey.currentState?.validate() ?? false) {
+                                SignupController().addProfileClick(
+                                    formKey,
+                                    check.checkboxValue.value,
+                                    emailController,
+                                    nameController,
+                                    phoneController,
+                                    passwordController);
+                              }
                             },
                             child: Text(
-                              'Login',
+                              'Signup',
                               style: TextStyle(
-                                color: buttoncolor,
-                                fontSize: 10.sp,
+                                color: Colors.white,
+                                fontSize: 14.sp,
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Already have an account -',
+                          style: TextStyle(
+                            color: buttoncolor,
+                            fontSize: 10.sp,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Get.off(
+                                transition: Transition.leftToRightWithFade,
+                                const LoginScreen());
+                          },
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                              color: buttoncolor,
+                              fontSize: 10.sp,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  Future<void> addProfileClick(BuildContext context) async {
-    SnackbarModel ber = SnackbarModel();
-
-    if (_formKey.currentState != null &&
-        _formKey.currentState!.validate() &&
-        checkboxValue == true) {
-      try {
-        final existingProfiles = profileList.value
-            .where((profile) => profile.email == emailController.text)
-            .toList();
-
-        if (existingProfiles.isNotEmpty) {
-          ber.errorSnack(message: 'This email is already registered');
-          return;
-        }
-
-        final profile = ProfileModel(
-          name: nameController.text.trim().toUpperCase(),
-          email: emailController.text.trim().toLowerCase(),
-          phone: phoneController.text.trim(),
-          password: passwordController.text,
-        );
-
-        await addProfile(profile);
-        await refreshRefreshdata();
-
-        ber.successSnack(message: 'Sign up Successfully');
-
-        Get.off(
-          transition: Transition.leftToRightWithFade,
-          const LoginScreen(),
-        );
-      } catch (e) {
-        log('Error inserting data: $e');
-        ber.errorSnack(message: 'Error occurred. Please try again later.');
-      }
-    } else {
-      ber.errorSnack(
-          message: 'Please fill all required fields and accept terms.');
-    }
   }
 }

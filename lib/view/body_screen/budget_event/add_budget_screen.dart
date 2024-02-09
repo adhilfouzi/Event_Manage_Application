@@ -101,7 +101,6 @@ class _AddBudgetState extends State<AddBudget> {
     }
   }
 
-  SnackbarModel ber = SnackbarModel();
   final _budgetController = TextEditingController();
   final _nameController = TextEditingController();
   final _categoryController = TextEditingController();
@@ -132,13 +131,13 @@ class _AddBudgetState extends State<AddBudget> {
         refreshBudgetData(widget.eventid);
         log('after add');
         Get.back();
-        ber.successSnack();
+        SnackbarModel.successSnack();
       } catch (e) {
         log('Error adding budget: $e');
-        ber.errorSnack(message: 'Error on  adding budget');
+        SnackbarModel.errorSnack(message: 'Error on  adding budget');
       }
     } else {
-      ber.errorSnack();
+      SnackbarModel.errorSnack();
     }
   }
 }

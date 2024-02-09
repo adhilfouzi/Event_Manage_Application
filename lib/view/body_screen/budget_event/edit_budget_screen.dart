@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:project_event/controller/budget_event/budget_do_delect.dart';
+import 'package:project_event/controller/event_controller/budget_event/budget_do_delect.dart';
 
 import 'package:project_event/model/db_functions/fn_budgetmodel.dart';
 import 'package:project_event/model/data_model/budget_model/budget_model.dart';
@@ -140,8 +140,6 @@ class _EditBudgetState extends State<EditBudget> {
 
   Future<void> editGuestclick(BuildContext ctx, BudgetModel budget, int step,
       Eventmodel eventModel) async {
-    SnackbarModel ber = SnackbarModel();
-
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       await editBudget(
           budget.id,
@@ -166,9 +164,9 @@ class _EditBudgetState extends State<EditBudget> {
       } else if (step == 5) {
         Get.offAll(DoneRpBudget(eventModel: eventModel));
       }
-      ber.successSnack(message: "Successfully edited");
+      SnackbarModel.successSnack(message: "Successfully edited");
     } else {
-      ber.errorSnack();
+      SnackbarModel.errorSnack();
     }
   }
 }

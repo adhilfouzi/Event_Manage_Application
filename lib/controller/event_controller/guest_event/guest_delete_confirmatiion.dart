@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/event/event_do_delect.dart';
-import 'package:project_event/model/data_model/event/event_model.dart';
+import 'package:project_event/controller/event_controller/guest_event/guest_do_delect.dart';
 
-void doDeleteEvent(Eventmodel event) {
+import 'package:project_event/model/data_model/event/event_model.dart';
+import 'package:project_event/model/data_model/guest_model/guest_model.dart';
+
+void doDeleteGuest(GuestModel guest, int step, Eventmodel eventModel) {
   try {
     Get.defaultDialog(
       title: 'Delete',
-      content: Text(
-        'Do you want to delete ${event.eventname} of ${event.clientname}?',
-      ),
+      content: Text('Do you want to delete ${guest.gname}?'),
       actions: [
         TextButton(
           onPressed: () {
-            deleteEventYes(event);
+            deleteYes(guest, step, eventModel);
           },
           child: const Text('Yes'),
         ),

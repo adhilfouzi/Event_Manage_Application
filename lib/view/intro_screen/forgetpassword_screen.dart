@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:project_event/controller/intro_controller/fn_forgetpassword.dart';
+import 'package:project_event/controller/intro_controller/login_button.dart';
+import 'package:project_event/controller/services/textvalidator.dart';
 import 'package:project_event/model/core/color/color.dart';
-import 'package:project_event/model/db_functions/fn_profilemodel.dart';
-import 'package:project_event/controller/widget/box/textfield_blue.dart';
-import 'package:project_event/model/getx/snackbar/getx_snackbar.dart';
-import 'package:project_event/view/intro_screen/loginpage_screen.dart';
 import 'package:sizer/sizer.dart';
 
-class ForgetPassword extends StatefulWidget {
+class ForgetPassword extends StatelessWidget {
   const ForgetPassword({Key? key}) : super(key: key);
 
   @override
-  State<ForgetPassword> createState() => _ForgetPasswordState();
-}
-
-class _ForgetPasswordState extends State<ForgetPassword> {
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController confirmPassController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  @override
   Widget build(BuildContext context) {
+    final TextEditingController passwordController = TextEditingController();
+
+    final TextEditingController emailController = TextEditingController();
+
+    final TextEditingController confirmPassController = TextEditingController();
+
+    final formKey = GlobalKey<FormState>();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -29,7 +25,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 2.h),
               child: Form(
-                key: _formKey,
+                key: formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -48,52 +44,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       width: 90.w,
                     ),
                     SizedBox(height: 3.h),
-                    ValueListenableBuilder(
-                      valueListenable: profileList,
-                      builder: (context, valueList, child) => TextFieldBlue(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a valid email address';
-                            }
-                            if (!RegExp(
-                                    r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-                                .hasMatch(value)) {
-                              return 'Enter a valid email address';
-                            }
-                            return null;
-                          },
-                          controller: emailController,
-                          textcontent: 'Email ',
-                          keyType: TextInputType.emailAddress),
-                    ),
-                    TextFieldBlue(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a password';
-                          }
-                          if (value.length < 8) {
-                            return 'Password must be at least 8 characters long';
-                          }
-                          return null;
-                        },
-                        obscureText: true,
-                        textcontent: 'Password',
-                        controller: passwordController),
+                    TextValidator().emailTextField(emailController),
+                    TextValidator()
+                        .password(passwordController: passwordController),
                     SizedBox(height: 1.5.h),
-                    TextFieldBlue(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please confirm your password';
-                        }
-                        if (value != passwordController.text) {
-                          return 'Passwords do not match';
-                        }
-                        return null;
-                      },
-                      obscureText: true,
-                      textcontent: 'Confirm Password',
-                      controller: confirmPassController,
-                    ),
+                    TextValidator().cofirmpassword(
+                        confirmPassController: confirmPassController,
+                        passwordController: passwordController),
                     SizedBox(height: 2.h),
                     Row(
                       children: [
@@ -101,7 +58,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           child: ElevatedButton(
                             style: firstbutton(),
                             onPressed: () {
-                              setProfileclick(context);
+                              setProfileclick(
+                                  formKey, passwordController, emailController);
                             },
                             child: Text('Set',
                                 style: TextStyle(
@@ -118,30 +76,5 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         ),
       ),
     );
-  }
-
-  Future<void> setProfileclick(mtx) async {
-    SnackbarModel ber = SnackbarModel();
-
-    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      final password = passwordController.text;
-
-      final existingProfiles = profileList.value
-          .where((profile) => profile.email == emailController.text)
-          .toList();
-      if (existingProfiles.isEmpty) {
-        ber.errorSnack(message: 'Email not registered. Please sign up.');
-        return;
-      }
-      await editProfiledata(
-          existingProfiles.first.id,
-          existingProfiles.first.imagex,
-          existingProfiles.first.name,
-          existingProfiles.first.email,
-          existingProfiles.first.phone,
-          existingProfiles.first.address,
-          password);
-      Get.back();
-    }
   }
 }

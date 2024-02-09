@@ -25,12 +25,13 @@ class ProfileModel {
     final password = map['password'] as String;
 
     return ProfileModel(
-        id: id,
-        name: name,
-        email: email,
-        phone: phone,
-        address: address,
-        imagex: imagex,
-        password: password);
+      id: id,
+      name: name,
+      email: email,
+      phone: phone,
+      address: address,
+      imagex: imagex,
+      password: password,
+    );
   }
 }

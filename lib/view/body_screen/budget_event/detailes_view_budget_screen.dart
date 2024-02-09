@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_event/controller/budget_event/budget_do_delect.dart';
+import 'package:project_event/controller/event_controller/budget_event/budget_do_delect.dart';
 
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
 import 'package:project_event/model/data_model/budget_model/budget_model.dart';

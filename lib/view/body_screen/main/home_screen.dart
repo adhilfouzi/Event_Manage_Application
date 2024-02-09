@@ -8,6 +8,7 @@ import 'package:project_event/model/db_functions/fn_budgetmodel.dart';
 import 'package:project_event/model/db_functions/fn_evenmodel.dart';
 import 'package:project_event/model/db_functions/fn_guestmodel.dart';
 import 'package:project_event/model/db_functions/fn_paymodel.dart';
+import 'package:project_event/model/db_functions/fn_profilemodel.dart';
 import 'package:project_event/model/db_functions/fn_taskmodel.dart';
 import 'package:project_event/model/db_functions/fn_vendormodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
@@ -36,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     search.value.pass = 0;
     finduser = eventList.value;
+    refreshRefreshid(widget.profileid);
   }
 
   List<Eventmodel> finduser = [];

@@ -229,10 +229,8 @@ class _AddEventState extends State<AddEvent> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pnoController = TextEditingController();
   Future addEventcliked(context) async {
-    SnackbarModel ber = SnackbarModel();
-
     if (imagepath == null) {
-      ber.errorSnack(message: 'Add Profile Picture');
+      SnackbarModel.errorSnack(message: 'Add Profile Picture');
     }
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       if (_eventnameController.text.toUpperCase().isNotEmpty &&
@@ -258,7 +256,7 @@ class _AddEventState extends State<AddEvent> {
             //     allowSnapshotting: false,
             fullscreenDialog: true,
             MainBottom(profileid: widget.profileid));
-        ber.successSnack();
+        SnackbarModel.successSnack();
       }
     }
   }
@@ -301,7 +299,7 @@ class _AddEventState extends State<AddEvent> {
 
   void addPhoto() {
     Get.defaultDialog(
-      title: 'Choose Image Source',
+      title: 'Add Image',
       content: const Text('Choose Image From.......'),
       actions: [
         IconButton(

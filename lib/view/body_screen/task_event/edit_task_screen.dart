@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:project_event/controller/task_event/task_delete_conformation.dart';
+import 'package:project_event/controller/event_controller/task_event/task_delete_conformation.dart';
 import 'package:project_event/model/db_functions/fn_taskmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/task/task_model.dart';
@@ -113,8 +113,6 @@ class _EditTaskState extends State<EditTask> {
   }
 
   Future<void> edittaskclicked(BuildContext context, TaskModel task) async {
-    SnackbarModel ber = SnackbarModel();
-
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final taskname = _tasknameController.text.toUpperCase();
       final category = _categoryController.text;
@@ -125,9 +123,9 @@ class _EditTaskState extends State<EditTask> {
       await editTask(
           task.id, taskname, category, note, _statusController, date, eventId);
       refreshEventtaskdata(eventId);
-      ber.successSnack();
+      SnackbarModel.successSnack();
     } else {
-      ber.errorSnack();
+      SnackbarModel.errorSnack();
     }
   }
 }

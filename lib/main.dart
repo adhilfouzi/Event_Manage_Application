@@ -25,6 +25,7 @@ Future<void> main() async {
   await initializePaymentDatabase();
   await initializeIncomeDatabase();
   await initializeProfileDB();
+  // await ProfileController().initializeProfileDB();
   runApp(
     const MyApp(),
   );

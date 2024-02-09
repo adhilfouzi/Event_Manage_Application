@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SnackbarModel {
-  void errorSnack({String? message}) {
+  static void errorSnack({String? message}) {
     Get.snackbar('Warning', message ?? 'Please fill all required fields',
         colorText: Colors.black,
         backgroundColor: Colors.redAccent,
@@ -12,7 +12,7 @@ class SnackbarModel {
         dismissDirection: DismissDirection.startToEnd);
   }
 
-  void successSnack({String? message}) {
+  static void successSnack({String? message}) {
     Get.snackbar(
       'Great',
       message ?? "Successfully added",
