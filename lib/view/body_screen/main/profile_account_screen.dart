@@ -107,7 +107,8 @@ class ProfileAccount extends StatelessWidget {
                                 Get.to(
                                   transition: Transition.rightToLeftWithFade,
                                   EditProfile(
-                                      profileid: profileData.value.first),
+                                    profile: profileData.value.first,
+                                  ),
                                 );
                               },
                               child: Text(

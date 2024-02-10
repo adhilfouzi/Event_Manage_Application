@@ -94,4 +94,15 @@ class TextValidator {
       controller: nameController,
     );
   }
+
+  Widget normal(
+      {required TextEditingController controller,
+      required String textcontent}) {
+    return TextFieldBlue(
+      keyType: TextInputType.streetAddress,
+      controller: controller,
+      textcontent: 'Address',
+      posticondata: Icons.location_on,
+    );
+  }
 }
