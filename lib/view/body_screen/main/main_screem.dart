@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:project_event/model/db_functions/fn_profilemodel.dart';
 import 'package:project_event/model/getx/getxcontroller/mainscreen_controller_getx.dart';
 import 'package:project_event/view/body_screen/main/home_screen.dart';
 import 'package:project_event/view/body_screen/profile/calender_view_screen.dart';
@@ -18,6 +19,7 @@ class MainBottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MainBottomController controller = Get.put(MainBottomController());
+    refreshRefreshid(profileid);
 
     final List<Widget> pages = [
       HomeScreen(profileid: profileid),

@@ -264,7 +264,7 @@ class _EditEventState extends State<EditEvent> {
 
             //     allowSnapshotting: false,
             fullscreenDialog: true,
-            MainBottom(profileid: widget.event.id!));
+            MainBottom(profileid: widget.event.profile));
         SnackbarModel.successSnack();
       }
     }

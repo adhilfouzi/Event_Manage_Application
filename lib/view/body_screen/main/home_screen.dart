@@ -70,22 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
     refreshEventdata(widget.profileid);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child:
-          //  PopScope(
-          //   canPop: false, // prevent back
-          //   onPopInvoked: (_) async {
-          //     timeback = DateTime.now();
-          //     final difference = DateTime.now().difference(timeback);
-
-          //     if (difference <= const Duration(seconds: 2)) {
-          //       return false;
-          //     }
-          //     else {
-          //       return true;
-          //     }
-          //   },
-          //   child:
-          Scaffold(
+      child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent, //appbarcolor,
           toolbarHeight: 12.h,

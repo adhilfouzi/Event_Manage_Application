@@ -22,6 +22,7 @@ import 'package:sizer/sizer.dart';
 
 class ViewEvent extends StatelessWidget {
   final Eventmodel eventModel;
+
   const ViewEvent({super.key, required this.eventModel});
 
   @override
@@ -31,9 +32,8 @@ class ViewEvent extends StatelessWidget {
       onPopInvoked: (didPop) {
         Get.offAll(
             transition: Transition.leftToRightWithFade,
-            //     allowSnapshotting: false,
             fullscreenDialog: true,
-            MainBottom(profileid: eventModel.id!));
+            MainBottom(profileid: eventModel.profile));
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -41,9 +41,8 @@ class ViewEvent extends StatelessWidget {
           leading: () {
             Get.offAll(
                 transition: Transition.leftToRightWithFade,
-                //     allowSnapshotting: false,
                 fullscreenDialog: true,
-                MainBottom(profileid: eventModel.id!));
+                MainBottom(profileid: eventModel.profile));
           },
           textcolor: Colors.white,
           actions: [

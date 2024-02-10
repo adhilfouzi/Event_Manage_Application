@@ -33,7 +33,7 @@ class ImageController extends GetxController {
             AndroidUiSettings(
                 lockAspectRatio: true,
                 toolbarTitle: 'Crop',
-                toolbarColor: Colors.deepOrange,
+                toolbarColor: Colors.black,
                 toolbarWidgetColor: Colors.white,
                 initAspectRatio: CropAspectRatioPreset.ratio4x3),
             IOSUiSettings(

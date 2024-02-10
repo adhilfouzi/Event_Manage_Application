@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_event/controller/services/textvalidator.dart';
 import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/core/font/font.dart';
-import 'package:project_event/controller/widget/box/textfield_blue.dart';
 import 'package:sizer/sizer.dart';
 
 class ContactState extends StatelessWidget {
@@ -38,49 +38,11 @@ class ContactState extends StatelessWidget {
             endIndent: 40,
             indent: 40,
           ),
-          TextFieldBlue(
-            validator: (value) {
-              if (value!.isNotEmpty) {
-                final phoneNumberWithoutSpaces = value.replaceAll(' ', '');
-
-                if (phoneNumberWithoutSpaces.startsWith('+') &&
-                    phoneNumberWithoutSpaces.length >= 13) {
-                  return null;
-                } else if (!phoneNumberWithoutSpaces.startsWith('+') &&
-                    phoneNumberWithoutSpaces.length == 10) {
-                  return null;
-                } else {
-                  return 'Enter a valid phone number';
-                }
-              }
-              return null;
-            },
-            keyType: TextInputType.phone,
-            controller: pcontroller,
-            textcontent: 'Phone Number',
-            posticondata: Icons.call,
-          ),
-          TextFieldBlue(
-            validator: (value) {
-              if (value!.isNotEmpty) {
-                if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-                    .hasMatch(value)) {
-                  return 'Enter a valid email address';
-                }
-              }
-              return null;
-            },
-            keyType: TextInputType.emailAddress,
-            controller: econtroller,
-            textcontent: 'Email Id',
-            posticondata: Icons.mail,
-          ),
-          TextFieldBlue(
-            keyType: TextInputType.streetAddress,
-            controller: acontroller,
-            textcontent: 'Address',
-            posticondata: Icons.location_on,
-          )
+          TextValidator()
+              .phoneNumber(phoneController: pcontroller!, bool: true),
+          TextValidator().emailTextField(econtroller!, bool: true),
+          TextValidator()
+              .place(controller: acontroller!, textcontent: 'Address'),
         ]),
       ),
     );
