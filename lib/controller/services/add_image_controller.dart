@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 
@@ -21,11 +22,32 @@ class ImageController extends GetxController {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) {
         return;
+      } else {
+        final croppedFile = await ImageCropper().cropImage(
+          sourcePath: image.path,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.ratio3x2,
+            CropAspectRatioPreset.ratio4x3,
+          ],
+          uiSettings: [
+            AndroidUiSettings(
+                lockAspectRatio: true,
+                toolbarTitle: 'Crop',
+                toolbarColor: Colors.deepOrange,
+                toolbarWidgetColor: Colors.white,
+                initAspectRatio: CropAspectRatioPreset.ratio4x3),
+            IOSUiSettings(
+              title: 'Crop',
+            ),
+          ],
+        );
+        if (croppedFile != null) {
+          imageProfile.value = File(croppedFile.path);
+          imagePath.value = croppedFile.path;
+        }
       }
-      imageProfile.value = File(image.path);
-      imagePath.value = image.path;
     } catch (e) {
-      // Handle error
+      // print('Failed image picker: $e');
     }
   }
 
