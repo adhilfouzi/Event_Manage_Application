@@ -30,14 +30,11 @@ Future<void> initializeEventDb() async {
 
 // Function to retrieve student data from the database.
 Future<void> refreshEventdata(int profile) async {
-  final result = await eventDB.rawQuery(
-      "SELECT * FROM event WHERE profile = ? ORDER BY startingDay DESC",
-      [profile.toString()]);
+  final result = await eventDB
+      .rawQuery("SELECT * FROM event WHERE profile = ?", [profile.toString()]);
   eventList.value.clear();
-  for (var map in result) {
-    final student = Eventmodel.fromMap(map);
-    eventList.value.add(student);
-  }
+
+  eventList = sortByDate(eventList, result);
   eventList.notifyListeners();
 
   ///-----------------------------------------
@@ -46,11 +43,106 @@ Future<void> refreshEventdata(int profile) async {
   final favResult = await eventDB.rawQuery(
       "SELECT * FROM event WHERE favorite = 1 ORDER BY startingDay DESC");
   favoriteEventlist.value.clear();
-  for (var map in favResult) {
-    final student = Eventmodel.fromMap(map);
-    favoriteEventlist.value.add(student);
-  }
+
+  favoriteEventlist = sortByDate(favoriteEventlist, favResult);
   favoriteEventlist.notifyListeners();
+}
+
+ValueNotifier<List<Eventmodel>> sortByDate(
+    ValueNotifier<List<Eventmodel>> valueNotifierList,
+    List<Map<String, Object?>> responce) {
+  List<Map<String, dynamic>> sortedEvents = [];
+
+  final now = DateTime.now();
+
+  for (var map in responce) {
+    final student = Eventmodel.fromMap(map);
+    String date = student.startingDay;
+    String time = student.startingTime;
+    String dateTime = "$date $time";
+
+    DateTime eventDateTime = parseCustomDateTime(dateTime);
+    sortedEvents.add({
+      'dateTime': eventDateTime,
+      'event': student,
+      'isFutureEvent': eventDateTime.isAfter(now),
+    });
+  }
+
+  sortedEvents.sort((a, b) {
+    if (a['isFutureEvent'] && !b['isFutureEvent']) {
+      return -1; // a should come before b
+    } else if (!a['isFutureEvent'] && b['isFutureEvent']) {
+      return 1; // b should come before a
+    } else {
+      // If both are future events or both are past events,
+      // sort based on the dateTime
+      return b['dateTime'].compareTo(a['dateTime']);
+    }
+  });
+
+  for (var sortedEvent in sortedEvents) {
+    valueNotifierList.value.add(sortedEvent['event']);
+  }
+  return valueNotifierList;
+}
+
+DateTime parseCustomDateTime(String dateTimeString) {
+  // Splitting the date-time string into date and time parts
+  List<String> parts = dateTimeString.split(' ');
+
+  // Parsing the date part
+  List<String> dateParts = parts[0].split('-');
+  int day = int.parse(dateParts[0]);
+  int month = _getMonthNumber(dateParts[1]);
+  int year = int.parse(dateParts[2]);
+
+  // Parsing the time part
+  List<String> timeParts =
+      parts[1].split(RegExp(r'(?::| )')); // Split by ':' or ' '
+
+  int hour = int.parse(timeParts[0]);
+  int minute = int.parse(timeParts[1]);
+
+  // Handle AM/PM format
+  if (parts[2] == 'PM') {
+    hour += 12;
+  } else if (parts[2] == 'AM' && hour == 12) {
+    hour = 0;
+  }
+  // Creating and returning the DateTime object
+  return DateTime(year, month, day, hour, minute);
+}
+
+int _getMonthNumber(String month) {
+  switch (month) {
+    case 'January':
+      return 1;
+    case 'February':
+      return 2;
+    case 'March':
+      return 3;
+    case 'April':
+      return 4;
+    case 'May':
+      return 5;
+    case 'June':
+      return 6;
+    case 'July':
+      return 7;
+    case 'August':
+      return 8;
+    case 'September':
+      return 9;
+    case 'October':
+      return 10;
+    case 'November':
+      return 11;
+    case 'December':
+      return 12;
+    default:
+      throw FormatException('Invalid month: $month');
+  }
 }
 
 // Function to add a new event to the database.

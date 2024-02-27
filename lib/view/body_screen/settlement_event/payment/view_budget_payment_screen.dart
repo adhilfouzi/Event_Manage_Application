@@ -47,10 +47,10 @@ class BudgetSettlement extends StatelessWidget {
                           style: raleway(color: Colors.black),
                         ),
                         subtitle: Text(
-                          'Paid on ${data.date}',
+                          'Paid on ${data.date} ${data.time}',
                           style: readexPro(
                             color: Colors.black45,
-                            fontSize: 8.sp,
+                            fontSize: 7.sp,
                           ),
                         ),
                         trailing: Text(

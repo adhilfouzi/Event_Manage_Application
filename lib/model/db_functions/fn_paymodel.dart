@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
 import 'package:flutter/material.dart';
+import 'package:project_event/model/db_functions/fn_evenmodel.dart';
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
 import 'package:project_event/model/data_model/payment/pay_model.dart';
 
@@ -38,10 +39,11 @@ Future<void> refreshPaymentData(int eventid) async {
         "SELECT * FROM payment WHERE eventid = ? AND paytype = 0 ORDER BY date DESC, time DESC",
         [eventid.toString()]);
     budgetPaymentList.value.clear();
-    for (var map in resultbd) {
-      final student = PaymentModel.fromMap(map);
-      budgetPaymentList.value.add(student);
-    }
+    budgetPaymentList = sortByDatePayment(budgetPaymentList, resultbd);
+    // for (var map in resultbd) {
+    //   final student = PaymentModel.fromMap(map);
+    //   budgetPaymentList.value.add(student);
+    // }
     budgetPaymentList.notifyListeners();
 
     ///-----------------------------------------
@@ -51,15 +53,56 @@ Future<void> refreshPaymentData(int eventid) async {
         "SELECT * FROM payment WHERE eventid = ? AND paytype = 1 ORDER BY date DESC, time DESC",
         [eventid.toString()]);
     vendorPaymentlist.value.clear();
-    for (var map in resultvn) {
-      final studentvn = PaymentModel.fromMap(map);
-      vendorPaymentlist.value.add(studentvn);
-    }
+
+    vendorPaymentlist = sortByDatePayment(vendorPaymentlist, resultvn);
+    // for (var map in resultvn) {
+    //   final studentvn = PaymentModel.fromMap(map);
+    //   vendorPaymentlist.value.add(studentvn);
+    // }
     vendorPaymentlist.notifyListeners();
     await refreshmainbalancedata(eventid);
   } catch (e) {
     // log('Error Refresh data: $e');
   }
+}
+
+ValueNotifier<List<PaymentModel>> sortByDatePayment(
+    ValueNotifier<List<PaymentModel>> valueNotifierList,
+    List<Map<String, Object?>> responce) {
+  List<Map<String, dynamic>> sortedEvents = [];
+
+  final now = DateTime.now();
+
+  for (var map in responce) {
+    final student = PaymentModel.fromMap(map);
+    String date = student.date;
+    String time = student.time;
+    String dateTime = "$date $time";
+
+    DateTime eventDateTime = parseCustomDateTime(dateTime);
+    sortedEvents.add({
+      'dateTime': eventDateTime,
+      'event': student,
+      'isFutureEvent': eventDateTime.isAfter(now),
+    });
+  }
+
+  sortedEvents.sort((a, b) {
+    if (a['isFutureEvent'] && !b['isFutureEvent']) {
+      return -1; // a should come before b
+    } else if (!a['isFutureEvent'] && b['isFutureEvent']) {
+      return 1; // b should come before a
+    } else {
+      // If both are future events or both are past events,
+      // sort based on the dateTime
+      return b['dateTime'].compareTo(a['dateTime']);
+    }
+  });
+
+  for (var sortedEvent in sortedEvents) {
+    valueNotifierList.value.add(sortedEvent['event']);
+  }
+  return valueNotifierList;
 }
 
 // Function to add a new student to the database.
