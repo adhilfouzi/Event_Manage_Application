@@ -40,10 +40,7 @@ Future<void> refreshPaymentData(int eventid) async {
         [eventid.toString()]);
     budgetPaymentList.value.clear();
     budgetPaymentList = sortByDatePayment(budgetPaymentList, resultbd);
-    // for (var map in resultbd) {
-    //   final student = PaymentModel.fromMap(map);
-    //   budgetPaymentList.value.add(student);
-    // }
+
     budgetPaymentList.notifyListeners();
 
     ///-----------------------------------------

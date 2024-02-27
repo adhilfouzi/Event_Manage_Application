@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:project_event/controller/event_controller/task_event/task_delete_conformation.dart';
+import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/db_functions/fn_taskmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/data_model/task/task_model.dart';
@@ -44,12 +45,6 @@ class _EditTaskState extends State<EditTask> {
               onPressed: () {
                 doDeleteTask(widget.taskdata, widget.step, widget.eventModel);
               }),
-          AppAction(
-              icon: Icons.done,
-              onPressed: () {
-                edittaskclicked(context, widget.taskdata);
-                Get.back();
-              })
         ], titleText: 'Edit Task'),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(1.5.h),
@@ -85,10 +80,45 @@ class _EditTaskState extends State<EditTask> {
                 defaultdata: _dateController.text,
                 controller: _dateController,
               ),
-              // SubTask(
-              //   subtasks: [],
-              //   goto: AddSubTask(),
-              // )
+              SizedBox(
+                height: 3.h,
+              ),
+              Padding(
+                padding: EdgeInsets.all(2.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(
+                                vertical: 1.5.h, horizontal: 4.h),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.0),
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.all(buttoncolor),
+                        ),
+                        onPressed: () {
+                          edittaskclicked(context, widget.taskdata);
+                        },
+                        child: Text(
+                          'Update Task',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ]),
           ),
         ),
@@ -122,8 +152,9 @@ class _EditTaskState extends State<EditTask> {
 
       await editTask(
           task.id, taskname, category, note, _statusController, date, eventId);
+      Get.back();
       refreshEventtaskdata(eventId);
-      SnackbarModel.successSnack();
+      SnackbarModel.successSnack(message: "Successfully edited");
     } else {
       SnackbarModel.errorSnack();
     }

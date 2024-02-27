@@ -6,6 +6,7 @@ import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/controller/event_controller/vendor_event/vendor_delete_conformation.dart';
+import 'package:project_event/model/core/color/color.dart';
 
 import 'package:project_event/model/db_functions/fn_vendormodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
@@ -59,11 +60,6 @@ class _EditVendorState extends State<EditVendor> {
                 icon: Icons.contacts,
                 onPressed: () {
                   getcontact();
-                }),
-            AppAction(
-                icon: Icons.done,
-                onPressed: () {
-                  editVendorclick(widget.step);
                 }),
           ],
           titleText: 'Edit Vendors',
@@ -127,8 +123,45 @@ class _EditVendorState extends State<EditVendor> {
                   acontroller: _acontroller,
                   econtroller: _econtroller,
                   pcontroller: _phoneController),
-              // PaymentsBar(),
-              // Payments(),
+              SizedBox(
+                height: 3.h,
+              ),
+              Padding(
+                padding: EdgeInsets.all(2.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(
+                                vertical: 1.5.h, horizontal: 4.h),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.0),
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.all(buttoncolor),
+                        ),
+                        onPressed: () {
+                          editVendorclick(widget.step);
+                        },
+                        child: Text(
+                          'Update Vendor',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ]),
           ),
         ),
@@ -207,7 +240,7 @@ class _EditVendorState extends State<EditVendor> {
       } else if (step == 4) {
         Get.offAll(DoneRpVendorList(eventModel: widget.eventModel));
       }
-      SnackbarModel.successSnack();
+      SnackbarModel.successSnack(message: "Successfully edited");
     } else {
       SnackbarModel.errorSnack();
     }

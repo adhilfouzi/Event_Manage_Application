@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:get/get.dart';
 import 'package:project_event/controller/event_controller/guest_event/guest_delete_confirmatiion.dart';
+import 'package:project_event/model/core/color/color.dart';
 
 import 'package:project_event/model/db_functions/fn_guestmodel.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
@@ -53,11 +54,6 @@ class _EditGuestState extends State<EditGuest> {
                   doDeleteGuest(
                       widget.guestdata, widget.step, widget.eventModel);
                 }),
-            AppAction(
-                icon: Icons.done,
-                onPressed: () {
-                  editGuestclick(context, widget.guestdata);
-                }),
           ],
           titleText: 'Edit Guest',
         ),
@@ -95,6 +91,45 @@ class _EditGuestState extends State<EditGuest> {
                   acontroller: _acontroller,
                   econtroller: _econtroller,
                   pcontroller: _pcontroller),
+              SizedBox(
+                height: 3.h,
+              ),
+              Padding(
+                padding: EdgeInsets.all(2.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(
+                                vertical: 1.5.h, horizontal: 4.h),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.0),
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.all(buttoncolor),
+                        ),
+                        onPressed: () {
+                          editGuestclick(context, widget.guestdata);
+                        },
+                        child: Text(
+                          'Update Guest',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ]),
           ),
         ),
@@ -137,7 +172,7 @@ class _EditGuestState extends State<EditGuest> {
           number, email, adress);
 
       refreshguestdata(guest.eventid);
-      SnackbarModel.successSnack();
+      SnackbarModel.successSnack(message: "Successfully edited");
     } else {
       SnackbarModel.errorSnack();
     }

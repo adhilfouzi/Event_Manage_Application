@@ -1,7 +1,9 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:project_event/model/db_functions/fn_taskmodel.dart';
 import 'package:project_event/model/data_model/task/task_model.dart';
@@ -34,14 +36,8 @@ class _AddTaskState extends State<AddTask> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: CustomAppBar(
-          actions: [
-            AppAction(
-                icon: Icons.done,
-                onPressed: () {
-                  addTaskclick(context);
-                }),
-          ],
+        appBar: const CustomAppBar(
+          actions: [],
           titleText: 'Add Task',
         ),
         body: Form(
@@ -74,6 +70,45 @@ class _AddTaskState extends State<AddTask> {
               ),
               Date(
                 controller: _dateController,
+              ),
+              SizedBox(
+                height: 3.h,
+              ),
+              Padding(
+                padding: EdgeInsets.all(2.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(
+                                vertical: 1.5.h, horizontal: 4.h),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.0),
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.all(buttoncolor),
+                        ),
+                        onPressed: () {
+                          addTaskclick(context);
+                        },
+                        child: Text(
+                          'Add Task',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ]),
           ),

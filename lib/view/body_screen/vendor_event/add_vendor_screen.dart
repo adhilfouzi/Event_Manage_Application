@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/db_functions/fn_vendormodel.dart';
 import 'package:project_event/model/data_model/vendors/vendors_model.dart';
 import 'package:project_event/controller/widget/box/textfield_blue.dart';
@@ -42,11 +43,6 @@ class _AddVendorState extends State<AddVendor> {
                 icon: Icons.contacts,
                 onPressed: () {
                   getcontact();
-                }),
-            AppAction(
-                icon: Icons.done,
-                onPressed: () {
-                  addVendorclick(context);
                 }),
           ],
           titleText: 'Add Vendors',
@@ -109,6 +105,45 @@ class _AddVendorState extends State<AddVendor> {
                   acontroller: _acontroller,
                   econtroller: _econtroller,
                   pcontroller: _phoneController),
+              SizedBox(
+                height: 3.h,
+              ),
+              Padding(
+                padding: EdgeInsets.all(2.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(
+                                vertical: 1.5.h, horizontal: 4.h),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.0),
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.all(buttoncolor),
+                        ),
+                        onPressed: () {
+                          addVendorclick(context);
+                        },
+                        child: Text(
+                          'Add Vendor',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ]),
           ),
         ),

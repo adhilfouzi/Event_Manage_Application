@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/controller/event_controller/settlement_event/income_controller/income_delete_conformation.dart';
+import 'package:project_event/model/core/color/color.dart';
 
 import 'package:project_event/model/db_functions/fn_incomemodel.dart';
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
@@ -53,11 +54,6 @@ class _EditIncomeState extends State<EditIncome> {
                 icon: Icons.delete,
                 onPressed: () {
                   doDeleteIncome(widget.paydata);
-                }),
-            AppAction(
-                icon: Icons.done,
-                onPressed: () {
-                  editPaymentclick(context);
                 }),
           ],
           titleText: 'Edit Payments',
@@ -116,7 +112,46 @@ class _EditIncomeState extends State<EditIncome> {
                   Time(
                     defaultdata: _timeController.text,
                     controller: _timeController,
-                  )
+                  ),
+                  SizedBox(
+                    height: 3.h,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(2.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(
+                                    vertical: 1.5.h, horizontal: 4.h),
+                              ),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(13.0),
+                                ),
+                              ),
+                              backgroundColor:
+                                  MaterialStateProperty.all(buttoncolor),
+                            ),
+                            onPressed: () {
+                              editPaymentclick(context);
+                            },
+                            child: Text(
+                              'Edit Income',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ]);
               },
             ),

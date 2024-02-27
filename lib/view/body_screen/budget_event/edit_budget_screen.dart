@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_event/controller/event_controller/budget_event/budget_do_delect.dart';
+import 'package:project_event/model/core/color/color.dart';
 
 import 'package:project_event/model/db_functions/fn_budgetmodel.dart';
 import 'package:project_event/model/data_model/budget_model/budget_model.dart';
@@ -51,12 +52,6 @@ class _EditBudgetState extends State<EditBudget> {
                   log(widget.step.toString());
                   doDeleteBudget(
                       widget.budgetdata, widget.step, widget.eventModel);
-                }),
-            AppAction(
-                icon: Icons.done,
-                onPressed: () {
-                  editGuestclick(context, widget.budgetdata, widget.step,
-                      widget.eventModel);
                 }),
           ],
           titleText: 'Edit Budget',
@@ -106,8 +101,46 @@ class _EditBudgetState extends State<EditBudget> {
                   FilteringTextInputFormatter.digitsOnly,
                 ],
               ),
-
-              // Payments(goto: AddPayments())
+              SizedBox(
+                height: 3.h,
+              ),
+              Padding(
+                padding: EdgeInsets.all(2.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(
+                                vertical: 1.5.h, horizontal: 4.h),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.0),
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.all(buttoncolor),
+                        ),
+                        onPressed: () {
+                          editGuestclick(context, widget.budgetdata,
+                              widget.step, widget.eventModel);
+                        },
+                        child: Text(
+                          'Update Budget',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ]),
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:project_event/model/core/color/color.dart';
 import 'package:project_event/model/db_functions/fn_budgetmodel.dart';
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
 import 'package:project_event/model/db_functions/fn_paymodel.dart';
@@ -50,14 +51,8 @@ class _AddPaymentsState extends State<AddPayments> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: CustomAppBar(
-          actions: [
-            AppAction(
-                icon: Icons.done,
-                onPressed: () {
-                  addPaymentclick(context);
-                }),
-          ],
+        appBar: const CustomAppBar(
+          actions: [],
           titleText: 'Add Payments',
         ),
         body: SingleChildScrollView(
@@ -172,7 +167,46 @@ class _AddPaymentsState extends State<AddPayments> {
                   ),
                   Time(
                     controller: _timeController,
-                  )
+                  ),
+                  SizedBox(
+                    height: 3.h,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(2.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(
+                                    vertical: 1.5.h, horizontal: 4.h),
+                              ),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(13.0),
+                                ),
+                              ),
+                              backgroundColor:
+                                  MaterialStateProperty.all(buttoncolor),
+                            ),
+                            onPressed: () {
+                              addPaymentclick(context);
+                            },
+                            child: Text(
+                              'Add Payment',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ]);
               },
             ),

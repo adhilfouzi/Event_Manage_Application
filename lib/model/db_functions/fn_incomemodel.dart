@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
 import 'package:flutter/material.dart';
+import 'package:project_event/model/db_functions/fn_evenmodel.dart';
 import 'package:project_event/model/db_functions/fn_paymentdetail.dart';
 import 'package:project_event/model/data_model/payment/pay_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -26,12 +27,48 @@ Future<void> refreshincomedata(int eventid) async {
   final result = await incomeDB
       .rawQuery("SELECT * FROM income WHERE eventid = ?", [eventid.toString()]);
   incomePaymentList.value.clear();
-  for (var map in result) {
+
+  incomePaymentList = sortByDateIncome(incomePaymentList, result);
+  incomePaymentList.notifyListeners();
+}
+
+ValueNotifier<List<IncomeModel>> sortByDateIncome(
+    ValueNotifier<List<IncomeModel>> valueNotifierList,
+    List<Map<String, Object?>> responce) {
+  List<Map<String, dynamic>> sortedEvents = [];
+
+  final now = DateTime.now();
+
+  for (var map in responce) {
     final student = IncomeModel.fromMap(map);
-    incomePaymentList.value.add(student);
+    String date = student.date;
+    String time = student.time;
+    String dateTime = "$date $time";
+
+    DateTime eventDateTime = parseCustomDateTime(dateTime);
+    sortedEvents.add({
+      'dateTime': eventDateTime,
+      'event': student,
+      'isFutureEvent': eventDateTime.isAfter(now),
+    });
   }
 
-  incomePaymentList.notifyListeners();
+  sortedEvents.sort((a, b) {
+    if (a['isFutureEvent'] && !b['isFutureEvent']) {
+      return -1; // a should come before b
+    } else if (!a['isFutureEvent'] && b['isFutureEvent']) {
+      return 1; // b should come before a
+    } else {
+      // If both are future events or both are past events,
+      // sort based on the dateTime
+      return b['dateTime'].compareTo(a['dateTime']);
+    }
+  });
+
+  for (var sortedEvent in sortedEvents) {
+    valueNotifierList.value.add(sortedEvent['event']);
+  }
+  return valueNotifierList;
 }
 
 Future<void> addincome(IncomeModel value) async {

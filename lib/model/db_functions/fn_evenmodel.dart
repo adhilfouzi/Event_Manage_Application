@@ -1,5 +1,7 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:project_event/model/data_model/event/event_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -103,13 +105,14 @@ DateTime parseCustomDateTime(String dateTimeString) {
 
   int hour = int.parse(timeParts[0]);
   int minute = int.parse(timeParts[1]);
-
   // Handle AM/PM format
-  if (parts[2] == 'PM') {
+  if (parts[2] == 'PM' && hour != 12) {
     hour += 12;
   } else if (parts[2] == 'AM' && hour == 12) {
     hour = 0;
   }
+
+  log("${DateTime(year, month, day, hour, minute)}");
   // Creating and returning the DateTime object
   return DateTime(year, month, day, hour, minute);
 }
