@@ -96,17 +96,17 @@ class _AddIncomeState extends State<AddIncome> {
                       Expanded(
                         child: ElevatedButton(
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all(
+                            padding: WidgetStateProperty.all(
                               EdgeInsets.symmetric(
                                   vertical: 1.5.h, horizontal: 4.h),
                             ),
-                            shape: MaterialStateProperty.all(
+                            shape: WidgetStateProperty.all(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(13.0),
                               ),
                             ),
                             backgroundColor:
-                                MaterialStateProperty.all(buttoncolor),
+                                WidgetStateProperty.all(buttoncolor),
                           ),
                           onPressed: () {
                             addincomeclick(context);

@@ -84,15 +84,14 @@ class _StatusBarState extends State<StatusBar> {
   }
 
   ButtonStyle one = ButtonStyle(
-    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
-    side: MaterialStateProperty.all(BorderSide.none),
-    backgroundColor: MaterialStateProperty.all(buttoncolor[300]),
+    padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
+    side: WidgetStateProperty.all(BorderSide.none),
+    backgroundColor: WidgetStateProperty.all(buttoncolor[300]),
   );
   ButtonStyle two = ButtonStyle(
-    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
-    side:
-        MaterialStateProperty.all(BorderSide(color: buttoncolor, width: 0.2.h)),
-    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+    padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
+    side: WidgetStateProperty.all(BorderSide(color: buttoncolor, width: 0.2.h)),
+    shape: WidgetStateProperty.all(RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30.0),
     )),
   );
@@ -114,18 +113,18 @@ class _StatusBarState extends State<StatusBar> {
 
 ButtonStyle firstcr() {
   return ButtonStyle(
-    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
-    side: MaterialStateProperty.all(BorderSide.none),
-    backgroundColor: MaterialStateProperty.all(buttoncolor[300]),
+    padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
+    side: WidgetStateProperty.all(BorderSide.none),
+    backgroundColor: WidgetStateProperty.all(buttoncolor[300]),
   );
 }
 
 ButtonStyle secandcr() {
   return ButtonStyle(
-    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
-    side: MaterialStateProperty.all(
+    padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 1.h)),
+    side: WidgetStateProperty.all(
         const BorderSide(color: buttoncolor, width: 2.0)),
-    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+    shape: WidgetStateProperty.all(RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30.0),
     )),
   );

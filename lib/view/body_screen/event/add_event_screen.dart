@@ -163,12 +163,10 @@ class AddEvent extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         style: ButtonStyle(
-                          padding: MaterialStatePropertyAll(
-                              EdgeInsets.symmetric(
-                                  vertical: 1.h, horizontal: 10.h)),
-                          side: MaterialStateProperty.all(BorderSide.none),
-                          backgroundColor:
-                              MaterialStateProperty.all(buttoncolor),
+                          padding: WidgetStatePropertyAll(EdgeInsets.symmetric(
+                              vertical: 1.h, horizontal: 10.h)),
+                          side: WidgetStateProperty.all(BorderSide.none),
+                          backgroundColor: WidgetStateProperty.all(buttoncolor),
                         ),
                         autofocus: true,
                         onPressed: () {

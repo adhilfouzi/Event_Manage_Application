@@ -134,17 +134,16 @@ class _EditVendorState extends State<EditVendor> {
                     Expanded(
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
+                          padding: WidgetStateProperty.all(
                             EdgeInsets.symmetric(
                                 vertical: 1.5.h, horizontal: 4.h),
                           ),
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(13.0),
                             ),
                           ),
-                          backgroundColor:
-                              MaterialStateProperty.all(buttoncolor),
+                          backgroundColor: WidgetStateProperty.all(buttoncolor),
                         ),
                         onPressed: () {
                           editVendorclick(widget.step);

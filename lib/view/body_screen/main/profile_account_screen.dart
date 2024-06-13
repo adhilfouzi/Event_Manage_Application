@@ -96,12 +96,11 @@ class ProfileAccount extends StatelessWidget {
                           Expanded(
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                padding: MaterialStateProperty.all(
+                                padding: WidgetStateProperty.all(
                                     EdgeInsets.symmetric(vertical: 0.8.h)),
-                                side:
-                                    MaterialStateProperty.all(BorderSide.none),
+                                side: WidgetStateProperty.all(BorderSide.none),
                                 backgroundColor:
-                                    MaterialStateProperty.all(buttoncolor[300]),
+                                    WidgetStateProperty.all(buttoncolor[300]),
                               ),
                               onPressed: () {
                                 Get.to(
